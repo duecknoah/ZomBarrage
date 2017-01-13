@@ -115,7 +115,7 @@ else {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Draw with exposure shader
+            <string>// Draw with exposure shader
 shader_set(sh_exposure);
 
 var exposure = shader_get_uniform(sh_exposure, "exposure");

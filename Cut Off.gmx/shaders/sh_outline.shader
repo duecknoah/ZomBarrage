@@ -19,7 +19,9 @@ void main()
 }
 
 //######################_==_YOYO_SHADER_MARKER_==_######################@~//
-// Simple passthrough fragment shader
+// Draws an outline around the sprite. The outline colour is determined
+// by the background fill color that is 100% transparent. So the colour is 
+// kept, but the alpha is 0.
 //
 varying vec2 v_vTexcoord;
 varying vec4 v_vColour;

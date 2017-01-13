@@ -441,9 +441,10 @@ if (keyboard_check_pressed(vk_f11)) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>// Make weapon to pickup glow
+            <string>/// Make weapon to pickup glow (outline)
 with (other) {
     image_blend = c_yellow;
+    showOutline = true;
 }
 
 if (keyboard_check_pressed(ord("E"))) {

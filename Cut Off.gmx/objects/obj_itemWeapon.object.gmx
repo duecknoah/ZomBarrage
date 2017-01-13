@@ -46,6 +46,7 @@ image_xscale = initBobScale;
 image_yscale = initBobScale;
 isBobbingUp = false; // is the weapon bobbing up or down in the animation of image_scale
 scaleSpd = 0; // the current speed of increment per step of the scale (like vspeed or hspeed but for scaling)
+showOutline = false; // shows outline when player is range of pickup (outline around gun to make it easy to see)
 // random bobbing starting position
 if (random(1) &lt; 0.5) {
     isBobbingUp = false;
@@ -114,6 +115,8 @@ else {
     image_blend = c_white;
 }
 
+showOutline = false; // set to false by default, triggered by player
+
 // update bobbing
 image_xscale += scaleSpd;
 image_yscale += scaleSpd;
@@ -163,13 +166,21 @@ else {
           <argument>
             <kind>1</kind>
             <string>/// Draw self
-shader_set(sh_outline);
-var shaderPixelW = shader_get_uniform(sh_outline, "pixelW");
-var shaderPixelH = shader_get_uniform(sh_outline, "pixelH");
-shader_set_uniform_f(shaderPixelW, (1.0 / sprite_get_width(sprite_index)));
-shader_set_uniform_f(shaderPixelH, (1.0 / sprite_get_height(sprite_index)));
-draw_self();
-shader_reset();
+// If showOutline (is true when player is in range to pick up gun
+// draw with outline
+if (showOutline) {
+    shader_set(sh_outline);
+        var shaderPixelW = shader_get_uniform(sh_outline, "pixelW");
+        var shaderPixelH = shader_get_uniform(sh_outline, "pixelH");
+        shader_set_uniform_f(shaderPixelW, 0.001);
+        shader_set_uniform_f(shaderPixelH, 0.001);
+        draw_self();
+    shader_reset();
+}
+else {
+// Else draw normally
+    draw_self();
+}
 </string>
           </argument>
         </arguments>
