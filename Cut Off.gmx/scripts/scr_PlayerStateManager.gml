@@ -179,6 +179,7 @@ if (!obj_guiController.showUpgrades) {
             else {
                 state = "Chainsaw"; // prevent running once out of ammo
             }
+        break;
         case "typing":
             img_speed = 0.5;
             img_number = 3;
