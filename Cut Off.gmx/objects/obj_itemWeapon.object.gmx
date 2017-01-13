@@ -116,6 +116,7 @@ else {
 }
 
 showOutline = false; // set to false by default, triggered by player
+depth = 0; // resets to default, is only changed when player wants to pick up weapon
 
 // update bobbing
 image_xscale += scaleSpd;

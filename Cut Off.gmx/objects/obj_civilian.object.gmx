@@ -29,7 +29,8 @@
 
 hairCol = make_colour_hsv(24, 100, random(200));
 skinCol = make_colour_hsv(24, 100, random(200));
-bodyCol = make_colour_rgb(random(255), random(255), random(255));
+shirtCol = make_colour_rgb(random(255), random(255), random(255));
+pantsCol = make_colour_rgb(random(255), random(255), random(255));
 
 scr_initEntityVars();
 state = "wander";
@@ -67,19 +68,21 @@ hair = choose(noone, sprite_get_number(spr_CivilianHair) - 1); // choose a rando
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// If a zombie is targeting this, make that zombies target noone
-with (obj_zombie) {
-    // If target is this, make it noone
-    if (target == other.id) {
-        target = noone;
-    }
-}
+            <string>/// Make all entities no longer target this one
+scr_removeOtherEntityTargeting();
 
-with (obj_civilian) {
-    // If lookAtEntity is this, make it noone
-    if (lookAtEntity == other.id) {
-        lookAtEntity = noone;
-    }
+// Create dead body and copy over this civilians body data
+with (instance_create(x, y, obj_civilianDeadBody)) {
+   hairCol = other.hairCol;
+   skinCol = other.skinCol;
+   shirtCol = other.shirtCol;
+   pantsCol = other.pantsCol;
+   hat = other.hat;
+   hair = other.hair;
+   rotation = other.rotation;
+   drawScale = other.drawScale;
+   image_xscale = other.image_xscale;
+   image_yscale = other.image_yscale;
 }
 </string>
           </argument>
@@ -121,7 +124,7 @@ switch (state) {
             wanderTimer = random(wanderMaxTime);
         }
         scr_entityMoveTo(wanderX, wanderY, 1, id, true);
-    break;
+    break;     
 }
 
 // Auto open and close doors when civilian walks by or through them
@@ -135,7 +138,6 @@ with (obj_propDoor) {
         open = false;
     }
 }
-
 scr_doEntityFuncs();
 </string>
           </argument>
@@ -182,7 +184,6 @@ wanderTimer --;
           <argument>
             <kind>1</kind>
             <string>/// Draw parts of civilian
-
 // if entity is not being pushed, rotate based on move direction
 if (!scr_isBeingPushed(id) &amp;&amp; global.timeScale != 0) {
     // If entity is moving either via path or backupPathfinding (x and y vals change)
@@ -257,10 +258,10 @@ if (!scr_isBeingPushed(id) &amp;&amp; global.timeScale != 0) {
 // shadow
 draw_sprite_ext(spr_shadow, 0, x, y, image_xscale, image_yscale, 0, c_white, 1);
 
-// Body
-draw_sprite_ext(spr_CivilianFistsBody, 0, x, y, drawScale, drawScale, rotation, bodyCol, 1);
+// Shirt
+draw_sprite_ext(spr_CivilianFistsShirt, 0, x, y, drawScale, drawScale, rotation, shirtCol, 1);
 
-// skin
+// skin (head, so we draw after the shirt)
 draw_sprite_ext(spr_CivilianFistsSkin, 0, x, y, drawScale, drawScale, rotation, skinCol, 1);
 
 // hair

@@ -184,7 +184,8 @@ if (target != noone) {
     }
 }
 else { // If there is no target for zombie, keep an eye out for one
-    // If there is a nav update, look for closest target
+    // If there is a nav update, look for closest target.
+    // This is where the zombies finds someone to go after
     if (global.navUpdateRateTimer == 0) {  
         var listOfClosestEnts = ds_list_create();
         var seeDist = 512;
@@ -192,6 +193,12 @@ else { // If there is no target for zombie, keep an eye out for one
         // Civilians
         for (var i = 0; i &lt; instance_number(obj_civilian); i ++) {
             var inst = instance_find(obj_civilian, i);
+            
+            // First check if already dead, if so, don't count as a target
+            if (inst.isDead) {
+                continue;
+            }
+            
             // If target in view distance
             if (distance_to_point(inst.x, inst.y) &lt; seeDist) {
                 // If no collisions between the zombie and the civilian (in the open)
@@ -268,10 +275,12 @@ scr_doEntityFuncs();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>// If player is not hurt and not viewing console, hurt them
-if (!other.isHurt) {
-    scr_addForce(other.id, 1 * 2, 1 * 2);
-    scr_hurt(other.id, 5); // do 5 damage to the player
+            <string>// If civilian is not hurt and not dead, hurt them
+if (!isDead) {
+    if (!other.isHurt) {
+        scr_addForce(other.id, 1 * 2, 1 * 2);
+        scr_hurt(other.id, 5); // do 5 damage to the civilian
+    }
 }
 </string>
           </argument>

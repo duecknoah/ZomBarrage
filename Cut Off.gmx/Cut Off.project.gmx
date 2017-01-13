@@ -112,9 +112,15 @@
       <sprites name="default">
         <sprite>sprites\spr_CivilianHair</sprite>
         <sprite>sprites\spr_CivilianFistsSkin</sprite>
-        <sprite>sprites\spr_CivilianFistsBody</sprite>
-        <sprite>sprites\spr_civilianCollision</sprite>
+        <sprite>sprites\spr_CivilianFistsShirt</sprite>
       </sprites>
+      <sprites name="dead">
+        <sprite>sprites\spr_CivilianDeadHair</sprite>
+        <sprite>sprites\spr_CivilianDeadSkin</sprite>
+        <sprite>sprites\spr_CivilianDeadShirt</sprite>
+        <sprite>sprites\spr_CivilianDeadPants</sprite>
+      </sprites>
+      <sprite>sprites\spr_civilianCollision</sprite>
     </sprites>
     <sprite>sprites\spr_vignette</sprite>
     <sprites name="Weapons">
@@ -154,6 +160,7 @@
         <script>scripts\scr_lootArea.gml</script>
         <script>scripts\scr_areaAddWeapon.gml</script>
       </scripts>
+      <script>scripts\scr_removeOtherEntityTargeting.gml</script>
     </scripts>
     <scripts name="View">
       <script>scripts\scr_InitView.gml</script>
@@ -270,6 +277,8 @@
       <object>objects\obj_zombie</object>
       <object>objects\obj_bigZombie</object>
       <object>objects\obj_civilian</object>
+      <object>objects\obj_civilianDeadBody</object>
+      <object>objects\obj_dad_civilian</object>
       <object>objects\obj_bullet</object>
       <object>objects\obj_rocket</object>
       <object>objects\obj_itemWeapon</object>
@@ -278,7 +287,6 @@
       <object>objects\obj_fragGrenade</object>
       <object>objects\obj_fire</object>
       <object>objects\obj_saveZone</object>
-      <object>objects\obj_dad_civilian</object>
     </objects>
     <objects name="Other">
       <object>objects\obj_zombieSpawn</object>
@@ -347,8 +355,8 @@
     <timeline>timelines\tl_cutscene_beginning</timeline>
   </timelines>
   <rooms name="rooms">
-    <room>rooms\mp_testRoom</room>
     <room>rooms\rm_Menu</room>
+    <room>rooms\mp_testRoom</room>
     <room>rooms\rm_shaderTesting</room>
     <room>rooms\room5</room>
     <rooms name="maps">

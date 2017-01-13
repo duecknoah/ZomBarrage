@@ -113,15 +113,26 @@ if (!isOnFire) {
 // If entity is discovered dead, make it dead
 if (hp <= 0) {
     isDead = true;
+    
+    // Make all entities no longer target this one
+    scr_removeOtherEntityTargeting();
+    
     // Do not destroy player object if hp of entity is 0
-    if (object_index != obj_player) {
-        instance_destroy();
-    }
-    else {
-        // If player
-        // create blood pool
-        instance_create(x, y, obj_bloodPool);
-        gameOver = true; // since player is dead, set it to game over
+    switch (object_index) {
+        case obj_player:
+            // If player
+            // create blood pool
+            instance_create(x, y, obj_bloodPool);
+            gameOver = true; // since player is dead, set it to game over
+        break;
+        case obj_civilian:
+            // end path, destroy self (which creates the dead body in destroy event)
+            path_end();
+            instance_destroy();
+            instance_create(x, y, obj_bloodPool);
+        break;
+        default:
+            instance_destroy();
     }
 }
 

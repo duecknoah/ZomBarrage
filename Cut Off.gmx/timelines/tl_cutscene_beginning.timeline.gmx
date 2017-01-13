@@ -42,6 +42,7 @@ global.preventPlayerControls = true;
 obj_player.state = "typing"; // start on the computer
 obj_player.hat = 0;
 obj_guiController.gameGuiAlpha = 0;
+scr_cameraZoom(3);
 </string>
           </argument>
         </arguments>
