@@ -106,7 +106,9 @@ scr_InitView();
 // Flashlight
 
 if (flashLightOn) {
-    scr_drawLightBeam(x, y, 255 / 2, c_white, rotation + 90, 90, 128);
+    scr_drawLightBeam(x, y, 255 / 8, c_white, rotation + 90, 140, 128); // outer beam
+    scr_drawLightBeam(x, y, 255 / 8, c_white, rotation + 90, 115, 128); // middle beam
+    scr_drawLightBeam(x, y, 255 / 2, c_white, rotation + 90, 90, 128); // inner beam
 }
 </string>
           </argument>

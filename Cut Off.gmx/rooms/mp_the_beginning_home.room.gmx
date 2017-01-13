@@ -99,7 +99,7 @@ tile layers are based on y pos
     <instance objName="obj_light" x="264" y="416" name="inst_05391F45" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_light" x="64" y="272" name="inst_F6B4A302" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_light" x="104" y="88" name="inst_0280997C" locked="0" code="flicker = true;&#xA;radius = 64;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_civilian" x="160" y="384" name="inst_21C61A9A" locked="0" code="label = &quot;dad&quot;;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_dad_civilian" x="160" y="384" name="inst_2707780A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
     <tile bgName="" x="480" y="416" w="16" h="16" xo="0" yo="0" id="10000668" name="inst_06879420" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>

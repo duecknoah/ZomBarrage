@@ -278,6 +278,7 @@
       <object>objects\obj_fragGrenade</object>
       <object>objects\obj_fire</object>
       <object>objects\obj_saveZone</object>
+      <object>objects\obj_dad_civilian</object>
     </objects>
     <objects name="Other">
       <object>objects\obj_zombieSpawn</object>
