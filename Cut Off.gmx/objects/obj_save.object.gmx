@@ -86,11 +86,8 @@ if (ds_exists(saveDynamic, ds_type_list)) {
             <kind>1</kind>
             <string>// Keep checking saves every &lt;checkSavesTime&gt; steps (if at main menu)
 if (checkSavesTimer &lt;= 0) {
-    if (room == rm_Menu) {
         scr_checkSaves(); // re-check saves
         checkSavesTimer = checkSavesTime; // reset timer
-        
-    }
 }
 else {
     checkSavesTimer --;

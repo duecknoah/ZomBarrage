@@ -26,16 +26,6 @@ varying vec4 v_vColour;
 
 void main()
 {
-   // gl_FragColor = v_vColour * texture2D( gm_BaseTexture, v_vTexcoord );
-    vec4 orgCol = texture2D( gm_BaseTexture, v_vTexcoord );
-    
-    float red = 0.0;
-    float green = orgCol.g;
-    float blue = 0.0;
-    float alpha = orgCol.a;
-    
-    vec4 finalCol = vec4(red, green, blue, alpha);
-    
-    gl_FragColor = finalCol;
+    gl_FragColor = v_vColour * texture2D( gm_BaseTexture, v_vTexcoord );
 }
 

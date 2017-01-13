@@ -25,10 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>shader_set(sh_test2);
-draw_self();
-shader_reset();
-</string>
+            <string></string>
           </argument>
         </arguments>
       </action>
