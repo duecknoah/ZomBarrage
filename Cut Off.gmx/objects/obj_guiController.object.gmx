@@ -30,19 +30,46 @@ show_debug_message(object_get_name(object_index) + " created");
 
 // Game gui settings
 guiScale = 4;
-guiAlpha = 1; // OVERALL ALPHA, when 0, no gui is shown in any category
-upgradeGuiAlpha = 1;
-pauseGuiAlpha = 0.5;
-endGameStatsGuiAlpha = 0;
-waveBarGuiAlpha = 1;
-OnFireGuiAlpha = 0; // when player is on fire, this will increase
+/* GUI variables ************
+* The difference from having an alpha of 0 and having for example showWaveBarGui equal to
+* false is that having showWaveBarGui set to false makes it not run any code to do with
+* the wave bar.
+*   ex. Checking if a button is pressed on the wave bar (if there was one)
+*   if the user is clicking on the gui button
+*/
+showUpgradeScreen = false; // show upgrade screen?
+showUpgradeButton = true; // show the button at the top left to access the upgrades?
+showPauseScreen = false; // show pause gui?
+showPauseButton = true; // show the button at the top right to access the pause screen?
+showWeaponPickupText = false; // show weapon pickup text?
+showWeaponScope = false; // show weapon scope?
+showWaveBar = true; // show the wave bar?
+showWaveCompletionScreen = true; // show the wave completed screen?
+showOnFireGuiAlpha = true; // run the code to do with the on fire on the screen?
+showInventory = true; // Weapon slots and inventory
+showHealthBar = true;
+showRespawnScreen = false; // is shown once player dies
+showLootingBar = true; // show the loading like bar when looting
+showLootingChooseScreen = true; // show the screen post-looting of where the player chooses what they want from the looting
+// Other gui variables
 shootDelayMax[0] = 0; // stores the highest value when shootdelay[0] of player is not 0
 shootDelayMax[1] = 0; // stores the highest value when shootdelay of player is not 0
-// gui variables
-showUpgrades = false; // show upgrade gui?
-showPause = false; // show pause gui?
-showWeaponPickupText = false; // show weapon pickup text?
+// Gui variable alpha
+upgradeScreenAlpha = 1;
+upgradeButtonAlpha = 1;
+pauseScreenAlpha = 0.5;
+pauseButtonAlpha = 1;
+waveBarGuiAlpha = 1;
+waveCompletionScreenAlpha = 1;
+weaponScopeAlpha = 1;
+weaponPickupTextAlpha = 1;
+OnFireGuiAlpha = 0; // when player is on fire, this will increase
+inventoryAlpha = 1;
+healthBarAlpha = 1;
+lootingBarAlpha = 1;
+lootingChooseScreenAlpha = 1;
 // Cutscene
+showForegroundImage = false; // show foreground image?
 foregroundImage = noone;
 foregroundImageAlpha = 0; // 1=nothing shown but foreground image, 0=foreground image not shown, everything else shown, 0-1)
 
@@ -116,12 +143,11 @@ if (surface_exists(consoleSurf)) {
 var centerX = view_wport[0] / 2;
 var centerY = view_hport[0] / 2;
 display_set_gui_size(view_wport[0], view_hport[0]);
-draw_set_alpha(guiAlpha);
 
 //////////////////////////
 // When game over, fade out game gui and fade in stats
-if (global.gameOver) {
-    endGameStatsGuiAlpha = 1;
+if (obj_player.isDead) {
+    showRespawnScreen = true;
 }
 var onFireFadeSpd = 0.01;
 if (obj_player.isOnFire) {
@@ -135,14 +161,21 @@ else {
     }
 }
 // on Fire gui
-if (OnFireGuiAlpha &gt; 0) {
-    draw_sprite_ext(spr_onFireGui, 0, 0, 0, 10, 10, 0, c_white, scr_lerpOffGuiAlpha(OnFireGuiAlpha));
+if (showOnFireGuiAlpha) {
+    draw_sprite_ext(spr_onFireGui, 0, 0, 0, 10, 10, 0, c_white, OnFireGuiAlpha);
 }
 
 // Game gui
 // Sniper rifle scope
 if (obj_player.state == "Sniper Rifle scoped" || obj_player.state == "Sniper Rifle scoped shoot") {
-    // draw zoomed in portion from default application surface
+    showWeaponScope = true;
+}
+else {
+    showWeaponScope = false;
+}
+
+if (showWeaponScope) {
+// draw zoomed in portion from default application surface
     var xSize = 128;
     var ySize = 128;
     var scale = 2;
@@ -168,98 +201,114 @@ if (obj_player.state == "Sniper Rifle scoped" || obj_player.state == "Sniper Rif
                             scale, 
                             scale, 
                             c_white,
-                            guiAlpha);
+                            weaponScopeAlpha);
     }
-    draw_sprite_ext(spr_sniperRifleScope, 0, device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), guiScale, guiScale, 0, c_white, guiAlpha);
+    draw_sprite_ext(spr_sniperRifleScope, 0, device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), guiScale, guiScale, 0, c_white, weaponScopeAlpha);
 }
 
 // Draw WaveBar
-var text = "";
-var yy = sprite_get_height(spr_WaveBar) * guiScale / 2;
-
-draw_sprite_ext(spr_WaveBar, 0, centerX, yy, guiScale, guiScale, 0, c_white, scr_lerpOffGuiAlpha(waveBarGuiAlpha));
-
-text += "Wave " + string(global.currentWave);
-
-if (global.delayBetweenWavesTimer &gt;= 0) {
-    text += "   Next Wave: " + string(global.delayBetweenWavesTimer);
+if (showWaveBar) {
+    var text = "";
+    var yy = sprite_get_height(spr_WaveBar) * guiScale / 2;
+    
+    draw_sprite_ext(spr_WaveBar, 0, centerX, yy, guiScale, guiScale, 0, c_white, waveBarGuiAlpha);
+    
+    text += "Wave " + string(global.currentWave);
+    
+    if (global.delayBetweenWavesTimer &gt;= 0) {
+        text += "   Next Wave: " + string(global.delayBetweenWavesTimer);
+    }
+    
+    draw_set_halign(fa_center);
+    draw_set_valign(fa_middle);
+    draw_set_colour(c_white);
+    draw_set_alpha(waveBarGuiAlpha);
+    draw_text(centerX, yy, text);
+    draw_set_halign(fa_left);
+    draw_set_valign(fa_top);
 }
 
-draw_set_halign(fa_center);
-draw_set_valign(fa_middle);
-draw_set_colour(c_white);
-draw_set_alpha(scr_lerpOffGuiAlpha(waveBarGuiAlpha));
-draw_text(centerX, yy, text);
-draw_set_halign(fa_left);
-draw_set_valign(fa_top);
-
-// Draw Upgrade Bar
-var text = "";
-var xx = centerX / 2 - (sprite_get_width(spr_upgradeBar) * guiScale / 2);
-var yy = 0;
-
-if (scr_buttonGuiSpriteText(xx, yy, spr_upgradeBar, guiScale, "UPGRADES", c_white, scr_lerpOffGuiAlpha(upgradeGuiAlpha)) == 2
-|| keyboard_check_pressed(vk_tab)) {
-    // Toggle upgrades if button pressed
-    if (showUpgrades) {
-        showUpgrades = false;
-        // Put timescale back to normal
-        scr_setTimeScale(1);
-        mouse_clear(mb_any);
-    }
-    else {
-        showUpgrades = true;
-        // Make global.timeScale slower when accessing upgrades (so player doesn't just die right away
-        scr_setTimeScale(0.05);
-        mouse_clear(mb_any); // prevent user from accidently buying something instantly
+// Draw Upgrade button
+if (showUpgradeButton) {
+    var text = "";
+    var xx = centerX / 2 - (sprite_get_width(spr_upgradeBar) * guiScale / 2);
+    var yy = 0;
+    
+    if (scr_buttonGuiSpriteText(xx, yy, spr_upgradeBar, guiScale, "UPGRADES", c_white, upgradeButtonAlpha) == 2
+    || keyboard_check_pressed(vk_tab)) {
+        // Toggle upgrades if button pressed
+        if (showUpgradeScreen) {
+            showUpgradeScreen = false;
+            // Put timescale back to normal
+            scr_setTimeScale(1);
+            mouse_clear(mb_any);
+        }
+        else {
+            showUpgradeScreen = true;
+            // Make global.timeScale slower when accessing upgrades (so player doesn't just die right away
+            scr_setTimeScale(0.05);
+            mouse_clear(mb_any); // prevent user from accidently buying something instantly
+        }
     }
 }
 
-// Draw Pause Button Bar
-xx = centerX + (centerX / 2) + (sprite_get_width(spr_upgradeBar) * guiScale / 2);
-yy = 0;
-if (!global.gameOver) {
-    if (scr_buttonGuiSpriteText(xx, yy, spr_upgradeBar, guiScale, "PAUSE", c_white, guiAlpha) == 2
+// Draw Pause Button
+if (showPauseButton) {
+    xx = centerX + (centerX / 2) + (sprite_get_width(spr_upgradeBar) * guiScale / 2);
+    yy = 0;
+    if (scr_buttonGuiSpriteText(xx, yy, spr_upgradeBar, guiScale, "PAUSE", c_white, pauseButtonAlpha) == 2
     || keyboard_check_pressed(vk_escape)) {
         // Toggle pausing
-        if (!showPause) {
+        if (!showPauseScreen) {
             scr_setTimeScale(0);
-            showPause = true;
+            showPauseScreen = true;
         }
         else {
             scr_setTimeScale(1);
-            showPause = false;
+            showPauseScreen = false;
         }
     }
 }
 
-// Wave completed text
-var durOfText = 3; // maximum duration to show text in seconds
-
+// Wave completion screen checking
 if (global.waveCompleted &amp;&amp; global.delayBetweenWaves - global.delayBetweenWavesTimer &lt; durOfText) {
+    showWaveCompletionScreen = true;
+}
+else {
+    showWaveCompletionScreen = false;
+}
+
+// Wave completed text / screen
+if (showWaveCompletionScreen) {
+    var durOfText = 3; // maximum duration to show text in seconds
+    draw_set_alpha(waveCompletionScreenAlpha);
     draw_text(centerX, centerY, "Wave Completed!");
+    draw_set_alpha(1);
 }
 
 // Draw inventory GUI
-scr_drawInventoryGui(0,
-                    view_hport[0] - (sprite_get_height(spr_inventory) / 2 * guiScale),
-                    guiScale,
-                    guiAlpha);
-
+if (showInventory) {
+    scr_drawInventoryGui(0,
+                        view_hport[0] - (sprite_get_height(spr_inventory) / 2 * guiScale),
+                        guiScale,
+                        inventoryAlpha);
+}
 
 // Draw HealthBar Gui
-var hbx = centerX - ((sprite_get_width(spr_healthBar) / 2) * guiScale);
-var hby = view_hport[0] - (sprite_get_height(spr_healthBar) * guiScale);
-var hbHealthMaxXScale = guiScale;
-var hbHealthPerc = obj_player.hp / obj_player.maxHp;
-var hbHealthXScale = lerp(0, hbHealthMaxXScale, hbHealthPerc);
-
-// Healthbar background (behind red health)
-draw_sprite_ext(spr_healthBar, 2, hbx, hby, guiScale, guiScale, 0, c_white, guiAlpha);
-// Healthbar health (red)
-draw_sprite_ext(spr_healthBar, 1, hbx, hby, hbHealthXScale, guiScale, 0, c_white, guiAlpha);
-// Healthbar frame
-draw_sprite_ext(spr_healthBar, 0, hbx, hby, guiScale, guiScale, 0, c_white, guiAlpha);
+if (showHealthBar) {
+    var hbx = centerX - ((sprite_get_width(spr_healthBar) / 2) * guiScale);
+    var hby = view_hport[0] - (sprite_get_height(spr_healthBar) * guiScale);
+    var hbHealthMaxXScale = guiScale;
+    var hbHealthPerc = obj_player.hp / obj_player.maxHp;
+    var hbHealthXScale = lerp(0, hbHealthMaxXScale, hbHealthPerc);
+    
+    // Healthbar background (behind red health)
+    draw_sprite_ext(spr_healthBar, 2, hbx, hby, guiScale, guiScale, 0, c_white, healthBarAlpha);
+    // Healthbar health (red)
+    draw_sprite_ext(spr_healthBar, 1, hbx, hby, hbHealthXScale, guiScale, 0, c_white, healthBarAlpha);
+    // Healthbar frame
+    draw_sprite_ext(spr_healthBar, 0, hbx, hby, guiScale, guiScale, 0, c_white, healthBarAlpha);
+}
 
 // Weapon pickup text toggling
 with (obj_player) {
@@ -276,14 +325,23 @@ if (showWeaponPickupText) {
     with (obj_player) {
         weaponInst = instance_place(x, y, obj_itemWeapon);
     }
+    draw_set_alpha(weaponPickupTextAlpha);
     draw_text(view_wport[0] / 2, view_hport[0] / 2 + 256, "'E' to pickup " + weaponInst.weaponType);
+    draw_set_alpha(1);
 }
 
 // Looting bar
 if (obj_player.state == "looting") {
+    showLootingBar = true;
+}
+else {
+    showLootingBar = false;
+}
+
+if (showLootingBar) {
     var lbx = centerX;
     var lby = centerY;
-    draw_sprite_ext(spr_lootingBar, 0, lbx, lby, guiScale, guiScale, 0, c_white, guiAlpha);
+    draw_sprite_ext(spr_lootingBar, 0, lbx, lby, guiScale, guiScale, 0, c_white, lootingBarAlpha);
     // Draw progress bar
     var lbProgressX1 = lbx - ((sprite_get_width(spr_lootingBar) / 2) * guiScale) + (7 * guiScale);
     var lbProgressY1 = lby - ((sprite_get_height(spr_lootingBar) / 2) * guiScale) + (4 * guiScale);
@@ -294,17 +352,27 @@ if (obj_player.state == "looting") {
     var lbProgressX2 = lerp(lbProgressX1, lbProgressX2, lootPerc);
     
     draw_set_colour(c_yellow);
+    draw_set_alpha(lootingBarAlpha);
     draw_rectangle(lbProgressX1, lbProgressY1, lbProgressX2, lbProgressY2, 0);
+    draw_set_alpha(1);
     draw_set_colour(c_white);
 }
+
 // Looting choose gui
 if (obj_player.state == "loot choose") {
+    showLootingChooseScreen = true;
+}
+else {
+    showLootingChooseScreen = false;
+}
+
+if (showLootingChooseScreen) {
     // Darken background
     draw_set_alpha(0.5);
     draw_set_colour(c_black);
     draw_rectangle(0, 0, view_wport[0], view_hport[0], 0);
     draw_set_colour(c_white); // reset
-    draw_set_alpha(guiAlpha); // reset
+    draw_set_alpha(lootingChooseScreenAlpha); // reset
     
     var yy = view_hport[0] / 2;
     
@@ -312,17 +380,17 @@ if (obj_player.state == "loot choose") {
     scr_drawInventoryGui(256,
                     yy,
                     guiScale,
-                    guiAlpha);
+                    lootingChooseScreenAlpha);
     // Draw loot area gui
     scr_drawAreaLootGui(view_wport[0] / 2, 
                     yy - 64, 
                     obj_player.lootArea, 
                     guiScale, 
-                    guiAlpha);
+                    lootingChooseScreenAlpha);
 }
 
 // Draw upgrade screen if alpha &gt; 0 and showing upgrades and not game over
-if (upgradeGuiAlpha &gt; 0 &amp;&amp; showUpgrades &amp;&amp; !global.gameOver) {
+if (showUpgradeScreen) {
     /* Things that can be upgraded:
      * - player max hp
      * - player overall shot accuracy
@@ -332,7 +400,7 @@ if (upgradeGuiAlpha &gt; 0 &amp;&amp; showUpgrades &amp;&amp; !global.gameOver) 
     // Draw background
     var bx = centerX - (sprite_get_width(spr_upgradeBackground) * guiScale / 2);
     var by = centerY - (sprite_get_height(spr_upgradeBackground) * guiScale / 2);
-    draw_sprite_ext(spr_upgradeBackground, 0, bx, by, guiScale, guiScale, 0, c_white, scr_lerpOffGuiAlpha(upgradeGuiAlpha));
+    draw_sprite_ext(spr_upgradeBackground, 0, bx, by, guiScale, guiScale, 0, c_white, upgradeScreenAlpha);
     
     // Upgrade buttons
     var xx = bx;
@@ -347,7 +415,7 @@ if (upgradeGuiAlpha &gt; 0 &amp;&amp; showUpgrades &amp;&amp; !global.gameOver) 
                             "TEMP_NO_SPRITE", 
                             "Increase max health of yourself by 10#Current: " + string(obj_player.maxHp),
                             2 * obj_player.maxHp,
-                            guiScale, scr_lerpOffGuiAlpha(upgradeGuiAlpha))) {
+                            guiScale, upgradeScreenAlpha)) {
         obj_player.maxHp += 10;
         obj_player.hp = obj_player.maxHp;
    }
@@ -356,7 +424,7 @@ if (upgradeGuiAlpha &gt; 0 &amp;&amp; showUpgrades &amp;&amp; !global.gameOver) 
                             "TEMP_NO_SPRITE", 
                             "Increase your lootrank.#Current: " + string(obj_player.lootRank), 
                             10 * obj_player.lootRank + 5, 
-                            guiScale, scr_lerpOffGuiAlpha(upgradeGuiAlpha))) {
+                            guiScale, upgradeScreenAlpha)) {
         obj_player.lootRank ++;
    }
    yy += yOff;
@@ -364,7 +432,7 @@ if (upgradeGuiAlpha &gt; 0 &amp;&amp; showUpgrades &amp;&amp; !global.gameOver) 
                            "TEMP_NO_SPRITE",
                            "Increase your average shot accuracy.#Current: +" + string((1 - obj_player.shotAcc) * 100) + "%", 
                            10 * obj_player.shotAcc + 5, 
-                           guiScale, scr_lerpOffGuiAlpha(upgradeGuiAlpha))) {
+                           guiScale, upgradeScreenAlpha)) {
         obj_player.shotAcc /= 1.5;
    }
    yy += yOff;
@@ -372,7 +440,7 @@ if (upgradeGuiAlpha &gt; 0 &amp;&amp; showUpgrades &amp;&amp; !global.gameOver) 
                            "TEMP_NO_SPRITE",
                            "Increase your explosive damage by 5.#Current: +" + string(obj_player.exploDmg), 
                            10 * obj_player.exploDmg + 5, 
-                           guiScale, scr_lerpOffGuiAlpha(upgradeGuiAlpha))) {
+                           guiScale, upgradeScreenAlpha)) {
         obj_player.exploDmg += 5;
    }
    yy += yOff;
@@ -380,21 +448,21 @@ if (upgradeGuiAlpha &gt; 0 &amp;&amp; showUpgrades &amp;&amp; !global.gameOver) 
                            "TEMP_NO_SPRITE",
                            "Increase your bullet damage by 5.#Current: +" + string(obj_player.bulletDmg), 
                            10 * obj_player.bulletDmg + 5, 
-                           guiScale, scr_lerpOffGuiAlpha(upgradeGuiAlpha))) {
+                           guiScale, upgradeScreenAlpha)) {
         obj_player.bulletDmg += 5;
    }
    yy += yOff;
 }
 
-// Pause Gui
-if (pauseGuiAlpha &gt; 0 &amp;&amp; showPause) {
+// Pause Screen
+if (showPauseScreen) {
     // Fade in background alpha based of global.timeScale fade out speed
     var _backgroundAlpha = lerp(0, 0.5, 1 - global.timeScale);
-    _backgroundAlpha -= pauseGuiAlpha;
+    _backgroundAlpha -= pauseScreenAlpha;
     
     // Background col
     draw_set_colour(c_black);
-    draw_set_alpha(scr_lerpOffGuiAlpha(_backgroundAlpha));
+    draw_set_alpha(_backgroundAlpha);
     draw_rectangle(0, 0, view_wport[0], view_hport[0], 0);
     draw_set_alpha(1);
     
@@ -402,47 +470,16 @@ if (pauseGuiAlpha &gt; 0 &amp;&amp; showPause) {
     draw_set_colour(c_white);
     draw_set_halign(fa_center);
     draw_set_valign(fa_middle);
-    draw_set_alpha(scr_lerpOffGuiAlpha(pauseGuiAlpha));
+    draw_set_alpha(pauseScreenAlpha);
     draw_text(centerX, centerY, "PAUSED");
     draw_text(centerX, centerY + 128, "Press 'ESC' To Resume");
     draw_set_alpha(1);
     draw_set_halign(fa_left);
     draw_set_valign(fa_top);
-    
-    // If player died during the slowdown of the global.timeScale
-    // then unpause and reset the global.timeScale to 1.
-    if (global.gameOver) {
-        showPause = false;
-        scr_setTimeScale(1);
-    }
-}
-
-// End game stats gui
-if (endGameStatsGuiAlpha &gt; 0) {
-    var statsYTop = 128;
-    
-    draw_set_alpha(scr_lerpOffGuiAlpha(endGameStatsGuiAlpha));
-    draw_text(centerX, statsYTop, "YOU DIED");
-    statsYTop += 64;
-    draw_text(centerX, statsYTop, "Total Waves survived: " + string(global.currentWave));
-    
-    var statsXBottom = centerX - 128;
-    var statsYBottom = view_hport[0] - 256;
-    
-    // Back to main menu
-    if (scr_buttonGuiSprite(statsXBottom, statsYBottom, spr_buttonBack, guiScale) == 2) {
-        room_goto(rm_Menu);
-    }
-    statsXBottom += 256;
-    if (scr_buttonGuiSprite(statsXBottom, statsYBottom, spr_buttonRetry, guiScale) == 2) {
-        room_restart();
-    }
-    
-    draw_set_alpha(1); // reset completly
 }
 
 // Cutscene foreground image gui
-if (foregroundImageAlpha &gt; 0) {
+if (showForegroundImage) {
     if (foregroundImage != noone) {
         var w = sprite_get_width(foregroundImage);
         var h = sprite_get_height(foregroundImage);
@@ -462,24 +499,12 @@ for (i = 0; i &lt; instance_number(obj_guiText); i += 1) {
         draw_set_alpha(guiText.textAlpha);
         draw_set_color(guiText.textCol);
         draw_text(guiText.textX, guiText.textY, guiText.text);
-        //show_message(guiText.textAlpha);
 }
 // reset
 draw_set_halign(fa_left);
 draw_set_valign(fa_top);
 draw_set_alpha(1);
 draw_set_color(c_white);
-    
-/*
-if (keyboard_check_pressed(ord("I"))) {
-    view_wport[0] = 1920;
-    view_hport[0] = 1080;
-    window_set_size(view_wport[0], view_hport[0]);
-    window_set_colour(c_red);
-}
-*/
-
-draw_set_alpha(1);
 
 // If in debug mode, show framerate
 if (debug_mode) {

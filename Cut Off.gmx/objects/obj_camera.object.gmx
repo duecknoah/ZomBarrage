@@ -69,11 +69,6 @@ if (instance_exists(obj_player)) {
 // Consistent Aspect ratio calculations:
 // width: set to whatever as height will adjust accordingly.
 // height: (original height / original width) x new width = new height
-/*
-view_wview[0] += ceil((view_wviewOrg - view_wview[0]) * 0.0025);
-var _newH = (view_hviewOrg / view_wviewOrg) * view_wview[0];
-view_hview[0] = _newH;
-*/
 
 // Zoom control (tweens when zoom is set)
 // Zoom is 0.25-infinity where 1 is 0.25:1 in game pixels and 2 is 2:1 pixels in game
@@ -110,7 +105,7 @@ if (cameraShake != 0) {
 }
 
 // zoom in when player dies
-if (global.gameOver) {
+if (obj_player.isDead) {
     scr_cameraZoom(2);
 }
 

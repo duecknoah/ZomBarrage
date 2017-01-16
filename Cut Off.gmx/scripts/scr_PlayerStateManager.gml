@@ -6,7 +6,7 @@ if (isDead) {
 }
 
 // If not showing the upgrade menu, allow things to happen
-if (!obj_guiController.showUpgrades) {
+if (!obj_guiController.showUpgradeScreen) {
     switch(state) {
         case "dead":
             draw_sprite_ext(spr_PlayerDead, 0, x, y, image_xscale, image_yscale, rotation, c_white, 1);

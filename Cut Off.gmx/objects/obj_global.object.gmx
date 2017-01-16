@@ -27,8 +27,6 @@
             <kind>1</kind>
             <string>/// Inits all global variables, then destroys self
 show_debug_message(object_get_name(object_index) + " created");
-//globalvar gameOver, timeScale, timeScaleChanged, isIndoor;
-global.gameOver = false; // is true when player dies
 /* timescale is the speed of the flow of the game
  * (ex. how fast the player runs, how fast everything
  *goes, the frameRate is unaffected)

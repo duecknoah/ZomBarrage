@@ -138,6 +138,7 @@
     <path>paths\path_cutscene_beginning_dad1</path>
   </paths>
   <scripts name="scripts">
+    <script>scripts\scr_findNearestFreeCell.gml</script>
     <scripts name="Misc.">
       <script>scripts\scr_boolToString.gml</script>
       <script>scripts\scr_dsListToString.gml</script>
@@ -262,7 +263,10 @@
       <script>scripts\scr_scriptRunnerAddScript.gml</script>
       <script>scripts\scr_scriptRunnerAddScriptByArgs.gml</script>
     </scripts>
-    <script>scripts\scr_findNearestFreeCell.gml</script>
+    <scripts name="Cutscene">
+      <script>scripts\scr_initCutscene.gml</script>
+      <script>scripts\scr_endCutscene.gml</script>
+    </scripts>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\sh_outline.shader</shader>

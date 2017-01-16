@@ -20,6 +20,7 @@
           <argument>
             <kind>1</kind>
             <string>/// Create guiTexts
+scr_initCutscene();
 scr_setGUIForegroundImage(spr_black);
 scr_setGUIForegroundAlpha(1);
 scr_createGuiText(view_wport[0] / 2, 
@@ -217,6 +218,7 @@ obj_player.hat = noone;
             <kind>1</kind>
             <string>/// Make cutscene end and allow movement again
 global.preventPlayerControls = false;
+scr_endCutscene();
 </string>
           </argument>
         </arguments>
