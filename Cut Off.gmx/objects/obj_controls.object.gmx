@@ -29,6 +29,7 @@
 
 shootButton = mb_left; // used for weapon firing
 actionButton = mb_right; // used for actions with props
+chatBarSkipMessageButton = vk_space; // used for speeding through dialogue
 </string>
           </argument>
         </arguments>

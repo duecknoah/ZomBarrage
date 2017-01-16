@@ -51,6 +51,7 @@ showHealthBar = true;
 showRespawnScreen = false; // is shown once player dies
 showLootingBar = true; // show the loading like bar when looting
 showLootingChooseScreen = true; // show the screen post-looting of where the player chooses what they want from the looting
+showChatBar = false; // show all the chatbar items? (the bottom bar where dialogue shows)
 // Other gui variables
 shootDelayMax[0] = 0; // stores the highest value when shootdelay[0] of player is not 0
 shootDelayMax[1] = 0; // stores the highest value when shootdelay of player is not 0
@@ -68,11 +69,31 @@ inventoryAlpha = 1;
 healthBarAlpha = 1;
 lootingBarAlpha = 1;
 lootingChooseScreenAlpha = 1;
+chatBarAlpha = 1;
 // Cutscene
 showForegroundImage = false; // show foreground image?
 foregroundImage = noone;
 foregroundImageAlpha = 0; // 1=nothing shown but foreground image, 0=foreground image not shown, everything else shown, 0-1)
-
+// Other Chatbar variables
+    // each index holds the next string of text in the dialogue, 
+    // ex. (0="Hello, how are you?", 1="I'm good!"), this is where 
+    // you can insert your dialogue into and it should automatically work
+    chatBarMessage = ds_list_create();
+    chatBarMessageDisplayed = ""; // the current message displayed in the chatbar
+    // the image of the current speaker, corresponds with the 
+    // indexs within chatBarMessage so the 
+    // speaker shown goes with the correct message
+    chatBarSpeakerImage = ds_list_create();
+    chatBarWidth = 960;
+    chatBarHeight = 128;
+    chatBarPadding = 16;
+    // the line we are on within chatBarMessageDisplayed, 
+    // a new line is created when the text no longer fits on the page
+    chatBarCurrentMessageLineNumber = 0; // the current line number within the message string
+    chatBarCurrentCharPos = 0; // current character number within the message string
+    chatBarStart = ds_list_create(); // stores the starting line numbers for the current message displayed
+    chatBarLastSpacePos = -1; // the position in the message string of the last space
+    chatBarTimer = 0;
 // Console
 consoleSurf = surface_create(750, 500); // surface used for console drawing
 showConsole = false; // can be toggled in debug mode
@@ -115,6 +136,14 @@ if (ds_exists(consoleHelpDB, ds_type_list)) {
 // Free console surface from mem
 if (surface_exists(consoleSurf)) {
     surface_free(consoleSurf);
+}
+
+// Chatbar
+if (ds_exists(chatBarMessage, ds_type_list)) {
+    ds_list_destroy(chatBarMessage);
+}
+if (ds_exists(chatBarSpeakerImage, ds_type_list)) {
+    ds_list_destroy(chatBarSpeakerImage);
 }
 </string>
           </argument>
@@ -292,6 +321,91 @@ if (showInventory) {
                         view_hport[0] - (sprite_get_height(spr_inventory) / 2 * guiScale),
                         guiScale,
                         inventoryAlpha);
+}
+
+// If there is message data for chatbar
+if (!ds_list_empty(chatBarMessage)) {
+    showChatBar = true; // show it
+    showHealthBar = false; // hide health bar
+}
+else {
+    showChatBar = false; // else hide it
+    showHealthBar = true;
+}
+
+// Chat bar
+if (showChatBar) {
+    // As we go through each message, once
+    // the user skips on to the next dialogue
+    // line, we remove index 0 (the first message)
+    // and naturally the next message will fall into
+    // index 0, continully doing this until there are
+    // no more messages and thats where we hide the chatbar
+    //ds_list (chatBarMessage)
+    var chatBarX = 256;
+    var chatBarY = view_hport[0] - chatBarHeight;
+    
+    // If there is no start line entries, set it to 0
+    if (ds_list_empty(chatBarStart)) {
+        ds_list_add(chatBarStart, 0);  
+    }
+    
+    // Now check if the full message has been shown, if so. Allow user to skip to next message in the ds_list
+    if (chatBarCurrentCharPos == string_length(chatBarMessage[| 0])) {
+        if (keyboard_check_pressed(obj_controls.chatBarSkipMessageButton)) {
+            // Delete the current messages, the next messages will
+            // fall into index 0 (if there is more)
+            ds_list_delete(chatBarMessage, 0);
+            ds_list_delete(chatBarSpeakerImage, 0);
+            // Reset vars
+            chatBarMessageDisplayed = "";
+            chatBarLastSpacePos = -1;
+            chatBarCurrentCharPos = 0;
+        }
+    }
+    
+    // Auto Line breaking
+    if (string_width(chatBarMessageDisplayed) &gt; chatBarWidth - chatBarPadding - chatBarPadding) {
+        chatBarMessageDisplayed = string_delete(chatBarMessageDisplayed, chatBarLastSpace, 1);
+        chatBarMessageDisplayed = string_insert("#", chatBarMessageDisplayed, chatBarLastSpace);
+        ds_list_add(chatBarStart, chatBarLastSpace + 1); // add the next line number
+    }
+    
+    if (chatBarTimer &lt;= 0) {
+        // If not at end of string yet
+        if (chatBarCurrentCharPos &lt; string_length(chatBarMessage[| 0])) {
+            // Add the next character to the display string
+            var nextChar = string_char_at(chatBarMessage[| 0], chatBarCurrentCharPos + 1);
+            
+            // Check if it is a space
+            if (nextChar == " ") {
+                // If so, mark this position as the last space
+                chatBarLastSpace = chatBarCurrentCharPos + 1;
+            }
+            
+            chatBarMessageDisplayed += nextChar;
+            chatBarTimer = 2; // reset timer, the lower the number, the faster the text goes
+            chatBarCurrentCharPos ++; // move the position forward one
+        }
+    }
+    else {
+    // keep counting down the timer
+        chatBarTimer --;
+    }   
+    
+    var finalStr = string_copy(chatBarMessageDisplayed, ds_list_find_value(chatBarStart, chatBarCurrentMessageLineNumber), chatBarCurrentCharPos - ds_list_find_value(chatBarStart, chatBarCurrentMessageLineNumber));
+    
+    // Did we go past the bottom? move up a line
+    if (string_height(finalStr) &gt; chatBarHeight - chatBarPadding) {
+        chatBarCurrentMessageLineNumber ++;
+    }
+    
+    // Draw the background box!
+    draw_set_color(c_dkgray);
+    draw_rectangle(chatBarX, chatBarY, chatBarX + chatBarWidth, chatBarY + chatBarHeight, 0);
+    // Draw the text!
+    draw_set_color(c_white);
+    draw_text(chatBarX + chatBarPadding, chatBarY + chatBarPadding, finalStr);
 }
 
 // Draw HealthBar Gui
@@ -478,7 +592,7 @@ if (showPauseScreen) {
     draw_set_valign(fa_top);
 }
 
-// Cutscene foreground image gui
+// Cutscene round image gui
 if (showForegroundImage) {
     if (foregroundImage != noone) {
         var w = sprite_get_width(foregroundImage);
@@ -519,6 +633,7 @@ if (debug_mode) {
     _y += 16;
     draw_text(16, _y, "view_hview: " + string(view_hview[0]));
     _y += 16;
+    draw_text(display_mouse_get_x(), display_mouse_get_y() - 16, string(display_mouse_get_x()) + " " + string(display_mouse_get_y()));
 }
 </string>
           </argument>

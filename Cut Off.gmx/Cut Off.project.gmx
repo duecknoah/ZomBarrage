@@ -266,6 +266,9 @@
     <scripts name="Cutscene">
       <script>scripts\scr_initCutscene.gml</script>
       <script>scripts\scr_endCutscene.gml</script>
+      <scripts name="Chatbar">
+        <script>scripts\scr_addDialogue.gml</script>
+      </scripts>
     </scripts>
   </scripts>
   <shaders name="shaders">

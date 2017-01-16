@@ -4,6 +4,8 @@
 
 var fadeSpd = 1 / room_speed / argument[0];
 
+obj_guiController.showForegroundImage = true; // make sure foreground image is showing
+
 if (obj_guiController.foregroundImageAlpha < 1) {
     obj_guiController.foregroundImageAlpha = clamp(obj_guiController.foregroundImageAlpha + fadeSpd, 0, 1);
     return false; // still fading

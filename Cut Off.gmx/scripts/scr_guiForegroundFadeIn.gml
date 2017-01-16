@@ -9,4 +9,5 @@ if (obj_guiController.foregroundImageAlpha > 0) {
     return false; // still fading
 }
 
+obj_guiController.showForegroundImage = false; // done showing foreground image
 return true; // done fading

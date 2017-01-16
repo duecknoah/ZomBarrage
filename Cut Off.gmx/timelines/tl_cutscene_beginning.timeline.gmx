@@ -164,6 +164,9 @@ with (obj_propComputer) {
             <kind>1</kind>
             <string>/// Make player stop typing
 obj_player.state = "default";
+scr_addDialogue("Do play they miss give so up. Words to up style of since world. We leaf to snug on no need. Way own uncommonly travelling now acceptance bed compliment solicitude. Dissimilar admiration so terminated no in contrasted it. Advantages entreaties mr he apartments do. Limits far yet turned highly repair parish talked six. Draw fond rank form nor the day eat. ", spr_PlayerM16);
+scr_addDialogue(" kadsf jkasdfjlk asdkjf lkjasd fjk jkhakjhljkhljkhjkh jdkahsfljhk fdjkh  asdl hjkasdjhkf lahjkds fhjlka jhkldsjhkdjksaf ljkhadskjhf kjasdf akjsdf hdhfjj", spr_zombie);
+scr_addDialogue("Agreed. I guess we'll see!", spr_PlayerM16);
 </string>
           </argument>
         </arguments>
