@@ -83,7 +83,8 @@ foregroundImageAlpha = 0; // 1=nothing shown but foreground image, 0=foreground 
     // the image of the current speaker, corresponds with the 
     // indexs within chatBarMessage so the 
     // speaker shown goes with the correct message
-    chatBarSpeakerImage = ds_list_create();
+    chatBarSpeakerSprite = ds_list_create(); // the sprite 
+    chatBarSpeakerSubimg = ds_list_create(); // the subimage within the sprite
     chatBarWidth = 960;
     chatBarHeight = 128;
     chatBarPadding = 16;
@@ -142,8 +143,14 @@ if (surface_exists(consoleSurf)) {
 if (ds_exists(chatBarMessage, ds_type_list)) {
     ds_list_destroy(chatBarMessage);
 }
-if (ds_exists(chatBarSpeakerImage, ds_type_list)) {
-    ds_list_destroy(chatBarSpeakerImage);
+if (ds_exists(chatBarSpeakerSprite, ds_type_list)) {
+    ds_list_destroy(chatBarSpeakerSprite);
+}
+if (ds_exists(chatBarSpeakerSubimg, ds_type_list)) {
+    ds_list_destroy(chatBarSpeakerSubimg);
+}
+if (ds_exists(chatBarStart, ds_type_list)) {
+    ds_list_destroy(chatBarStart);
 }
 </string>
           </argument>
@@ -345,23 +352,25 @@ if (showChatBar) {
     var chatBarX = 256;
     var chatBarY = view_hport[0] - chatBarHeight;
     
-    // If there is no start line entries, set it to 0
-    if (ds_list_empty(chatBarStart)) {
-        ds_list_add(chatBarStart, 0);  
-    }
-    
-    // Now check if the full message has been shown, if so. Allow user to skip to next message in the ds_list
+    // First check if the full message has been shown, if so. Allow user to skip to next message in the ds_list
     if (chatBarCurrentCharPos == string_length(chatBarMessage[| 0])) {
         if (keyboard_check_pressed(obj_controls.chatBarSkipMessageButton)) {
             // Delete the current messages, the next messages will
             // fall into index 0 (if there is more)
             ds_list_delete(chatBarMessage, 0);
-            ds_list_delete(chatBarSpeakerImage, 0);
+            ds_list_delete(chatBarSpeakerSprite, 0);
+            ds_list_delete(chatBarSpeakerSubimg, 0);
+            ds_list_clear(chatBarStart); // clears all the starting numbers for the message displayed
             // Reset vars
             chatBarMessageDisplayed = "";
             chatBarLastSpacePos = -1;
             chatBarCurrentCharPos = 0;
         }
+    }
+    
+    // If there is no start line entries, set it to 0
+    if (ds_list_empty(chatBarStart)) {
+        ds_list_add(chatBarStart, 0);  
     }
     
     // Auto Line breaking
@@ -406,7 +415,9 @@ if (showChatBar) {
     // Draw the text!
     draw_set_color(c_white);
     draw_text(chatBarX + chatBarPadding, chatBarY + chatBarPadding, finalStr);
-}
+    // Draw the speaker!
+    draw_sprite_ext(chatBarSpeakerSprite[| 0], chatBarSpeakerSubimg[| 0], device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), guiScale, guiScale, 0, c_white, 1);
+} 
 
 // Draw HealthBar Gui
 if (showHealthBar) {
@@ -633,7 +644,7 @@ if (debug_mode) {
     _y += 16;
     draw_text(16, _y, "view_hview: " + string(view_hview[0]));
     _y += 16;
-    draw_text(display_mouse_get_x(), display_mouse_get_y() - 16, string(display_mouse_get_x()) + " " + string(display_mouse_get_y()));
+    draw_text(device_mouse_x_to_gui(0), device_mouse_y_to_gui(0) - 16, string(device_mouse_x_to_gui(0)) + " " + string(device_mouse_y_to_gui(0)));
 }
 </string>
           </argument>

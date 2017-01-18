@@ -412,15 +412,6 @@ if (!isDead &amp;&amp; !obj_guiController.showConsole) {
 if (keyboard_check_pressed(vk_f12)) {
     scr_takeScreenshot();
 }
-
-if (keyboard_check_pressed(vk_f11)) {
-    if (obj_guiController.guiAlpha == 0) {
-        obj_guiController.guiAlpha = 1;
-    }
-    else {
-        obj_guiController.guiAlpha = 0;
-    }
-}
 </string>
           </argument>
         </arguments>

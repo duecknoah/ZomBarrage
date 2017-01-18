@@ -126,6 +126,9 @@
     <sprites name="Weapons">
       <sprite>sprites\spr_itemWeapon</sprite>
     </sprites>
+    <sprites name="Speakers">
+      <sprite>sprites\spr_daveSpeaker</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\tile_back</background>
