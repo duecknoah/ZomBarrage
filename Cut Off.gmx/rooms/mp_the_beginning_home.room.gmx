@@ -56,7 +56,7 @@ tile layers are based on y pos
   <instances>
     <instance objName="obj_indoorObjectsInit" x="0" y="0" name="inst_06FD9418" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_player" x="120" y="120" name="inst_FFAAAA1F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_cutscene" x="32" y="0" name="inst_03BEC8CE" locked="0" code="// init cutscene&#xA;timeline_index = tl_cutscene_beginning;&#xA;timeline_running = true;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_cutscene" x="32" y="0" name="inst_03BEC8CE" locked="0" code="// init cutscene&#xA;cutscene = obj_cutscene_beginning_controller;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_light" x="120" y="144" name="inst_8F74DB45" locked="0" code="" scaleX="1" scaleY="1" colour="4294108104" rotation="0"/>
     <instance objName="obj_smallCollision" x="104" y="104" name="inst_8292C678" locked="0" code="" scaleX="2.75" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_propBookshelf" x="160" y="64" name="inst_3B50620F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
@@ -100,6 +100,9 @@ tile layers are based on y pos
     <instance objName="obj_light" x="64" y="272" name="inst_F6B4A302" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_light" x="104" y="88" name="inst_0280997C" locked="0" code="flicker = true;&#xA;radius = 64;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_dad_civilian" x="160" y="384" name="inst_2707780A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_env_light" x="64" y="0" name="inst_966F78E6" locked="0" code="scr_setEnvColor(make_colour_rgb(5, 5, 15));&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_light" x="80" y="-128" name="inst_02756055" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_light" x="384" y="-128" name="inst_C9B931CA" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
     <tile bgName="" x="480" y="416" w="16" h="16" xo="0" yo="0" id="10000668" name="inst_06879420" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>

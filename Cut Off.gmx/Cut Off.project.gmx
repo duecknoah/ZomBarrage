@@ -10,9 +10,12 @@
   <sprites name="sprites">
     <sprites name="Labels">
       <sprite>sprites\spr_collision</sprite>
-      <sprite>sprites\spr_smallCollision</sprite>
       <sprite>sprites\spr_lootArea</sprite>
+      <sprite>sprites\spr_lootBox</sprite>
+      <sprite>sprites\spr_smallCollision</sprite>
       <sprite>sprites\spr_lightIcon</sprite>
+      <sprite>sprites\spr_roomZone</sprite>
+      <sprite>sprites\spr_teleportZone</sprite>
     </sprites>
     <sprites name="Zombie">
       <sprite>sprites\spr_zombie</sprite>
@@ -128,6 +131,7 @@
     </sprites>
     <sprites name="Speakers">
       <sprite>sprites\spr_daveSpeaker</sprite>
+      <sprite>sprites\spr_randySpeaker</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background">
@@ -296,13 +300,13 @@
       <object>objects\obj_molotovCocktail</object>
       <object>objects\obj_fragGrenade</object>
       <object>objects\obj_fire</object>
-      <object>objects\obj_saveZone</object>
     </objects>
     <objects name="Other">
       <object>objects\obj_zombieSpawn</object>
       <object>objects\obj_pointsText</object>
       <object>objects\obj_bloodPool</object>
       <object>objects\obj_lootArea</object>
+      <object>objects\obj_lootBox</object>
       <object>objects\obj_guiText</object>
     </objects>
     <objects name="Controllers">
@@ -360,9 +364,14 @@
       <object>objects\obj_shaderTestPlayer</object>
       <object>objects\obj_testAnimation</object>
     </objects>
+    <objects name="Zones">
+      <object>objects\obj_roomZone</object>
+      <object>objects\obj_saveZone</object>
+      <object>objects\obj_teleportZone</object>
+    </objects>
   </objects>
   <timelines name="timelines">
-    <timeline>timelines\tl_cutscene_beginning</timeline>
+    <timeline>timelines\tl_cutscene_beginning_intro</timeline>
   </timelines>
   <rooms name="rooms">
     <room>rooms\rm_Menu</room>

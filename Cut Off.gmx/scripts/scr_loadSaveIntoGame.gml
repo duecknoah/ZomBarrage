@@ -8,6 +8,7 @@ var dir = "save" + string(saveNum) + "/";
 var dynamicSaveName = "saveDynamic" + string(saveNum) + ".ini"; // saveDynamic (this) holds dynamically created resources that will get loaded after game_load
 var saveName = "save" + string(saveNum) + ".ini"; // game_save creates save[i].ini
 
+//show_message("HG");
 ini_open(dir + dynamicSaveName);
 
 if (ini_section_exists("data")) {

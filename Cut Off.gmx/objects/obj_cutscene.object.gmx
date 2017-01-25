@@ -28,6 +28,45 @@
             <string>/// Show message that obj_cutscene has been created
 // obj_cutscene is the instance that runs the timelines (tl) for cutscenes
 show_debug_message(object_get_name(object_index) + " created");
+// Each cutscene is it's own object (ex. obj_cutscene_beginning_controller), setting 
+// this variable 'cutscene' to a cutscene object will make obj_cutscene create that
+// cutscene object. When the cutscene object finishes (destroys self). Then the 
+// variable 'cutscene' will be set back to noone marking the end of that cutscene.
+cutscene = noone;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Automatic creating of cutscenes
+// If there is a cutscene set
+if (cutscene != noone) {
+    // Check if that cutscene is an object
+    if (object_exists(cutscene)) {
+        // If so, check if it doesn't already exist in the room
+        if (!instance_exists(cutscene)) {
+            // Then create it
+            instance_create(x, y, cutscene);
+        }
+    }
+}
 </string>
           </argument>
         </arguments>

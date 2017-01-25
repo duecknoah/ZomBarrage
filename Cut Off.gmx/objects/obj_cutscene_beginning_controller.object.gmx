@@ -26,29 +26,12 @@
           <argument>
             <kind>1</kind>
             <string>/// Cutscene variables
-timer = 0;
-part = "fadein";
-scr_setGUIForegroundImage(spr_black);
-scr_setGUIForegroundAlpha(1);
-scr_createGuiText(view_wport[0] / 2, 
-                view_hport[0] / 2, 
-                "Friday Night", 
-                fa_center, 
-                fa_middle, 
-                fnt_normal, 
-                c_white, 
-                0, 2, 2, 5);
-scr_createGuiText(view_wport[0] / 2, 
-                view_hport[0] / 2 + 64, 
-                "Your room", 
-                fa_center, 
-                fa_middle, 
-                fnt_normal, 
-                c_white, 
-                0, 3, 3, 2);
+scr_initCutscene();
 global.preventPlayerControls = true;
-obj_player.state = "typing"; // start on the computer
-obj_guiController.gameGuiAlpha = 0;
+timer = 0;
+part = "";
+timeline_index = tl_cutscene_beginning_intro;
+timeline_running = true;
 </string>
           </argument>
         </arguments>
@@ -73,6 +56,8 @@ obj_guiController.gameGuiAlpha = 0;
             <kind>1</kind>
             <string>/// Show end of cutscene message
 show_debug_message("Cutscene " + string(object_get_name(object_index)) + " ended");
+scr_endCutscene();
+global.preventPlayerControls = false; // give control back to the player
 </string>
           </argument>
         </arguments>
@@ -95,21 +80,15 @@ show_debug_message("Cutscene " + string(object_get_name(object_index)) + " ended
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (part == "fadein") {
-    if (scr_guiForegroundFadeIn(4)) {
-        part = "wait1";
-        alarm[0] = room_speed * 4;
+            <string>/// Run cutscene
+// The 
+if (timeline_index == tl_cutscene_beginning_intro) {
+    if (timeline_running == false) {
+        // If done chatting
+        if (obj_guiController.showChatBar == false) {
+            instance_destroy(); // end cutscene
+        }
     }
-}
-
-if (part == "wait1") {
-    if (alarm[0] &lt; 0) {
-        part = "mom argument";
-    }
-}
-
-if (part == "mom argument") {
-    
 }
 </string>
           </argument>

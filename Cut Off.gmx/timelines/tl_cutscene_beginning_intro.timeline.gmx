@@ -20,7 +20,6 @@
           <argument>
             <kind>1</kind>
             <string>/// Create guiTexts
-scr_initCutscene();
 scr_setGUIForegroundImage(spr_black);
 scr_setGUIForegroundAlpha(1);
 scr_createGuiText(view_wport[0] / 2, 
@@ -39,7 +38,6 @@ scr_createGuiText(view_wport[0] / 2,
                 fnt_normal, 
                 c_white, 
                 0, 3, 3, 2);
-global.preventPlayerControls = true;
 obj_player.state = "typing"; // start on the computer
 obj_player.hat = 0;
 obj_guiController.gameGuiAlpha = 0;
@@ -105,7 +103,7 @@ with (obj_civilian) {
     if (label == "dad") {
         //scr_scriptRunnerAddScriptByArgs("scr_entityMoveTo", obj_player.x, obj_player.y - 64, 1, id, true);
         path_start(path_cutscene_beginning_dad1, 1, 0, true);
-        state = "path"
+        state = "path";
     }
 }
 </string>
@@ -164,9 +162,47 @@ with (obj_propComputer) {
             <kind>1</kind>
             <string>/// Make player stop typing
 obj_player.state = "default";
-scr_addDialogue("Do play they miss give so up. Words to up style of since world. We leaf to snug on no need. Way own uncommonly travelling now acceptance bed compliment solicitude. Dissimilar admiration so terminated no in contrasted it. Advantages entreaties mr he apartments do. Limits far yet turned highly repair parish talked six. Draw fond rank form nor the day eat. ", spr_PlayerM16, 0);
-scr_addDialogue(" kadsf jkasdfjlk asdkjf lkjasd fjk jkhakjhljkhljkhjkh jdkahsfljhk fdjkh  asdl hjkasdjhkf lahjkds fhjlka jhkldsjhkdjksaf ljkhadskjhf kjasdf akjsdf hdhfjj", spr_zombie, 0);
-scr_addDialogue("Agreed. I guess we'll see!", spr_PlayerM16, 0);
+
+//// NOTE
+//// I MEANTION TOO MUCH AT ONCE HERE, WE SHOULD PROBABLY SLOWLY INTRODUCE IT
+scr_addDialogue("Thats odd ... Well so much for playing games tonight with the boys. Mhph", spr_daveSpeaker, 0);
+scr_addDialogue("Its weird its like the second time this week its happenned, and the weathers fine outside too.", spr_daveSpeaker, 0);
+scr_addDialogue("Oh actually I think I know what it is ... Dad! ... you blow the circuit again?", spr_daveSpeaker, 0);
+scr_addDialogue("dad!?", spr_daveSpeaker, 0);
+scr_addDialogue("Yep, I'm here, powers out again.", spr_randySpeaker, 0);
+scr_addDialogue("nice observation. Anyways you need to stop blowing the circuits, it cuts me out of my game and shuts everything down.", spr_daveSpeaker, 0);
+scr_addDialogue("I know bud, sorry. However I'm not sure what caused this one.", spr_randySpeaker, 0);
+scr_addDialogue("What do you mean?", spr_daveSpeaker, 0);
+scr_addDialogue("Well I haven't even started on project tonight yet ... I guess it could be a blown transformer.", spr_randySpeaker, 0);
+scr_addDialogue("Dang ... You think it'll be back on tonight?", spr_daveSpeaker, 0);
+scr_addDialogue("Well we'll see, the protests are still going on. So if it's because of that, they likely won't fix it until the crowd clears up.", spr_randySpeaker, 0);
+scr_addDialogue("Thats probably them making a mess again. This Vaccine crisis is a little over the top.", spr_daveSpeaker, 0);
+scr_addDialogue("Yea, I'm sure its just a faze, eventually it'll die down as how most of these things go.", spr_randySpeaker, 0);
+scr_addDialogue("You have a flash light in here right?", spr_randySpeaker, 0);
+scr_addDialogue("Yea, somewhere in here.", spr_daveSpeaker, 0);
+scr_addDialogue("Okay, I'll try and get the generator going.", spr_randySpeaker, 0);
+// dad begins to leave room
+// Cutscene ends
+// Objective: Find flashlight in room.
+
+// dad did you blow the circuit again!?
+//  ...
+// dad!?
+// dad: Yep I'm here, powers out again
+// you: nice observation. Anyways you need to stop blowing the circuits, it cuts me out of my game and shuts everything down.
+// dad: I know bud, sorry. However I'm not sure what caused this one.
+// you: What do you mean?
+// dad: Well I haven't even started on project tonight yet ... I guess it could be a blown transformer.
+// you: Dang ... You think it'll be back on tonight?
+// dad: Well we'll see, the protests are still going on. So if it's because of that, they likely won't fix it until the crowd clears up.
+// you: Thats probably them making a mess again. This Vaccine crisis is a little over the top.
+// dad: Yea, I'm sure its just a faze, eventually it'll die down as how most of these things go.
+// dad: You have a flash light in here right?
+// you: Yea, somewhere in here.
+// dad: Okay, I'll try and get the generator going.
+// dad begins to leave room
+// Cutscene ends
+// Objective: Find flashlight in room.
 </string>
           </argument>
         </arguments>
@@ -219,9 +255,8 @@ obj_player.hat = noone;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Make cutscene end and allow movement again
-global.preventPlayerControls = false;
-scr_endCutscene();
+            <string>/// Make timeline end
+timeline_running = false;
 </string>
           </argument>
         </arguments>

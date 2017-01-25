@@ -88,6 +88,7 @@ foregroundImageAlpha = 0; // 1=nothing shown but foreground image, 0=foreground 
     chatBarWidth = 960;
     chatBarHeight = 128;
     chatBarPadding = 16;
+    chatBarPaddingSpeaker = 192; // padding on the right for the speaker
     // the line we are on within chatBarMessageDisplayed, 
     // a new line is created when the text no longer fits on the page
     chatBarCurrentMessageLineNumber = 0; // the current line number within the message string
@@ -330,14 +331,26 @@ if (showInventory) {
                         inventoryAlpha);
 }
 
+// Re setup ds_lists (dynamic variables) if they don't exist
+if (!ds_exists(chatBarStart, ds_type_list)) {
+    chatBarStart = ds_list_create();
+}
+if (!ds_exists(chatBarSpeakerSprite, ds_type_list)) {
+    chatBarSpeakerSprite = ds_list_create();
+}
+if (!ds_exists(chatBarSpeakerSubimg, ds_type_list)) {
+    chatBarSpeakerSubimg = ds_list_create();
+}
+if (!ds_exists(chatBarMessage, ds_type_list)) {
+    chatBarMessage = ds_list_create();
+}
+
 // If there is message data for chatbar
 if (!ds_list_empty(chatBarMessage)) {
     showChatBar = true; // show it
-    showHealthBar = false; // hide health bar
 }
 else {
     showChatBar = false; // else hide it
-    showHealthBar = true;
 }
 
 // Chat bar
@@ -351,10 +364,11 @@ if (showChatBar) {
     //ds_list (chatBarMessage)
     var chatBarX = 256;
     var chatBarY = view_hport[0] - chatBarHeight;
+    var instantShowMessage = false; // instantly finish printing message to screen? true when player presses chatBarSkipMessageButton
     
-    // First check if the full message has been shown, if so. Allow user to skip to next message in the ds_list
-    if (chatBarCurrentCharPos == string_length(chatBarMessage[| 0])) {
-        if (keyboard_check_pressed(obj_controls.chatBarSkipMessageButton)) {
+    if (keyboard_check_pressed(obj_controls.chatBarSkipMessageButton)) {
+        // First check if the full message has been shown, if so. Allow user to skip to next message in the ds_list
+        if (chatBarCurrentCharPos == string_length(chatBarMessage[| 0])) {
             // Delete the current messages, the next messages will
             // fall into index 0 (if there is more)
             ds_list_delete(chatBarMessage, 0);
@@ -365,49 +379,65 @@ if (showChatBar) {
             chatBarMessageDisplayed = "";
             chatBarLastSpacePos = -1;
             chatBarCurrentCharPos = 0;
+            chatBarCurrentLineNumber = 0;
+            chatBarCurrentMessageLineNumber = 0;
+        }
+        else {
+        // Else if message isn't fully shown yet (still printing out to screen, instantly finish sentence.
+            instantShowMessage = true;
         }
     }
-    
+
     // If there is no start line entries, set it to 0
     if (ds_list_empty(chatBarStart)) {
         ds_list_add(chatBarStart, 0);  
     }
     
-    // Auto Line breaking
-    if (string_width(chatBarMessageDisplayed) &gt; chatBarWidth - chatBarPadding - chatBarPadding) {
-        chatBarMessageDisplayed = string_delete(chatBarMessageDisplayed, chatBarLastSpace, 1);
-        chatBarMessageDisplayed = string_insert("#", chatBarMessageDisplayed, chatBarLastSpace);
-        ds_list_add(chatBarStart, chatBarLastSpace + 1); // add the next line number
-    }
-    
-    if (chatBarTimer &lt;= 0) {
-        // If not at end of string yet
-        if (chatBarCurrentCharPos &lt; string_length(chatBarMessage[| 0])) {
-            // Add the next character to the display string
-            var nextChar = string_char_at(chatBarMessage[| 0], chatBarCurrentCharPos + 1);
-            
-            // Check if it is a space
-            if (nextChar == " ") {
-                // If so, mark this position as the last space
-                chatBarLastSpace = chatBarCurrentCharPos + 1;
-            }
-            
-            chatBarMessageDisplayed += nextChar;
-            chatBarTimer = 2; // reset timer, the lower the number, the faster the text goes
-            chatBarCurrentCharPos ++; // move the position forward one
+    // Do loop for instantly instantShowMessage    
+    do {
+        // Auto Line breaking
+        if (string_width(chatBarMessageDisplayed) &gt; chatBarWidth - chatBarPadding - chatBarPadding - chatBarPaddingSpeaker) {
+            chatBarMessageDisplayed = string_delete(chatBarMessageDisplayed, chatBarLastSpace, 1);
+            chatBarMessageDisplayed = string_insert("#", chatBarMessageDisplayed, chatBarLastSpace);
+            ds_list_add(chatBarStart, chatBarLastSpace + 1); // add the next line number
         }
-    }
-    else {
-    // keep counting down the timer
-        chatBarTimer --;
-    }   
-    
-    var finalStr = string_copy(chatBarMessageDisplayed, ds_list_find_value(chatBarStart, chatBarCurrentMessageLineNumber), chatBarCurrentCharPos - ds_list_find_value(chatBarStart, chatBarCurrentMessageLineNumber));
-    
-    // Did we go past the bottom? move up a line
-    if (string_height(finalStr) &gt; chatBarHeight - chatBarPadding) {
-        chatBarCurrentMessageLineNumber ++;
-    }
+        
+        if (chatBarTimer &lt;= 0) {
+            // If not at end of string yet
+            if (chatBarCurrentCharPos &lt; string_length(chatBarMessage[| 0])) {
+                // Add the next character to the display string
+                var nextChar = string_char_at(chatBarMessage[| 0], chatBarCurrentCharPos + 1);
+                
+                // Check if it is a space
+                if (nextChar == " ") {
+                    // If so, mark this position as the last space
+                    chatBarLastSpace = chatBarCurrentCharPos + 1;
+                }
+                chatBarMessageDisplayed += nextChar;
+                chatBarTimer = 2; // reset timer, the lower the number, the faster the text goes
+                chatBarCurrentCharPos ++; // move the position forward one
+            }
+        }
+        else {
+        // keep counting down the timer
+            chatBarTimer --;
+        }   
+        
+        var finalStr = "";
+        
+        if (chatBarMessageDisplayed != "") {
+            var index = ds_list_find_value(chatBarStart, chatBarCurrentMessageLineNumber);
+            var count = chatBarCurrentCharPos - ds_list_find_value(chatBarStart, chatBarCurrentMessageLineNumber);
+            
+            finalStr = string_copy(chatBarMessageDisplayed, index, count);
+        }
+        
+        // Did we go past the bottom? move up a line
+        if (string_height(finalStr) &gt; chatBarHeight - chatBarPadding) {
+            chatBarCurrentMessageLineNumber ++;
+        }
+    } until ((instantShowMessage == true &amp;&amp; chatBarCurrentCharPos == string_length(chatBarMessage[| 0])) || (instantShowMessage == false));
+    // If not instantShowMessage, don't loop. Else loop until it went through the entire message
     
     // Draw the background box!
     draw_set_color(c_dkgray);
@@ -416,7 +446,15 @@ if (showChatBar) {
     draw_set_color(c_white);
     draw_text(chatBarX + chatBarPadding, chatBarY + chatBarPadding, finalStr);
     // Draw the speaker!
-    draw_sprite_ext(chatBarSpeakerSprite[| 0], chatBarSpeakerSubimg[| 0], device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), guiScale, guiScale, 0, c_white, 1);
+    draw_sprite_ext(chatBarSpeakerSprite[| 0], chatBarSpeakerSubimg[| 0], 1025, 529, guiScale, guiScale, 0, c_white, 1);
+    
+    // toggle healthbar based on if chatbar is showing or not
+    if (!ds_list_empty(chatBarMessage)) {
+        showHealthBar = false; // hide health bar
+    }
+    else {
+        showHealthBar = true;
+    }
 } 
 
 // Draw HealthBar Gui

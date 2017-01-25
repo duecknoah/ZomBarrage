@@ -1,4 +1,4 @@
-///scr_addDialogue(message, speakerImg);
+///scr_addDialogue(message, speakerImg, _speakerSubImg);
 // Adds dialogue to the chatbox, used in cutscenes
 var _message = argument0;
 var _speakerSprite = argument1;

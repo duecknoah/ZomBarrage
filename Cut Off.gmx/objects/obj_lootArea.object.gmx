@@ -26,6 +26,9 @@
           <argument>
             <kind>1</kind>
             <string>/// Init vars
+// The difference between this and lootBox is lootBox's are for
+// looting small things like chests and drawers, you can loot those faster.
+// This is for entire buildings when not inside.
 
 looted = false; // has this already been looted?
 
