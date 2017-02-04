@@ -286,20 +286,26 @@
     <font>fonts\fnt_normal</font>
   </fonts>
   <objects name="objects">
+    <object>objects\obj_camera</object>
     <objects name="Entities">
       <object>objects\obj_player</object>
-      <object>objects\obj_zombie</object>
-      <object>objects\obj_bigZombie</object>
       <object>objects\obj_civilian</object>
-      <object>objects\obj_civilianDeadBody</object>
       <object>objects\obj_dad_civilian</object>
-      <object>objects\obj_bullet</object>
-      <object>objects\obj_rocket</object>
+      <object>objects\obj_civilianDeadBody</object>
       <object>objects\obj_itemWeapon</object>
-      <object>objects\obj_camera</object>
-      <object>objects\obj_molotovCocktail</object>
-      <object>objects\obj_fragGrenade</object>
       <object>objects\obj_fire</object>
+      <objects name="Zombies">
+        <object>objects\obj_zombieP</object>
+        <object>objects\obj_zombie</object>
+        <object>objects\obj_bigZombie</object>
+      </objects>
+      <objects name="Projectile">
+        <object>objects\obj_projectileP</object>
+        <object>objects\obj_bullet</object>
+        <object>objects\obj_rocket</object>
+        <object>objects\obj_molotovCocktail</object>
+        <object>objects\obj_fragGrenade</object>
+      </objects>
     </objects>
     <objects name="Other">
       <object>objects\obj_zombieSpawn</object>
@@ -379,8 +385,8 @@
     <room>rooms\rm_shaderTesting</room>
     <room>rooms\room5</room>
     <rooms name="maps">
-      <room>rooms\mp_the_beginning_home</room>
       <room>rooms\mp_town</room>
+      <room>rooms\mp_the_beginning_home</room>
     </rooms>
   </rooms>
   <help>

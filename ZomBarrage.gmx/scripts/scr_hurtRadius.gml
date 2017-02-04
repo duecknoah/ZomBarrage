@@ -46,7 +46,7 @@ if (_doAffectPlayer) {
 }
 
 if (_doAffectZombie) {
-    with (obj_zombie) {
+    with (obj_zombieP) {
         var _dist = scr_getAbsoluteDistance(x, y, _x, _y);
         var _dmg = _amt;
         if (_dist <= _radius) {

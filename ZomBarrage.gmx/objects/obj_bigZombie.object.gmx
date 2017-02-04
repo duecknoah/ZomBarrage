@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>obj_zombieP</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -26,11 +26,9 @@
           <argument>
             <kind>1</kind>
             <string>/// create navPath and set variables
-scr_initEntityVars();
-path = path_add();
+event_inherited();
 maxHp = global.currentWave + 30;
 hp = maxHp;
-doBackupPathfinding = false; // used if can't path to player (wall in way)
 image_index = 0;
 image_speed = 0;
 </string>
@@ -100,104 +98,150 @@ if (global.preventEntityMovement) {
     exit;
 }
 
-var px = (obj_player.x div 16)* 16 + 8;
-var py = (obj_player.y div 16)* 16 + 8;
-
-var spd = 0.5 * global.timeScale;
-
-if (global.navUpdateRateTimer == 0) {
-    if (!path_exists(path)) {
-        path = path_add();
-    }    
- 
-    // End path and clear self from the path to not see self as a collision and setup new collisions
-    path_end();
-    mp_grid_clear_cell(global.grid, x div obj_navGrid.cell_width, y div obj_navGrid.cell_height);
+// If zombie has a target to chase
+if (target != noone) {
+    var px = (target.x div 16)* 16 + 8;
+    var py = (target.y div 16)* 16 + 8;
     
-    // Make a path to the player
-    if (mp_grid_path(global.grid, path, x, y, px, py, 1)) {
-        // Since able to, Start the path and add a cell where self is going to be net navUpdate,
-        // this would prevent other zombies from colliding into this one on next navUpdate.
-        path_start(path, spd, 0, false);
+    var spd = 0.5 * global.timeScale;
+    
+    if (global.navUpdateRateTimer == 0) {
+        if (!path_exists(path)) {
+            path = path_add();
+        }    
+    
+        // End path and clear self from the path to not see self as a collision and setup new collisions
+        path_end();
+        mp_grid_clear_cell(global.grid, x div obj_navGrid.cell_width, y div obj_navGrid.cell_height);
         
-        // Calc next path pos
-        var _nextPoint = (1 / path_get_number(path)) * (path_position + spd);
-        var _nextPointX = path_get_x(path, _nextPoint);
-        var _nextPointY = path_get_y(path, _nextPoint);
-        mp_grid_add_cell(global.grid, _nextPointX div obj_navGrid.cell_width, 
-                                      _nextPointY div obj_navGrid.cell_height);
-        //mp_grid_add_cell(global.grid, x div obj_navGrid.cell_width, y div obj_navGrid.cell_height);
-        doBackupPathFinding = false;
+        // Make a path to the target
+        if (mp_grid_path(global.grid, path, x, y, px, py, 1)) {
+            // Since able to, Start the path and add a cell where self is going to be net navUpdate,
+            // this would prevent other zombies from colliding into this one on next navUpdate.
+            path_start(path, spd, 0, false);
+            
+            // Calc next path pos
+            var _nextPoint = (1 / path_get_number(path)) * (path_position + 1);
+            var _nextPointX = path_get_x(path, _nextPoint);
+            var _nextPointY = path_get_y(path, _nextPoint);
+            mp_grid_add_cell(global.grid, _nextPointX div obj_navGrid.cell_width, 
+                                          _nextPointY div obj_navGrid.cell_height);
+            //mp_grid_add_cell(global.grid, x div obj_navGrid.cell_width, y div obj_navGrid.cell_height);
+            doBackupPathFinding = false;
+        }
+        else { 
+            doBackupPathFinding = true;
+        }
     }
-    else { 
-        doBackupPathFinding = true;
+    
+    // Backup pathfinding ////////////////
+    if (doBackupPathFinding) {
+        // if can't find a path to player, just move towards player directly
+        // move_towards_point(px, py, 1);
+        
+        // If heading diagonal, make speed slower
+        if (y != py &amp;&amp; x != px) {
+            spd = 0.5 * global.timeScale;
+        }
+        
+        if (x &lt; px) {
+            if (!place_meeting(x + spd, y, obj_collision)) {
+                x += spd;
+            }
+        }
+        else if (x &gt; px) {
+            if (!place_meeting(x - spd, y, obj_collision)) {
+                x -= spd;
+            }
+        }
+        if (y &lt; py) {
+            if (!place_meeting(x, y + spd, obj_collision)) {
+                y += spd;
+            }
+        }
+        else if (y &gt; py) {
+            if (!place_meeting(x, y - spd, obj_collision)) {
+                y -= spd;
+            }
+        }
+    }
+    
+    // Check if target is out of view range / see distance
+    var seeDist = 512;
+    if (distance_to_point(target.x, target.y) &gt; seeDist) {
+        target = noone;
     }
 }
-
-if (doBackupPathFinding) {
-    // if can't find a path to player, just move towards player directly
-    // move_towards_point(px, py, 1);
-    
-    // If heading diagonal, make speed slower
-    if (y != py &amp;&amp; x != px) {
-        spd = 0.5 * global.timeScale;
-    }
-    
-    if (x &lt; px) {
-        if (!place_meeting(x + spd, y, obj_collision)) {
-            x += spd;
+else { // If there is no target for zombie, keep an eye out for one
+    // If there is a nav update, look for closest target.
+    // This is where the zombies finds someone to go after
+    if (global.navUpdateRateTimer == 0) {  
+        var listOfClosestEnts = ds_list_create();
+        var seeDist = 512;
+        
+        // Civilians
+        for (var i = 0; i &lt; instance_number(obj_civilian); i ++) {
+            var inst = instance_find(obj_civilian, i);
+            
+            // First check if already dead, if so, don't count as a target
+            if (inst.isDead) {
+                continue;
+            }
+            
+            // If target in view distance
+            if (distance_to_point(inst.x, inst.y) &lt; seeDist) {
+                // If no collisions between the zombie and the civilian (in the open)
+                if (!collision_line(x, y, inst.x, inst.y, obj_collision, 0, 0)) {
+                    ds_list_add(listOfClosestEnts, inst);
+                }
+            }
         }
-    }
-    else if (x &gt; px) {
-        if (!place_meeting(x - spd, y, obj_collision)) {
-            x -= spd;
+        // Player
+        if (distance_to_point(x, y) &lt; seeDist) {
+            // If no collisions between the zombie and the civilian (in the open)
+            if (!collision_line(x, y, obj_player.x, obj_player.y, obj_collision, 0, 0)) {
+                ds_list_add(listOfClosestEnts, obj_player);
+            }
         }
-    }
-    if (y &lt; py) {
-        if (!place_meeting(x, y + spd, obj_collision)) {
-            y += spd;
+        
+        // Loop through all entitys in view and find the closest one
+        var size = ds_list_size(listOfClosestEnts);
+        var closestEnt = noone;
+        var closestDist = -1;
+        
+        // Find the closest entity to self
+        for (var i = 0; i &lt; size; i ++) {
+            var inst = listOfClosestEnts[| i];
+            
+            // If the closest distance hasn't been determined yet, then
+            // this is the closest distance
+            if (closestEnt == noone) {
+                closestDist = distance_to_point(inst.x, inst.y);
+                closestEnt = inst;
+            }
+            else {
+            // If the closest distance has been determined, than check if this
+            // distance between self and another civlian is closer than the closest
+            // civilian to self so far
+                var dist = distance_to_point(inst.x, inst.y);
+                // If this civilian is closer than the other civilian, count
+                // this civilian to have the closest distance
+                if (dist &lt; closestDist) {
+                    closestDist = dist;
+                    closestEnt = inst;
+                }
+            }   
         }
-    }
-    else if (y &gt; py) {
-        if (!place_meeting(x, y - spd, obj_collision)) {
-            y -= spd;
+        
+        // If there is a closest entity available
+        if (closestEnt != noone) {
+            target = closestEnt; // target it
         }
+        ds_list_destroy(listOfClosestEnts);
     }
 }
 
 scr_doEntityFuncs();
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="4" ename="obj_player">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>// If player is not hurt and not viewing console, hurt them
-if (!other.isHurt &amp;&amp; !obj_guiController.showConsole) {
-    var playerXSpd = other.x - other.xprevious;
-    var playerYSpd = other.y - other.yprevious;
-    var xSpd = x - xprevious;
-    var ySpd = y - yprevious;
-
-    scr_addForce(other.id, xSpd * 2, ySpd * 2);
-    scr_hurt(other.id, 5); // do 5 damage to the player
-}
 </string>
           </argument>
         </arguments>

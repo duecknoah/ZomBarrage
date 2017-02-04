@@ -96,12 +96,18 @@
     <instance objName="obj_dad_civilian" x="768" y="320" name="inst_31D44CE6" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_dad_civilian" x="832" y="320" name="inst_2EFA3F63" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_dad_civilian" x="896" y="320" name="inst_813503AD" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_zombie" x="800" y="384" name="inst_F373A8F4" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_zombie" x="800" y="448" name="inst_1CC326DF" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_zombie" x="864" y="416" name="inst_65D865DD" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_zombie" x="832" y="480" name="inst_0568AF4E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_zombie" x="768" y="512" name="inst_C2855293" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_zombie" x="896" y="480" name="inst_681AEC85" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_zombieSpawn" x="864" y="832" name="inst_3CBFE5C5" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_zombieSpawn" x="736" y="928" name="inst_189B2247" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_zombieSpawn" x="480" y="896" name="inst_A35D559E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_zombieSpawn" x="64" y="800" name="inst_8631475E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_zombieSpawn" x="32" y="320" name="inst_56425D07" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_zombieSpawn" x="32" y="64" name="inst_2574CB98" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_zombieSpawn" x="576" y="32" name="inst_3862D22B" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_zombieSpawn" x="896" y="64" name="inst_688384BA" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_zombieSpawn" x="928" y="128" name="inst_7CD187AF" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_zombieSpawn" x="896" y="544" name="inst_FD3B6FDD" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_zombieSpawn" x="224" y="896" name="inst_80FC4FFE" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_bigZombie" x="256" y="160" name="inst_59014AE0" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>

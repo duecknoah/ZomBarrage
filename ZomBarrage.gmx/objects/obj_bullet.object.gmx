@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>obj_projectileP</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -99,7 +99,8 @@ initCalc = true;
         show_debug_message(string(closestCollision) + " " + string(closestCollision.x) + " " + string(closestCollision.y) + " " + string(random(1)));
     }
     
-    with (obj_zombie) {
+    // If collision with any zombie
+    with (obj_zombieP) {
         if (collision_line(other.startX, other.startY, other.x, other.y, id, false, false)) {
             scr_hurt(id, other.damage);
         }

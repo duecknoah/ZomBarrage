@@ -63,7 +63,9 @@ doErrorCheck = true; // does error checks initially, then doesn't after first st
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (doErrorCheck) {
+            <string>/// Zombie wave controlling
+// Do initial error check
+if (doErrorCheck) {
     if (instance_number(obj_zombieSpawn) == 0) {
         scr_consoleOutPrintln("Error: No Zombie Spawns detected on map!");
     }

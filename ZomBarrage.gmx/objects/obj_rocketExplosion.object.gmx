@@ -90,7 +90,7 @@ var range = 100;
 
 // initialize damage in event once only
 if (initDmg) {
-    with (obj_zombie) {
+    with (obj_zombieP) {
         if (point_distance(other.x, other.y, x, y) &lt; range) {
             scr_hurt(id, other.rocketDmg);
         }

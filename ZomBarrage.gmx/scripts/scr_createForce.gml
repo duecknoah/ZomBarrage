@@ -28,7 +28,7 @@ for (var i = 0; i < 2; i ++) {
         break;
         case 1:
             if (doEffectPlayer) {
-                entityToEffect = obj_zombie;
+                entityToEffect = obj_zombieP;
             }
             else continue;
         break;

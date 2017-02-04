@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>obj_civilian</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -25,18 +25,14 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Creates the dad civilian and destroys self
-with (instance_create(x, y, obj_civilian)) {
-    label = "dad";
-    shirtCol = make_color_rgb(40, 38, 104);
-    pantsCol = make_color_rgb(50, 50, 100);
-    hairCol = make_color_rgb(104, 69, 38);
-    skinCol = make_color_rgb(211, 169, 133);
-    hat = noone;
-    hair = 0;
-}
-
-instance_destroy(); // destroy this
+            <string>/// Set dad civilian looks
+event_inherited();
+shirtCol = make_color_rgb(40, 38, 104);
+pantsCol = make_color_rgb(50, 50, 100);
+hairCol = make_color_rgb(104, 69, 38);
+skinCol = make_color_rgb(211, 169, 133);
+hat = noone;
+hair = 0;
 </string>
           </argument>
         </arguments>

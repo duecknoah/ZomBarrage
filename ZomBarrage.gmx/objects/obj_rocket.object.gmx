@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>obj_projectileP</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -120,7 +120,8 @@ if (global.timeScaleChanged) {
     rocketSpd *= global.timeScale;
 }
 
-if (place_meeting(x, y, obj_collision) || place_meeting(x, y, obj_zombie)) {
+// If colliding with a collision object or any zombie
+if (place_meeting(x, y, obj_collision) || place_meeting(x, y, obj_zombieP)) {
     instance_destroy();
 }
 

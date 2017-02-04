@@ -45,7 +45,6 @@ global.isIndoor = false; // now outside
 if (!instance_exists(obj_waveController)) {
     instance_create(x, y, obj_waveController);
 }
-obj_waveController.preventSpawn = true; // allow spawning outdoors
 
 if (!instance_exists(obj_guiController)) {
     instance_create(x, y, obj_guiController);

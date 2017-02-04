@@ -308,6 +308,7 @@ if (showPauseButton) {
 }
 
 // Wave completion screen checking
+var durOfText = 3; // maximum duration to show text in seconds
 if (global.waveCompleted &amp;&amp; global.delayBetweenWaves - global.delayBetweenWavesTimer &lt; durOfText) {
     showWaveCompletionScreen = true;
 }
@@ -317,7 +318,6 @@ else {
 
 // Wave completed text / screen
 if (showWaveCompletionScreen) {
-    var durOfText = 3; // maximum duration to show text in seconds
     draw_set_alpha(waveCompletionScreenAlpha);
     draw_text(centerX, centerY, "Wave Completed!");
     draw_set_alpha(1);
