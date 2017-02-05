@@ -28,16 +28,16 @@
             <string>/// Set the cursor for the game and variables
 // Variables
 cameraShake = 0; // when set, camera will shake until this number is 0
+followInst = obj_player; // the instance for the camera to follow
+zoom = 1; // 1 means default zoom, 2 is double zoomed in, must be &gt;= 1
 show_debug_message(object_get_name(object_index) + " created");
-
-window_set_cursor(cr_cross);
 
 // Setup Camera start transition
 view_wviewOrg = view_wview[0];
 view_hviewOrg = view_hview[0];
 view_wview[0] = view_wviewOrg / 80;
 view_hview[0] = view_hviewOrg / 45; // def 45
-zoom = 1; // 1 means default zoom, 2 is double zoomed in, must be &gt;= 1
+window_set_cursor(cr_cross);
 // Instantly line up view initially, then tween camera after
 if (instance_exists(obj_player)) {
     scr_viewFollow(obj_player.x, obj_player.y, 1);
@@ -86,13 +86,13 @@ if (zoom &lt; 0.25) {
     zoom = 0.25;
 }
 
-// Player following
-if (instance_exists(obj_player)) {
+// Instance following
+if (instance_exists(followInst)) {
     // Make view follow player with mouse partially affecting it
-    var mouseXRelative = (mouse_x - obj_player.x);
-    var mouseYRelative = (mouse_y - obj_player.y);
-    var camFollowX = obj_player.x + (mouseXRelative / 6);
-    var camFollowY = obj_player.y + (mouseYRelative / 6);
+    var mouseXRelative = (mouse_x - followInst.x);
+    var mouseYRelative = (mouse_y - followInst.y);
+    var camFollowX = followInst.x + (mouseXRelative / 6);
+    var camFollowY = followInst.y + (mouseYRelative / 6);
     
     scr_viewFollow(camFollowX, camFollowY, 0.075 * global.timeScale);
 }

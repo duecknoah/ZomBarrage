@@ -133,6 +133,9 @@
       <sprite>sprites\spr_daveSpeaker</sprite>
       <sprite>sprites\spr_randySpeaker</sprite>
     </sprites>
+    <sprites name="Vehicles">
+      <sprite>sprites\spr_miniTruck</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\tile_back</background>
@@ -143,6 +146,7 @@
   </backgrounds>
   <paths name="paths">
     <path>paths\path_cutscene_beginning_dad1</path>
+    <path>paths\path_truck_mp_town</path>
   </paths>
   <scripts name="scripts">
     <script>scripts\scr_findNearestFreeCell.gml</script>
@@ -173,6 +177,7 @@
     <scripts name="View">
       <script>scripts\scr_InitView.gml</script>
       <script>scripts\scr_viewFollow.gml</script>
+      <script>scripts\scr_viewFollowInstance.gml</script>
       <script>scripts\scr_takeScreenshot.gml</script>
     </scripts>
     <scripts name="Weapon">
@@ -306,6 +311,10 @@
         <object>objects\obj_molotovCocktail</object>
         <object>objects\obj_fragGrenade</object>
       </objects>
+      <objects name="Vehicles">
+        <object>objects\obj_vehicleP</object>
+        <object>objects\obj_miniTruck</object>
+      </objects>
     </objects>
     <objects name="Other">
       <object>objects\obj_zombieSpawn</object>
@@ -380,12 +389,11 @@
     <timeline>timelines\tl_cutscene_beginning_intro</timeline>
   </timelines>
   <rooms name="rooms">
+    <room>rooms\mp_town</room>
     <room>rooms\rm_Menu</room>
     <room>rooms\mp_testRoom</room>
     <room>rooms\rm_shaderTesting</room>
-    <room>rooms\room5</room>
     <rooms name="maps">
-      <room>rooms\mp_town</room>
       <room>rooms\mp_the_beginning_home</room>
     </rooms>
   </rooms>
