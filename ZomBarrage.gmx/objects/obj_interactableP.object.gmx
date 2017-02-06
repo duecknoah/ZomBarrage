@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>obj_interactableP</parentName>
+  <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -25,12 +25,13 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Setup vehicle variables
-event_inherited();
-maxVehicleSpd = 1; // max vehicle speed (per step)
-vehicleAccel = 0.025; // acceleration spd per step
-vehicleSpd = 0; // speed per step
-path = noone; // no path by default
+            <string>/// Setup interactable variables for the child entities
+// This makes it so the child entities will be able to be
+// interacted with by characters
+interactEntity = noone; // the entity id of the entity using this chair
+xPreviousInteractEntity = -1; // the x pos just before the entity got on (used for getting off)
+yPreviousInteractEntity = -1; // the y pos just before the entity got on (used for getting off)
+isLocked = false; // is the entity locked? If so, it can not be interacted with
 </string>
           </argument>
         </arguments>
@@ -53,30 +54,27 @@ path = noone; // no path by default
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// If there is a path for the vehicle, go on it
-event_inherited();
-if (path_exists(path)) {
-    if (path_index != noone) {
-        path_speed = vehicleSpd * global.timeScale;
-    }
+            <string>/// The default interactable step event
+/// toggle player sitting with mouse only if within distance, not prevented controls, and mouse is on chair
+if (position_meeting(mouse_x, mouse_y, self) &amp;&amp; distance_to_object(obj_player) &lt; 24
+    &amp;&amp; !global.preventPlayerControls &amp;&amp; !global.preventEntityMovement) {
     
-    if (vehicleSpd &lt; maxVehicleSpd) {
-        vehicleSpd += vehicleAccel;
+    // If player is not already interacting with an entity
+    // and this is not locked 
+    if (obj_player.interactEntity == noone &amp;&amp; !isLocked) {
+        image_blend = c_green;
+        if (mouse_check_button_pressed(obj_controls.actionButton)) {
+            scr_charInteract(obj_player, id); // make player interact with this
+        }
     }
-    // if entity is not being pushed, rotate based on move direction
-    if (global.timeScale != 0) {
-        //image_angle += ((point_direction(xprevious, yprevious, x, y) - 90) - image_angle) * 0.25;
-        var xPathPrev = path_get_point_x(path, path_positionprevious);
-        var yPathPrev = path_get_point_y(path, path_positionprevious);
-        var xPath = path_get_point_x(path, path_position);
-        var yPath = path_get_point_y(path, path_position);
-        
-        image_angle += ((direction - 90) - image_angle) * 0.25;
+    else {
+        image_blend = c_red;
+        if (mouse_check_button_pressed(obj_controls.actionButton)) {
+            scr_charSeparate(obj_player, id); // make player separate from this
+        }
     }
 }
-else {
-    vehicleSpd = 0;
-}
+else image_blend = c_white;
 </string>
           </argument>
         </arguments>

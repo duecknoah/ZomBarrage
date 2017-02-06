@@ -171,6 +171,11 @@
         <script>scripts\scr_areaAddWeapon.gml</script>
       </scripts>
       <script>scripts\scr_removeOtherEntityTargeting.gml</script>
+      <scripts name="Interactions">
+        <script>scripts\scr_isInteractable.gml</script>
+        <script>scripts\scr_charInteract.gml</script>
+        <script>scripts\scr_charSeparate.gml</script>
+      </scripts>
     </scripts>
     <scripts name="View">
       <script>scripts\scr_InitView.gml</script>
@@ -280,7 +285,6 @@
         <script>scripts\scr_addDialogue.gml</script>
       </scripts>
     </scripts>
-    <script>scripts\scr_instPutInVehicle.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\sh_outline.shader</shader>
@@ -291,6 +295,7 @@
   </fonts>
   <objects name="objects">
     <object>objects\obj_camera</object>
+    <object>objects\obj_interactableP</object>
     <objects name="Entities">
       <objects name="People">
         <object>objects\obj_characterP</object>
@@ -318,6 +323,7 @@
       <objects name="Vehicles">
         <object>objects\obj_vehicleP</object>
         <object>objects\obj_miniTruck</object>
+        <object>objects\obj_playerVehicle</object>
       </objects>
     </objects>
     <objects name="Other">
@@ -393,13 +399,13 @@
     <timeline>timelines\tl_cutscene_beginning_intro</timeline>
   </timelines>
   <rooms name="rooms">
-    <room>rooms\mp_town</room>
+    <rooms name="maps">
+      <room>rooms\mp_town</room>
+      <room>rooms\mp_the_beginning_home</room>
+    </rooms>
     <room>rooms\rm_Menu</room>
     <room>rooms\mp_testRoom</room>
     <room>rooms\rm_shaderTesting</room>
-    <rooms name="maps">
-      <room>rooms\mp_the_beginning_home</room>
-    </rooms>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

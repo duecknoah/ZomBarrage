@@ -57,6 +57,7 @@
     hurtTimer = hurtTime; // timer used to keep track of how long entity has been hurt
     fireTime = room_speed * 2.5; // time (in game steps) that the player will be lit on fire for
     fireTimer = -1;
+    interactEntity = noone; // the entity this character is interacting with (ex. chair, vehicle, etc.)
 
 // Movement Variables
     path = noone; // no path by default
@@ -232,10 +233,16 @@ if (hp &lt;= 0) {
     }
 }
 
+// character sitting on something (chair)
+if (interactEntity != noone) {
+    x = interactEntity.x;
+    y = interactEntity.y;
+}
+
 depth = scr_getDepth(y, 0, true);
 
-// prevent entity from leaving the room
 
+// prevent entity from leaving the room
 if (x &lt; 0) {
     x = 0;
     xPush = 0;
@@ -296,6 +303,14 @@ if (bobbing == 1) {
 // At bottom of bob, begin enlarging up
 else if (bobbing == 0) {
     isBobbingUp = true;
+}
+
+// Hide character if in vehicle
+if (object_is_ancestor(interactEntity.object_index, obj_vehicleP)) {
+    visible = false;
+}
+else {
+    visible = true;
 }
 </string>
           </argument>

@@ -237,12 +237,6 @@ if (!obj_guiController.showUpgradeScreen) {
     }
 }
 
-// Player sitting on something (chair)
-if (sittingOnEntity != noone) {
-    x = sittingOnEntity.x;
-    y = sittingOnEntity.y;
-}
-
 // Update shoot delay
 if (shootDelay[0] > 0) {
     shootDelay[0] -= (1 / room_speed) * global.timeScale;

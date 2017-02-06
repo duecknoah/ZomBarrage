@@ -45,8 +45,6 @@ event_inherited();
     hidePlayer = false; //when true, player is not shown (nor the flashlight)
     lootXPrev = 0; // x previous, used after player is done looting to teleport player back outside of building
     lootYPrev = 0; // y previous, used after player is done looting to teleport player back outside of building
-    sittingOnEntity = noone; // when set to the instance id of some instance, the player is parented to it and can slowly move around (ex. chair, car)
-// Movement Variables
     xSpd = 0;
     ySpd = 0;
 // Other
