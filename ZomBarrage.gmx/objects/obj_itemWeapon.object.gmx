@@ -38,7 +38,8 @@
 */
 
 image_speed = 0;
-weaponType = "Wimps Pistol";
+// random weapon by default
+weaponType = scr_IdToWeapon(floor(random_range(1, global.totalWeapons - 1)));
 initWeaponType = "";
 // Bobbing of weapon animation (hovering up and down)
 var initBobScale = random(0.75); 
