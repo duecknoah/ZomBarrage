@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>obj_characterP</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -32,7 +32,7 @@ skinCol = make_colour_hsv(24, 100, random(200));
 shirtCol = make_colour_rgb(random(255), random(255), random(255));
 pantsCol = make_colour_rgb(random(255), random(255), random(255));
 
-scr_initEntityVars();
+event_inherited(); // initialize entity variables
 state = "wander";
 path = path_add();
 wanderX = noone;
@@ -138,7 +138,7 @@ with (obj_propDoor) {
         open = false;
     }
 }
-scr_doEntityFuncs();
+event_inherited(); // run character functions
 </string>
           </argument>
         </arguments>

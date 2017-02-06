@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>/// create navPath and set variables
-event_inherited();
+event_inherited(); // init character and zombie variables
 maxHp = global.currentWave + 5;
 hp = maxHp;
 image_xscale = 0.85;
@@ -246,7 +246,7 @@ else { // If there is no target for zombie, keep an eye out for one
     }
 }
 
-scr_doEntityFuncs();
+event_inherited(); // do character and zombie functions
 </string>
           </argument>
         </arguments>

@@ -1,4 +1,3 @@
-///scr_initEntityVars();
 /* This initializes all variables required by an entity.
  * An entity is something that can move, gets
  * affected by forces, rotates, and can be

@@ -28,8 +28,9 @@
             <string>/// Setup vehicle variables
 maxVehicleSpd = 1; // max vehicle speed (per step)
 vehicleAccel = 0.025; // acceleration spd per step
-vehicleSpd = 1; // speed per step
+vehicleSpd = 0; // speed per step
 path = noone; // no path by default
+passenger[0] = noone; // passenger (id of inst) in vehicle, default is only up to one
 </string>
           </argument>
         </arguments>
@@ -54,14 +55,25 @@ path = noone; // no path by default
             <kind>1</kind>
             <string>/// If there is a path for the vehicle, go on it
 if (path_exists(path)) {
-    path_start(path, vehicleSpd, 0, true);
+    if (path_index == noone) {
+       // path_start(path, vehicleSpd, 0, true);
+    }
+    else {
+        path_speed = vehicleSpd * global.timeScale;
+    }
     
     if (vehicleSpd &lt; maxVehicleSpd) {
         vehicleSpd += vehicleAccel;
     }
     // if entity is not being pushed, rotate based on move direction
     if (global.timeScale != 0) {
-        image_angle += ((point_direction(xprevious, yprevious, x, y) - 90) - image_angle) * 0.25;
+        //image_angle += ((point_direction(xprevious, yprevious, x, y) - 90) - image_angle) * 0.25;
+        var xPathPrev = path_get_point_x(path, path_positionprevious);
+        var yPathPrev = path_get_point_y(path, path_positionprevious);
+        var xPath = path_get_point_x(path, path_position);
+        var yPath = path_get_point_y(path, path_position);
+        
+        image_angle += ((direction - 90) - image_angle) * 0.25;
     }
 }
 else {

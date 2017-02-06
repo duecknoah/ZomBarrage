@@ -241,7 +241,7 @@ else { // If there is no target for zombie, keep an eye out for one
     }
 }
 
-scr_doEntityFuncs();
+event_inherited(); // do character and zombie functions
 </string>
           </argument>
         </arguments>

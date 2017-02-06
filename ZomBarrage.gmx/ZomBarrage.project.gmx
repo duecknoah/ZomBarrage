@@ -157,8 +157,6 @@
       <script>scripts\scr_totalEnemyCount.gml</script>
     </scripts>
     <scripts name="Entity">
-      <script>scripts\scr_initEntityVars.gml</script>
-      <script>scripts\scr_doEntityFuncs.gml</script>
       <script>scripts\scr_hurt.gml</script>
       <script>scripts\scr_hurtRadius.gml</script>
       <script>scripts\scr_createFireRadius.gml</script>
@@ -282,6 +280,7 @@
         <script>scripts\scr_addDialogue.gml</script>
       </scripts>
     </scripts>
+    <script>scripts\scr_instPutInVehicle.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\sh_outline.shader</shader>
@@ -293,10 +292,15 @@
   <objects name="objects">
     <object>objects\obj_camera</object>
     <objects name="Entities">
-      <object>objects\obj_player</object>
-      <object>objects\obj_civilian</object>
-      <object>objects\obj_dad_civilian</object>
-      <object>objects\obj_civilianDeadBody</object>
+      <objects name="People">
+        <object>objects\obj_characterP</object>
+        <object>objects\obj_player</object>
+        <object>objects\obj_civilian</object>
+        <objects name="Special Civilians">
+          <object>objects\obj_dad_civilian</object>
+          <object>objects\obj_civilianDeadBody</object>
+        </objects>
+      </objects>
       <object>objects\obj_itemWeapon</object>
       <object>objects\obj_fire</object>
       <objects name="Zombies">

@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>obj_characterP</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>/// Init zombies
-scr_initEntityVars();
+event_inherited(); // init character variables
 path = path_add();
 target = noone; // target to go to
 maxHp = global.currentWave + 5;

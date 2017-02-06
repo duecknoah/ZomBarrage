@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>obj_characterP</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>/// Initialize Player variables
-scr_initEntityVars();
+event_inherited();
 
 // Inventory //
         selectedSlot = 0;
@@ -45,7 +45,7 @@ scr_initEntityVars();
     hidePlayer = false; //when true, player is not shown (nor the flashlight)
     lootXPrev = 0; // x previous, used after player is done looting to teleport player back outside of building
     lootYPrev = 0; // y previous, used after player is done looting to teleport player back outside of building
-    sittingOnEntity = noone; // when set to the instance id of some instance, the player is parented to it and can slowly move around (ex. chair)
+    sittingOnEntity = noone; // when set to the instance id of some instance, the player is parented to it and can slowly move around (ex. chair, car)
 // Movement Variables
     xSpd = 0;
     ySpd = 0;
@@ -239,7 +239,7 @@ if (!isDead &amp;&amp; !obj_guiController.showConsole) {
     }
     x += xSpd;
     
-    scr_doEntityFuncs();
+    event_inherited(); // run entity functions
     
     // if player movement isnt prevented and entity movement isnt prevented, allow player movement
     if (!global.preventPlayerControls &amp;&amp; !global.preventEntityMovement) {

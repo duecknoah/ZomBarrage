@@ -132,7 +132,7 @@
     <instance objName="obj_propLightPost" x="192" y="1760" name="inst_0A23A9AD" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_propLightPost" x="192" y="2048" name="inst_A75106AC" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_propLightPost" x="192" y="1504" name="inst_C7DDED31" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_miniTruck" x="1696" y="1888" name="inst_89394D9A" locked="0" code="path = path_truck_mp_town;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_miniTruck" x="1696" y="1888" name="inst_89394D9A" locked="0" code="path = path_truck_mp_town;&#xA;path_start(path, 0, 0, true);&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
     <tile bgName="tile_back" x="224" y="192" w="64" h="64" xo="64" yo="0" id="10000010" name="inst_22FAEEAC" depth="1000001" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
