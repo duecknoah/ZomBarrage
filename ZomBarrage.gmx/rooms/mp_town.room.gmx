@@ -150,6 +150,8 @@
     <instance objName="obj_itemWeapon" x="672" y="1952" name="inst_595F49F6" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_itemWeapon" x="480" y="1696" name="inst_57440089" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_itemWeapon" x="1408" y="1536" name="inst_66C68C91" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_itemWeapon" x="960" y="1184" name="inst_4F08F661" locked="0" code="weaponType = &quot;M16&quot;;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_itemWeapon" x="1024" y="1184" name="inst_3B1A5708" locked="0" code="weaponType = &quot;Molotov Cocktail&quot;;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
     <tile bgName="tile_back" x="224" y="192" w="64" h="64" xo="64" yo="0" id="10000010" name="inst_22FAEEAC" depth="1000001" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
@@ -418,8 +420,7 @@
     <tile bgName="tile_back" x="544" y="1920" w="64" h="64" xo="384" yo="192" id="10000560" name="inst_A317C90A" depth="1000001" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="tile_back" x="608" y="1920" w="64" h="64" xo="384" yo="192" id="10000561" name="inst_45B6EF18" depth="1000001" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="tile_back" x="672" y="1920" w="64" h="64" xo="384" yo="192" id="10000562" name="inst_6C943B7D" depth="1000001" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="tile_back" x="736" y="1920" w="64" h="64" xo="384" yo="192" id="10000563" name="inst_3FB7FFCD" depth="1000001" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="tile_back" x="800" y="1920" w="64" h="64" xo="384" yo="192" id="10000564" name="inst_10E64422" depth="1000001" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="tile_back" x="736" y="1920" w="64" h="64" xo="384" yo="192" id="10000564" name="inst_10E64422" depth="1000001" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="tile_back" x="640" y="416" w="64" h="64" xo="0" yo="0" id="10000307" name="inst_AF50076C" depth="18" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="tile_back" x="640" y="384" w="64" h="64" xo="0" yo="0" id="10000308" name="inst_B6DD09E6" depth="18" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="tile_back" x="608" y="384" w="64" h="64" xo="0" yo="0" id="10000309" name="inst_93BAC2C9" depth="18" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>

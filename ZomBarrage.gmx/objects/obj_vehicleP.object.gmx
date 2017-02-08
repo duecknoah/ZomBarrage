@@ -59,7 +59,7 @@ if (path_exists(path)) {
     if (path_index != noone) {
         path_speed = vehicleSpd * global.timeScale;
     }
-    
+
     if (vehicleSpd &lt; maxVehicleSpd) {
         vehicleSpd += vehicleAccel;
     }

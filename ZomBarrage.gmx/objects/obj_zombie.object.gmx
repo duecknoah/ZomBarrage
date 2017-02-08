@@ -171,10 +171,13 @@ if (target != noone) {
         }
     }
     
-    // Check if target is out of view range / see distance
-    var seeDist = 512;
-    if (distance_to_point(target.x, target.y) &gt; seeDist) {
-        target = noone;
+    // If zombies only see there nearby surroundings
+    if (!obj_navGrid.zombiesSeeEverywhere) {
+        // Check if target is out of view range / see distance
+        var seeDist = 512;
+        if (distance_to_point(target.x, target.y) &gt; seeDist) {
+            target = noone;
+        }
     }
 }
 else { 
@@ -184,12 +187,14 @@ else {
         var instType = random(1);
         var chancePlayer = 0.50; // the % chance the zombie will target the player instead of a civilian
         
-        // Choose which instance to target
-        if (instType &lt;= chancePlayer) {
+        // If instance type is player and player does exist, or if a civilian does not exist
+        if ((instType &lt;= chancePlayer &amp;&amp; instance_exists(obj_player)) || !instance_exists(obj_civilian)) {
         // Target player
             target = obj_player.id;
         }
-        else {
+        
+        // If instance type is civilian and civilian exists
+        if (instType &gt; chancePlayer &amp;&amp; instance_exists(obj_civilian)) {
         // Target civilian
             target = round(random(instance_number(obj_civilian)));
         }
