@@ -19,11 +19,11 @@
     </sprites>
     <sprites name="Zombie">
       <sprite>sprites\spr_zombie</sprite>
-      <sprite>sprites\spr_bigZombie</sprite>
+      <sprite>sprites\spr_heavyZombie</sprite>
       <sprite>sprites\spr_zombieCrawler</sprite>
       <sprite>sprites\spr_zombieGore</sprite>
       <sprite>sprites\spr_zombieCollision</sprite>
-      <sprite>sprites\spr_bigZombieCollision</sprite>
+      <sprite>sprites\spr_heavyZombieCollision</sprite>
       <sprite>sprites\spr_zombieSpawn</sprite>
       <sprite>sprites\spr_navGrid</sprite>
     </sprites>
@@ -311,7 +311,7 @@
       <objects name="Zombies">
         <object>objects\obj_zombieP</object>
         <object>objects\obj_zombie</object>
-        <object>objects\obj_bigZombie</object>
+        <object>objects\obj_heavyZombie</object>
       </objects>
       <objects name="Projectile">
         <object>objects\obj_projectileP</object>

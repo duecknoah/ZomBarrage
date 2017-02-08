@@ -273,7 +273,7 @@ var movementAmt;
 if (object_index == obj_zombie || object_index == obj_civilian) {
     movementAmt = path_speed;
 }
-else if (object_index == obj_bigZombie) {
+else if (object_index == obj_heavyZombie) {
     // Make big zombie slam down when bobbing down (showing lots of weight)
     if (isBobbingUp) {
         movementAmt = path_speed;

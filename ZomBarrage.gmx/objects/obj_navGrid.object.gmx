@@ -40,6 +40,7 @@ global.navUpdateRate = room_speed / 4; // how many game steps until an update to
 global.navUpdateRateTimer = 0;
 
 collisionObjectCount = -1; // will update nav grid if new objects are found
+zombiesSeeEverywhere = true; // Do zombies know where characters are at all times?
 </string>
           </argument>
         </arguments>
@@ -101,12 +102,17 @@ if (global.navUpdateRateTimer &lt; 0) {
     if (instance_exists(obj_collision)) {
         mp_grid_add_instances(global.grid, obj_collision, false);
     }
+    if (instance_exists(obj_zombieP)) {
+        mp_grid_add_instances(global.grid, obj_zombieP, false);
+    }
+    /*
     if (instance_exists(obj_zombie)) {
         mp_grid_add_instances(global.grid, obj_zombie, false);
     }
-    if (instance_exists(obj_bigZombie)) {
+    if (instance_exists(obj_heavyZombie)) {
         mp_grid_add_instances(global.grid, obj_bigZombie, false);
     }
+    */
     if (instance_exists(obj_civilian)) {
         mp_grid_add_instances(global.grid, obj_civilian, false);
     }  

@@ -177,72 +177,91 @@ if (target != noone) {
         target = noone;
     }
 }
-else { // If there is no target for zombie, keep an eye out for one
+else { 
+    if (obj_navGrid.zombiesSeeEverywhere) {
+    // If there is no current set target for the zombie, target a
+    // random person.
+        var instType = random(1);
+        var chancePlayer = 0.50; // the % chance the zombie will target the player instead of a civilian
+        
+        // Choose which instance to target
+        if (instType &lt;= chancePlayer) {
+        // Target player
+            target = obj_player.id;
+        }
+        else {
+        // Target civilian
+            target = round(random(instance_number(obj_civilian)));
+        }
+    }
+    else {
+    // If there is no target for zombie, keep an eye out for one
     // If there is a nav update, look for closest target.
     // This is where the zombies finds someone to go after
-    if (global.navUpdateRateTimer == 0) {  
-        var listOfClosestEnts = ds_list_create();
-        var seeDist = 512;
-        
-        // Civilians
-        for (var i = 0; i &lt; instance_number(obj_civilian); i ++) {
-            var inst = instance_find(obj_civilian, i);
+        if (global.navUpdateRateTimer == 0) {  
+            var listOfClosestEnts = ds_list_create();
+            var seeDist = 512;
             
-            // First check if already dead, if so, don't count as a target
-            if (inst.isDead) {
-                continue;
-            }
-            
-            // If target in view distance
-            if (distance_to_point(inst.x, inst.y) &lt; seeDist) {
-                // If no collisions between the zombie and the civilian (in the open)
-                if (!collision_line(x, y, inst.x, inst.y, obj_collision, 0, 0)) {
-                    ds_list_add(listOfClosestEnts, inst);
+            // Civilians
+            for (var i = 0; i &lt; instance_number(obj_civilian); i ++) {
+                var inst = instance_find(obj_civilian, i);
+                
+                // First check if already dead, if so, don't count as a target
+                if (inst.isDead) {
+                    continue;
+                }
+                
+                // If target in view distance
+                if (distance_to_point(inst.x, inst.y) &lt; seeDist) {
+                    // If no collisions between the zombie and the civilian (in the open)
+                    if (!collision_line(x, y, inst.x, inst.y, obj_collision, 0, 0)) {
+                        ds_list_add(listOfClosestEnts, inst);
+                    }
                 }
             }
-        }
-        // Player
-        if (distance_to_point(x, y) &lt; seeDist) {
-            // If no collisions between the zombie and the civilian (in the open)
-            if (!collision_line(x, y, obj_player.x, obj_player.y, obj_collision, 0, 0)) {
-                ds_list_add(listOfClosestEnts, obj_player);
+            // Player
+            if (distance_to_point(x, y) &lt; seeDist) {
+                // If no collisions between the zombie and the civilian (in the open)
+                if (!collision_line(x, y, obj_player.x, obj_player.y, obj_collision, 0, 0)) {
+                    ds_list_add(listOfClosestEnts, obj_player);
+                }
             }
-        }
-        
-        // Loop through all entitys in view and find the closest one
-        var size = ds_list_size(listOfClosestEnts);
-        var closestEnt = noone;
-        var closestDist = -1;
-        
-        // Find the closest entity to self
-        for (var i = 0; i &lt; size; i ++) {
-            var inst = listOfClosestEnts[| i];
             
-            // If the closest distance hasn't been determined yet, then
-            // this is the closest distance
-            if (closestEnt == noone) {
-                closestDist = distance_to_point(inst.x, inst.y);
-                closestEnt = inst;
-            }
-            else {
-            // If the closest distance has been determined, than check if this
-            // distance between self and another civlian is closer than the closest
-            // civilian to self so far
-                var dist = distance_to_point(inst.x, inst.y);
-                // If this civilian is closer than the other civilian, count
-                // this civilian to have the closest distance
-                if (dist &lt; closestDist) {
-                    closestDist = dist;
+            // Loop through all entitys in view and find the closest one
+            var size = ds_list_size(listOfClosestEnts);
+            var closestEnt = noone;
+            var closestDist = -1;
+            
+            // Find the closest entity to self
+            for (var i = 0; i &lt; size; i ++) {
+                var inst = listOfClosestEnts[| i];
+                
+                // If the closest distance hasn't been determined yet, then
+                // this is the closest distance
+                if (closestEnt == noone) {
+                    closestDist = distance_to_point(inst.x, inst.y);
                     closestEnt = inst;
                 }
-            }   
+                else {
+                // If the closest distance has been determined, than check if this
+                // distance between self and another civlian is closer than the closest
+                // civilian to self so far
+                    var dist = distance_to_point(inst.x, inst.y);
+                    // If this civilian is closer than the other civilian, count
+                    // this civilian to have the closest distance
+                    if (dist &lt; closestDist) {
+                        closestDist = dist;
+                        closestEnt = inst;
+                    }
+                }   
+            }
+            
+            // If there is a closest entity available
+            if (closestEnt != noone) {
+                target = closestEnt; // target it
+            }
+            ds_list_destroy(listOfClosestEnts);
         }
-        
-        // If there is a closest entity available
-        if (closestEnt != noone) {
-            target = closestEnt; // target it
-        }
-        ds_list_destroy(listOfClosestEnts);
     }
 }
 

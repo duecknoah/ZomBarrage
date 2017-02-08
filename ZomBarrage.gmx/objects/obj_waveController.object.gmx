@@ -31,15 +31,17 @@ global.delayBetweenWaves = 5; // delay between waves in seconds
 global.delayBetweenWavesTimer = global.delayBetweenWaves;
 global.waveCompleted = false; // is true when wave is just completed, false during a wave
 global.currentWave = 0;
+global.amtOfWaves = 5; // the amount of waves in order to complete the level (def 5)
+global.allWavesDone = false; // is the waves all completed in this level?
 
 zombiesForWave = 0; // how many more zombies for this wave, increases over time
 zombiesIncForWave = 20; // how many zombies to increment per wave (def 20)
 zombieSpawnDelay = 1; // 1 second delay per zombie spawn
 zombieSpawnDelayTimer = 0;
 zombiesSpawned = 0; // keeps track of the amount of zombies spawned so far in the current round
-bigZombieSpawnChance = 100; // The higher the number, the less chance (ex. if 1000, the chance is 1 in 1000)
+heavyZombieSpawnChance = 100; // The higher the number, the less chance (ex. if 1000, the chance is 1 in 1000)
 initWave = false; // when true, activates init sequence for wave (when timer is up)
-preventSpawn = false; // when true, zombies will not spawn
+preventSpawn = true; // when true, zombies will not spawn
 doErrorCheck = true; // does error checks initially, then doesn't after first step
 </string>
           </argument>
@@ -72,48 +74,56 @@ if (doErrorCheck) {
     doErrorCheck = false;
 }
 
-if (global.delayBetweenWavesTimer &gt;= 0) {
-    global.delayBetweenWavesTimer -= (1 / room_speed);
-    initWave = true;
-}
-else {
-    if (initWave) {
-        global.currentWave ++;
-        zombiesForWave = global.currentWave * zombiesIncForWave;
-        initWave = false;
-        global.waveCompleted = false;
-        zombiesSpawned = 0;
+// If all waves not completed yet
+if (!global.allWavesDone) {
+    if (global.delayBetweenWavesTimer &gt;= 0) {
+        global.delayBetweenWavesTimer -= (1 / room_speed);
+        initWave = true;
     }
-    
-    // If not at total zombies for this wave yet   
-    if (zombiesSpawned &lt; zombiesForWave) {
-        // If still spawning zombies and not preventing spawn
-        if (zombieSpawnDelayTimer &lt; 0 &amp;&amp; !preventSpawn) {
-            if (instance_exists(obj_zombieSpawn)) {
-                // Spawn at random spawn point
-                spawnPoint = instance_find(obj_zombieSpawn, round(random(instance_number(obj_zombieSpawn))));
-                // Choose what to spawn there
+    else {
+        if (initWave) {
+            global.currentWave ++;
+            zombiesForWave = global.currentWave * zombiesIncForWave;
+            initWave = false;
+            global.waveCompleted = false;
+            zombiesSpawned = 0;
+        }
+        
+        // If not at total zombies for this wave yet   
+        if (zombiesSpawned &lt; zombiesForWave) {
+            // If still spawning zombies and not preventing spawn
+            if (zombieSpawnDelayTimer &lt; 0 &amp;&amp; !preventSpawn) {
+                if (instance_exists(obj_zombieSpawn)) {
+                    // Spawn at random spawn point
+                    spawnPoint = instance_find(obj_zombieSpawn, round(random(instance_number(obj_zombieSpawn))));
+                    // Choose what to spawn there
+                    
+                    if (round(random_range(1, heavyZombieSpawnChance)) == 1) {
+                        instance_create(spawnPoint.x, spawnPoint.y, obj_heavyZombie);
+                    }
+                    else {
+                        instance_create(spawnPoint.x, spawnPoint.y, obj_zombie);
+                    }
+                    zombiesSpawned ++;
+                }
                 
-                if (round(random_range(1, bigZombieSpawnChance)) == 1) {
-                    instance_create(spawnPoint.x, spawnPoint.y, obj_bigZombie);
-                }
-                else {
-                    instance_create(spawnPoint.x, spawnPoint.y, obj_zombie);
-                }
-                zombiesSpawned ++;
+                // reset spawn delay timer
+                zombieSpawnDelayTimer = zombieSpawnDelay;
             }
-            
-            // reset spawn delay timer
-            zombieSpawnDelayTimer = zombieSpawnDelay;
+            else {
+                zombieSpawnDelayTimer -= 1 / room_speed;
+            }
         }
-        else {
-            zombieSpawnDelayTimer -= 1 / room_speed;
-        }
-    }
-    else { // If done spawning new zombies
-        if (scr_totalEnemyCount() == 0) { // if wave completed
-            global.delayBetweenWavesTimer = global.delayBetweenWaves;
-            global.waveCompleted = true;
+        else { // If done spawning new zombies
+            if (scr_totalEnemyCount() == 0) { // if wave completed
+                global.delayBetweenWavesTimer = global.delayBetweenWaves;
+                global.waveCompleted = true;
+                
+                // Check if all waves have been completed
+                if (global.currentWave &gt;= global.amtOfWaves) {
+                    global.allWavesDone = true;
+                }
+            }
         }
     }
 }
