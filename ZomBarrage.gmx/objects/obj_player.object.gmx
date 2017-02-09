@@ -396,7 +396,7 @@ if (!isDead &amp;&amp; !obj_guiController.showConsole) {
             }
             // If holding an actual weapon
             if (inventory[selectedSlot] != "fists") {
-                scr_createWeapon(x, y, scr_WeaponToId(inventory[selectedSlot]), inventoryAmmo[selectedSlot]);
+                scr_createWeapon(x, y, scr_WeaponNameToId(inventory[selectedSlot]), inventoryAmmo[selectedSlot]);
                 inventory[selectedSlot] = "fists";
                 inventoryAmmo[selectedSlot] = 0;
                 // Reset img state, else player cycles through animation forever
