@@ -19,7 +19,8 @@
     </sprites>
     <sprites name="Zombie">
       <sprite>sprites\spr_zombie</sprite>
-      <sprite>sprites\spr_heavyZombie</sprite>
+      <sprite>sprites\spr_heavyZombieWalk</sprite>
+      <sprite>sprites\spr_heavyZombieSwing</sprite>
       <sprite>sprites\spr_zombieCrawler</sprite>
       <sprite>sprites\spr_zombieGore</sprite>
       <sprite>sprites\spr_zombieCollision</sprite>
@@ -401,12 +402,12 @@
     <timeline>timelines\tl_cutscene_beginning_intro</timeline>
   </timelines>
   <rooms name="rooms">
+    <room>rooms\mp_testRoom</room>
+    <room>rooms\rm_Menu</room>
     <rooms name="maps">
       <room>rooms\mp_town</room>
       <room>rooms\mp_the_beginning_home</room>
     </rooms>
-    <room>rooms\rm_Menu</room>
-    <room>rooms\mp_testRoom</room>
     <room>rooms\rm_shaderTesting</room>
   </rooms>
   <help>

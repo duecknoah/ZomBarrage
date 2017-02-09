@@ -20,6 +20,6 @@
   <width>32</width>
   <height>32</height>
   <frames>
-    <frame index="0">images\spr_heavyZombie_0.png</frame>
+    <frame index="0">images\spr_heavyZombieWalk_0.png</frame>
   </frames>
 </sprite>

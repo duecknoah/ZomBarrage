@@ -32,6 +32,10 @@ if (!instance_exists(obj_global)) {
     instance_create(x, y, obj_global);
 }
 
+if (!instance_exists(obj_weaponDB)) {
+    instance_create(x, y, obj_weaponDB);
+}
+
 if (!instance_exists(obj_controls)) {
     instance_create(x, y, obj_controls);
 }
@@ -69,10 +73,6 @@ if (!instance_exists(obj_timeScaleController)) {
 }
 if (!instance_exists(obj_cutscene)) {
     instance_create(x, y, obj_cutscene);
-}
-
-if (!instance_exists(obj_weaponDB)) {
-    instance_create(x, y, obj_weaponDB);
 }
 
 // Destroy self
