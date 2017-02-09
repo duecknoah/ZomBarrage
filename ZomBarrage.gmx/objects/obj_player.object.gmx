@@ -494,18 +494,20 @@ with (other) {
 }
 
 if (keyboard_check_pressed(ord("E"))) {
-    var actionTaken = scr_PlayerAddWeapon(other.weaponType, other.ammo);
+    var actionTaken = scr_PlayerAddWeapon(other.weapon, other.weapon[? "ammo"]);
     
     switch(actionTaken) {
         case -1: // nothing happened
         break;
         case 0: // user picked up just the ammo
-            other.ammo = 0;
+            with (other) {
+                instance_destroy();
+            } 
         break;
         case 1: // user picked up the weapon
-          with (other) {
-            instance_destroy();
-        }  
+            with (other) {
+                instance_destroy();
+            }  
         break;
     }
 }

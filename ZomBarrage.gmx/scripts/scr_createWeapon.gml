@@ -13,8 +13,7 @@ if (weaponId == -1) {
 }
 
 with (instance_create(xx, yy, obj_itemWeapon)) {
-    weaponType = scr_IdToWeapon(other.weaponId);
-    initWeaponType = weaponType; // prevent reseting ammo
-    image_index = scr_WeaponToId(weaponType);
+    weapon = scr_IdToWeapon(other.weaponId);
+    weapon[? "ammo"] = other.ammo;
     ammo = other.ammo;
 }

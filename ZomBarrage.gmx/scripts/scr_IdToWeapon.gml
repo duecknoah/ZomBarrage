@@ -6,41 +6,12 @@
  * (set in obj_roomObjectsInit). This DOESN'T include fists
 */
 
-ID = argument0;
+var _searchId = argument0;
 
-switch(ID) {
-    case 0: 
-        return "fists";
-    break;
-    case 1:
-        return "Wimps Pistol";
-    break;
-    case 2:
-        return "M16";
-    break;
-    case 3:
-        return "Rocket Launcher";
-    break;
-    case 4:
-        return "Flashlight";
-    break;
-    case 5:
-        return "Loot Key";
-    break;
-    case 6:
-        return "Sniper Rifle";
-    break;
-    case 7:
-        return "Molotov Cocktail";
-    break;
-    case 8:
-        return "Frag Grenade";
-    break;
-    case 9:
-        return "Iron Sword";
-    break;
-    case 10:
-        return "Chainsaw";
-    break;
-    default: return "default";
+// If id is within the range of weapon id's
+if (_searchId < obj_weaponDB.totalWeapons && _searchId >= 0) {
+    var _weapon = ds_map_create(); 
+    ds_map_copy(_weapon, obj_weaponDB.weapon[| _searchId]);
+    return _weapon;
 }
+return 0;

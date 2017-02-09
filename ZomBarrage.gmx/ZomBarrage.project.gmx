@@ -187,6 +187,7 @@
       <script>scripts\scr_shootBullet.gml</script>
       <script>scripts\scr_WeaponToId.gml</script>
       <script>scripts\scr_IdToWeapon.gml</script>
+      <script>scripts\scr_WeaponNameToId.gml</script>
       <script>scripts\scr_shootRocket.gml</script>
       <script>scripts\scr_createRocketExplosion.gml</script>
       <script>scripts\scr_createWeapon.gml</script>
@@ -345,6 +346,7 @@
       <object>objects\obj_cutscene</object>
       <object>objects\obj_controls</object>
       <object>objects\obj_scriptRunner</object>
+      <object>objects\obj_weaponDB</object>
     </objects>
     <objects name="partSystems">
       <object>objects\obj_particleIndex</object>

@@ -489,7 +489,7 @@ if (showWeaponPickupText) {
         weaponInst = instance_place(x, y, obj_itemWeapon);
     }
     draw_set_alpha(weaponPickupTextAlpha);
-    draw_text(view_wport[0] / 2, view_hport[0] / 2 + 256, "'E' to pickup " + weaponInst.weaponType);
+    draw_text(view_wport[0] / 2, view_hport[0] / 2 + 256, "'E' to pickup " + weaponInst.weapon[? "name"]);
     draw_set_alpha(1);
 }
 

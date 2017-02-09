@@ -36,7 +36,6 @@ global.timeScaleChanged = true; // Change in the timeScale during this step?
 global.isIndoor = false; // are we currently indoor? This is used to prevent trying to spawn zombies in such when indoors
 global.preventPlayerControls = false; // don't allow player to use controls to move? In cutscenes this can be used
 global.preventEntityMovement = false; // prevent all entity movement? (zombies and player)
-global.totalWeapons = 5; // total weapons in game
 
 randomize(); // randomize the seed
 

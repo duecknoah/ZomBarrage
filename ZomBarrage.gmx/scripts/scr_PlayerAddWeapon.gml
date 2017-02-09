@@ -8,7 +8,7 @@ returns 1
     -   user picked up weapon
 */
 
-var weaponType = argument0;
+var weapon = argument0;
 var ammo = argument1;
 
 /* Loop through the inventory and see if it
@@ -20,16 +20,16 @@ from it
 for(var i=0; i<array_length_1d(obj_player.inventory); i++) {
     // If empty slot
     if (inventory[i] == "fists") {
-        obj_player.inventory[i] = weaponType;
-        obj_player.inventoryAmmo[i] = ammo;
+        obj_player.inventory[i] = weapon[? "name"];
+        obj_player.inventoryAmmo[i] = weapon[? "ammo"];
         // Turn on flashlight if it is one
-        if (weaponType = "Flashlight") {
+        if (weapon[? "name"] = "Flashlight") {
             flashLightOn = true;
         }
         return 1;
     }
-    else if (inventory[i] == weaponType) {
-        obj_player.inventoryAmmo[i] += ammo;
+    else if (inventory[i] == weapon[? "name"]) {
+        obj_player.inventoryAmmo[i] += weapon[? "ammo"];
         return 0;
     }
 }

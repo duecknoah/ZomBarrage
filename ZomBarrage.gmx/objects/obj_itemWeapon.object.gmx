@@ -39,8 +39,8 @@
 
 image_speed = 0;
 // random weapon by default
-weaponType = scr_IdToWeapon(floor(random_range(1, global.totalWeapons - 1)));
-initWeaponType = "";
+weapon = scr_IdToWeapon(floor(random_range(1, obj_weaponDB.totalWeapons - 1)));
+initWeapon = true;
 // Bobbing of weapon animation (hovering up and down)
 var initBobScale = random(0.75); 
 image_xscale = initBobScale;
@@ -55,8 +55,33 @@ if (random(1) &lt; 0.5) {
 else {
     isBobbingUp = true;
 }
-image_index = scr_WeaponToId(weaponType);
-ammo = 0;
+image_index = weapon[? "id"];
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="1" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Destroy weapon ds_map
+if (ds_exists(weapon, ds_type_map)) {
+    ds_map_destroy(weapon);
+}
 </string>
           </argument>
         </arguments>
@@ -80,34 +105,12 @@ ammo = 0;
           <argument>
             <kind>1</kind>
             <string>/// If a change in weaponType, update the weapon
-if (weaponType != initWeaponType) {
-    image_index = scr_WeaponToId(weaponType);
-    
-    switch(weaponType) {
-        case "Wimps Pistol": ammo = 64;
-        break;
-        case "M16": ammo = 128;
-        break;
-        case "Rocket Launcher": ammo = 10;
-        break;
-        case "Flashlight": ammo = -1;
-        break;
-        case "Loot Key": ammo = 1;
-        break;
-        case "Sniper Rifle": ammo = 32;
-        break;
-        case "Molotov Cocktail": ammo = 5;
-        break;
-        case "Frag Grenade": ammo = 5;
-        break;
-        case "Iron Sword": ammo = 1;
-        break;
-        case "Chainsaw": ammo = (room_speed * 0.05) * 35;
-    }
-    initWeaponType = weaponType;
+if (initWeapon) {
+    image_index = weapon[? "id"];
+    initWeapon = false;
 }
 
-if (ammo == 0) {
+if (weapon[? "ammo"] == 0) {
     image_alpha = 1;
     image_blend = c_red;
 }
@@ -145,6 +148,30 @@ else {
         scaleSpd /= 2;
     }
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="5">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Do destroy event to free ram
+instance_destroy();
 </string>
           </argument>
         </arguments>

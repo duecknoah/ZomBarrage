@@ -19,7 +19,7 @@ var ammoY = inventorySlotY;
 
 for(i=0; i<2; i++) {
     // Draw weapon sprite
-    var ID = scr_WeaponToId(obj_player.inventory[i]);
+    var ID = scr_WeaponNameToId(obj_player.inventory[i]);
     draw_sprite_ext(spr_itemWeapon, ID, inventorySlotX, inventorySlotY, _scale, _scale, 0, c_white, _alpha);
     
     // Draw ammo amount (ceiled to remove decimals for certain weapons)
