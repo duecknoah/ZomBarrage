@@ -57,7 +57,7 @@ image_speed = 0;
 var lootKeyChance = 12; // default 1 out of 12
 
 if (round(random(lootKeyChance)) == 0) {
-    scr_createWeapon(x, y, scr_WeaponToId("Loot Key"), 1);
+    scr_createWeapon(x, y, scr_WeaponNameToId("Loot Key"), 1);
 }
 
 with (instance_create(x, y, obj_zombieGore)) {
