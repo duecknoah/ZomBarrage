@@ -21,13 +21,13 @@ var _doAffectPlayer = argument6;
 var _doAffectZombie = argument7;
 
 // Debugging
-
+/*
 draw_set_colour(c_red);
 draw_set_alpha(0.5);
 draw_ellipse(_x - (_radius / 2), _y - (_radius / 2), _x + (_radius / 2), _y + (_radius / 2), false); 
 draw_set_alpha(1);
 draw_set_colour(c_white);
-
+*/
 
 scr_createForce(_x, _y, _forceAmt, _radius, _doAffectPlayer, _doAffectZombie);
 

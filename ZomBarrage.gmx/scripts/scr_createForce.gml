@@ -37,7 +37,7 @@ for (var i = 0; i < 2; i ++) {
     // Apply force on entity   
     with (entityToEffect) {
         // If within radius, add force
-        if (distance_to_point(other.xcoord, other.ycoord) < other.radius) {
+        if (distance_to_point(other.xcoord, other.ycoord) < (other.radius / 2)) {
             var _angle = point_direction(other.xcoord, other.ycoord, x, y);
             var _xPush = cos(degtorad(_angle)) * other.amt; // x coordinate push
             var _yPush = -sin(degtorad(_angle)) * other.amt; // y coordinate push

@@ -90,7 +90,7 @@ if (testThrower != -1) {
 }
 if (doDamage) {
     scr_createForce(x, y, 1, 64, true, true);
-    scr_hurtRadius(x, y, 1, 24, -1, true, true, true);
+    scr_hurtRadius(x, y, 1, 32, -1, true, true, true);
 }
 
 // If past or equal to distance the molotov is supposed to travel
