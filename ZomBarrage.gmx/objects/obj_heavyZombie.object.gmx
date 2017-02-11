@@ -30,6 +30,7 @@ event_inherited();
 maxHp = global.currentWave + 30;
 hp = maxHp;
 movementSpd = 0.25;
+hasPunched = false; // turns true to prevent many scr_hurts during punch, becomes false after punch animation ends
 state = "default";
 image_index = 0;
 image_speed = 0;
@@ -98,6 +99,10 @@ obj_player.points += points; // give points to player on death
 // don't run movement code if movement prevented
 event_inherited(); // do character and zombie functions
 
+if (global.preventEntityMovement) {
+    exit;
+}
+
 switch (state) {
     case "default": // no target currently
         // If there is a target, change state to chase
@@ -116,7 +121,7 @@ switch (state) {
         if (target == noone) {
             state = "default";
         }
-        if (distance_to_point(target.x, target.y) &lt; 50) {
+        if (distance_to_point(target.x, target.y) &lt; 25) {
             // throw punch
             state = "punch";
             image_index = 0;
@@ -124,14 +129,24 @@ switch (state) {
     break;
     case "punch":
         // Swinging punch at target
-        path_end();
+        // move forward when swinging
+        if (image_index &gt; 1.5 &amp;&amp; image_index &lt; 2.25) {
+            path_speed = 1.5;
+        }
+        else {
+            path_speed = 0;
+        }
+        
+        // Do punch
+        if (image_index &gt; 2 &amp;&amp; !hasPunched) {
+            var punchX = x + lengthdir_x(16, rotation);
+            var punchY = y + lengthdir_y(16, rotation);
+            scr_hurtRadius(punchX, punchY, 20, 64, 4, false, true, false);
+            hasPunched = true;
+        }
         sprite_index = spr_heavyZombieSwing;
         image_speed = 0.025 * global.timeScale;
     break;
-}
-
-if (global.preventEntityMovement) {
-    exit;
 }
 </string>
           </argument>
@@ -161,6 +176,7 @@ switch (state) {
     case "punch":
         // Swinging punch at target
         state = "default";
+        hasPunched = false; // reset
     break;
 }
 </string>
@@ -185,13 +201,13 @@ switch (state) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>// if entity is not being pushed, rotate based on move direction
-if (!scr_isBeingPushed(id) &amp;&amp; global.timeScale != 0) {
-    rotation += ((point_direction(xprevious, yprevious, x, y) - 90) - rotation) * 0.25;
+            <string>if (state == "punch") {
+    //rotation += ((point_direction(x, y, target.x, target.y) - 90) - rotation) * 0.25;
+    rotation = point_direction(x, y, target.x, target.y) - 90;
 }
-
-if (state == "punch") {
-    rotation += ((point_direction(x, y, target.x, target.y) - 90) - rotation) * 0.25;
+else if (!scr_isBeingPushed(id) &amp;&amp; global.timeScale != 0) {
+    // if entity is not being pushed, rotate based on move direction
+    rotation += ((point_direction(xprevious, yprevious, x, y) - 90) - rotation) * 0.25;
 }
 
 // Draw shadow

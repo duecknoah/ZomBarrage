@@ -302,7 +302,6 @@ if (!other.isHurt &amp;&amp; !obj_guiController.showConsole) {
     var ySpd = y - yprevious;
 
     scr_addForce(other.id, xSpd * 2, ySpd * 2);
-    scr_hurt(other.id, 5); // do 5 damage to the player
 }
 </string>
           </argument>

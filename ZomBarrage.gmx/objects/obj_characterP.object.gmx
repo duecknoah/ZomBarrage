@@ -267,6 +267,8 @@ img_index += img_speed * global.timeScale;
 if (img_index &gt; img_number) {
     img_index = 0;
 }
+// Make image speed go off timescale
+image_speed = image_speed * global.timeScale;
 
 var bobHeight = 0.15; //def 0.15
 var movementAmt;
