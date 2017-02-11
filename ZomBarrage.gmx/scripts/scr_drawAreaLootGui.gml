@@ -12,7 +12,7 @@ for(var _i = 0; _i < array_length_1d(_area.inventory); _i ++) {
     
     if (_area.inventory[_i] != "") {
         draw_sprite_ext(spr_itemWeapon, 
-                        scr_WeaponToId(_area.inventory[_i]), 
+                        scr_WeaponNameToId(_area.inventory[_i]), 
                         _x + xoff, 
                         _y, 
                         _scale, 

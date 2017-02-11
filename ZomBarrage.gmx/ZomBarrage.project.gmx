@@ -191,6 +191,7 @@
       <script>scripts\scr_WeaponToId.gml</script>
       <script>scripts\scr_IdToWeapon.gml</script>
       <script>scripts\scr_WeaponNameToId.gml</script>
+      <script>scripts\scr_IdToWeaponName.gml</script>
       <script>scripts\scr_shootRocket.gml</script>
       <script>scripts\scr_createRocketExplosion.gml</script>
       <script>scripts\scr_createWeapon.gml</script>

@@ -13,15 +13,15 @@ var hasFoundWeapon = false;
 if (round(random(gunDropChance))) {
     // We add one to totalWeapons to not include fists (1 - totalWeapons is the range)
     // and global.totalWeapons already doesn't include fists
-    var _weaponType = scr_IdToWeapon(round(random_range(1, global.totalWeapons)));
+    var _weaponName = scr_IdToWeaponName(round(random_range(1, obj_weaponDB.totalWeapons)));
     var _ammo = round(random_range(ammoAmountDropMin, ammoAmountDropMax));
     
     // provide a specific amount of ammo for loot keys
-    if (_weaponType == "Loot Key") {
+    if (_weaponName == "Loot Key") {
         _ammo = lootKeyAmountDrop;
     }
     // Add weapon to area inventory
-    scr_areaAddWeapon(_area, _weaponType, _ammo);
+    scr_areaAddWeapon(_area, _weaponName, _ammo);
     hasFoundWeapon = true;
 }
 
