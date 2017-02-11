@@ -88,12 +88,23 @@ if (target != noone &amp;&amp; instance_exists(target)) {
             // this would prevent other zombies from colliding into this one on next navUpdate.
             path_start(path, stepSpd, 0, false);
             
-            // Calc next path pos
+            // Calc next path pos to claim that zone so other zombies don't run into it
             var _nextPoint = (1 / path_get_number(path)) * (path_position + 1);
             var _nextPointX = path_get_x(path, _nextPoint);
             var _nextPointY = path_get_y(path, _nextPoint);
-            mp_grid_add_cell(global.grid, _nextPointX div obj_navGrid.cell_width, 
-                                          _nextPointY div obj_navGrid.cell_height);
+            
+            // Make cell claims based on zombie size
+            switch (object_index) {
+                case obj_heavyZombie: // heavy zombie has a big hitbox, so we want to claim more zones
+                    mp_grid_add_rectangle(global.grid, _nextPointX - obj_navGrid.cell_width, 
+                                                       _nextPointY - obj_navGrid.cell_height, 
+                                                       _nextPointX + obj_navGrid.cell_width, 
+                                                       _nextPointY + obj_navGrid.cell_height);
+                break;
+                default: // default is one cell
+                    mp_grid_add_cell(global.grid, _nextPointX div obj_navGrid.cell_width, 
+                                                  _nextPointY div obj_navGrid.cell_height);
+            }
             //mp_grid_add_cell(global.grid, x div obj_navGrid.cell_width, y div obj_navGrid.cell_height);
             doBackupPathFinding = false;
         }

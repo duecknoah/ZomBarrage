@@ -402,12 +402,12 @@
     <timeline>timelines\tl_cutscene_beginning_intro</timeline>
   </timelines>
   <rooms name="rooms">
-    <room>rooms\mp_testRoom</room>
-    <room>rooms\rm_Menu</room>
     <rooms name="maps">
       <room>rooms\mp_town</room>
+      <room>rooms\mp_testRoom</room>
       <room>rooms\mp_the_beginning_home</room>
     </rooms>
+    <room>rooms\rm_Menu</room>
     <room>rooms\rm_shaderTesting</room>
   </rooms>
   <help>

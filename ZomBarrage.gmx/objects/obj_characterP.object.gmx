@@ -281,7 +281,7 @@ else if (object_index == obj_heavyZombie) {
     else {
         movementAmt = path_speed * 5;
     }
-    bobHeight = 0.5;
+    bobHeight = 0.25;
 }
 else {
    movementAmt = sqrt(sqr(abs(x - xprevious)) + sqr(abs(y - yprevious))); 

@@ -71,7 +71,7 @@ mp_grid_destroy(global.grid);
         </arguments>
       </action>
     </event>
-    <event eventtype="3" enumb="0">
+    <event eventtype="3" enumb="2">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -102,20 +102,13 @@ if (global.navUpdateRateTimer &lt; 0) {
     if (instance_exists(obj_collision)) {
         mp_grid_add_instances(global.grid, obj_collision, false);
     }
-    if (instance_exists(obj_zombieP)) {
-        mp_grid_add_instances(global.grid, obj_zombieP, false);
-    }
-    /*
-    if (instance_exists(obj_zombie)) {
-        mp_grid_add_instances(global.grid, obj_zombie, false);
-    }
-    if (instance_exists(obj_heavyZombie)) {
-        mp_grid_add_instances(global.grid, obj_bigZombie, false);
-    }
-    */
-    if (instance_exists(obj_civilian)) {
-        mp_grid_add_instances(global.grid, obj_civilian, false);
-    }  
+    // We used to use mp_grid_add_instances here for each zombie. However, in 
+    // obj_zombieP, the pathfinding we use there to avoid zombies from going inside
+    // each other is by adding cells where their next position will be rather than their
+    // current position. Doing this works because zombies are always moving, so what is the
+    // point of claiming their current position as taken.
+    // - This also prevents zombies with a hitbox bigger than a cell from not pathfinding properly
+    //   due to them getting stuck in their own current position cell.
 }
 else {
     global.navUpdateRateTimer --;
