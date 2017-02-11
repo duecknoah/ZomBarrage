@@ -24,8 +24,14 @@ void main()
 varying vec2 v_vTexcoord;
 varying vec4 v_vColour;
 
+uniform sampler2D s_maskMap;
+
 void main()
 {
-    gl_FragColor = v_vColour * texture2D( gm_BaseTexture, v_vTexcoord );
+    //vec4 colour = texture2D( gm_BaseTexture, v_vTexcoord ); // get color
+    //float mask = texture2D(s_maskMap, v_vTexcoord).a; // get mask
+    
+    //gl_FragColor = colour * vec4(1.0, 1.0, 1.0, mask);
+    gl_FragColor = v_vColour * texture2D(s_maskMap, v_vTexcoord);
 }
 

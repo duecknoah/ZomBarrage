@@ -21,6 +21,7 @@
       <sprite>sprites\spr_zombie</sprite>
       <sprite>sprites\spr_heavyZombieWalk</sprite>
       <sprite>sprites\spr_heavyZombieSwing</sprite>
+      <sprite>sprites\spr_heavyZombieThrow</sprite>
       <sprite>sprites\spr_zombieCrawler</sprite>
       <sprite>sprites\spr_zombieGore</sprite>
       <sprite>sprites\spr_zombieCollision</sprite>
@@ -52,6 +53,7 @@
       <sprite>sprites\spr_bloodPool</sprite>
       <sprite>sprites\spr_fire</sprite>
       <sprite>sprites\spr_fireSparkParticle</sprite>
+      <sprite>sprites\spr_thrownGround</sprite>
     </sprites>
     <sprites name="Gui">
       <sprite>sprites\spr_WaveBar</sprite>
@@ -194,6 +196,7 @@
       <script>scripts\scr_createWeapon.gml</script>
       <script>scripts\scr_createMolotovCocktail.gml</script>
       <script>scripts\scr_createFragGrenade.gml</script>
+      <script>scripts\scr_createThrownGround.gml</script>
     </scripts>
     <scripts name="Physics">
       <script>scripts\scr_isBeingPushed.gml</script>
@@ -320,6 +323,7 @@
         <object>objects\obj_bullet</object>
         <object>objects\obj_rocket</object>
         <object>objects\obj_molotovCocktail</object>
+        <object>objects\obj_thrownGround</object>
         <object>objects\obj_fragGrenade</object>
       </objects>
       <objects name="Vehicles">

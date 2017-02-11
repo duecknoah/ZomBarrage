@@ -31,6 +31,7 @@ maxHp = global.currentWave + 30;
 hp = maxHp;
 movementSpd = 0.25;
 hasPunched = false; // turns true to prevent many scr_hurts during punch, becomes false after punch animation ends
+hasThrown = false; // turns true to prevent many thrown objects during throw, becomes false after throw animation ends
 state = "default";
 image_index = 0;
 image_speed = 0;
@@ -121,10 +122,19 @@ switch (state) {
         if (target == noone) {
             state = "default";
         }
+        
         if (distance_to_point(target.x, target.y) &lt; 25) {
-            // throw punch
+            // punch
             state = "punch";
             image_index = 0;
+        }
+        else if (distance_to_point(target.x, target.y) &lt; 256) {
+            // throw material from ground at player
+            var throwChance = 0.005; // % chance every step of throwing
+            if (random(1) &gt;= (1 - throwChance)) {
+                state = "throw";
+                image_index = 0;
+            }
         }
     break;
     case "punch":
@@ -145,6 +155,17 @@ switch (state) {
             hasPunched = true;
         }
         sprite_index = spr_heavyZombieSwing;
+        image_speed = 0.025 * global.timeScale;
+    break;
+    case "throw":
+        // Throwing ground at target
+        path_speed = 0;
+        if (image_index &gt; 3.9 &amp;&amp; !hasThrown) {
+            // throw
+            scr_createThrownGround(x, y, point_direction(x, y, target.x, target.y), 256, id);
+            hasThrown = true;
+        }
+        sprite_index = spr_heavyZombieThrow;
         image_speed = 0.025 * global.timeScale;
     break;
 }
@@ -178,6 +199,10 @@ switch (state) {
         state = "default";
         hasPunched = false; // reset
     break;
+    case "throw":
+        // Throw ground at target
+        state = "default";
+        hasThrown = false; // reset
 }
 </string>
           </argument>
@@ -201,7 +226,7 @@ switch (state) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (state == "punch") {
+            <string>if (state == "punch" || state == "throw") {
     //rotation += ((point_direction(x, y, target.x, target.y) - 90) - rotation) * 0.25;
     rotation = point_direction(x, y, target.x, target.y) - 90;
 }
