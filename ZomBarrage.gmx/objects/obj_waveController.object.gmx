@@ -122,6 +122,11 @@ if (!global.allWavesDone) {
                 // Check if all waves have been completed
                 if (global.currentWave &gt;= global.amtOfWaves) {
                     global.allWavesDone = true;
+                    scr_addDialogue("Looks like the town is finally clear.", spr_daveSpeaker, 0);
+                    scr_addDialogue("Execellent work Dave! Now the families in the nearby cities may finally be able to move back in to their hometown. Now I'm hearing a lot of activity over in the southwest forest, you think you could check that out?", spr_randySpeaker, 0);
+                    scr_addDialogue("Awesome, will do.", spr_daveSpeaker, 0);
+                    scr_addDialogue("Cool, because I'm tired of hearing complaints about that area sooo...", spr_randySpeaker, 0);
+                    scr_addDialogue("Yea yea, I'm on it..", spr_daveSpeaker, 0); 
                 }
             }
         }

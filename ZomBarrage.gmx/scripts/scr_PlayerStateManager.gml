@@ -32,6 +32,8 @@ if (!obj_guiController.showUpgradeScreen) {
         case "shoot " + "M16":
             var dirSpread = (rotation + 90) + random_range(-10 * shotAcc, 10 * shotAcc);
             scr_shootBullet(x, y, dirSpread, 0.625 + bulletDmg, 0.1, 500, 400, instance_id);
+            //var chosenSound = choose(snd_m16_shot_1, snd_m16_shot_2, snd_m16_shot_3);
+            //audio_play_sound_at(chosenSound, 0, 0, 0, 100, 300, 1, false, 3);
             draw_sprite_ext(spr_PlayerM16, 0, x, y, drawScale, drawScale, rotation, c_white, 1);
         break;
         case "shoot " + "Rocket Launcher":

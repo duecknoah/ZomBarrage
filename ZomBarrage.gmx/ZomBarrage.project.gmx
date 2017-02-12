@@ -6,6 +6,9 @@
   <NewExtensions/>
   <sounds name="sound">
     <sound>sound\snd_env_outdoor_forest_nearby_city</sound>
+    <sound>sound\snd_m16_shot_1</sound>
+    <sound>sound\snd_m16_shot_2</sound>
+    <sound>sound\snd_m16_shot_3</sound>
   </sounds>
   <sprites name="sprites">
     <sprites name="Labels">
@@ -409,10 +412,10 @@
   <rooms name="rooms">
     <rooms name="maps">
       <room>rooms\mp_town</room>
+      <room>rooms\rm_Menu</room>
       <room>rooms\mp_testRoom</room>
       <room>rooms\mp_the_beginning_home</room>
     </rooms>
-    <room>rooms\rm_Menu</room>
     <room>rooms\rm_shaderTesting</room>
   </rooms>
   <help>

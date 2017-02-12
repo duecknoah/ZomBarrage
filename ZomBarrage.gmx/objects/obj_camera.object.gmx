@@ -120,6 +120,9 @@ if (zoom &gt; 1.5) {
 }
 x = view_xview[0];
 y = view_yview[0];
+
+// Audio
+//audio_listener_position(x + (view_wview[0] / 2), y + (view_hview[0] / 2), 0);
 </string>
           </argument>
         </arguments>

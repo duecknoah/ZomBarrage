@@ -105,7 +105,7 @@ consoleHelpDB = ds_list_create(); // console help list dataBase
 consoleLineOffset = 0; // 0 - n, where n is the last line in the console outputConsoleString
                        // scrolling affects this number when in the console
 scr_initConsoleDB();
-
+scr_initCutscene();
 scr_consoleOutPrintln("Console: Type 'help' for help.");
 scr_consoleOutPrintln("Press 'TAB' to close");
 </string>
@@ -291,7 +291,7 @@ if (showUpgradeButton) {
 
 // Draw Pause Button
 if (showPauseButton) {
-    xx = centerX + (centerX / 2) + (sprite_get_width(spr_upgradeBar) * guiScale / 2);
+    xx = centerX + (centerX / 3);
     yy = 0;
     if (scr_buttonGuiSpriteText(xx, yy, spr_upgradeBar, guiScale, "PAUSE", c_white, pauseButtonAlpha) == 2
     || keyboard_check_pressed(vk_escape)) {
