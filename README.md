@@ -15,6 +15,6 @@ The game works with a wave-type system where zombies will spawn in 'waves'. Each
 
 This a clone of the Cut Off Game Project when the Cut Off Game Project was in early development. However, in this version, I decided to branch off from where I was in the Cut Off Game Project and change it into a wave survivor game. Rather than being a story-driven game, I want to start off simple and possibly take the assets from this one and implement it into the Cut Off Game in the future.
 
-### Just gonna sneak this links in:
+### Just gonna sneak these links in :)
 - Gamejolt: http://bit.ly/2lyCk9m
 - Youtube: http://bit.ly/2g5GEZz
