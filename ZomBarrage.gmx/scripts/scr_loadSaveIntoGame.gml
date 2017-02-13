@@ -34,11 +34,6 @@ if (ini_section_exists("data")) {
             obj_guiController.outputConsoleString = "";
             obj_guiController.showConsole = false;
             obj_guiController.showPause = false;
-            // Particle index
-            with (obj_particleIndex) {
-                instance_destroy();
-            }
-            instance_create(0, 0, obj_particleIndex);
             
         }         
         return true; // success

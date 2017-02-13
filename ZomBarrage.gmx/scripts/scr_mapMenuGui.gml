@@ -41,7 +41,7 @@ var _lockY = _y + (25 * menuScale); // the x coordinate of the lock / unlock sym
 // Back arrow button
 if (scr_buttonGuiSpriteExt(_backArrowMapX, _backArrowMapY, spr_arrowButton, -menuScale, menuScale) == 2) {
     if (mapViewed == 0) {
-        currentMenu = "Map-Main";
+        currentMenu = "LevelSelect-Start";
     }
     else {
         mapViewed --;
@@ -64,7 +64,7 @@ scr_buttonGuiSprite(_difficultyX, _difficultyY, spr_difficultyButton, menuScale)
 // Survive Button
 if (scr_buttonGuiSprite(_surviveX, _surviveY, spr_surviveButton, menuScale) == 2) {
     // Start Game transition
-    currentMenu = "Map-Game";
+    currentMenu = "LevelSelect-Game";
 }
 
 draw_text_ext(_mapDescX, _mapDescY, _mapDesc, -1, _mapDescW);

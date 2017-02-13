@@ -115,6 +115,7 @@ if (string_pos("Main", currentMenu) != 0) {
 
 // Start Menu
 if (string_pos("Start", currentMenu) != 0) {
+    /*
     var _xOffset = room_width;
     var _yOffset = 0;
     var _startX = drawMenuX + (room_width / 2) - ((sprite_get_width(spr_buttonMenu) * menuScale) / 2) + _xOffset;
@@ -136,10 +137,44 @@ if (string_pos("Start", currentMenu) != 0) {
     if (scr_buttonGuiSpriteText(_startX, _startY, spr_buttonMenu, menuScale, "Continue", c_white) == 2) {
         currentMenu = "Start-SaveContinue";
     }
+    */
+    var _xOffset = room_width;
+    var _yOffset = 0;
+    var _startX = drawMenuX + (room_width / 2) - ((sprite_get_width(spr_buttonMenu) * menuScale) / 2) + _xOffset;
+    var _startY = drawMenuY + (room_height / 2) - ((sprite_get_height(spr_buttonMenu) * menuScale) / 2) + _yOffset;
+    
+    // Back button
+    var _backX = drawMenuX + _xOffset + (sprite_get_width(spr_arrowButton) * menuScale) + 128;
+    var _backY = drawMenuY + _yOffset + (room_height / 2) - ((sprite_get_height(spr_arrowButton) * menuScale) / 2);
+    if (scr_buttonGuiSpriteExt(_backX, _backY, spr_arrowButton, -menuScale, menuScale) == 2) {
+        currentMenu = "Start-Main";
+    }
+    
+    // Show save buttons, if a save is used, show it faded and unclickable, else don't
+    for (var i=0; i&lt;3; i++) {
+        if (obj_save.saveUsed[i]) { // if save is used
+            if (scr_buttonGuiSpriteText(_startX, _startY, spr_buttonMenu, menuScale, "Save " + string(i) + " (DATA)", c_green) == 2) {
+                obj_save.saveNum = i; // make i the current save being used in game
+                obj_save.saveUsed[i] = true; // mark as used
+                currentMenu = "Start-LevelSelect";
+            } 
+        }
+        else { // if save is not used
+            if (scr_buttonGuiSpriteText(_startX, _startY, spr_buttonMenu, menuScale, "Save " + string(i) + " (FREE)", c_white) == 2) {
+                    scr_createSave(i);
+                    obj_save.saveNum = i; // make i the current save being used in game
+                    obj_save.saveUsed[i] = true; // save is now used
+                    currentMenu = "Start-LevelSelect";
+            } 
+        }
+        _startY += 128;
+    }
+    
 }
 
 // SaveNew Menu
 if (string_pos("SaveNew", currentMenu) != 0) {
+    /*
     var _xOffset = room_width * 2;
     var _yOffset = 0;
     var _startX = drawMenuX + (room_width / 2) - ((sprite_get_width(spr_buttonMenu) * menuScale) / 2) + _xOffset;
@@ -164,16 +199,18 @@ if (string_pos("SaveNew", currentMenu) != 0) {
                     scr_createSave(i);
                     obj_save.saveNum = i; // make i the current save being used in game
                     obj_save.saveUsed[i] = true; // save is now used
-                    currentMenu = "SaveNew-GameBeginNew";
+                    currentMenu = "SaveNew-LevelSelect";
                     break;
             } 
         }
         _startY += 128;
     }
+    */
 }
 
 // SaveContinue Menu
 if (string_pos("SaveContinue", currentMenu) != 0) {
+    /*
     var _xOffset = room_width * 2;
     var _yOffset = 0;
     var _startX = drawMenuX + (room_width / 2) - ((sprite_get_width(spr_buttonMenu) * menuScale) / 2) + _xOffset;
@@ -202,11 +239,12 @@ if (string_pos("SaveContinue", currentMenu) != 0) {
         }
         _startY += 128;
     }
+    */
 }
 
 // LevelSelect Menu
 if (string_pos("LevelSelect", currentMenu) != 0) {
-   var _xOffset = room_width;
+   var _xOffset = room_width * 2;
    var _yOffset = 0;
    var _mapGuiX = drawMenuX + (room_width / 2) - ((sprite_get_width(spr_mapMenuGui) * menuScale) / 2) + _xOffset;
    var _mapGuiY = drawMenuY + (room_height / 2) - ((sprite_get_height(spr_mapMenuGui) * menuScale) / 2) + _yOffset;
@@ -218,15 +256,7 @@ if (string_pos("LevelSelect", currentMenu) != 0) {
     map[mapViewed], 
     mapImage[mapViewed], 
     mapDesc[mapViewed], 
-    menuScale); 
-   //draw_sprite_ext(spr_mapMenuGui, 0, _mapGuiX, _mapGuiY, menuScale, menuScale, 0, c_white, 1);
-   //draw_sprite_ext(spr_mapTown, 0, _mapImageX, _mapImageY, menuScale / 4, menuScale / 4, 0, c_white, 1);
-}
-
-// Loading new game
-if (currentMenu == "GameBeginNew") {
-    obj_save.doLoadSaveIntoGame = false;
-    room_goto(mp_the_beginning_home); // the first level
+    menuScale);
 }
 
 // Loading a pre-existing game
@@ -237,28 +267,19 @@ if (currentMenu == "GameBegin") {
 
 // ************* Transitions *************
 
-if (currentMenu == "Main-Start") {
-    scr_menuMoveTransition("Start", 1, 0);
-}
-
-if (currentMenu == "Start-Main") {
-    scr_menuMoveTransition("Main", 0, 0);
-}
-
-if (currentMenu == "Start-SaveNew") {
-    scr_menuMoveTransition("SaveNew", 2, 0);
-}
-
-if (currentMenu == "SaveNew-Start") {
-    scr_menuMoveTransition("Start", 1, 0);
-}
-
-if (currentMenu == "Start-SaveContinue") {
-    scr_menuMoveTransition("SaveContinue", 2, 0);
-}
-
-if (currentMenu == "SaveContinue-Start") {
-    scr_menuMoveTransition("Start", 1, 0);
+switch (currentMenu) {
+    case "Main-Start":
+        scr_menuMoveTransition("Start", 1, 0);
+    break;
+    case "Start-Main":
+        scr_menuMoveTransition("Main", 0, 0);
+    break;
+    case "Start-LevelSelect":
+        scr_menuMoveTransition("LevelSelect", 2, 0);
+    break;
+    case "LevelSelect-Start":
+        scr_menuMoveTransition("Start", 1, 0);
+    break;
 }
 
 if (currentMenu == "SaveNew-GameBeginNew") {
@@ -272,20 +293,8 @@ if (currentMenu == "SaveContinue-GameBegin") {
     scr_menuMoveTransition("GameBegin", 0, 0);
 }
 
-if (currentMenu == "Map-Game") {
-    var _finalScale = 128;
-    var _xOff = sprite_get_width(spr_PlayerFists) / 2 + (room_width / 2);
-    var _yOff = sprite_get_height(spr_PlayerFists) / 2 + (room_height / 2);
-    var _playerAlpha = menuScale / _finalScale;
-    
-    // Zoom into sprite of player
-    menuScale += (_finalScale - menuScale) * 0.10;
-    
-    if (menuScale &gt; _finalScale - 1) {
-        room_goto(map[mapViewed]);
-    }
-        
-    draw_sprite_ext(spr_PlayerFists, 0, _xOff, _yOff, menuScale * 1.25, menuScale * 1.25, 0, c_white, _playerAlpha);
+if (currentMenu == "LevelSelect-Game") {
+    room_goto(map[mapViewed]);
 }
 
 // Vignette

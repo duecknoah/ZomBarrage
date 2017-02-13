@@ -153,6 +153,7 @@
   <paths name="paths">
     <path>paths\path_cutscene_beginning_dad1</path>
     <path>paths\path_truck_mp_town</path>
+    <path>paths\path2</path>
   </paths>
   <scripts name="scripts">
     <script>scripts\scr_findNearestFreeCell.gml</script>
@@ -411,8 +412,8 @@
   </timelines>
   <rooms name="rooms">
     <rooms name="maps">
-      <room>rooms\mp_town</room>
       <room>rooms\rm_Menu</room>
+      <room>rooms\mp_town</room>
       <room>rooms\mp_testRoom</room>
       <room>rooms\mp_the_beginning_home</room>
     </rooms>
