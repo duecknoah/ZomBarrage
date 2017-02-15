@@ -31,6 +31,7 @@ maxVehicleSpd = 1; // max vehicle speed (per step)
 vehicleAccel = 0.025; // acceleration spd per step
 vehicleSpd = 0; // speed per step
 path = noone; // no path by default
+collisionInst = instance_create(x, y, obj_collision);
 </string>
           </argument>
         </arguments>
@@ -76,6 +77,16 @@ if (path_exists(path)) {
 }
 else {
     vehicleSpd = 0;
+}
+
+// Update collision
+with (collisionInst) {
+    mask_index = spr_miniTruck;
+    x = other.x;
+    y = other.y;
+    image_xscale = other.image_xscale;
+    image_yscale = other.image_yscale;
+    image_angle = other.image_angle;
 }
 </string>
           </argument>
