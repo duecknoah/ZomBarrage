@@ -30,6 +30,7 @@ weapon = ds_list_create();  // Holds all weapon data in game based off weapons.j
 
 // If there is no json file there, create it
 if (!file_exists("weapons.json")) {
+    show_message("NOPE");
     var initWeaponsFile = file_text_open_write("weapons.json");
     file_text_write_string(initWeaponsFile, 
     '[

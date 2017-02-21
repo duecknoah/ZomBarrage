@@ -61,10 +61,7 @@ if (round(random(lootKeyChance)) == 0) {
     scr_createWeapon(x, y, scr_WeaponNameToId("Loot Key"), 1);
 }
 
-with (instance_create(x, y, obj_zombieGore)) {
-    partAmt = round(random_range(4, 8));
-}
-
+scr_createZombieGoreBurst(x, y, round(random_range(4, 8)));
 scr_createZombieBodyAt(x, y, rotation + 90);
 
 var points = 1;

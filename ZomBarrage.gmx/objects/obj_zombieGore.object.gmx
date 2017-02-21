@@ -26,115 +26,12 @@
           <argument>
             <kind>1</kind>
             <string>/// Init vars
-partAmt = 0;
-init = true;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="1" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// Destroy emitter
-if (part_emitter_exists(obj_particleIndex.zombieGore, zombieGoreEmitter)) {
-    part_emitter_destroy(obj_particleIndex.zombieGore, zombieGoreEmitter);
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="2" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// Destroy self
-instance_destroy();
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="3" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// Create gore / init
+zombieGoreEmitter = part_emitter_create(obj_particleIndex.zombieGore);
 
-if (init) {
-    zombieGoreEmitter = part_emitter_create(obj_particleIndex.zombieGore);
-    part_emitter_region(obj_particleIndex.zombieGore, zombieGoreEmitter, x - 5, x + 5, y - 5, y + 5, ps_shape_ellipse, ps_distr_linear); 
-    part_emitter_burst(obj_particleIndex.zombieGore, zombieGoreEmitter, obj_particleIndex.zombieGore, partAmt);
-    
-    // Time until death of object
-    alarm[0] = 35 * room_speed;
-    init = false;
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="7" enumb="5">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// Run destroy event to remove from mem
-instance_destroy();
+//with (obj_zombieGore) {
+//  part_emitter_region(obj_particleIndex.zombieGore, zombieGoreEmitter, x - 5, x + 5, y - 5, y + 5, ps_shape_ellipse, ps_distr_linear); 
+//  part_emitter_burst(obj_particleIndex.zombieGore, zombieGoreEmitter, obj_particleIndex.zombieGore, partAmt);
+//}
 </string>
           </argument>
         </arguments>

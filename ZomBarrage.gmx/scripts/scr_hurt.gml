@@ -4,12 +4,6 @@
 _id = argument0;
 amt = argument1;
 
-var bloodInst;
-var goreInst;
-
-bloodInst = instance_create(x, y, obj_bloodSpurt);
-goreInst = instance_create(x, y, obj_zombieGore);
-
 with (_id) {
     hp -= other.amt;
     isHurt = true;
@@ -32,10 +26,5 @@ with (_id) {
     }
 }
 
-with (bloodInst) {
-    partAmt = other.amt;
-}
-
-with (goreInst) {
-    partAmt = ceil(clamp(other.amt / 10, 0, 8));
-}
+scr_createBloodSpurtBurst(id.x, id.y, amt);
+scr_createZombieGoreBurst(id.x, id.y, ceil(clamp(amt / 10, 0, 8)));

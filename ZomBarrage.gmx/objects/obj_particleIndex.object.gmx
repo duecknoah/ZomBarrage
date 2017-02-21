@@ -29,7 +29,21 @@
 /* This index is important as creating a new particle system for every object is costly,
  * plus, that means each object associated with their particle system must not be destroyed
  * as the particle system somehow gets destroyed permanently and globally.
+ *
+ * Particle Notes:
+ * Static: Static particle objects are objects who have a single emitter for
+ *         an entire particle system. They only need to be created
+ *         at the start of the room and the game will handle the rest
+ *         It is moved around manually and set to
+ *         burst to use it. This is much more efficient than dynamic particle systems
+ *         as only one instance and one emitter is needed for a whole particle system.
+ * Dynamic: dynamic particles are particles that have an emitter for each instance
+ *          of themselves. They are used when special events are used for it that
+ *          cannot be done just with a single particle emitter. This is
+ *          less efficient than static particle systems.
 */
+
+
 show_debug_message(object_get_name(object_index) + " created");
 // Rocket Explosion
     rocketExplosion = part_system_create();
@@ -53,6 +67,8 @@ show_debug_message(object_get_name(object_index) + " created");
     part_type_alpha2(bloodSpurt, 1, 0);
     part_type_direction(bloodSpurt, 0, 360, 0, 0);
     part_type_speed(bloodSpurt, 1, 2, -0.05, 0);
+    // Create static particle object
+    instance_create(x, y, obj_bloodSpurt);
 // Zombie Gore
     zombieGore = part_system_create();
     zombieGore = part_type_create();
@@ -65,6 +81,8 @@ show_debug_message(object_get_name(object_index) + " created");
     part_type_alpha2(zombieGore, 1, 0);
     part_type_direction(zombieGore, 0, 360, 0, 0);
     part_type_speed(zombieGore, 1, 2, -0.05, 0);
+    // Create static particle object
+    instance_create(x, y, obj_zombieGore);
 // Entity on Fire particle (entity on fire)
     fireSpark = part_system_create();
     fireSpark = part_type_create();
@@ -75,6 +93,15 @@ show_debug_message(object_get_name(object_index) + " created");
     part_type_direction(fireSpark, 45, 180 - 45, 0, 0);
     part_type_speed(fireSpark, 0, 0.25, 0.05, 0);
     part_type_sprite(fireSpark, spr_fireSparkParticle, 0, 0, false);
+// Test Particle
+    testPart = part_system_create();
+    testPart = part_type_create();
+    testPartEmitter = part_emitter_create(testPart);
+    part_system_depth(testPart, -1);
+    part_type_sprite(testPart, spr_collision, 0, 0, false);
+    part_type_direction(testPart, 45, 180 - 45, 0, 0);
+    part_type_life(testPart, room_speed, room_speed * 1.5);
+    part_emitter_stream(testPart, testPartEmitter, testPart, 1);
 </string>
           </argument>
         </arguments>
@@ -116,12 +143,40 @@ if (part_system_exists(fireSpark)) {
     part_emitter_destroy_all(fireSpark);
     part_system_destroy(fireSpark);
 }
+
+if (part_system_exists(testPart)) {
+    part_emitter_destroy_all(testPart);
+    part_system_destroy(testPart);
+}
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="7" enumb="62">
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//part_emitter_region(testPart, testPartEmitter, view_xview[0], view_xview[0] + view_wview[0], view_yview[0], view_yview[0] + view_hview[0], ps_shape_rectangle, ps_distr_linear);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="5">
       <action>
         <libid>1</libid>
         <id>603</id>

@@ -244,8 +244,8 @@ if (!isDead &amp;&amp; !obj_guiController.showConsole) {
         // Action Controls
         // if not looting, allow changing states
         if (state != "looting" &amp;&amp; state != "loot choose") {
-            switch(inventory[selectedSlot]) {
-                case "fists":
+            switch(scr_WeaponNameToId(inventory[selectedSlot])) {
+                case 0: // fists
                    if (mouse_check_button_pressed(mb_left)) {
                         // If not already animating punch / punching
                         if (img_index == 0) {
@@ -264,42 +264,42 @@ if (!isDead &amp;&amp; !obj_guiController.showConsole) {
                         }
                    }
                 break;
-                case "Wimps Pistol":
+                case 1: //"Wimps Pistol"
                    if (mouse_check_button_pressed(mb_left)
                         &amp;&amp; shootDelay[selectedSlot] &lt;= 0) {
                         state = "shoot Wimps Pistol";
                    }
                    else state = "Wimps Pistol";
                 break;
-                case "M16":
+                case 2: //"M16"
                     if (mouse_check_button(mb_left)
                         &amp;&amp; shootDelay[selectedSlot] &lt;= 0) {
                         state = "shoot M16";
                     }
                     else state = "M16";
                 break;
-                case "Rocket Launcher":
+                case 3: //"Rocket Launcher"
                     if (mouse_check_button_pressed(mb_left)
                         &amp;&amp; shootDelay[selectedSlot] &lt;= 0) {
                         state = "shoot Rocket Launcher";
                     }
                     else state = "Rocket Launcher";
                 break; 
-                case "Flashlight":
+                case 4: //"Flashlight"
                     if (mouse_check_button_pressed(mb_left)
                         &amp;&amp; shootDelay[selectedSlot] &lt;= 0) {
                         state = "toggle Flashlight";
                     }
                     else state = "Flashlight";
                 break;
-                case "Loot Key":
+                case 5: //"Loot Key"
                     if (mouse_check_button_pressed(mb_left)
                         &amp;&amp; shootDelay[selectedSlot] &lt;= 0) {
                         state = "Loot Key use";
                     }
                     else state = "Loot Key";
                 break;
-                case "Sniper Rifle":
+                case 6: //"Sniper Rifle"
                     // Shoot with left click, different states if scoped or not
                     if (mouse_check_button_pressed(mb_left)) {
                         if (state == "Sniper Rifle scoped") {
@@ -316,7 +316,7 @@ if (!isDead &amp;&amp; !obj_guiController.showConsole) {
                     // Toggle scope with right click
                     if (mouse_check_button_pressed(mb_right)) {
                         if (state == "Sniper Rifle scoped") {
-                            state = "Sniper Rifle";
+                            state = "Sniper Rifle"; //"Sniper Rifle"
                             // Disable scope light and ADS
                             with (sniperScopeLight) {
                                 radius = 0;
@@ -333,7 +333,7 @@ if (!isDead &amp;&amp; !obj_guiController.showConsole) {
                         }
                     }
                 break;
-                case "Molotov Cocktail":
+                case 7: //"Molotov Cocktail"
                     // If clicked and player still has more ammo
                     if (mouse_check_button_pressed(mb_left)
                         &amp;&amp; inventoryAmmo[selectedSlot] &gt; 0
@@ -341,7 +341,7 @@ if (!isDead &amp;&amp; !obj_guiController.showConsole) {
                         state = "throw Molotov Cocktail";
                     }
                 break;
-                case "Frag Grenade":
+                case 8: //"Frag Grenade"
                     // If clicked and player still has more ammo
                     if (mouse_check_button_pressed(mb_left)
                         &amp;&amp; inventoryAmmo[selectedSlot] &gt; 0
@@ -349,7 +349,7 @@ if (!isDead &amp;&amp; !obj_guiController.showConsole) {
                         state = "throw Frag Grenade";
                     }
                 break;
-                case "Iron Sword":
+                case 9: //"Iron Sword"
                     // If clicked and not currently animating swing, allow swinging sword
                     if (mouse_check_button_pressed(mb_left) 
                         &amp;&amp; img_index == 0
@@ -361,7 +361,7 @@ if (!isDead &amp;&amp; !obj_guiController.showConsole) {
                         shootDelay[selectedSlot] = (img_number * img_index) / room_speed;
                     }
                 break;
-                case "Chainsaw":
+                case 10: //"Chainsaw"
                     // If mouse pressed and is cooled-down after use, startup chainsaw blades
                     if (mouse_check_button_pressed(mb_left)
                         &amp;&amp; shootDelay[selectedSlot] &lt;= 0) {
@@ -391,7 +391,7 @@ if (!isDead &amp;&amp; !obj_guiController.showConsole) {
         
         // Drop selected weapon
         if (keyboard_check_pressed(ord("Q"))) {
-            if (inventory[selectedSlot] == "Flashlight") {
+            if (inventory[selectedSlot] == scr_IdToWeaponName(4)) { // if holding Flashlight
                 flashLightOn = false; // disable if player had flashlight on
             }
             // If holding an actual weapon

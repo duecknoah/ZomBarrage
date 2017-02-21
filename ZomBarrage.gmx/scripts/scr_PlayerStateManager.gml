@@ -24,24 +24,24 @@ if (!obj_guiController.showUpgradeScreen) {
             }
             draw_sprite_ext(spr_index, img_index, x, y, drawScale, drawScale, rotation, c_white, 1);
         break;
-        case "shoot " + "Wimps Pistol":
+        case "shoot Wimps Pistol": // shoot Wimps Pistol
             var dirSpread = (rotation + 90) + random_range(-7 * shotAcc, 7 * shotAcc);
             scr_shootBullet(x, y, dirSpread, 1 + bulletDmg, 0.15, 400, 425, instance_id);
             draw_sprite_ext(spr_PlayerWimpPistol, 0, x, y, drawScale, drawScale, rotation, c_white, 1);
         break;
-        case "shoot " + "M16":
+        case "shoot M16": // shoot M16
             var dirSpread = (rotation + 90) + random_range(-10 * shotAcc, 10 * shotAcc);
             scr_shootBullet(x, y, dirSpread, 0.625 + bulletDmg, 0.1, 500, 400, instance_id);
             //var chosenSound = choose(snd_m16_shot_1, snd_m16_shot_2, snd_m16_shot_3);
             //audio_play_sound_at(chosenSound, 0, 0, 0, 100, 300, 1, false, 3);
             draw_sprite_ext(spr_PlayerM16, 0, x, y, drawScale, drawScale, rotation, c_white, 1);
         break;
-        case "shoot " + "Rocket Launcher":
+        case "shoot Rocket Launcher": // shoot Rocket Launcher
             var dirSpread = (rotation + 90) + random_range(-5 * shotAcc, 5 * shotAcc);
             scr_shootRocket(x, y, dirSpread, 50 + exploDmg, 2, 0.1, instance_id);
             draw_sprite_ext(spr_PlayerRocketLauncher, 0, x, y, drawScale, drawScale, rotation, c_white, 1);
         break;
-        case "toggle Flashlight":
+        case "toggle Flashlight": // toggle Flashlight
             if (flashLightOn) {
                 flashLightOn = false;
             }
@@ -50,7 +50,7 @@ if (!obj_guiController.showUpgradeScreen) {
             }
             draw_sprite_ext(spr_PlayerFlashlight, 0, x, y, drawScale, drawScale, rotation, c_white, 1);
         break;
-        case "Loot Key use":
+        case "Loot Key use": // Loot Key use
             draw_sprite_ext(spr_PlayerFists1, 0, x, y, drawScale, drawScale, rotation, c_white, 1);
             // If selecting loot area, then allow use
             if (place_meeting(mouse_x, mouse_y, obj_lootArea)) {
@@ -88,7 +88,7 @@ if (!obj_guiController.showUpgradeScreen) {
         // After looting, the player can choose which weapons they want to take
         // NOTE: gui is drawn in obj_guiController draw GUI event
         break;
-        case "Sniper Rifle scoped":
+        case "Sniper Rifle scoped": // Sniper Rifle scoped
             draw_sprite_ext(spr_PlayerSniperRifle, 0, x, y, drawScale, drawScale, rotation, c_white, 1);
             with (sniperScopeLight) {
                 x = mouse_x;
@@ -99,7 +99,7 @@ if (!obj_guiController.showUpgradeScreen) {
             //application_surface
            // draw_surface(application_surface, mouse_x, mouse_y);
         break;
-        case "Sniper Rifle scoped shoot":
+        case "Sniper Rifle scoped shoot": // Sniper Rifle scoped shoot
             draw_sprite_ext(spr_PlayerSniperRifle, 0, x, y, drawScale, drawScale, rotation, c_white, 1);
             var dirSpread = (rotation + 90) + random_range(-2 * shotAcc, 2 * shotAcc); // have a narrow spread
             scr_shootBullet(x, y, dirSpread, 40 + bulletDmg, 1, 400, 700, instance_id);
@@ -107,15 +107,15 @@ if (!obj_guiController.showUpgradeScreen) {
                 x = mouse_x;
                 y = mouse_y;
             }
-            state = "Sniper Rifle scoped"; // stop the shooting
+            state = "Sniper Rifle scoped"; // "Sniper Rifle scoped" stop the shooting
         break;
-        case "Sniper Rifle unscoped shoot":
+        case "Sniper Rifle unscoped shoot": // Sniper Rifle unscoped shoot
             draw_sprite_ext(spr_PlayerSniperRifle, 0, x, y, drawScale, drawScale, rotation, c_white, 1);
             var dirSpread = (rotation + 90) + random_range(-6 * shotAcc, 6 * shotAcc); // have a wider spread (when unscoped)
             scr_shootBullet(x, y, dirSpread, 40 + bulletDmg, 1, 400, 700, instance_id);
-            state = "Sniper Rifle" // stop the shooting
+            state = "Sniper Rifle"; // Sniper Rifle
         break;
-        case "throw Molotov Cocktail":
+        case "throw Molotov Cocktail": // throw Molotov Cocktail
             draw_sprite_ext(spr_PlayerMolotovCocktail, 1, x, y, drawScale, drawScale, rotation, c_white, 1);
             var _throwDist = 128;
             var _dir = rotation + 90;
@@ -129,9 +129,9 @@ if (!obj_guiController.showUpgradeScreen) {
                 inventory[selectedSlot] = "fists";
             }
             shootDelay[selectedSlot] = 1.5; // 1 second delay
-            state = "Molotov Cocktail";
+            state = "Molotov Cocktail"; // Molotov Cocktail
         break;
-        case "throw Frag Grenade":
+        case "throw Frag Grenade": // Throw Frag Grenade
             draw_sprite_ext(spr_PlayerFragGrenade, 1, x, y, drawScale, drawScale, rotation, c_white, 1);
             var _throwDist = 128;
             var _dir = rotation + 90;
@@ -145,10 +145,10 @@ if (!obj_guiController.showUpgradeScreen) {
                 inventory[selectedSlot] = "fists";
             }
             // Go back to normal state of holding frag grenade
-            state = "Frag Grenade";
+            state = "Frag Grenade"; // Frag Grenade
             shootDelay[selectedSlot] = 1; // 1 second delay
         break;
-        case "swing Iron Sword":
+        case "swing Iron Sword": // swing Iron Sword
             // Once done animating sword, return to default state
             // show_message(string(image_index) + " " + string(image_number) + " " + string(sprite_get_number(spr_PlayerFists)) + " " + string(sprite_index));
             // If on frame where player swung sword, create hurt radius
@@ -167,7 +167,7 @@ if (!obj_guiController.showUpgradeScreen) {
             }
             draw_sprite_ext(spr_PlayerIronSword, img_index, x, y, drawScale, drawScale, rotation, c_white, 1);
         break;
-        case "run Chainsaw":
+        case "run Chainsaw": // run Chainsaw
             if (inventoryAmmo[selectedSlot] > 0) {
                 // Do constant amounts of small damage
                 var _rotOff = -15;
@@ -189,23 +189,23 @@ if (!obj_guiController.showUpgradeScreen) {
         break;
         default:
         // if no special state, show player holding selected item
-            switch(obj_player.inventory[selectedSlot]) {
-                case "fists": 
+            switch(scr_WeaponNameToId(obj_player.inventory[selectedSlot])) {
+                case 0: // fists
                     draw_sprite_ext(spr_index, 0, x, y, drawScale, drawScale, rotation, c_white, 1);
                 break;
-                case "Wimps Pistol":
+                case 1: //"Wimps Pistol"
                      draw_sprite_ext(spr_PlayerWimpPistol, 0, x, y, drawScale, drawScale, rotation, c_white, 1);
                 break;
-                case "M16":
+                case 2: //"M16"
                      draw_sprite_ext(spr_PlayerM16, 0, x, y, drawScale, drawScale, rotation, c_white, 1);
                 break;
-                case "Rocket Launcher":
+                case 3: //"Rocket Launcher"
                       draw_sprite_ext(spr_PlayerRocketLauncher, 0, x, y, drawScale, drawScale, rotation, c_white, 1);
                 break;
-                case "Flashlight":
+                case 4: //"Flashlight"
                     draw_sprite_ext(spr_PlayerFlashlight, 0, x, y, drawScale, drawScale, rotation, c_white, 1);
                 break;
-                case "Loot Key":
+                case 5: //"Loot Key"
                     draw_sprite_ext(spr_PlayerFists1, 0, x, y, drawScale, drawScale, rotation, c_white, 1);
                     // If selecting loot area and in range, then make visible
                     if (place_meeting(mouse_x, mouse_y, obj_lootArea) && scr_getAbsoluteDistance(x, y, mouse_x, mouse_y) <= lootRange) {
@@ -217,19 +217,19 @@ if (!obj_guiController.showUpgradeScreen) {
                         }
                     }
                 break;
-                case "Sniper Rifle":
+                case 6: //"Sniper Rifle"
                     draw_sprite_ext(spr_PlayerSniperRifle, 0, x, y, drawScale, drawScale, rotation, c_white, 1);
                 break;
-                case "Molotov Cocktail":
+                case 7: //"Molotov Cocktail"
                     draw_sprite_ext(spr_PlayerMolotovCocktail, 0, x, y, drawScale, drawScale, rotation, c_white, 1);
                 break;
-                case "Frag Grenade":
+                case 88: //"Frag Grenade"
                     draw_sprite_ext(spr_PlayerFragGrenade, 0, x, y, drawScale, drawScale, rotation, c_white, 1);
                 break;
-                case "Iron Sword":
+                case 9: //"Iron Sword"
                     draw_sprite_ext(spr_PlayerIronSword, 0, x, y, drawScale, drawScale, rotation, c_white, 1);  
                 break;
-                case "Chainsaw":
+                case 10: //"Chainsaw"
                     draw_sprite_ext(spr_PlayerChainsaw, 0, x, y, drawScale, drawScale, rotation, c_white, 1);  
                 break;
                 default:

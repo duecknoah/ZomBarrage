@@ -1,4 +1,4 @@
-///scr_IdToWeaponName(name)
+///scr_IdToWeaponName(id)
 // will return the coressponding name for the weapon id
 // will return -1 if name / weapon doesn't exist
 

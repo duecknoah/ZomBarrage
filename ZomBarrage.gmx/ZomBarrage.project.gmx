@@ -3,6 +3,25 @@
   <Configs name="configs">
     <Config>Configs\Default</Config>
   </Configs>
+  <datafiles number="2" name="datafiles">
+    <datafile>
+      <name>weapons.json</name>
+      <exists>-1</exists>
+      <size>1039</size>
+      <exportAction>2</exportAction>
+      <exportDir></exportDir>
+      <overwrite>0</overwrite>
+      <freeData>-1</freeData>
+      <removeEnd>0</removeEnd>
+      <store>0</store>
+      <ConfigOptions>
+        <Config name="Default">
+          <CopyToMask>9223372036854775807</CopyToMask>
+        </Config>
+      </ConfigOptions>
+      <filename>weapons.json</filename>
+    </datafile>
+  </datafiles>
   <NewExtensions/>
   <sounds name="sound">
     <sound>sound\snd_env_outdoor_forest_nearby_city</sound>
@@ -141,6 +160,14 @@
     </sprites>
     <sprites name="Vehicles">
       <sprite>sprites\spr_miniTruck</sprite>
+      <sprite>sprites\spr_ambulance</sprite>
+      <sprite>sprites\spr_audi</sprite>
+      <sprite>sprites\spr_blackViper</sprite>
+      <sprite>sprites\spr_mustang</sprite>
+      <sprite>sprites\spr_miniVan</sprite>
+      <sprite>sprites\spr_policeCar</sprite>
+      <sprite>sprites\spr_taxi</sprite>
+      <sprite>sprites\spr_bigTruck</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background">
@@ -295,6 +322,10 @@
         <script>scripts\scr_addDialogue.gml</script>
       </scripts>
     </scripts>
+    <scripts name="Particles">
+      <script>scripts\scr_createZombieGoreBurst.gml</script>
+      <script>scripts\scr_createBloodSpurtBurst.gml</script>
+    </scripts>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\sh_outline.shader</shader>
@@ -334,6 +365,14 @@
       <objects name="Vehicles">
         <object>objects\obj_vehicleP</object>
         <object>objects\obj_miniTruck</object>
+        <object>objects\obj_ambulance</object>
+        <object>objects\obj_audi</object>
+        <object>objects\obj_blackViper</object>
+        <object>objects\obj_mustang</object>
+        <object>objects\obj_miniVan</object>
+        <object>objects\obj_policeCar</object>
+        <object>objects\obj_taxi</object>
+        <object>objects\obj_bigTruck</object>
         <object>objects\obj_playerVehicle</object>
       </objects>
     </objects>
@@ -360,9 +399,13 @@
     </objects>
     <objects name="partSystems">
       <object>objects\obj_particleIndex</object>
-      <object>objects\obj_rocketExplosion</object>
-      <object>objects\obj_bloodSpurt</object>
-      <object>objects\obj_zombieGore</object>
+      <objects name="static">
+        <object>objects\obj_bloodSpurt</object>
+        <object>objects\obj_zombieGore</object>
+      </objects>
+      <objects name="dynamic">
+        <object>objects\obj_rocketExplosion</object>
+      </objects>
     </objects>
     <objects name="Mapping">
       <object>objects\obj_collision</object>
@@ -413,11 +456,12 @@
   <rooms name="rooms">
     <rooms name="maps">
       <room>rooms\rm_Menu</room>
-      <room>rooms\mp_town</room>
       <room>rooms\mp_testRoom</room>
+      <room>rooms\mp_town</room>
       <room>rooms\mp_the_beginning_home</room>
     </rooms>
     <room>rooms\rm_shaderTesting</room>
+    <room>rooms\rm_template</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>
