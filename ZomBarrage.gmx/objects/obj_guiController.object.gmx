@@ -44,6 +44,8 @@ showPauseButton = true; // show the button at the top right to access the pause 
 showWeaponPickupText = false; // show weapon pickup text?
 showWeaponScope = false; // show weapon scope?
 showWaveBar = true; // show the wave bar?
+triggerWaveCompletionText = false; // when true, it will create the wave completion text
+triggerAllWavesDoneText = false; // when true, it will create the all waves completion text
 showWaveCompletionScreen = true; // show the wave completed screen?
 showOnFireGuiAlpha = true; // run the code to do with the on fire on the screen?
 showInventory = true; // Weapon slots and inventory
@@ -255,6 +257,10 @@ if (showWaveBar) {
         text += "   Next Wave: " + string(global.delayBetweenWavesTimer);
     }
     
+    if (global.allWavesDone) {
+        text = "All Zombies Cleared!";
+    }
+    
     draw_set_halign(fa_center);
     draw_set_valign(fa_middle);
     draw_set_colour(c_white);
@@ -315,11 +321,26 @@ else {
     showWaveCompletionScreen = false;
 }
 
+// Creates wave completion text gui object
+if (triggerWaveCompletionText) {
+    scr_createGuiText(centerX, centerY, "Wave Completed", fa_center, fa_middle,
+                                        fnt_big, c_white, 1, 0.5, 1, 4);
+    triggerWaveCompletionText = false;
+}
+
+// Creates all waves completion text gui object
+if (triggerAllWavesDoneText) {
+    scr_createGuiText(centerX, centerY, "All Waves Completed", fa_center, fa_middle,
+                                        fnt_big, c_lime, 1, 0.5, 1, 4);
+    triggerAllWavesDoneText = false;
+}
+
 // Wave completed text / screen
 if (showWaveCompletionScreen) {
-    draw_set_alpha(waveCompletionScreenAlpha);
-    draw_text(centerX, centerY, "Wave Completed!");
-    draw_set_alpha(1);
+    //draw_set_alpha(waveCompletionScreenAlpha);
+    //draw_text(centerX, centerY, "Wave Completed!");
+    //draw_set_alpha(1);
+    
 }
 
 // Draw inventory GUI
@@ -463,6 +484,8 @@ if (showHealthBar) {
     var hbHealthMaxXScale = guiScale;
     var hbHealthPerc = obj_player.hp / obj_player.maxHp;
     var hbHealthXScale = lerp(0, hbHealthMaxXScale, hbHealthPerc);
+    
+    hbHealthXScale = clamp(hbHealthXScale, 0, obj_player.maxHp);
     
     // Healthbar background (behind red health)
     draw_sprite_ext(spr_healthBar, 2, hbx, hby, guiScale, guiScale, 0, c_white, healthBarAlpha);
@@ -667,6 +690,7 @@ draw_set_halign(fa_left);
 draw_set_valign(fa_top);
 draw_set_alpha(1);
 draw_set_color(c_white);
+draw_set_font(fnt_normal);
 
 // If in debug mode, show framerate
 if (debug_mode) {

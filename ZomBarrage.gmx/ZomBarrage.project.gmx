@@ -179,8 +179,8 @@
   </backgrounds>
   <paths name="paths">
     <path>paths\path_cutscene_beginning_dad1</path>
-    <path>paths\path_truck_mp_town</path>
-    <path>paths\path2</path>
+    <path>paths\path_PlayerVehicleIntroTown</path>
+    <path>paths\path_PlayerVehicleOutroTown</path>
   </paths>
   <scripts name="scripts">
     <script>scripts\scr_findNearestFreeCell.gml</script>
@@ -288,6 +288,7 @@
       <script>scripts\scr_lerpOffGuiAlpha.gml</script>
       <script>scripts\scr_mapMenuGui.gml</script>
       <script>scripts\scr_menuMoveTransition.gml</script>
+      <script>scripts\scr_guiTextExists.gml</script>
       <scripts name="Cutscene">
         <script>scripts\scr_guiForegroundFadeIn.gml</script>
         <script>scripts\scr_guiForegroundFadeOut.gml</script>
@@ -333,6 +334,7 @@
   </shaders>
   <fonts name="fonts">
     <font>fonts\fnt_normal</font>
+    <font>fonts\fnt_big</font>
   </fonts>
   <objects name="objects">
     <object>objects\obj_camera</object>

@@ -31,6 +31,8 @@
 event_inherited();
 scr_charInteract(obj_player, id); // make player go in vehicle
 isLocked = true; // lock it up until at end of path
+introPath = noone; // path used when entering the level, the path actually used is variable 'path' that copies off this when needed
+outroPath = noone; // path used when exiting the level, the path actually used is variable 'path' that copies off this when needed
 </string>
           </argument>
         </arguments>
@@ -65,6 +67,41 @@ if (isLocked &amp;&amp; path_position == 1) {
     // Allow spawning of zombies
     if (instance_exists(obj_waveController)) {
         obj_waveController.preventSpawn = false;
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Outro
+// To set the intro, use creation code in the room on the player vehicle
+// Unlock player vehicle when all waves completed
+if (global.allWavesDone) {
+    if (interactEntity != obj_player &amp;&amp; isLocked) {
+        isLocked = false;
+    }
+    
+    // If player is interacting with vehicle for the first time, start outropath
+    if (interactEntity == obj_player &amp;&amp; path != outroPath) {
+        path = outroPath;
+        path_start(path, 0, 0, true);
+        isLocked = true; // prevent player from getting out of outroscene
     }
 }
 </string>

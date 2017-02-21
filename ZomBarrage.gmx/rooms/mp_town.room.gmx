@@ -132,7 +132,7 @@
     <instance objName="obj_propLightPost" x="192" y="1760" name="inst_0A23A9AD" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_propLightPost" x="192" y="2048" name="inst_A75106AC" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_propLightPost" x="192" y="1504" name="inst_C7DDED31" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_playerVehicle" x="1696" y="1888" name="inst_BB1D33C7" locked="0" code="path = path_truck_mp_town;&#xA;path_start(path, 0, 0, true);&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_playerVehicle" x="1696" y="1888" name="inst_BB1D33C7" locked="0" code="introPath = path_PlayerVehicleIntroTown;&#xA;outroPath = path_PlayerVehicleOutroTown;&#xA;path = introPath;&#xA;path_start(path, 0, 0, true);&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_itemWeapon" x="288" y="256" name="inst_8C856EAB" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_itemWeapon" x="288" y="640" name="inst_BBD954BF" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_itemWeapon" x="896" y="640" name="inst_A61DA8F4" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
