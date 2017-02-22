@@ -1,0 +1,19 @@
+Saving System Notes:
+--------------------------------------
+
+All Saves are stored in %localappdata%/ZomBarrage/
+Each individual save has there own directory corresponding with their name. 
+	- This is stored in %localappdata%/ZomBarrage/savename
+
+When a save is created, it is either save0, save1, or save2. Each of those corresponds to a directory within the save storage directory.
+	ex. save0 is stored in: %localappdata%/ZomBarrage/save0/
+
+*****************************************
+Files within each individual save folder:
+*****************************************
+save<num>.ini
+	- Stores the gamestate of the most recent save
+	- Can be loaded directly which will load the game directly to when it was last saved
+saveDynamic<num>.ini
+	- Stores all dynmaic resources like ds_maps, ds_lists, ex.
+	- Also stores any player data, stats, etc.

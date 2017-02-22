@@ -115,29 +115,6 @@ if (string_pos("Main", currentMenu) != 0) {
 
 // Start Menu
 if (string_pos("Start", currentMenu) != 0) {
-    /*
-    var _xOffset = room_width;
-    var _yOffset = 0;
-    var _startX = drawMenuX + (room_width / 2) - ((sprite_get_width(spr_buttonMenu) * menuScale) / 2) + _xOffset;
-    var _startY = drawMenuY + (room_height / 2) - ((sprite_get_height(spr_buttonMenu) * menuScale) / 2) + _yOffset;
-    
-    // Back button
-    var _backX = drawMenuX + _xOffset + (sprite_get_width(spr_arrowButton) * menuScale) + 128;
-    var _backY = drawMenuY + _yOffset + (room_height / 2) - ((sprite_get_height(spr_arrowButton) * menuScale) / 2);
-    if (scr_buttonGuiSpriteExt(_backX, _backY, spr_arrowButton, -menuScale, menuScale) == 2) {
-        currentMenu = "Start-Main";
-    }
-    
-    if (scr_buttonGuiSpriteText(_startX, _startY, spr_buttonMenu, menuScale, "New Game", c_white) == 2) {
-        currentMenu = "Start-SaveNew";
-    }
-    
-    _startY += 128;
-    
-    if (scr_buttonGuiSpriteText(_startX, _startY, spr_buttonMenu, menuScale, "Continue", c_white) == 2) {
-        currentMenu = "Start-SaveContinue";
-    }
-    */
     var _xOffset = room_width;
     var _yOffset = 0;
     var _startX = drawMenuX + (room_width / 2) - ((sprite_get_width(spr_buttonMenu) * menuScale) / 2) + _xOffset;
@@ -170,76 +147,6 @@ if (string_pos("Start", currentMenu) != 0) {
         _startY += 128;
     }
     
-}
-
-// SaveNew Menu
-if (string_pos("SaveNew", currentMenu) != 0) {
-    /*
-    var _xOffset = room_width * 2;
-    var _yOffset = 0;
-    var _startX = drawMenuX + (room_width / 2) - ((sprite_get_width(spr_buttonMenu) * menuScale) / 2) + _xOffset;
-    var _startY = drawMenuY + (room_height / 2) - ((sprite_get_height(spr_buttonMenu) * menuScale) / 2) + _yOffset;
-    
-    // Back button
-    var _backX = drawMenuX + _xOffset + (sprite_get_width(spr_arrowButton) * menuScale) + 128;
-    var _backY = drawMenuY + _yOffset + (room_height / 2) - ((sprite_get_height(spr_arrowButton) * menuScale) / 2);
-    if (scr_buttonGuiSpriteExt(_backX, _backY, spr_arrowButton, -menuScale, menuScale) == 2) {
-        currentMenu = "SaveNew-Start";
-    }
-    
-    // Show save buttons, if a save is used, show it faded and unclickable, else don't
-    for (var i=0; i&lt;3; i++) {
-        if (obj_save.saveUsed[i]) { // if save is used
-            if (scr_buttonGuiSpriteText(_startX, _startY, spr_buttonMenu, menuScale, "Save " + string(i), c_maroon) == 1) {
-                scr_buttonGuiSpriteText(_startX, _startY, spr_buttonMenu, menuScale, "Save " + string(i) + " is Used", c_maroon);
-            } 
-        }
-        else { // if save is not used
-            if (scr_buttonGuiSpriteText(_startX, _startY, spr_buttonMenu, menuScale, "Save " + string(i), c_white) == 2) {
-                    scr_createSave(i);
-                    obj_save.saveNum = i; // make i the current save being used in game
-                    obj_save.saveUsed[i] = true; // save is now used
-                    currentMenu = "SaveNew-LevelSelect";
-                    break;
-            } 
-        }
-        _startY += 128;
-    }
-    */
-}
-
-// SaveContinue Menu
-if (string_pos("SaveContinue", currentMenu) != 0) {
-    /*
-    var _xOffset = room_width * 2;
-    var _yOffset = 0;
-    var _startX = drawMenuX + (room_width / 2) - ((sprite_get_width(spr_buttonMenu) * menuScale) / 2) + _xOffset;
-    var _startY = drawMenuY + (room_height / 2) - ((sprite_get_height(spr_buttonMenu) * menuScale) / 2) + _yOffset;
-
-    // Back button
-    var _backX = drawMenuX + _xOffset + (sprite_get_width(spr_arrowButton) * menuScale) + 128;
-    var _backY = drawMenuY + _yOffset + (room_height / 2) - ((sprite_get_height(spr_arrowButton) * menuScale) / 2);
-    if (scr_buttonGuiSpriteExt(_backX, _backY, spr_arrowButton, -menuScale, menuScale) == 2) {
-        currentMenu = "SaveContinue-Start";
-    }
-    
-    // Show save buttons, if a save is used, show it faded and unclickable, else don't
-    for (var i=0; i&lt;3; i++) {
-        if (!obj_save.saveUsed[i]) { // if save is not used
-            if (scr_buttonGuiSpriteText(_startX, _startY, spr_buttonMenu, menuScale, "Save " + string(i), c_maroon) == 1) {
-                scr_buttonGuiSpriteText(_startX, _startY, spr_buttonMenu, menuScale, "Save " + string(i) + " has no data!", c_maroon);
-            } 
-        }
-        else { // if save is used
-            if (scr_buttonGuiSpriteText(_startX, _startY, spr_buttonMenu, menuScale, "Save " + string(i), c_white) == 2) {
-                    obj_save.saveNum = i; // make i the current save being used in game
-                    currentMenu = "SaveContinue-GameBegin";
-                    break;
-            } 
-        }
-        _startY += 128;
-    }
-    */
 }
 
 // LevelSelect Menu
