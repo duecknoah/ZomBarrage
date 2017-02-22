@@ -17,18 +17,18 @@ game_save(dir + saveName);
 // Make sure there is already a save there to overwrite
 if (obj_save.saveUsed[saveNum] == true) {
     ini_open(dir + dynamicSaveName);
-    // If this is the first time saving (as only the map, add everything to the ds_map
-    if (ds_map_empty(obj_save.saveDynamic)) {
-        // Only add dynamic resources in here
-        
-        
-    }
-    else {
-        // Else if this is not the first time saving, overwrite the values in the ds_list
+    // if this is not the first time saving, overwrite the values in the ds_list
+    if (!ds_map_empty(obj_save.saveDynamic)) {
         // ... ADD MORE ...
         // Only add dynamic resources in here
-        
-        
+        // Permanent player stats
+        obj_save.saveDynamic[? "Player.maxHp"] = obj_player.maxHp;
+        obj_save.saveDynamic[? "Player.points"] = obj_player.points;
+        obj_save.saveDynamic[? "Player.lootRange"] = obj_player.lootRange;
+        obj_save.saveDynamic[? "Player.lootTime"] = obj_player.lootTime;
+    }
+    else {
+        show_debug_message("saveDynamic is empty!");
     }
     ini_write_string("data", "save", ds_map_write(obj_save.saveDynamic));
     ini_close();

@@ -4,7 +4,7 @@
   <solid>0</solid>
   <visible>-1</visible>
   <depth>0</depth>
-  <persistent>0</persistent>
+  <persistent>-1</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
@@ -30,78 +30,8 @@ weapon = ds_list_create();  // Holds all weapon data in game based off weapons.j
 
 // If there is no json file there, create it
 if (!file_exists("weapons.json")) {
-    show_message("NOPE");
-    var initWeaponsFile = file_text_open_write("weapons.json");
-    file_text_write_string(initWeaponsFile, 
-    '[
-        {
-            "id": 0,
-            "name": "fists",
-            "ammo": 0
-        },
-        
-        {
-            "id": 1,
-            "name": "Wimps Pistol",
-            "ammo": 1024
-        },
-        
-        {
-            "id": 2,
-            "name": "M16",
-            "ammo": 512
-        },
-        
-        {
-            "id": 3,
-            "name": "Rocket Launcher",
-            "ammo": 10
-        },
-        
-        {
-            "id": 4,
-            "name": "Flashlight",
-            "ammo": 1
-        },
-        
-        {
-            "id": 5,
-            "name": "Loot Key",
-            "ammo": 1
-        },
-        
-        {
-            "id": 6,
-            "name": "Sniper Rifle",
-            "ammo": 32
-        },
-        
-        {
-            "id": 7,
-            "name": "Molotov Cocktail",
-            "ammo": 5
-        },
-        
-        {
-            "id": 8,
-            "name": "Frag Grenade",
-            "ammo": 8
-        },
-        
-        {
-            "id": 9,
-            "name": "Iron Sword",
-            "ammo": 1
-        },
-        
-        {
-            "id": 10,
-            "name": "Chainsaw",
-            "ammo": 105
-        }
-    ]'
-    );
-    file_text_close(initWeaponsFile);
+    show_message("weapons.json file does not exist!");
+    room_goto(rm_Menu);
 }
 
 // Load JSON
@@ -151,7 +81,7 @@ if (ds_exists(weapon, ds_type_list)) {
         </arguments>
       </action>
     </event>
-    <event eventtype="7" enumb="5">
+    <event eventtype="7" enumb="3">
       <action>
         <libid>1</libid>
         <id>603</id>

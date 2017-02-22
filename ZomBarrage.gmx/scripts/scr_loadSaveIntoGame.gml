@@ -20,20 +20,21 @@ if (ini_section_exists("data")) {
                 show_message("Loading save error: save dynamic data string empty! No data.");
                 room_goto(rm_Menu);
             }
-            saveDynamic = ds_map_create(); // init save file, this is the current one being used in game that holds dynamic resources while game_save loads everything else
-            ds_map_read(saveDynamic, saveStr);
+            obj_save.saveDynamic = ds_map_create(); // init save file, this is the current one being used in game that holds dynamic resources while game_save loads everything else
+            ds_map_read(obj_save.saveDynamic, saveStr);
             /* LIST OF DYNAMIC RESOURCES:
             - All ds variables
             - all dynamic data
             */
-            // Re-init ds_data
-            // GUI
+            // Player Stats
+            with (obj_player) {
+                // Permanent (stats that last the whole game)
+                maxHp = obj_save.saveDynamic[? "Player.maxHp"];
+                points = obj_save.saveDynamic[? "Player.points"]; // how many points the player has, used in buying upgrades
+                lootRange = obj_save.saveDynamic[? "Player.lootRange"]; // range where player can loot from (using loot key)
+                lootTime = obj_save.saveDynamic[? "Player.lootTime"]; // time it takes (in seconds) to loot a building
+            }
             scr_initConsoleDB();
-            obj_guiController.inputConsoleString = "";
-            obj_guiController.consoleLineOffset = 0;
-            obj_guiController.outputConsoleString = "";
-            obj_guiController.showConsole = false;
-            obj_guiController.showPause = false;
             
         }         
         return true; // success

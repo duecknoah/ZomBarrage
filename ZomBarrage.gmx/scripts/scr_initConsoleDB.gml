@@ -30,3 +30,10 @@ ds_list_add(obj_guiController.consoleHelpDB,
             "set envCol r g b - sets the environment light colourt in r g b", 
             "set zoom <multiplier> - sets the zoom of the camera", 
             "object count <object> - prints the number of <object> in game");
+
+// set to defaults
+obj_guiController.inputConsoleString = "";
+obj_guiController.consoleLineOffset = 0;
+obj_guiController.outputConsoleString = "";
+obj_guiController.showConsole = false;
+obj_guiController.showPause = false;

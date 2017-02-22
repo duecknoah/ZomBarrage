@@ -55,6 +55,7 @@
     <instance objName="obj_save" x="128" y="32" name="inst_3B25AE3D" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_controls" x="64" y="32" name="inst_645C70F2" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_scriptRunner" x="192" y="32" name="inst_5B672879" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_weaponDB" x="224" y="32" name="inst_9E849418" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>

@@ -59,18 +59,21 @@ event_inherited();
         image_blend = c_dkgray / 4;
         radius = 256; 
     }
-// Stats
+// Stats (DEFAULT VALUES, DATA IS LOADED FROM scr_loadSaveIntoGame within obj_save endstep)
+    // Permanent (stats that last the whole game)
     maxHp = 50;
-    hp = maxHp;
     points = 0; // how many points the player has, used in buying upgrades
-    lootRange = 128; // range where player can loot from (using loot key)
+    lootRange = 1; // range where player can loot from (using loot key)
+    lootTime = 2; // time it takes (in seconds) to loot a building
+    // Temporary (stats that last until a map change
     lootRank = 0; // the higher the better / more loot
-    lootTime = 1.5; // time it takes (in seconds) to loot a building
-    lootTimer = -1; // timer used for looting, goes based off lootTime
     shotAcc = 1; // between 0-1, 0 being 100% accurate, 1 being default weapon accuracy
     exploDmg = 0; // additive explosive damage
     bulletDmg = 0; // additive bullet damage
-    playerSpd = 1; // speed of movement
+    playerSpd = 1; // max speed of movement
+    // Variables
+    hp = maxHp;
+    lootTimer = -1; // timer used for looting, goes based off lootTime
     // be smaller than 1 to fix between doors
     image_xscale = 0.85;
     image_yscale = 0.85;

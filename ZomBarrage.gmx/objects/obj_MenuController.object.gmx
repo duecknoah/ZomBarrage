@@ -166,12 +166,6 @@ if (string_pos("LevelSelect", currentMenu) != 0) {
     menuScale);
 }
 
-// Loading a pre-existing game
-if (currentMenu == "GameBegin") {
-    obj_save.doLoadSaveIntoGame = true; // load save into game after map loads
-    scr_loadSave(obj_save.saveNum); // loads and changes to the saved map
-}
-
 // ************* Transitions *************
 
 switch (currentMenu) {
@@ -189,18 +183,10 @@ switch (currentMenu) {
     break;
 }
 
-if (currentMenu == "SaveNew-GameBeginNew") {
-    // begin a new game from save selected and possibly level selected (if there was one, else it will auto-select the most recent one)
-    scr_menuMoveTransition("GameBeginNew", 0, 0);
-    //currentMenu = "GameBegin";
-}
-
-if (currentMenu == "SaveContinue-GameBegin") {
-    // begin game from save selected and possibly level selected (if there was one, else it will auto-select the most recent one)
-    scr_menuMoveTransition("GameBegin", 0, 0);
-}
-
 if (currentMenu == "LevelSelect-Game") {
+    //ds_map_clear(obj_save.saveDynamic); // clear to be reloaded when loading save (look at obj_save end step)
+    obj_save.doLoadSaveIntoGame = true; // load save into game after map loads
+    scr_loadSave(obj_save.saveNum); // loads and changes to the saved map
     room_goto(map[mapViewed]);
 }
 

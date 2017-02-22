@@ -110,6 +110,12 @@ if (initWeapon) {
     initWeapon = false;
 }
 
+// If ds weapon data doesn't exist (ex. loading from save)
+if (!ds_exists(weapon, ds_type_map)) {
+    // Re-create dynamic data off image_index (id)
+    weapon = scr_IdToWeapon(image_index);
+}
+
 if (weapon[? "ammo"] == 0) {
     image_alpha = 1;
     image_blend = c_red;

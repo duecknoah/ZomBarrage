@@ -304,6 +304,7 @@
       <script>scripts\scr_loadSave.gml</script>
       <script>scripts\scr_loadSaveIntoGame.gml</script>
       <script>scripts\scr_reSave.gml</script>
+      <script>scripts\scr_deleteMapSave.gml</script>
       <scripts name="old">
         <script>scripts\scr_old_checkSaves.gml</script>
         <script>scripts\scr_old_createSave.gml</script>

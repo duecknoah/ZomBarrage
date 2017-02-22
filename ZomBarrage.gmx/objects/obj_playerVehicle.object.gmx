@@ -59,7 +59,7 @@ outroPath = noone; // path used when exiting the level, the path actually used i
 event_inherited();
 
 // If at end of path, kick player out of vehicle, begin zombie spawning!
-if (isLocked &amp;&amp; path_position == 1) {
+if (isLocked &amp;&amp; path_position == 1 &amp;&amp; interactEntity == obj_player) {
     isLocked = false; // unlock to get player out
     scr_charSeparate(obj_player, id);
     isLocked = true; // re-lock to prevent getting back in until end of mission
@@ -68,6 +68,7 @@ if (isLocked &amp;&amp; path_position == 1) {
     if (instance_exists(obj_waveController)) {
         obj_waveController.preventSpawn = false;
     }
+    scr_reSave(obj_save.saveNum); // save state here
 }
 </string>
           </argument>
@@ -103,6 +104,13 @@ if (global.allWavesDone) {
         path_start(path, 0, 0, true);
         isLocked = true; // prevent player from getting out of outroscene
     }
+}
+
+// If at end of outro, go back to main menu level select, level complete!
+if (path == outroPath &amp;&amp; path_position == 1) {
+    scr_reSave(obj_save.saveNum); // save map and dynamic data
+    scr_deleteMapSave(obj_save.saveNum); // Clear temporary map save, leaving only dynamic data
+    room_goto(rm_Menu);
 }
 </string>
           </argument>

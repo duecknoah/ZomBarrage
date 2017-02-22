@@ -64,7 +64,6 @@ zombiesSeeEverywhere = true; // Do zombies know where characters are at all time
           <argument>
             <kind>1</kind>
             <string>/// Destroy the nav grid, free resources
-
 mp_grid_destroy(global.grid);
 </string>
           </argument>

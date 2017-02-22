@@ -62,6 +62,9 @@ scr_checkSaves();
 if (ds_exists(saveDynamic, ds_type_list)) {
     ds_map_destroy(saveDynamic);
 }
+
+// Delete temporary map save from disk
+scr_deleteMapSave(obj_save.saveNum);
 </string>
           </argument>
         </arguments>
