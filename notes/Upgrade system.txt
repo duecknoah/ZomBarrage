@@ -1,0 +1,8 @@
+Upgrade System
+
+There will be two types of upgrades:
+Permanent (stats that last the whole game)
+- Includes: MaxHp, points, lootRange, lootTime
+
+Temporary (status that last until a map change)
+- includes: lootRank, shot accuracy, explosive damage, bullet damage, player speed

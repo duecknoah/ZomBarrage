@@ -1,4 +1,4 @@
-///scr_buttonGuiSpriteExt(x, y, sprite, xscale, yscale);
+///scr_buttonGuiSpriteExt(x, y, sprite, subimg, xscale, yscale);
 /* returns 0 when not hovering, not pressed
  * returns 1 when hovering, not pressed
  * returns 2 when hovering, and pressed
@@ -9,8 +9,9 @@
 var _x = argument0;
 var _y = argument1;
 var _sprite = argument2;
-var _xscale = argument3;
-var _yscale = argument4;
+var _subimg = argument3;
+var _xscale = argument4;
+var _yscale = argument5;
 
 var _w = sprite_get_width(_sprite) * _xscale;
 var _h = sprite_get_height(_sprite) * _yscale;
@@ -48,7 +49,7 @@ else {
 }
 
 switch (val) {
-    case 0: _alpha /= 2;
+    case 0: _alpha /= 1.5;
     break;
     case 1: draw_set_blend_mode(bm_normal);
     break;
@@ -56,7 +57,7 @@ switch (val) {
     break;
 }
 
-draw_sprite_ext(_sprite, 0, _x, _y, _xscale, _yscale, 0, c_white, _alpha);
+draw_sprite_ext(_sprite, _subimg, _x, _y, _xscale, _yscale, 0, c_white, _alpha);
 draw_set_blend_mode(bm_normal);
 
 return val;

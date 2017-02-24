@@ -39,7 +39,7 @@ var _lockX = _x + (119 * menuScale); // the x coordinate of the lock / unlock sy
 var _lockY = _y + (25 * menuScale); // the x coordinate of the lock / unlock symbol that says if the map is locked or not
 
 // Back arrow button
-if (scr_buttonGuiSpriteExt(_backArrowMapX, _backArrowMapY, spr_arrowButton, -menuScale, menuScale) == 2) {
+if (scr_buttonGuiSpriteExt(_backArrowMapX, _backArrowMapY, spr_arrowButton, 0, -menuScale, menuScale) == 2) {
     if (mapViewed == 0) {
         currentMenu = "LevelSelect-Start";
     }
@@ -49,7 +49,7 @@ if (scr_buttonGuiSpriteExt(_backArrowMapX, _backArrowMapY, spr_arrowButton, -men
 }
 
 // Forward arrow button
-if (scr_buttonGuiSpriteExt(_forwardArrowMapX, _forwardArrowMapY, spr_arrowButton, menuScale, menuScale) == 2) {
+if (scr_buttonGuiSpriteExt(_forwardArrowMapX, _forwardArrowMapY, spr_arrowButton, 0, menuScale, menuScale) == 2) {
     if (mapViewed < array_length_1d(map) - 1) {
         mapViewed ++;
     }

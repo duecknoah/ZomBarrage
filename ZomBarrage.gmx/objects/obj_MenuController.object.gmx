@@ -123,7 +123,7 @@ if (string_pos("Start", currentMenu) != 0) {
     // Back button
     var _backX = drawMenuX + _xOffset + (sprite_get_width(spr_arrowButton) * menuScale) + 128;
     var _backY = drawMenuY + _yOffset + (room_height / 2) - ((sprite_get_height(spr_arrowButton) * menuScale) / 2);
-    if (scr_buttonGuiSpriteExt(_backX, _backY, spr_arrowButton, -menuScale, menuScale) == 2) {
+    if (scr_buttonGuiSpriteExt(_backX, _backY, spr_arrowButton, 0, -menuScale, menuScale) == 2) {
         currentMenu = "Start-Main";
     }
     

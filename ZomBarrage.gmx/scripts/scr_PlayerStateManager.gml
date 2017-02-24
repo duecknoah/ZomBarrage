@@ -63,7 +63,7 @@ if (!obj_guiController.showUpgradeScreen) {
             if (place_meeting(mouse_x, mouse_y, obj_lootArea)) {
                 var _area = instance_place(mouse_x, mouse_y, obj_lootArea);
                 // is loot area in range and not already looted?
-                if (scr_getAbsoluteDistance(x, y, mouse_x, mouse_y) <= lootRange
+                if (distance_to_object(_area) <= lootRange
                  && _area.looted == false) {
                     state = "looting"; // change state to looting ...
                     lootArea = _area; // set lootArea of looting
@@ -215,7 +215,9 @@ if (!obj_guiController.showUpgradeScreen) {
                 case 5: //"Loot Key"
                     draw_sprite_ext(spr_PlayerFists1, 0, x, y, drawScale, drawScale, rotation, c_white, 1);
                     // If selecting loot area and in range, then make visible
-                    if (place_meeting(mouse_x, mouse_y, obj_lootArea) && scr_getAbsoluteDistance(x, y, mouse_x, mouse_y) <= lootRange) {
+                    var _area = instance_place(mouse_x, mouse_y, obj_lootArea);
+                    // is loot area in range and not already looted?
+                    if (distance_to_object(_area) <= lootRange) {
                         with (instance_place(mouse_x, mouse_y, obj_lootArea)) {
                             // If not already looted, make visible
                             if (!looted) {

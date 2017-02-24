@@ -63,7 +63,7 @@ event_inherited();
     // Permanent (stats that last the whole game)
     maxHp = 50;
     points = 0; // how many points the player has, used in buying upgrades
-    lootRange = 1; // range where player can loot from (using loot key)
+    lootRange = 32; // range where player can loot from (using loot key)
     lootTime = 2; // time it takes (in seconds) to loot a building
     // Temporary (stats that last until a map change
     lootRank = 0; // the higher the better / more loot

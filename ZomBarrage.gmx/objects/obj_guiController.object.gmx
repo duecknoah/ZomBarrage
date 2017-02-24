@@ -59,6 +59,7 @@ shootDelayMax[0] = 0; // stores the highest value when shootdelay[0] of player i
 shootDelayMax[1] = 0; // stores the highest value when shootdelay of player is not 0
 // Gui variable alpha
 upgradeScreenAlpha = 1;
+upgradeScreenType = "perma"; // show permanent category upgrades by default
 upgradeButtonAlpha = 1;
 pauseScreenAlpha = 0.5;
 pauseButtonAlpha = 1;
@@ -587,56 +588,93 @@ if (showUpgradeScreen) {
     var by = centerY - (sprite_get_height(spr_upgradeBackground) * guiScale / 2);
     draw_sprite_ext(spr_upgradeBackground, 0, bx, by, guiScale, guiScale, 0, c_white, upgradeScreenAlpha);
     
+    // Upgrade type tabs
+    // Perma upgrades upgrade button
+    var upgradeTypebutton1X, upgradeTypebutton1Y, upgradeTypebutton2X, upgradeTypebutton2Y;
+    upgradeTypebutton1X = 416;
+    upgradeTypebutton1Y = 64;
+    upgradeTypebutton2X = 616;
+    upgradeTypebutton2Y = 64;
+    if (scr_buttonGui(upgradeTypebutton1X, upgradeTypebutton1Y, sprite_get_width(spr_upgradeTypeTab) * guiScale, sprite_get_height(spr_upgradeTypeTab) * guiScale)) {
+        upgradeScreenType = "perma";
+    }
+    // Temporary upgrades upgrade button
+    if (scr_buttonGui(upgradeTypebutton2X, upgradeTypebutton2Y, sprite_get_width(spr_upgradeTypeTab) * guiScale, sprite_get_height(spr_upgradeTypeTab) * guiScale)) {
+        upgradeScreenType = "temp";
+    }
+    
     // Upgrade buttons
     var xx = bx;
-    var yy = by;
+    var yy = by + (10 * guiScale);
     var yOff = sprite_get_height(spr_upgradeButton) * guiScale + 4;
    /* ex. upgrade button:
     *   if (scr_buttonGuiUpgrade(xx, yy, spr_upgradeBar, "This is a test upgrade.", 1, guiScale)) {
     *       room_restart();
     *   }
    */
-   if (scr_buttonGuiUpgrade(xx, yy, 
+   // Upgrade types: permanent, temporary
+   switch (upgradeScreenType) {
+    case "perma":
+        // First draw tab sprites
+        draw_sprite_ext(spr_upgradeTypeTab, 2, upgradeTypebutton2X, upgradeTypebutton2Y, guiScale, guiScale, 0, c_white, 1);
+        draw_sprite_ext(spr_upgradeTypeTab, 1, upgradeTypebutton1X, upgradeTypebutton1Y, guiScale, guiScale, 0, c_white, 1);
+        
+        if (scr_buttonGuiUpgrade(xx, yy, 
                             "TEMP_NO_SPRITE", 
                             "Increase max health of yourself by 10#Current: " + string(obj_player.maxHp),
                             2 * obj_player.maxHp,
                             guiScale, upgradeScreenAlpha)) {
         obj_player.maxHp += 10;
         obj_player.hp = obj_player.maxHp;
-   }
-   yy += yOff;
-   if (scr_buttonGuiUpgrade(xx, yy, 
+       }
+       yy += yOff;
+       if (scr_buttonGuiUpgrade(xx, yy, 
+                            "TEMP_NO_SPRITE", 
+                            "Increase your Loot speed#Current: " + string(obj_player.lootTime) + " secs.",
+                            60 / obj_player.lootTime,
+                            guiScale, upgradeScreenAlpha)) {
+        obj_player.lootTime /= 1.5;
+       }
+       yy += yOff;
+    break;
+    case "temp":
+        // First draw tab sprites
+        draw_sprite_ext(spr_upgradeTypeTab, 0, upgradeTypebutton1X, upgradeTypebutton1Y, guiScale, guiScale, 0, c_white, 1);
+        draw_sprite_ext(spr_upgradeTypeTab, 3, upgradeTypebutton2X, upgradeTypebutton2Y, guiScale, guiScale, 0, c_white, 1);
+        if (scr_buttonGuiUpgrade(xx, yy, 
                             "TEMP_NO_SPRITE", 
                             "Increase your lootrank.#Current: " + string(obj_player.lootRank), 
                             10 * obj_player.lootRank + 5, 
                             guiScale, upgradeScreenAlpha)) {
         obj_player.lootRank ++;
+       }
+       yy += yOff;
+       if (scr_buttonGuiUpgrade(xx, yy, 
+                               "TEMP_NO_SPRITE",
+                               "Increase your average shot accuracy.#Current: +" + string((1 - obj_player.shotAcc) * 100) + "%", 
+                               10 * obj_player.shotAcc + 5, 
+                               guiScale, upgradeScreenAlpha)) {
+            obj_player.shotAcc /= 1.5;
+       }
+       yy += yOff;
+       if (scr_buttonGuiUpgrade(xx, yy, 
+                               "TEMP_NO_SPRITE",
+                               "Increase your explosive damage by 5.#Current: +" + string(obj_player.exploDmg), 
+                               10 * obj_player.exploDmg + 5, 
+                               guiScale, upgradeScreenAlpha)) {
+            obj_player.exploDmg += 5;
+       }
+       yy += yOff;
+       if (scr_buttonGuiUpgrade(xx, yy, 
+                               "TEMP_NO_SPRITE",
+                               "Increase your bullet damage by 5.#Current: +" + string(obj_player.bulletDmg), 
+                               10 * obj_player.bulletDmg + 5, 
+                               guiScale, upgradeScreenAlpha)) {
+            obj_player.bulletDmg += 5;
+       }
+       yy += yOff;
+    break;
    }
-   yy += yOff;
-   if (scr_buttonGuiUpgrade(xx, yy, 
-                           "TEMP_NO_SPRITE",
-                           "Increase your average shot accuracy.#Current: +" + string((1 - obj_player.shotAcc) * 100) + "%", 
-                           10 * obj_player.shotAcc + 5, 
-                           guiScale, upgradeScreenAlpha)) {
-        obj_player.shotAcc /= 1.5;
-   }
-   yy += yOff;
-   if (scr_buttonGuiUpgrade(xx, yy, 
-                           "TEMP_NO_SPRITE",
-                           "Increase your explosive damage by 5.#Current: +" + string(obj_player.exploDmg), 
-                           10 * obj_player.exploDmg + 5, 
-                           guiScale, upgradeScreenAlpha)) {
-        obj_player.exploDmg += 5;
-   }
-   yy += yOff;
-   if (scr_buttonGuiUpgrade(xx, yy, 
-                           "TEMP_NO_SPRITE",
-                           "Increase your bullet damage by 5.#Current: +" + string(obj_player.bulletDmg), 
-                           10 * obj_player.bulletDmg + 5, 
-                           guiScale, upgradeScreenAlpha)) {
-        obj_player.bulletDmg += 5;
-   }
-   yy += yOff;
 }
 
 // Pause Screen
