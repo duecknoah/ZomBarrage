@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>/// create navPath and set variables
 event_inherited();
-maxHp = global.currentWave + 30;
+maxHp = global.currentWave * 5 + 30;
 hp = maxHp;
 movementSpd = 0.25;
 hasPunched = false; // turns true to prevent many scr_hurts during punch, becomes false after punch animation ends

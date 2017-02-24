@@ -5,6 +5,12 @@ if (isDead) {
     flashLightOn = false;
 }
 
+// Get weapon data for the id of the weapon being held. 
+// NOTE: This is just going off the weapon database. So something like 
+// ammo of this is NOT the same as the players ammo
+// for this weapon. Rather, its a blueprint of the weapon the total 
+var currentWeapon = scr_WeaponNameToWeapon(inventory[selectedSlot]);
+
 // If not showing the upgrade menu, allow things to happen
 if (!obj_guiController.showUpgradeScreen) {
     switch(state) {
@@ -17,7 +23,7 @@ if (!obj_guiController.showUpgradeScreen) {
             if (img_index >= img_number) {
                 var _x = x + lengthdir_x(16, rotation + 90);
                 var _y = y + lengthdir_y(16, rotation + 90);
-                scr_hurtRadius(_x, _y, 2, 16, 1, false, false, true);
+                scr_hurtRadius(_x, _y, 2, 16, currentWeapon[? "damage"], false, false, true);
                 state = "default";
                 img_index = 0; 
                 img_speed = 0;
@@ -26,19 +32,20 @@ if (!obj_guiController.showUpgradeScreen) {
         break;
         case "shoot Wimps Pistol": // shoot Wimps Pistol
             var dirSpread = (rotation + 90) + random_range(-7 * shotAcc, 7 * shotAcc);
-            scr_shootBullet(x, y, dirSpread, 1 + bulletDmg, 0.15, 400, 425, instance_id);
+            scr_shootBullet(x, y, dirSpread, currentWeapon[? "damage"] + bulletDmg, 0.15, 400, 425, instance_id);
             draw_sprite_ext(spr_PlayerWimpPistol, 0, x, y, drawScale, drawScale, rotation, c_white, 1);
         break;
         case "shoot M16": // shoot M16
             var dirSpread = (rotation + 90) + random_range(-10 * shotAcc, 10 * shotAcc);
-            scr_shootBullet(x, y, dirSpread, 0.625 + bulletDmg, 0.1, 500, 400, instance_id);
+            scr_shootBullet(x, y, dirSpread, currentWeapon[? "damage"] + bulletDmg, 0.1, 500, 400, instance_id);
             //var chosenSound = choose(snd_m16_shot_1, snd_m16_shot_2, snd_m16_shot_3);
             //audio_play_sound_at(chosenSound, 0, 0, 0, 100, 300, 1, false, 3);
             draw_sprite_ext(spr_PlayerM16, 0, x, y, drawScale, drawScale, rotation, c_white, 1);
         break;
         case "shoot Rocket Launcher": // shoot Rocket Launcher
             var dirSpread = (rotation + 90) + random_range(-5 * shotAcc, 5 * shotAcc);
-            scr_shootRocket(x, y, dirSpread, 50 + exploDmg, 2, 0.1, instance_id);
+            // explo radius is stored in rocket explosion entity
+            scr_shootRocket(x, y, dirSpread, currentWeapon[? "damage"] + exploDmg, 2, 0.1, instance_id);
             draw_sprite_ext(spr_PlayerRocketLauncher, 0, x, y, drawScale, drawScale, rotation, c_white, 1);
         break;
         case "toggle Flashlight": // toggle Flashlight
@@ -102,7 +109,7 @@ if (!obj_guiController.showUpgradeScreen) {
         case "Sniper Rifle scoped shoot": // Sniper Rifle scoped shoot
             draw_sprite_ext(spr_PlayerSniperRifle, 0, x, y, drawScale, drawScale, rotation, c_white, 1);
             var dirSpread = (rotation + 90) + random_range(-2 * shotAcc, 2 * shotAcc); // have a narrow spread
-            scr_shootBullet(x, y, dirSpread, 40 + bulletDmg, 1, 400, 700, instance_id);
+            scr_shootBullet(x, y, dirSpread, currentWeapon[? "damage"] + bulletDmg, 1, 400, 700, instance_id);
             with (sniperScopeLight) {
                 x = mouse_x;
                 y = mouse_y;
@@ -112,7 +119,7 @@ if (!obj_guiController.showUpgradeScreen) {
         case "Sniper Rifle unscoped shoot": // Sniper Rifle unscoped shoot
             draw_sprite_ext(spr_PlayerSniperRifle, 0, x, y, drawScale, drawScale, rotation, c_white, 1);
             var dirSpread = (rotation + 90) + random_range(-6 * shotAcc, 6 * shotAcc); // have a wider spread (when unscoped)
-            scr_shootBullet(x, y, dirSpread, 40 + bulletDmg, 1, 400, 700, instance_id);
+            scr_shootBullet(x, y, dirSpread, currentWeapon[? "damage"] + bulletDmg, 1, 400, 700, instance_id);
             state = "Sniper Rifle"; // Sniper Rifle
         break;
         case "throw Molotov Cocktail": // throw Molotov Cocktail
@@ -156,7 +163,7 @@ if (!obj_guiController.showUpgradeScreen) {
                 var _rotOff = 30;
                 var _x = x + lengthdir_x(16, rotation + 90 + _rotOff);
                 var _y = y + lengthdir_y(16, rotation + 90 + _rotOff);
-                scr_hurtRadius(_x, _y, 5, 16, 25, false, false, true);
+                scr_hurtRadius(_x, _y, currentWeapon[? "damage"], currentWeapon[? "radius"], currentWeapon[? "force"], false, false, true);
             }
             // When at end of animation, return to default state 
             if (img_index >= img_number) {    
@@ -173,7 +180,7 @@ if (!obj_guiController.showUpgradeScreen) {
                 var _rotOff = -15;
                 var _x = x + lengthdir_x(8, rotation + 90 + _rotOff);
                 var _y = y + lengthdir_y(8, rotation + 90 + _rotOff);
-                scr_hurtRadius(_x, _y, 1, 20, 25, false, false, true);
+                scr_hurtRadius(_x, _y, currentWeapon[? "damage"], currentWeapon[? "radius"], currentWeapon[? "force"], false, false, true);
                 draw_sprite_ext(spr_PlayerChainsaw, img_index, x, y, drawScale, drawScale, rotation, c_white, 1);
                 inventoryAmmo[selectedSlot] -= 0.05; // lose ammo every step (chainsaw has lots)
                 shootDelay[selectedSlot] = 0.5; // shoot delay only effects the startup of the chainsaw, once running, it is unaffected

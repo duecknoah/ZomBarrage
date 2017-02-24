@@ -86,24 +86,24 @@ if (part_emitter_exists(obj_particleIndex.rocketExplosion, explosionEmitter)) {
           <argument>
             <kind>1</kind>
             <string>/// Do damage and create force
-var range = 100;
-
 // initialize damage in event once only
 if (initDmg) {
+    var weaponData = scr_IdToWeapon(3);
+    
     with (obj_zombieP) {
-        if (point_distance(other.x, other.y, x, y) &lt; range) {
+        if (point_distance(other.x, other.y, x, y) &lt; weaponData[? "radius"]) {
             scr_hurt(id, other.rocketDmg);
         }
     }
     
     with (obj_player) {
-        if (point_distance(other.x, other.y, x, y) &lt; range) {
+        if (point_distance(other.x, other.y, x, y) &lt; weaponData[? "radius"]) {
             scr_hurt(id, other.rocketDmg);
         }
     }
     initDmg = false;
 
-    scr_createForce(x, y, 10, 256, true, true);
+    scr_createForce(x, y, 10, weaponData[? "radius"], true, true);
 }
 
 // Destroy self when death timer ends
