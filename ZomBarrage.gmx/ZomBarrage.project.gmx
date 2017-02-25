@@ -460,8 +460,8 @@
   </timelines>
   <rooms name="rooms">
     <rooms name="maps">
-      <room>rooms\mp_testRoom</room>
       <room>rooms\rm_Menu</room>
+      <room>rooms\mp_testRoom</room>
       <room>rooms\mp_town</room>
       <room>rooms\mp_the_beginning_home</room>
     </rooms>

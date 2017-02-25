@@ -34,9 +34,11 @@ image_index = floor(random(sprite_get_number(spr_fire)))
 with (parentedLight) {
     radius = 256;
     color = c_orange;
-    parent = other; // parent light to the fire (this)
+    parent = other.id; // parent light to the fire (this)
 }
 brightness = 1; // exposure, used in exposure shader when drawing to randomize brightness over time
+moveToX = x; // the x pos to move to over time, ex. this is used for the molotov cocktail to make fire explode from the bottle and to a random pos
+moveToY = y;// the x pos to move to over time, ex. this is used for the molotov cocktail to make fire explode from the bottle and to a random pos
 </string>
           </argument>
         </arguments>
@@ -93,6 +95,9 @@ if (timer &gt; 0) {
 else {
     instance_destroy();
 }
+
+x += (moveToX - x) * 0.05;
+y += (moveToY - y) * 0.05;
 </string>
           </argument>
         </arguments>

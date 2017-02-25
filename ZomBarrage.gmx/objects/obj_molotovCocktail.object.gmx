@@ -85,7 +85,7 @@ if (scr_getAbsoluteDistance(initX, initY, x, y) &gt;= dist) {
     var weaponData = scr_IdToWeapon(7);
     scr_createForce(x, y, 1, weaponData[? "radius"], true, true);
     scr_hurtRadius(x, y, weaponData[? "damage"] + obj_player.exploDmg, weaponData[? "radius"], -1, true, true, true);
-    scr_createFireRadius(x, y, weaponData[? "fireRadius"], 4);
+    scr_createFireRadius(x, y, weaponData[? "fireRadius"], 7);
     instance_destroy();
 }
 
