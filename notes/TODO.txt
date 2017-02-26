@@ -11,7 +11,6 @@ Improvements to make:
 Bugs to fix:
 - make it so weapon ammo can stack when looting
 - heavy zombie moving towards player while throwing rock or punch while in backup pathfinding
-- SWORD DOESN'T WORK!!!3
 - FireLights not dissappearing on zombie kill sometimes
 - Buildings not staying faded, usually after looting
 - prevent allowing picking up two of the same weapon, this happens when you have a gun in the second slot while the first slot is empty. Then when you pickup the same weapon as in slot 2, it will go in slot 1 and not stack when it should.
