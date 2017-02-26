@@ -61,16 +61,19 @@ event_inherited();
     }
 // Stats (DEFAULT VALUES, DATA IS LOADED FROM scr_loadSaveIntoGame within obj_save endstep)
     // Permanent (stats that last the whole game)
-    maxHp = 50;
+    maxHp = 35;
     points = 0; // how many points the player has, used in buying upgrades
     lootRange = 32; // range where player can loot from (using loot key)
     lootTime = 2; // time it takes (in seconds) to loot a building
     // Temporary (stats that last until a map change
     lootRank = 0; // the higher the better / more loot
-    shotAcc = 1; // between 0-1, 0 being 100% accurate, 1 being default weapon accuracy
+    shotAcc = 0; // between 0-1, 0 being default weapon accuracy, 1 being 100% accurate
     exploDmg = 0; // additive explosive damage
     bulletDmg = 0; // additive bullet damage
     playerSpd = 1; // max speed of movement
+    // Boosters (things that give stats a boost for a certain amount of time within the map)
+    
+    
     // Variables
     hp = maxHp;
     lootTimer = -1; // timer used for looting, goes based off lootTime
@@ -577,7 +580,7 @@ if (state != "looting" || state != "loot choose") {
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
   <PhysicsShapePoints>
-    <point>32,32</point>
-    <point>32,32</point>
+    <point>8,8</point>
+    <point>8,8</point>
   </PhysicsShapePoints>
 </object>

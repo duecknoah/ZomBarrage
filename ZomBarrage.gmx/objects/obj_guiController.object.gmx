@@ -622,18 +622,26 @@ if (showUpgradeScreen) {
         if (scr_buttonGuiUpgrade(xx, yy, 
                             "TEMP_NO_SPRITE", 
                             "Increase max health of yourself by 10#Current: " + string(obj_player.maxHp),
-                            2 * obj_player.maxHp,
+                            2 * obj_player.maxHp, obj_player.maxHp, 1, 100, 
                             guiScale, upgradeScreenAlpha)) {
-        obj_player.maxHp += 10;
-        obj_player.hp = obj_player.maxHp;
+            obj_player.maxHp += 10;
+            obj_player.hp = obj_player.maxHp;
+       }
+       yy += yOff;
+       if (scr_buttonGuiUpgrade(xx, yy, 
+                            "TEMP_NO_SPRITE", 
+                            "Increase your Looting range by 32 pixels#Current: " + string(obj_player.lootRange) + " pixels",
+                            obj_player.lootRange / 1.5, obj_player.lootRange, 1, 128, 
+                            guiScale, upgradeScreenAlpha)) {
+            obj_player.lootRange += 32;
        }
        yy += yOff;
        if (scr_buttonGuiUpgrade(xx, yy, 
                             "TEMP_NO_SPRITE", 
                             "Increase your Loot speed#Current: " + string(obj_player.lootTime) + " secs.",
-                            60 / obj_player.lootTime,
+                            60 / obj_player.lootTime, obj_player.lootTime, 0, 5,  
                             guiScale, upgradeScreenAlpha)) {
-        obj_player.lootTime /= 1.5;
+            obj_player.lootTime /= 1.5;
        }
        yy += yOff;
     break;
@@ -644,33 +652,33 @@ if (showUpgradeScreen) {
         if (scr_buttonGuiUpgrade(xx, yy, 
                             "TEMP_NO_SPRITE", 
                             "Increase your lootrank.#Current: " + string(obj_player.lootRank), 
-                            10 * obj_player.lootRank + 5, 
+                            10 * obj_player.lootRank + 5, obj_player.lootRank, -1, 5, 
                             guiScale, upgradeScreenAlpha)) {
-        obj_player.lootRank ++;
+            obj_player.lootRank ++;
        }
        yy += yOff;
        if (scr_buttonGuiUpgrade(xx, yy, 
                                "TEMP_NO_SPRITE",
-                               "Increase your average shot accuracy.#Current: +" + string((1 - obj_player.shotAcc) * 100) + "%", 
-                               10 * obj_player.shotAcc + 5, 
+                               "Increase your average shot accuracy by 10%.#Current: +" + string((obj_player.shotAcc) * 100) + "%", 
+                               10 * obj_player.shotAcc + 5, obj_player.shotAcc, -1, 0.80, 
                                guiScale, upgradeScreenAlpha)) {
-            obj_player.shotAcc /= 1.5;
+            obj_player.shotAcc += 0.10;
        }
        yy += yOff;
        if (scr_buttonGuiUpgrade(xx, yy, 
                                "TEMP_NO_SPRITE",
-                               "Increase your explosive damage by 5.#Current: +" + string(obj_player.exploDmg), 
-                               10 * obj_player.exploDmg + 5, 
+                               "Increase your explosive damage by 2.#Current: +" + string(obj_player.exploDmg), 
+                               10 * obj_player.exploDmg + 5, obj_player.exploDmg, -1, 12, 
                                guiScale, upgradeScreenAlpha)) {
-            obj_player.exploDmg += 5;
+            obj_player.exploDmg += 2;
        }
        yy += yOff;
        if (scr_buttonGuiUpgrade(xx, yy, 
                                "TEMP_NO_SPRITE",
-                               "Increase your bullet damage by 5.#Current: +" + string(obj_player.bulletDmg), 
-                               10 * obj_player.bulletDmg + 5, 
+                               "Increase your bullet damage by 2.#Current: +" + string(obj_player.bulletDmg), 
+                               10 * obj_player.bulletDmg + 5, obj_player.bulletDmg, -1, 6, 
                                guiScale, upgradeScreenAlpha)) {
-            obj_player.bulletDmg += 5;
+            obj_player.bulletDmg += 2;
        }
        yy += yOff;
     break;

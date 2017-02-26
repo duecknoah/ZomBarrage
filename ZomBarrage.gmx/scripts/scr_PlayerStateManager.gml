@@ -20,7 +20,7 @@ if (!obj_guiController.showUpgradeScreen) {
         case "punch":
             // Once done animating punch, return to default state
             // show_message(string(image_index) + " " + string(image_number) + " " + string(sprite_get_number(spr_PlayerFists)) + " " + string(sprite_index));
-            if (img_index >= img_number) {
+            if (img_index == 0) {
                 var _x = x + lengthdir_x(16, rotation + 90);
                 var _y = y + lengthdir_y(16, rotation + 90);
                 scr_hurtRadius(_x, _y, 2, 16, currentWeapon[? "damage"], false, false, true);
@@ -31,19 +31,19 @@ if (!obj_guiController.showUpgradeScreen) {
             draw_sprite_ext(spr_index, img_index, x, y, drawScale, drawScale, rotation, c_white, 1);
         break;
         case "shoot Wimps Pistol": // shoot Wimps Pistol
-            var dirSpread = (rotation + 90) + random_range(-7 * shotAcc, 7 * shotAcc);
+            var dirSpread = (rotation + 90) + random_range(-7 * (1 - shotAcc), 7 * (1 - shotAcc));
             scr_shootBullet(x, y, dirSpread, currentWeapon[? "damage"] + bulletDmg, 0.15, 400, 425, instance_id);
             draw_sprite_ext(spr_PlayerWimpPistol, 0, x, y, drawScale, drawScale, rotation, c_white, 1);
         break;
         case "shoot M16": // shoot M16
-            var dirSpread = (rotation + 90) + random_range(-10 * shotAcc, 10 * shotAcc);
+            var dirSpread = (rotation + 90) + random_range(-10 * (1 - shotAcc), 10 * (1 - shotAcc));
             scr_shootBullet(x, y, dirSpread, currentWeapon[? "damage"] + bulletDmg, 0.1, 500, 400, instance_id);
             //var chosenSound = choose(snd_m16_shot_1, snd_m16_shot_2, snd_m16_shot_3);
             //audio_play_sound_at(chosenSound, 0, 0, 0, 100, 300, 1, false, 3);
             draw_sprite_ext(spr_PlayerM16, 0, x, y, drawScale, drawScale, rotation, c_white, 1);
         break;
         case "shoot Rocket Launcher": // shoot Rocket Launcher
-            var dirSpread = (rotation + 90) + random_range(-5 * shotAcc, 5 * shotAcc);
+            var dirSpread = (rotation + 90) + random_range(-5 * (1 - shotAcc), 5 * (1 - shotAcc));
             // explo radius is stored in rocket explosion entity
             scr_shootRocket(x, y, dirSpread, currentWeapon[? "damage"] + exploDmg, 2, 0.1, instance_id);
             draw_sprite_ext(spr_PlayerRocketLauncher, 0, x, y, drawScale, drawScale, rotation, c_white, 1);
@@ -108,7 +108,7 @@ if (!obj_guiController.showUpgradeScreen) {
         break;
         case "Sniper Rifle scoped shoot": // Sniper Rifle scoped shoot
             draw_sprite_ext(spr_PlayerSniperRifle, 0, x, y, drawScale, drawScale, rotation, c_white, 1);
-            var dirSpread = (rotation + 90) + random_range(-2 * shotAcc, 2 * shotAcc); // have a narrow spread
+            var dirSpread = (rotation + 90) + random_range(-2 * (1 - shotAcc), 2 * (1 - shotAcc)); // have a narrow spread
             scr_shootBullet(x, y, dirSpread, currentWeapon[? "damage"] + bulletDmg, 1, 400, 700, instance_id);
             with (sniperScopeLight) {
                 x = mouse_x;
@@ -118,7 +118,7 @@ if (!obj_guiController.showUpgradeScreen) {
         break;
         case "Sniper Rifle unscoped shoot": // Sniper Rifle unscoped shoot
             draw_sprite_ext(spr_PlayerSniperRifle, 0, x, y, drawScale, drawScale, rotation, c_white, 1);
-            var dirSpread = (rotation + 90) + random_range(-6 * shotAcc, 6 * shotAcc); // have a wider spread (when unscoped)
+            var dirSpread = (rotation + 90) + random_range(-6 * (1 - shotAcc), 6 * (1 - shotAcc)); // have a wider spread (when unscoped)
             scr_shootBullet(x, y, dirSpread, currentWeapon[? "damage"] + bulletDmg, 1, 400, 700, instance_id);
             state = "Sniper Rifle"; // Sniper Rifle
         break;
@@ -166,7 +166,7 @@ if (!obj_guiController.showUpgradeScreen) {
                 scr_hurtRadius(_x, _y, currentWeapon[? "damage"], currentWeapon[? "radius"], currentWeapon[? "force"], false, false, true);
             }
             // When at end of animation, return to default state 
-            if (img_index >= img_number) {    
+            if (img_index == 0) {    
                 state = "default";
                 img_index = 0; 
                 img_speed = 0;

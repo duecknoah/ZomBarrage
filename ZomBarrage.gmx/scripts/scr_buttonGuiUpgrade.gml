@@ -1,4 +1,4 @@
-///scr_buttonGuiUpgrade(x, y, icon, description, cost, scale, alpha);
+///scr_buttonGuiUpgrade(x, y, icon, description, cost, currentStat, minStat, maxStat, scale, alpha);
 /* Draws / creates a usuable upgrade button for a specific 
  * upgrade, used in the obj_guiController to add upgrade options.
  * This function will return 'true' when purchasing the upgrade
@@ -9,6 +9,9 @@
  * icon - the icon sprite to draw
  * description - the description of the upgrade
  * cost - the cost (in points) of the upgrade
+ * currentStat - the current number this upgrade stat is (ex. 100)
+ * minStat - the lowest number this stat can be
+ * maxStat - the highest number this stat can be
  * scale - the scale to draw the button
 */
 
@@ -17,16 +20,20 @@ var _y = argument1;
 var _icon = argument2;
 var _desc = argument3;
 var _cost = argument4;
-var _scale = argument5;
-var _alpha = argument6;
+var _currentStat = argument5;
+var _minStat = argument6;
+var _maxStat = argument7;
+var _scale = argument8;
+var _alpha = argument9;
 
 // Draw button background n stuff
 var _w = sprite_get_width(spr_upgradeButton) * _scale;
 var _h = sprite_get_height(spr_upgradeButton) * _scale;
 var _canAfford = (obj_player.points >= _cost); // can the player afford the upgrade?
 
-// Draw red button if can't afford
-if (!_canAfford) {
+// Draw red button if can't afford or if the current stat number is 
+// at it's max or minimum
+if (!_canAfford || _currentStat == _minStat || _currentStat == _maxStat) {
     draw_sprite_ext(spr_upgradeButton, 3, _x, _y, _scale, _scale, 0, c_white, _alpha);
 }
 else {
@@ -35,6 +42,19 @@ else {
         obj_player.points -= _cost;
         return true; // button pressed
     }
+}
+
+// Keep current stat within range
+_currentStat = clamp(_currentStat, _minStat, _maxStat);
+
+if (_currentStat == _minStat) {
+    _desc += " (at Minimum Level)";
+    _cost = "";
+}
+
+if (_currentStat == _maxStat) {
+    _desc += " (at Maximum Level)";
+    _cost = "";
 }
 
 // Draw icon
