@@ -186,7 +186,7 @@ switch (currentMenu) {
 if (currentMenu == "LevelSelect-Game") {
     //ds_map_clear(obj_save.saveDynamic); // clear to be reloaded when loading save (look at obj_save end step)
     obj_save.doLoadSaveIntoGame = true; // load save into game after map loads
-    scr_loadSave(obj_save.saveNum); // loads and changes to the saved map
+    scr_deleteMapSave(obj_save.saveNum); // delete any map save, leave the dynamic data however
     room_goto(map[mapViewed]);
 }
 

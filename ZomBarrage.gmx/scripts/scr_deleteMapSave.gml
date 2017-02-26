@@ -1,4 +1,4 @@
-///scr_clearMapSave(saveNum);
+///scr_deleteMapSave(saveNum);
 // This will clear the saved gamestate / obj_save.save.
 // This is used when exiting a level or the game ends, we don't want
 // the player to skip the beginning cutscene if there is a gamestate / obj_save.save
