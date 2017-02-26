@@ -709,6 +709,20 @@ if (showPauseScreen) {
     draw_set_valign(fa_top);
 }
 
+// Player death screen and restart
+if (obj_player.isDead &amp;&amp; !showRespawnScreen) {
+    showRespawnScreen = true;
+    scr_createGuiText(centerX, centerY, "You Died", fa_center, fa_middle,
+                                        fnt_big, c_white, 1, 1, 1, 5);
+}
+
+if (showRespawnScreen) {
+    scr_setGUIForegroundImage(spr_black);
+    if (scr_guiForegroundFadeOut(8)) {
+        scr_restartMap();
+    }
+}
+
 // Cutscene round image gui
 if (showForegroundImage) {
     if (foregroundImage != noone) {

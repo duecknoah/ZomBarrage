@@ -59,7 +59,7 @@ outroPath = noone; // path used when exiting the level, the path actually used i
 event_inherited();
 
 // If at end of path, kick player out of vehicle, begin zombie spawning!
-if (isLocked &amp;&amp; path_position == 1 &amp;&amp; interactEntity == obj_player) {
+if (isLocked &amp;&amp; path_position == 1 &amp;&amp; interactEntity == obj_player &amp;&amp; !obj_player.isDead) {
     isLocked = false; // unlock to get player out
     scr_charSeparate(obj_player, id);
     isLocked = true; // re-lock to prevent getting back in until end of mission

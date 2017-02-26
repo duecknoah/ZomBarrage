@@ -1,0 +1,23 @@
+Improvements to make:
+- make it so you dont loot so much, adjust loot rank
+- show total points in upgrade menu
+- improve pause screen, make it pause instantly
+- Find a way to make weapons spawn in a cool way
+- allow loot keys and flashlights to have their own special inventory slots
+- make health of zombies increase more higher as waves go on
+- make collatoral damage not be infinite
+- increase time between waves
+
+Bugs to fix:
+- make it so weapon ammo can stack when looting
+- heavy zombie moving towards player while throwing rock or punch while in backup pathfinding
+- SWORD DOESN'T WORK!!!3
+- FireLights not dissappearing on zombie kill sometimes
+- Buildings not staying faded, usually after looting
+- prevent allowing picking up two of the same weapon, this happens when you have a gun in the second slot while the first slot is empty. Then when you pickup the same weapon as in slot 2, it will go in slot 1 and not stack when it should.
+
+To make maps more challenging, make them more tight spaced.
+
+upgrade idea: faster shooting speed (temporary)
+
+- maybe rather than creating obj_pointText entitys on the ground, maybe make them appear in the gui right below the upgrades tab. Also maybe show points on the outside of the upgrade tab as well

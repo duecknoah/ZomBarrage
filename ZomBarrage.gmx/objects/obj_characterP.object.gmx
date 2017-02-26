@@ -253,7 +253,6 @@ if (hp &lt;= 0) {
             // If player
             // create blood pool
             instance_create(x, y, obj_bloodPool);
-            gameOver = true; // since player is dead, set it to game over
         break;
         case obj_civilian:
             // end path, destroy self (which creates the dead body in destroy event)
@@ -300,7 +299,8 @@ img_index += img_speed * global.timeScale;
 if (img_index &gt; img_number) {
     img_index = 0;
 }
-// Make image speed go off timescale
+// Make img_speed and image speed both go off timescale
+//img_speed = img_speed * global.timeScale;
 image_speed = image_speed * global.timeScale;
 
 var bobHeight = 0.15; //def 0.15

@@ -254,7 +254,7 @@ if (!isDead &amp;&amp; !obj_guiController.showConsole) {
                 case 0: // fists
                    if (mouse_check_button_pressed(mb_left)) {
                         // If not already animating punch / punching
-                        if (img_index == 0) {
+                        if (img_index == 0 &amp;&amp; shootDelay[selectedSlot] &lt;= 0) {
                             var swingOtherArm = round(random(1));
                             if (swingOtherArm) {
                                 spr_index = spr_PlayerFists2;
@@ -272,35 +272,35 @@ if (!isDead &amp;&amp; !obj_guiController.showConsole) {
                 break;
                 case 1: //"Wimps Pistol"
                    if (mouse_check_button_pressed(mb_left)
-                        &amp;&amp; shootDelay[selectedSlot] &lt;= 0) {
+                   &amp;&amp; shootDelay[selectedSlot] &lt;= 0) {
                         state = "shoot Wimps Pistol";
                    }
                    else state = "Wimps Pistol";
                 break;
                 case 2: //"M16"
                     if (mouse_check_button(mb_left)
-                        &amp;&amp; shootDelay[selectedSlot] &lt;= 0) {
+                    &amp;&amp; shootDelay[selectedSlot] &lt;= 0) {
                         state = "shoot M16";
                     }
                     else state = "M16";
                 break;
                 case 3: //"Rocket Launcher"
                     if (mouse_check_button_pressed(mb_left)
-                        &amp;&amp; shootDelay[selectedSlot] &lt;= 0) {
+                    &amp;&amp; shootDelay[selectedSlot] &lt;= 0) {
                         state = "shoot Rocket Launcher";
                     }
                     else state = "Rocket Launcher";
                 break; 
                 case 4: //"Flashlight"
                     if (mouse_check_button_pressed(mb_left)
-                        &amp;&amp; shootDelay[selectedSlot] &lt;= 0) {
+                    &amp;&amp; shootDelay[selectedSlot] &lt;= 0) {
                         state = "toggle Flashlight";
                     }
                     else state = "Flashlight";
                 break;
                 case 5: //"Loot Key"
                     if (mouse_check_button_pressed(mb_left)
-                        &amp;&amp; shootDelay[selectedSlot] &lt;= 0) {
+                    &amp;&amp; shootDelay[selectedSlot] &lt;= 0) {
                         state = "Loot Key use";
                     }
                     else state = "Loot Key";
@@ -342,26 +342,26 @@ if (!isDead &amp;&amp; !obj_guiController.showConsole) {
                 case 7: //"Molotov Cocktail"
                     // If clicked and player still has more ammo
                     if (mouse_check_button_pressed(mb_left)
-                        &amp;&amp; inventoryAmmo[selectedSlot] &gt; 0
-                        &amp;&amp; shootDelay[selectedSlot] &lt;= 0) {
+                    &amp;&amp; inventoryAmmo[selectedSlot] &gt; 0
+                    &amp;&amp; shootDelay[selectedSlot] &lt;= 0) {
                         state = "throw Molotov Cocktail";
                     }
                 break;
                 case 8: //"Frag Grenade"
                     // If clicked and player still has more ammo
                     if (mouse_check_button_pressed(mb_left)
-                        &amp;&amp; inventoryAmmo[selectedSlot] &gt; 0
-                        &amp;&amp; shootDelay[selectedSlot] &lt;= 0) {
+                    &amp;&amp; inventoryAmmo[selectedSlot] &gt; 0
+                    &amp;&amp; shootDelay[selectedSlot] &lt;= 0) {
                         state = "throw Frag Grenade";
                     }
                 break;
                 case 9: //"Iron Sword"
                     // If clicked and not currently animating swing, allow swinging sword
                     if (mouse_check_button_pressed(mb_left) 
-                        &amp;&amp; img_index == 0
-                        &amp;&amp; shootDelay[selectedSlot] &lt;= 0) {
+                    &amp;&amp; img_index == 0
+                    &amp;&amp; shootDelay[selectedSlot] &lt;= 0) {
                         state = "swing Iron Sword";
-                        img_index = 0;
+                        img_index = 0.1;
                         img_speed = 0.20 * global.timeScale;
                         img_number = sprite_get_number(spr_PlayerIronSword); // total number of images in sprite (-1 because its an array, so its the element of the array)
                         shootDelay[selectedSlot] = (img_number * img_index) / room_speed;
@@ -370,7 +370,7 @@ if (!isDead &amp;&amp; !obj_guiController.showConsole) {
                 case 10: //"Chainsaw"
                     // If mouse pressed and is cooled-down after use, startup chainsaw blades
                     if (mouse_check_button_pressed(mb_left)
-                        &amp;&amp; shootDelay[selectedSlot] &lt;= 0) {
+                    &amp;&amp; shootDelay[selectedSlot] &lt;= 0) {
                         state = "run Chainsaw";
                         img_index = 0;
                         img_speed = 0.5 * global.timeScale;

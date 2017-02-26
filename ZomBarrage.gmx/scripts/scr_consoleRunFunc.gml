@@ -33,9 +33,7 @@ switch (_inputLength) {
         }
         //restart
         if (_input[| 0] == "restart") {
-            //room_restart();
-            obj_save.doLoadSaveIntoGame = true; // load save into game after map loads
-            scr_loadSave(obj_save.saveNum);
+            scr_restartMap();
             return 0;
         }
         //clear (clears the console)

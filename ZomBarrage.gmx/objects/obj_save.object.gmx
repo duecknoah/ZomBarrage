@@ -95,17 +95,40 @@ if (checkSavesTimer &lt;= 0) {
 else {
     checkSavesTimer --;
 }
-
-// When loading a new map, load game data
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>// When loading a new map, load game data
 // If not at main menu
 if (room_get_name(room) != room_get_name(rm_Menu)) {
+    // First check if ds_exists, if not, create it
+    if (!ds_exists(saveDynamic, ds_type_list)) {
+        saveDynamic = ds_list_create();
+    }
     // If the save dynamic is empty (not loaded, this is 
     // always the case after game_load() as it doesn't save
     // dynamically created resources
-    if (ds_exists(saveDynamic, ds_type_list)) {
-        if (ds_list_empty(saveDynamic)) {
-            scr_loadSaveIntoGame(saveNum);
-        } 
+    if (ds_list_empty(saveDynamic)) {
+        scr_loadSaveIntoGame(saveNum);
     }
 }
 </string>

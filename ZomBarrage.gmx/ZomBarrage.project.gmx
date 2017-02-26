@@ -88,7 +88,7 @@
       <sprite>sprites\spr_lootSwap</sprite>
       <sprite>sprites\spr_onFireGui</sprite>
       <sprite>sprites\spr_mapMenuGui</sprite>
-      <sprites name="Map Imagse">
+      <sprites name="Map Images">
         <sprite>sprites\spr_mapTown</sprite>
       </sprites>
       <sprite>sprites\spr_locked</sprite>
@@ -307,6 +307,8 @@
       <script>scripts\scr_loadSaveIntoGame.gml</script>
       <script>scripts\scr_reSave.gml</script>
       <script>scripts\scr_deleteMapSave.gml</script>
+      <script>scripts\scr_mapSaveExists.gml</script>
+      <script>scripts\scr_restartMap.gml</script>
       <scripts name="old">
         <script>scripts\scr_old_checkSaves.gml</script>
         <script>scripts\scr_old_createSave.gml</script>

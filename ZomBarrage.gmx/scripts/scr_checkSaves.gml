@@ -12,14 +12,6 @@ for (var i = 0; i < 3; i++) {
         obj_save.saveUsed[i] = false;
         continue;
     }
-    
-    /*
-    // If static game save.ini is not there, game save is not considered to be used
-    if (!file_exists(dir + saveName)) {
-        obj_save.saveUsed[i] = false;
-        continue;
-    }
-    */
 
     // If dynamic game saveDynamic.ini is not there, game save is not considered to be used
     if (file_exists(dir + dynamicSaveName)) {

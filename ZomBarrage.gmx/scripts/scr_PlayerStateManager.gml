@@ -21,12 +21,17 @@ if (!obj_guiController.showUpgradeScreen) {
             // Once done animating punch, return to default state
             // show_message(string(image_index) + " " + string(image_number) + " " + string(sprite_get_number(spr_PlayerFists)) + " " + string(sprite_index));
             if (img_index == 0) {
-                var _x = x + lengthdir_x(16, rotation + 90);
-                var _y = y + lengthdir_y(16, rotation + 90);
-                scr_hurtRadius(_x, _y, 2, 16, currentWeapon[? "damage"], false, false, true);
                 state = "default";
                 img_index = 0; 
                 img_speed = 0;
+            }
+            
+            // create hurt radius at frame 2 in the animation
+            if (img_index >= 2 && shootDelay[selectedSlot] <= 0) {
+                var _x = x + lengthdir_x(16, rotation + 90);
+                var _y = y + lengthdir_y(16, rotation + 90);
+                scr_hurtRadius(_x, _y, 2, 16, currentWeapon[? "damage"], false, false, true);
+                shootDelay[selectedSlot] = 0.15;
             }
             draw_sprite_ext(spr_index, img_index, x, y, drawScale, drawScale, rotation, c_white, 1);
         break;
@@ -159,11 +164,12 @@ if (!obj_guiController.showUpgradeScreen) {
             // Once done animating sword, return to default state
             // show_message(string(image_index) + " " + string(image_number) + " " + string(sprite_get_number(spr_PlayerFists)) + " " + string(sprite_index));
             // If on frame where player swung sword, create hurt radius
-            if (img_index == 1) {
+            if (img_index >= 1 && shootDelay[selectedSlot] <= 0) {
                 var _rotOff = 30;
                 var _x = x + lengthdir_x(16, rotation + 90 + _rotOff);
                 var _y = y + lengthdir_y(16, rotation + 90 + _rotOff);
                 scr_hurtRadius(_x, _y, currentWeapon[? "damage"], currentWeapon[? "radius"], currentWeapon[? "force"], false, false, true);
+                shootDelay[selectedSlot] = 0.5;
             }
             // When at end of animation, return to default state 
             if (img_index == 0) {    
