@@ -16,7 +16,7 @@ The game works with a wave-type system where zombies will spawn in 'waves'. Each
 This a clone of the Cut Off Game Project when the Cut Off Game Project was in early development. However, in this version, I decided to branch off from where I was in the Cut Off Game Project and change it into a wave survivor game. Rather than being a story-driven game, I want to start off simple and possibly take the assets from this one and implement it into the Cut Off Game in the future.
 
 ### Other Links:
-- Gamejolt: http://bit.ly/2lyCk9m
-- Itchio: http://bit.ly/2lZmELO
-- Youtube: http://bit.ly/2g5GEZz
-- Twitter: http://bit.ly/2msQAxj
+- Gamejolt: http://gamejolt.com/games/zombarrage/234208
+- Itchio: https://dojoblue.itch.io/zombarrage
+- Youtube: https://www.youtube.com/channel/UCrO_L_XRzv6uyk6NNK6z6sg
+- Twitter: https://twitter.com/dojoblue25
