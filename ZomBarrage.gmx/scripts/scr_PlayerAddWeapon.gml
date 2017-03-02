@@ -17,20 +17,32 @@ has the weapon being picked up, just add the ammo
 from it
 */
 
-for(var i=0; i<array_length_1d(obj_player.inventory); i++) {
+// First check if we find the same weapon already in the players
+// inventory, if so, we'll stack it
+for (var i = 0; i < array_length_1d(obj_player.inventory); i ++) {
+    // If matching slot
+    if (inventory[i] == weapon[? "name"]) {
+        obj_player.inventory[i] = weapon[? "name"];
+        obj_player.inventoryAmmo[i] += weapon[? "ammo"]; // add ammo
+        // Turn on flashlight if it is one
+        if (weapon[? "name"] = "Flashlight") {
+            obj_player.flashLightOn = true;
+        }
+        return 0; 
+    }
+}
+
+// If no stackable slots were found, then check for an empty slot
+for(var i = 0; i < array_length_1d(obj_player.inventory); i ++) {
     // If empty slot
     if (inventory[i] == "fists") {
         obj_player.inventory[i] = weapon[? "name"];
-        obj_player.inventoryAmmo[i] = weapon[? "ammo"];
+        obj_player.inventoryAmmo[i] = weapon[? "ammo"]; // set ammo
         // Turn on flashlight if it is one
         if (weapon[? "name"] = "Flashlight") {
-            flashLightOn = true;
+            obj_player.flashLightOn = true;
         }
         return 1;
-    }
-    else if (inventory[i] == weapon[? "name"]) {
-        obj_player.inventoryAmmo[i] += weapon[? "ammo"];
-        return 0;
     }
 }
 

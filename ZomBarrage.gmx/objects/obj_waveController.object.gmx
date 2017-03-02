@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>show_debug_message(object_get_name(object_index) + " created");
 
-global.delayBetweenWaves = 5; // delay between waves in seconds
+global.delayBetweenWaves = 15; // delay between waves in seconds
 global.delayBetweenWavesTimer = global.delayBetweenWaves;
 global.waveCompleted = false; // is true when wave is just completed, false during a wave
 global.currentWave = 0;
