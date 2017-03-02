@@ -34,12 +34,19 @@ global.currentWave = 0;
 global.amtOfWaves = 5; // the amount of waves in order to complete the level (def 5)
 global.allWavesDone = false; // is the waves all completed in this level?
 
+// Zombie wave variables
 zombiesForWave = 0; // how many more zombies for this wave, increases over time
 zombiesIncForWave = 20; // how many zombies to increment per wave (def 20)
 zombieSpawnDelay = 1; // 1 second delay per zombie spawn
 zombieSpawnDelayTimer = 0;
 zombiesSpawned = 0; // keeps track of the amount of zombies spawned so far in the current round
-heavyZombieSpawnChance = 100; // The higher the number, the less chance (ex. if 1000, the chance is 1 in 1000)
+// Spawn chances
+heavyZombieSpawnChance = 1 / 100; // 0 - no chance of spawn, 1 - 100% chance of spawn
+runnerZombieSpawnChance = 1 / 25; // 0 - no chance of spawn, 1 - 100% chance of spawn
+// Spawn chance increases (the amount the chance of spawning increases each round)
+heavyZombieSpawnChanceIncrease = 1 / 100;
+runnerZombieSpawnChanceIncrease = 1 / 25;
+// Other boolean settings
 initWave = false; // when true, activates init sequence for wave (when timer is up)
 preventSpawn = true; // when true, zombies will not spawn
 doErrorCheck = true; // does error checks initially, then doesn't after first step
@@ -87,6 +94,10 @@ if (!global.allWavesDone) {
             initWave = false;
             global.waveCompleted = false;
             zombiesSpawned = 0;
+            // Increase spawn chances of each zombie by their specified
+            // amount each round
+            heavyZombieSpawnChance += heavyZombieSpawnChanceIncrease;
+            runnerZombieSpawnChance += runnerZombieSpawnChanceIncrease;
         }
         
         // If not at total zombies for this wave yet   
@@ -98,8 +109,11 @@ if (!global.allWavesDone) {
                     spawnPoint = instance_find(obj_zombieSpawn, round(random(instance_number(obj_zombieSpawn))));
                     // Choose what to spawn there
                     
-                    if (round(random_range(1, heavyZombieSpawnChance)) == 1) {
+                    if (random(1) &gt;= (1 - heavyZombieSpawnChance)) {
                         instance_create(spawnPoint.x, spawnPoint.y, obj_heavyZombie);
+                    }
+                    else if (random(1) &gt;= (1 - runnerZombieSpawnChance)) {
+                        instance_create(spawnPoint.x, spawnPoint.y, obj_runnerZombie);
                     }
                     else {
                         instance_create(spawnPoint.x, spawnPoint.y, obj_zombie);

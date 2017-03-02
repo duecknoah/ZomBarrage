@@ -86,6 +86,21 @@ show_debug_message(object_get_name(object_index) + " created");
     // Create static particle object
     instance_create(x, y, obj_zombieGore);
     show_debug_message("Zombie Gore particle systems active");
+// RunnerZombie Gore
+    runnerZombieGore = part_system_create();
+    runnerZombieGore = part_type_create();
+    part_system_depth(runnerZombieGore, -1);
+    part_type_sprite(runnerZombieGore, spr_runnerZombieGore, false, false, true);
+    //part_type_orientation(bloodSpurt, 0, 360, 0, 0, 1);
+    part_type_scale(runnerZombieGore, 1.25, 1.25);
+    part_type_life(runnerZombieGore, 25 * room_speed, 35 * room_speed);
+    part_type_orientation(runnerZombieGore, 0, 360, 0, 0, 0);
+    part_type_alpha2(runnerZombieGore, 1, 0);
+    part_type_direction(runnerZombieGore, 0, 360, 0, 0);
+    part_type_speed(runnerZombieGore, 1, 2, -0.05, 0);
+    // Create static particle object
+    instance_create(x, y, obj_runnerZombieGore);
+    show_debug_message("RunnerZombie Gore particle systems active");
 // Entity on Fire particle (entity on fire)
     fireSpark = part_system_create();
     fireSpark = part_type_create();
@@ -134,6 +149,10 @@ if (part_system_exists(bloodSpurt)) {
 if (part_system_exists(zombieGore)) {
     part_emitter_destroy_all(zombieGore);
     part_system_destroy(zombieGore);
+}
+if (part_system_exists(runnerZombieGore)) {
+    part_emitter_destroy_all(runnerZombieGore);
+    part_system_destroy(runnerZombieGore);
 }
 if (part_system_exists(fireSpark)) {
     part_emitter_destroy_all(fireSpark);

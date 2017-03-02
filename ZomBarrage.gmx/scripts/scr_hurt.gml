@@ -26,5 +26,16 @@ with (_id) {
     }
 }
 
-scr_createBloodSpurtBurst(id.x, id.y, amt);
-scr_createZombieGoreBurst(id.x, id.y, ceil(clamp(amt / 10, 0, 8)));
+scr_createBloodSpurtBurst(_id.x, _id.y, amt);
+
+// Create gore based on object_index of the character
+switch (_id.object_index) {
+    case obj_zombie:
+        scr_createZombieGoreBurst(_id.x, _id.y, ceil(clamp(amt / 4, 0, 58)));
+    break;
+    case obj_runnerZombie:
+        scr_createRunnerZombieGoreBurst(_id.x, _id.y, ceil(clamp(amt / 4, 0, 58)));
+    break;
+    default: 
+        scr_createZombieGoreBurst(_id.x, _id.y, ceil(clamp(amt / 4, 0, 58)));
+}

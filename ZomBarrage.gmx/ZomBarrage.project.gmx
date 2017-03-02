@@ -41,12 +41,15 @@
     </sprites>
     <sprites name="Zombie">
       <sprite>sprites\spr_zombie</sprite>
+      <sprite>sprites\spr_runnerZombie</sprite>
       <sprite>sprites\spr_heavyZombieWalk</sprite>
       <sprite>sprites\spr_heavyZombieSwing</sprite>
       <sprite>sprites\spr_heavyZombieThrow</sprite>
       <sprite>sprites\spr_zombieCrawler</sprite>
       <sprite>sprites\spr_zombieGore</sprite>
+      <sprite>sprites\spr_runnerZombieGore</sprite>
       <sprite>sprites\spr_zombieCollision</sprite>
+      <sprite>sprites\spr_runnerZombieCollision</sprite>
       <sprite>sprites\spr_heavyZombieCollision</sprite>
       <sprite>sprites\spr_zombieSpawn</sprite>
       <sprite>sprites\spr_navGrid</sprite>
@@ -330,6 +333,7 @@
     </scripts>
     <scripts name="Particles">
       <script>scripts\scr_createZombieGoreBurst.gml</script>
+      <script>scripts\scr_createRunnerZombieGoreBurst.gml</script>
       <script>scripts\scr_createBloodSpurtBurst.gml</script>
     </scripts>
   </scripts>
@@ -360,6 +364,7 @@
         <object>objects\obj_zombieP</object>
         <object>objects\obj_zombie</object>
         <object>objects\obj_heavyZombie</object>
+        <object>objects\obj_runnerZombie</object>
       </objects>
       <objects name="Projectile">
         <object>objects\obj_projectileP</object>
@@ -409,6 +414,7 @@
       <objects name="static">
         <object>objects\obj_bloodSpurt</object>
         <object>objects\obj_zombieGore</object>
+        <object>objects\obj_runnerZombieGore</object>
       </objects>
       <objects name="dynamic">
         <object>objects\obj_rocketExplosion</object>

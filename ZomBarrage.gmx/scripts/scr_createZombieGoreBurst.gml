@@ -1,5 +1,5 @@
 ///scr_createZombieGoreBurst(x, y, _partAmt);
-// Creates zombie gore at the specified pos
+// Creates Zombie gore at the specified pos
 var _x = argument0;
 var _y = argument1;
 var _partAmt = argument2;

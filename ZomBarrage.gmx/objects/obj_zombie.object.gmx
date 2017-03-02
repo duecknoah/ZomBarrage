@@ -61,9 +61,7 @@ if (round(random(lootKeyChance)) == 0) {
     scr_createWeapon(x, y, scr_WeaponNameToId("Loot Key"), 1);
 }
 
-scr_createZombieGoreBurst(x, y, round(random_range(4, 8)));
 scr_createZombieBodyAt(x, y, rotation + 90);
-
 var points = 1;
 scr_createPointsText(x, y, "+" + string(points), c_lime);
 obj_player.points += points; // give points to player on death
@@ -124,7 +122,7 @@ if (isCrawler) {
             <kind>1</kind>
             <string>event_inherited();
 if (!other.isHurt &amp;&amp; !obj_guiController.showConsole) {
-    scr_hurt(other.id, 3); // do 5 damage to the player
+    scr_hurt(other.id, 3); // do 3 damage to the player
 }
 </string>
           </argument>

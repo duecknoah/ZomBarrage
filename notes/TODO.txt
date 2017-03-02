@@ -7,6 +7,7 @@ Improvements to make:
 - make health of zombies increase more higher as waves go on
 - make collatoral damage not be infinite
 - increase time between waves
+- Make 'sunrise' at end of wave, and 'sunset' at start of wave 
 
 Bugs to fix:
 - make it so weapon ammo can stack when looting
@@ -14,9 +15,17 @@ Bugs to fix:
 - FireLights not dissappearing on zombie kill sometimes
 - Buildings not staying faded, usually after looting
 - prevent allowing picking up two of the same weapon, this happens when you have a gun in the second slot while the first slot is empty. Then when you pickup the same weapon as in slot 2, it will go in slot 1 and not stack when it should.
+- Possible memory leaks due to static particle systems not destroying particle emitters at end of room / game (first check if obj_particleIndex dose this already)
 
 To make maps more challenging, make them more tight spaced.
 
 upgrade idea: faster shooting speed (temporary)
 
 - maybe rather than creating obj_pointText entitys on the ground, maybe make them appear in the gui right below the upgrades tab. Also maybe show points on the outside of the upgrade tab as well
+
+
+
+
+Quick notes:
+Make it so the backup pathfinding of the runnerZombie doesn't make it go super slow compared to its normal speed
+Ammo can be a problem, maybe power ups that drop that solve that??
