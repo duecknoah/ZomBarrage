@@ -29,6 +29,8 @@ for(i=0; i<2; i++) {
     ammoY += 36 * _scale;
 }
 
+//draw_sprite_ext(spr_itemWeapon, 5, device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), _scale / 2, _scale / 2, 0, c_white, 1);
+
 // Shoot delay cooldown
 
 for(i=0; i<2; i++) {

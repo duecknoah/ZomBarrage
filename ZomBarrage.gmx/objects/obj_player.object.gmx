@@ -33,9 +33,13 @@ event_inherited();
     // Inventory Weapons
         inventory[0] = "fists";
         inventory[1] = "fists";
+        // Secondary
+        inventory[2] = "fists";
     // inventory ammo (corresponding with inventory items)
         inventoryAmmo[0] = 0;
         inventoryAmmo[1] = 0;
+        // Secondary
+        inventoryAmmo[2] = 0;
 
 // State variables
     state = "default";

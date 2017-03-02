@@ -3,7 +3,7 @@
 
 var _x = argument0;
 var _y = argument1;
-var _dir = round((argument2) / 90); // snap into 4 different directions
+var _dir = floor((argument2) / 90); // snap into 4 different directions
 
 var _wTot = background_get_width(tile_zombieDead);
 var _hTot = background_get_height(tile_zombieDead);
