@@ -75,6 +75,9 @@ event_inherited();
     exploDmg = 0; // additive explosive damage
     bulletDmg = 0; // additive bullet damage
     playerSpd = 1; // max speed of movement
+    healSpd = 1; // how much the player heals per second
+    safeHpCoolDownTime = 2;// how many seconds it takes after being hurt in order to start healing
+    safeHpCoolDownTimer = safeHpCoolDownTime; 
     // Boosters (things that give stats a boost for a certain amount of time within the map)
     
     
@@ -246,6 +249,23 @@ if (!isDead &amp;&amp; !obj_guiController.showConsole) {
         xSpd *= slowDown;
     }
     x += xSpd;
+    
+    // Healing over time when the player hasn't been hit after 
+    // &lt;safeHpCoolDownTime&gt; seconds.
+    if (isHurt) {
+        // If hurt, reset timer
+        safeHpCoolDownTimer = safeHpCoolDownTime;
+    }
+    else {
+        // If no longer hurt, begin countdown until auto-healing
+        if (safeHpCoolDownTimer &gt; 0) {
+            safeHpCoolDownTimer -= 1 / room_speed;
+        }
+        else {
+        // If timer is up, begin auto-healing player
+            hp = clamp(hp + (healSpd / room_speed), 0, maxHp);
+        }
+    }
     
     event_inherited(); // run entity functions
     
