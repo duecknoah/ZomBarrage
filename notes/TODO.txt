@@ -8,6 +8,10 @@ Improvements to make:
 - make collatoral damage not be infinite
 - increase time between waves
 - Make 'sunrise' at end of wave, and 'sunset' at start of wave 
+- Make it so where you click is where the grenade / molotov goes
+- Make it show weapon damage on gun when holding it
+- Make it so each zombie begins spawning at a specific wave, rather than all starting at wave 1
+- Make it so each gun has a maxstack amount. You could use this variable with lootRank to lerp the ammo between 0 and the max amount
 
 Bugs to fix:
 - make it so weapon ammo can stack when looting

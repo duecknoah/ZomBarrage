@@ -27,10 +27,20 @@ for(var _i = 0; _i < array_length_1d(_area.inventory); _i ++) {
             var holdW = obj_player.inventory[obj_player.selectedSlot];
             var holdA = obj_player.inventoryAmmo[obj_player.selectedSlot];
             
-            obj_player.inventory[obj_player.selectedSlot] = _area.inventory[_i];
-            obj_player.inventoryAmmo[obj_player.selectedSlot] = _area.inventoryAmmo[_i];
-            _area.inventory[_i] = holdW;
-            _area.inventoryAmmo[_i] = holdA;
+            // If the player is selecting the same weapon as the one being swapped with
+            if (obj_player.inventory[obj_player.selectedSlot] == _area.inventory[_i]) {
+                obj_player.inventoryAmmo[obj_player.selectedSlot] += _area.inventoryAmmo[_i];
+                _area.inventory[_i] = "fists";
+                _area.inventoryAmmo[_i] = 0;
+                
+            }
+            else {
+            // Else if it is a different weapon, just swap it
+                obj_player.inventory[obj_player.selectedSlot] = _area.inventory[_i];
+                obj_player.inventoryAmmo[obj_player.selectedSlot] = _area.inventoryAmmo[_i];
+                _area.inventory[_i] = holdW;
+                _area.inventoryAmmo[_i] = holdA;
+            }
         }
     }
 }

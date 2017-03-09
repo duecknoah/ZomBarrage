@@ -61,7 +61,7 @@ shootDelayMax[1] = 0; // stores the highest value when shootdelay of player is n
 upgradeScreenAlpha = 1;
 upgradeScreenType = "perma"; // show permanent category upgrades by default
 upgradeButtonAlpha = 1;
-pauseScreenAlpha = 0.5;
+pauseScreenAlpha = 1;
 pauseButtonAlpha = 1;
 waveBarGuiAlpha = 1;
 waveCompletionScreenAlpha = 1;
@@ -271,13 +271,14 @@ if (showWaveBar) {
     draw_set_valign(fa_top);
 }
 
-// Draw Upgrade button
+// Draw Upgrade button (and total points)
 if (showUpgradeButton) {
     var text = "";
     var xx = centerX / 2 - (sprite_get_width(spr_upgradeBar) * guiScale / 2);
     var yy = 0;
     
-    if (scr_buttonGuiSpriteText(xx, yy, spr_upgradeBar, guiScale, "UPGRADES", c_white, upgradeButtonAlpha) == 2
+    // Draw upgrade button (with line break in front to put points above in the end)
+    if (scr_buttonGuiSpriteText(xx, yy, spr_upgradeBar, guiScale, "#UPGRADES", c_white, upgradeButtonAlpha) == 2
     || keyboard_check_pressed(vk_tab)) {
         // Toggle upgrades if button pressed
         if (showUpgradeScreen) {
@@ -293,22 +294,29 @@ if (showUpgradeButton) {
             mouse_clear(mb_any); // prevent user from accidently buying something instantly
         }
     }
+    // Draw total points
+    draw_set_color(c_yellow);
+    draw_text(xx + 20, yy, "Points: " + string(obj_player.points));
+    draw_set_color(c_white);
+    yy += sprite_get_height(spr_upgradeBar) * guiScale;
 }
 
 // Draw Pause Button
 if (showPauseButton) {
     xx = centerX + (centerX / 3);
     yy = 0;
-    if (scr_buttonGuiSpriteText(xx, yy, spr_upgradeBar, guiScale, "PAUSE", c_white, pauseButtonAlpha) == 2
+    if (scr_buttonGuiSpriteText(xx, yy, spr_upgradeBar, guiScale, "#PAUSE", c_white, pauseButtonAlpha) == 2
     || keyboard_check_pressed(vk_escape)) {
         // Toggle pausing
         if (!showPauseScreen) {
             scr_setTimeScale(0);
             showPauseScreen = true;
+            scr_setGUIForegroundAlpha(0.75);
         }
         else {
             scr_setTimeScale(1);
             showPauseScreen = false;
+            scr_setGUIForegroundAlpha(0);
         }
     }
 }
@@ -685,30 +693,6 @@ if (showUpgradeScreen) {
    }
 }
 
-// Pause Screen
-if (showPauseScreen) {
-    // Fade in background alpha based of global.timeScale fade out speed
-    var _backgroundAlpha = lerp(0, 0.5, 1 - global.timeScale);
-    _backgroundAlpha -= pauseScreenAlpha;
-    
-    // Background col
-    draw_set_colour(c_black);
-    draw_set_alpha(_backgroundAlpha);
-    draw_rectangle(0, 0, view_wport[0], view_hport[0], 0);
-    draw_set_alpha(1);
-    
-    // Pause Text
-    draw_set_colour(c_white);
-    draw_set_halign(fa_center);
-    draw_set_valign(fa_middle);
-    draw_set_alpha(pauseScreenAlpha);
-    draw_text(centerX, centerY, "PAUSED");
-    draw_text(centerX, centerY + 128, "Press 'ESC' To Resume");
-    draw_set_alpha(1);
-    draw_set_halign(fa_left);
-    draw_set_valign(fa_top);
-}
-
 // Player death screen and restart
 if (obj_player.isDead &amp;&amp; !showRespawnScreen) {
     showRespawnScreen = true;
@@ -733,6 +717,43 @@ if (showForegroundImage) {
         
         draw_sprite_ext(foregroundImage, 0, 0, 0, stretchedW, stretchedH, 0, c_white, foregroundImageAlpha);
     }
+}
+
+// Pause Screen
+if (showPauseScreen) {
+    var xx = centerX;
+    var yy = centerY - 128;
+    // Set background
+    scr_setGUIForegroundImage(spr_black);
+    
+    // Pause Text
+    draw_set_colour(c_white);
+    draw_set_halign(fa_center);
+    draw_set_valign(fa_middle);
+    draw_set_alpha(pauseScreenAlpha);
+    draw_set_font(fnt_big);
+    draw_text(xx, yy, "PAUSED");
+    draw_set_font(fnt_normal);
+    yy += 64;
+    draw_text(xx, yy, "Press 'ESC' To Resume");
+    yy += 64;
+    
+    // Buttons
+    var xoff = -(sprite_get_width(spr_buttonMenu) * guiScale / 2);
+    
+    if (scr_buttonGuiSpriteText(xx + xoff, yy, spr_buttonMenu, guiScale, "Resume", c_white) == 2) {
+        showPauseScreen = false;
+        scr_setGUIForegroundAlpha(0);
+        scr_setTimeScale(1);
+    }
+    yy += 96;
+    if (scr_buttonGuiSpriteText(xx + xoff, yy, spr_buttonMenu, guiScale, "Quit to Main Menu", c_white) == 2) {
+        room_goto(rm_Menu);
+    }
+    
+    draw_set_alpha(1);
+    draw_set_halign(fa_left);
+    draw_set_valign(fa_top);
 }
 
 // gui object text drawing

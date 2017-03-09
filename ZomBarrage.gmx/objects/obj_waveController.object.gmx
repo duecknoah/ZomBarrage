@@ -84,7 +84,7 @@ if (doErrorCheck) {
 // If all waves not completed yet
 if (!global.allWavesDone) {
     if (global.delayBetweenWavesTimer &gt;= 0) {
-        global.delayBetweenWavesTimer -= (1 / room_speed);
+        global.delayBetweenWavesTimer -= (1 / room_speed) * global.timeScale;
         initWave = true;
     }
     else {
