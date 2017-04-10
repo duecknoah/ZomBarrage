@@ -49,12 +49,12 @@ _currentStat = clamp(_currentStat, _minStat, _maxStat);
 
 if (_currentStat == _minStat) {
     _desc += " (at Minimum Level)";
-    _cost = "";
+    _cost = -1;
 }
 
 if (_currentStat == _maxStat) {
     _desc += " (at Maximum Level)";
-    _cost = "";
+    _cost = -1;
 }
 
 // Draw icon
@@ -65,6 +65,8 @@ var _yOff = 1 * _scale;
 draw_text(_x + _xOff, _y + _yOff, _desc);
 
 // Draw Cost (amt of points)
-var _xOff = 141 * _scale;
-var _yOff = 1 * _scale; 
-draw_text(_x + _xOff, _y + _yOff , string(_cost) + " points");
+if (_cost != -1) {
+    var _xOff = 141 * _scale;
+    var _yOff = 1 * _scale; 
+    draw_text(_x + _xOff, _y + _yOff , string(_cost) + " points");
+}

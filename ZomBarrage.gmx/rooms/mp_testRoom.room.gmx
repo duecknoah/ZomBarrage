@@ -53,7 +53,7 @@
   <instances>
     <instance objName="obj_mapObjectsInit" x="64" y="64" name="inst_A043EBB6" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_player" x="416" y="160" name="inst_8B24C064" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="b_BasicHouse" x="416" y="192" name="inst_60D5F399" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_airdropCrate" x="448" y="-256" name="inst_6993CFA4" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="b_BasicHouse" x="576" y="352" name="inst_2EB2930F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="b_GreenBuilding" x="96" y="192" name="inst_2EA7DD92" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="b_WoodBuilding" x="256" y="192" name="inst_A13BAE96" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>

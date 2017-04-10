@@ -2,26 +2,24 @@
 <sprite>
   <type>0</type>
   <xorig>0</xorig>
-  <yorigin>37</yorigin>
+  <yorigin>0</yorigin>
   <colkind>1</colkind>
   <coltolerance>0</coltolerance>
   <sepmasks>0</sepmasks>
   <bboxmode>0</bboxmode>
   <bbox_left>0</bbox_left>
-  <bbox_right>56</bbox_right>
+  <bbox_right>37</bbox_right>
   <bbox_top>0</bbox_top>
-  <bbox_bottom>74</bbox_bottom>
+  <bbox_bottom>17</bbox_bottom>
   <HTile>0</HTile>
   <VTile>0</VTile>
   <TextureGroups>
-    <TextureGroup0>2</TextureGroup0>
+    <TextureGroup0>0</TextureGroup0>
   </TextureGroups>
   <For3D>0</For3D>
-  <width>57</width>
-  <height>75</height>
+  <width>38</width>
+  <height>26</height>
   <frames>
-    <frame index="0">images\spr_inventory_0.png</frame>
-    <frame index="1">images\spr_inventory_1.png</frame>
-    <frame index="2">images\spr_inventory_2.png</frame>
+    <frame index="0">images\spr_lootKeysBar_0.png</frame>
   </frames>
 </sprite>

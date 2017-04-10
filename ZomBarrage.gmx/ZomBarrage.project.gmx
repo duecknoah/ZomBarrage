@@ -3,7 +3,7 @@
   <Configs name="configs">
     <Config>Configs\Default</Config>
   </Configs>
-  <datafiles number="2" name="datafiles">
+  <datafiles number="10" name="datafiles">
     <datafile>
       <name>weapons.json</name>
       <exists>-1</exists>
@@ -21,6 +21,150 @@
       </ConfigOptions>
       <filename>weapons.json</filename>
     </datafile>
+    <datafiles number="10" name="munro1">
+      <datafiles number="10" name="munro">
+        <datafile>
+          <name>.DS_Store</name>
+          <exists>-1</exists>
+          <size>6148</size>
+          <exportAction>2</exportAction>
+          <exportDir></exportDir>
+          <overwrite>0</overwrite>
+          <freeData>-1</freeData>
+          <removeEnd>0</removeEnd>
+          <store>0</store>
+          <ConfigOptions>
+            <Config name="Default">
+              <CopyToMask>9223372036854775807</CopyToMask>
+            </Config>
+          </ConfigOptions>
+          <filename>.DS_Store</filename>
+        </datafile>
+        <datafile>
+          <name>Munro.ttf</name>
+          <exists>-1</exists>
+          <size>28168</size>
+          <exportAction>2</exportAction>
+          <exportDir></exportDir>
+          <overwrite>0</overwrite>
+          <freeData>-1</freeData>
+          <removeEnd>0</removeEnd>
+          <store>0</store>
+          <ConfigOptions>
+            <Config name="Default">
+              <CopyToMask>9223372036854775807</CopyToMask>
+            </Config>
+          </ConfigOptions>
+          <filename>Munro.ttf</filename>
+        </datafile>
+        <datafile>
+          <name>MunroNarrow.ttf</name>
+          <exists>-1</exists>
+          <size>27684</size>
+          <exportAction>2</exportAction>
+          <exportDir></exportDir>
+          <overwrite>0</overwrite>
+          <freeData>-1</freeData>
+          <removeEnd>0</removeEnd>
+          <store>0</store>
+          <ConfigOptions>
+            <Config name="Default">
+              <CopyToMask>9223372036854775807</CopyToMask>
+            </Config>
+          </ConfigOptions>
+          <filename>MunroNarrow.ttf</filename>
+        </datafile>
+        <datafile>
+          <name>MunroSmall.ttf</name>
+          <exists>-1</exists>
+          <size>27300</size>
+          <exportAction>2</exportAction>
+          <exportDir></exportDir>
+          <overwrite>0</overwrite>
+          <freeData>-1</freeData>
+          <removeEnd>0</removeEnd>
+          <store>0</store>
+          <ConfigOptions>
+            <Config name="Default">
+              <CopyToMask>9223372036854775807</CopyToMask>
+            </Config>
+          </ConfigOptions>
+          <filename>MunroSmall.ttf</filename>
+        </datafile>
+      </datafiles>
+      <datafiles number="10" name="__MACOSX">
+        <datafiles number="10" name="munro">
+          <datafile>
+            <name>._.DS_Store</name>
+            <exists>-1</exists>
+            <size>82</size>
+            <exportAction>2</exportAction>
+            <exportDir></exportDir>
+            <overwrite>0</overwrite>
+            <freeData>-1</freeData>
+            <removeEnd>0</removeEnd>
+            <store>0</store>
+            <ConfigOptions>
+              <Config name="Default">
+                <CopyToMask>9223372036854775807</CopyToMask>
+              </Config>
+            </ConfigOptions>
+            <filename>._.DS_Store</filename>
+          </datafile>
+          <datafile>
+            <name>._Munro.ttf</name>
+            <exists>-1</exists>
+            <size>82</size>
+            <exportAction>2</exportAction>
+            <exportDir></exportDir>
+            <overwrite>0</overwrite>
+            <freeData>-1</freeData>
+            <removeEnd>0</removeEnd>
+            <store>0</store>
+            <ConfigOptions>
+              <Config name="Default">
+                <CopyToMask>9223372036854775807</CopyToMask>
+              </Config>
+            </ConfigOptions>
+            <filename>._Munro.ttf</filename>
+          </datafile>
+          <datafile>
+            <name>._MunroNarrow.ttf</name>
+            <exists>-1</exists>
+            <size>82</size>
+            <exportAction>2</exportAction>
+            <exportDir></exportDir>
+            <overwrite>0</overwrite>
+            <freeData>-1</freeData>
+            <removeEnd>0</removeEnd>
+            <store>0</store>
+            <ConfigOptions>
+              <Config name="Default">
+                <CopyToMask>9223372036854775807</CopyToMask>
+              </Config>
+            </ConfigOptions>
+            <filename>._MunroNarrow.ttf</filename>
+          </datafile>
+          <datafile>
+            <name>._MunroSmall.ttf</name>
+            <exists>-1</exists>
+            <size>82</size>
+            <exportAction>2</exportAction>
+            <exportDir></exportDir>
+            <overwrite>0</overwrite>
+            <freeData>-1</freeData>
+            <removeEnd>0</removeEnd>
+            <store>0</store>
+            <ConfigOptions>
+              <Config name="Default">
+                <CopyToMask>9223372036854775807</CopyToMask>
+              </Config>
+            </ConfigOptions>
+            <filename>._MunroSmall.ttf</filename>
+          </datafile>
+        </datafiles>
+      </datafiles>
+    </datafiles>
   </datafiles>
   <NewExtensions/>
   <sounds name="sound">
@@ -69,7 +213,6 @@
       <sprite>sprites\spr_PlayerDead</sprite>
       <sprite>sprites\spr_PlayerFlashlight</sprite>
       <sprite>sprites\spr_playerCollision</sprite>
-      <sprite>sprites\spr_sniperRifleScope</sprite>
     </sprites>
     <sprites name="FX">
       <sprite>sprites\spr_explosion</sprite>
@@ -82,13 +225,11 @@
     </sprites>
     <sprites name="Gui">
       <sprite>sprites\spr_WaveBar</sprite>
-      <sprite>sprites\spr_upgradeBar</sprite>
       <sprite>sprites\spr_inventory</sprite>
+      <sprite>sprites\spr_lootKeysBar</sprite>
       <sprite>sprites\spr_healthBar</sprite>
       <sprite>sprites\spr_upgradeBackground</sprite>
-      <sprite>sprites\spr_upgradeTypeTab</sprite>
       <sprite>sprites\spr_lootingBar</sprite>
-      <sprite>sprites\spr_lootSwap</sprite>
       <sprite>sprites\spr_onFireGui</sprite>
       <sprite>sprites\spr_mapMenuGui</sprite>
       <sprites name="Map Images">
@@ -97,6 +238,22 @@
       <sprite>sprites\spr_locked</sprite>
       <sprite>sprites\spr_unlocked</sprite>
       <sprite>sprites\spr_black</sprite>
+      <sprite>sprites\spr_sniperRifleScope</sprite>
+      <sprites name="buttons">
+        <sprite>sprites\spr_upgradeBar</sprite>
+        <sprite>sprites\spr_buttonBack</sprite>
+        <sprite>sprites\spr_buttonRetry</sprite>
+        <sprite>sprites\spr_checkMarkButton</sprite>
+        <sprite>sprites\spr_upgradeButton</sprite>
+        <sprite>sprites\spr_buttonMenu</sprite>
+        <sprite>sprites\spr_arrowButton</sprite>
+        <sprite>sprites\spr_scoresButton</sprite>
+        <sprite>sprites\spr_difficultyButton</sprite>
+        <sprite>sprites\spr_diffucltyWindow</sprite>
+        <sprite>sprites\spr_surviveButton</sprite>
+        <sprite>sprites\spr_lootSwap</sprite>
+        <sprite>sprites\spr_upgradeTypeTab</sprite>
+      </sprites>
     </sprites>
     <sprites name="Mapping">
       <sprites name="Props">
@@ -123,18 +280,6 @@
           <sprite>sprites\spr_p_bench</sprite>
         </sprites>
       </sprites>
-    </sprites>
-    <sprites name="buttons">
-      <sprite>sprites\spr_buttonBack</sprite>
-      <sprite>sprites\spr_buttonRetry</sprite>
-      <sprite>sprites\spr_checkMarkButton</sprite>
-      <sprite>sprites\spr_upgradeButton</sprite>
-      <sprite>sprites\spr_buttonMenu</sprite>
-      <sprite>sprites\spr_arrowButton</sprite>
-      <sprite>sprites\spr_scoresButton</sprite>
-      <sprite>sprites\spr_difficultyButton</sprite>
-      <sprite>sprites\spr_diffucltyWindow</sprite>
-      <sprite>sprites\spr_surviveButton</sprite>
     </sprites>
     <sprites name="Hats">
       <sprite>sprites\spr_hat</sprite>
@@ -173,6 +318,9 @@
       <sprite>sprites\spr_taxi</sprite>
       <sprite>sprites\spr_bigTruck</sprite>
     </sprites>
+    <sprites name="airdrop">
+      <sprite>sprites\spr_airdropCrate</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\tile_back</background>
@@ -202,13 +350,13 @@
       <script>scripts\scr_drawHat.gml</script>
       <script>scripts\scr_drawHair.gml</script>
       <script>scripts\scr_entityMoveTo.gml</script>
+      <script>scripts\scr_removeOtherEntityTargeting.gml</script>
       <scripts name="Player">
         <script>scripts\scr_PlayerAddWeapon.gml</script>
         <script>scripts\scr_PlayerStateManager.gml</script>
         <script>scripts\scr_lootArea.gml</script>
         <script>scripts\scr_areaAddWeapon.gml</script>
       </scripts>
-      <script>scripts\scr_removeOtherEntityTargeting.gml</script>
       <scripts name="Interactions">
         <script>scripts\scr_isInteractable.gml</script>
         <script>scripts\scr_charInteract.gml</script>
@@ -462,6 +610,7 @@
       <object>objects\obj_saveZone</object>
       <object>objects\obj_teleportZone</object>
     </objects>
+    <object>objects\obj_airdropCrate</object>
   </objects>
   <timelines name="timelines">
     <timeline>timelines\tl_cutscene_beginning_intro</timeline>

@@ -33,11 +33,11 @@ event_inherited();
     // Inventory Weapons
         inventory[0] = "fists";
         inventory[1] = "fists";
-        // Secondary
     // inventory ammo (corresponding with inventory items)
         inventoryAmmo[0] = 0;
         inventoryAmmo[1] = 0;
-        // Secondary
+    // Loot keys
+        lootKeys = 0; // separate from inventory slots
 
 // State variables
     state = "default";
@@ -68,7 +68,7 @@ event_inherited();
     lootRange = 32; // range where player can loot from (using loot key)
     lootTime = 2; // time it takes (in seconds) to loot a building
     // Temporary (stats that last until a map change
-    lootRank = 0; // the higher the better / more loot
+    lootRank = 1; // the higher the better / more loot
     shotAcc = 0; // between 0-1, 0 being default weapon accuracy, 1 being 100% accurate
     exploDmg = 0; // additive explosive damage
     bulletDmg = 0; // additive bullet damage

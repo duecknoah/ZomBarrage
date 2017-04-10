@@ -29,7 +29,7 @@
 show_debug_message(object_get_name(object_index) + " created");
 
 // Game gui settings
-guiScale = 4;
+guiScale = 3;
 /* GUI variables ************
 * The difference from having an alpha of 0 and having for example showWaveBarGui equal to
 * false is that having showWaveBarGui set to false makes it not run any code to do with
@@ -54,6 +54,7 @@ showRespawnScreen = false; // is shown once player dies
 showLootingBar = true; // show the loading like bar when looting
 showLootingChooseScreen = true; // show the screen post-looting of where the player chooses what they want from the looting
 showChatBar = false; // show all the chatbar items? (the bottom bar where dialogue shows)
+showLootKeysBar = true; // show the lootkeys bar?
 // Other gui variables
 shootDelayMax[0] = 0; // stores the highest value when shootdelay[0] of player is not 0
 shootDelayMax[1] = 0; // stores the highest value when shootdelay of player is not 0
@@ -215,8 +216,8 @@ else {
 
 if (showWeaponScope) {
 // draw zoomed in portion from default application surface
-    var xSize = 128;
-    var ySize = 128;
+    var xSize = 32 * guiScale; // 128
+    var ySize = 32 * guiScale;
     var scale = 2;
     /* NOTE 1: We draw the application surface twice as the shadow tiles
      * seem to be slightly transparent for some odd reason. So
@@ -504,6 +505,11 @@ if (showHealthBar) {
     draw_sprite_ext(spr_healthBar, 0, hbx, hby, guiScale, guiScale, 0, c_white, healthBarAlpha);
 }
 
+// Draw Lootkey bar
+if (showLootKeysBar) {
+    draw_sprite_ext(spr_lootKeysBar, 0, 0, 0, guiScale / 2, guiScale / 2, 0, c_white, 1);
+}
+
 // Weapon pickup text toggling
 with (obj_player) {
     if (place_meeting(x, y, obj_itemWeapon)) {
@@ -599,10 +605,11 @@ if (showUpgradeScreen) {
     // Upgrade type tabs
     // Perma upgrades upgrade button
     var upgradeTypebutton1X, upgradeTypebutton1Y, upgradeTypebutton2X, upgradeTypebutton2Y;
-    upgradeTypebutton1X = 416;
-    upgradeTypebutton1Y = 64;
-    upgradeTypebutton2X = 616;
-    upgradeTypebutton2Y = 64;
+    upgradeTypebutton1X = bx + (sprite_get_width(spr_upgradeBackground) * guiScale / 2)
+                        - (sprite_get_width(spr_upgradeTypeTab) * guiScale);
+    upgradeTypebutton1Y = by - (sprite_get_height(spr_upgradeTypeTab) * guiScale);
+    upgradeTypebutton2X = bx + (sprite_get_width(spr_upgradeBackground) * guiScale / 2);
+    upgradeTypebutton2Y = by - (sprite_get_height(spr_upgradeTypeTab) * guiScale);
     if (scr_buttonGui(upgradeTypebutton1X, upgradeTypebutton1Y, sprite_get_width(spr_upgradeTypeTab) * guiScale, sprite_get_height(spr_upgradeTypeTab) * guiScale)) {
         upgradeScreenType = "perma";
     }
@@ -629,7 +636,7 @@ if (showUpgradeScreen) {
         
         if (scr_buttonGuiUpgrade(xx, yy, 
                             "TEMP_NO_SPRITE", 
-                            "Increase max health of yourself by 10#Current: " + string(obj_player.maxHp),
+                            "Increase your Max Health#Current: " + string(obj_player.maxHp),
                             2 * obj_player.maxHp, obj_player.maxHp, 1, 100, 
                             guiScale, upgradeScreenAlpha)) {
             obj_player.maxHp += 10;
@@ -638,7 +645,7 @@ if (showUpgradeScreen) {
        yy += yOff;
        if (scr_buttonGuiUpgrade(xx, yy, 
                             "TEMP_NO_SPRITE", 
-                            "Increase your Looting range by 32 pixels#Current: " + string(obj_player.lootRange) + " pixels",
+                            "Increase your Looting Range#Current: " + string(obj_player.lootRange) + " pixels",
                             obj_player.lootRange / 1.5, obj_player.lootRange, 1, 128, 
                             guiScale, upgradeScreenAlpha)) {
             obj_player.lootRange += 32;
@@ -659,7 +666,7 @@ if (showUpgradeScreen) {
         draw_sprite_ext(spr_upgradeTypeTab, 3, upgradeTypebutton2X, upgradeTypebutton2Y, guiScale, guiScale, 0, c_white, 1);
         if (scr_buttonGuiUpgrade(xx, yy, 
                             "TEMP_NO_SPRITE", 
-                            "Increase your lootrank.#Current: " + string(obj_player.lootRank), 
+                            "Increase your lootrank#Current: " + string(obj_player.lootRank), 
                             10 * obj_player.lootRank + 5, obj_player.lootRank, -1, 5, 
                             guiScale, upgradeScreenAlpha)) {
             obj_player.lootRank ++;
@@ -667,7 +674,7 @@ if (showUpgradeScreen) {
        yy += yOff;
        if (scr_buttonGuiUpgrade(xx, yy, 
                                "TEMP_NO_SPRITE",
-                               "Increase your average shot accuracy by 10%.#Current: +" + string((obj_player.shotAcc) * 100) + "%", 
+                               "Increase your average shot accuracy#Current: +" + string((obj_player.shotAcc) * 100) + "%", 
                                10 * obj_player.shotAcc + 5, obj_player.shotAcc, -1, 0.80, 
                                guiScale, upgradeScreenAlpha)) {
             obj_player.shotAcc += 0.10;
@@ -675,7 +682,7 @@ if (showUpgradeScreen) {
        yy += yOff;
        if (scr_buttonGuiUpgrade(xx, yy, 
                                "TEMP_NO_SPRITE",
-                               "Increase your explosive damage by 2.#Current: +" + string(obj_player.exploDmg), 
+                               "Increase your explosive damage#Current: +" + string(obj_player.exploDmg), 
                                10 * obj_player.exploDmg + 5, obj_player.exploDmg, -1, 12, 
                                guiScale, upgradeScreenAlpha)) {
             obj_player.exploDmg += 2;
@@ -683,7 +690,7 @@ if (showUpgradeScreen) {
        yy += yOff;
        if (scr_buttonGuiUpgrade(xx, yy, 
                                "TEMP_NO_SPRITE",
-                               "Increase your bullet damage by 2.#Current: +" + string(obj_player.bulletDmg), 
+                               "Increase your bullet damage#Current: +" + string(obj_player.bulletDmg), 
                                10 * obj_player.bulletDmg + 5, obj_player.bulletDmg, -1, 6, 
                                guiScale, upgradeScreenAlpha)) {
             obj_player.bulletDmg += 2;

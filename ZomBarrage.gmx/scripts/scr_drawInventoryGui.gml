@@ -12,12 +12,12 @@ var inventorySlotX = _xx + (3 * _scale);
 var inventorySlotY = _yy - ((sprite_get_height(spr_inventory) / 2) * _scale) + (4 * _scale);
 inventorySlotX += weaponDrawOff;
 inventorySlotY += weaponDrawOff;
-var ammoX = inventorySlotX + weaponDrawOff;
+var ammoX = inventorySlotX + weaponDrawOff + 8;
 var ammoY = inventorySlotY;
 
 // weapon sprites in slots
 
-for(i=0; i<2; i++) {
+for(i = 0; i < 2; i ++) {
     // Draw weapon sprite
     var ID = scr_WeaponNameToId(obj_player.inventory[i]);
     draw_sprite_ext(spr_itemWeapon, ID, inventorySlotX, inventorySlotY, _scale, _scale, 0, c_white, _alpha);
@@ -54,16 +54,16 @@ for(i=0; i<2; i++) {
     
     if (i == 0) {
         // Slot 0
-        _x1 = _xx + (48 * _scale);
+        _x1 = _xx + (52 * _scale);
         _y1 = _yy + ((2 + _yoff) * _scale);
-        _x2 = _xx + (52 * _scale);
+        _x2 = _xx + (56 * _scale);
         _y2 = _yy + ((35 + _yoff) * _scale);
     }
     else {
         // Slot 1
-        _x1 = _xx + (48 * _scale);
+        _x1 = _xx + (52 * _scale);
         _y1 = _yy + ((40 + _yoff) * _scale);
-        _x2 = _xx + (52 * _scale);
+        _x2 = _xx + (56 * _scale);
         _y2 = _yy + ((73 + _yoff) * _scale);    
     }
     

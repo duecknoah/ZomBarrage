@@ -34,6 +34,7 @@ bulletDir = 0; // bullet direction
 creator = 0; // creator of this bullet
 alpha = 0.8; // inital alpha
 damage = 1; // damage of bullet, set in shot, this is default
+lastZombieTouched = noone;
 
 initCalc = true;
 </string>
@@ -96,14 +97,45 @@ initCalc = true;
         compared to sin and cos which is the opposite way. */
        x = (collisionDist * cos(-degtorad(bulletDir))) + startX;
        y = (collisionDist * sin(-degtorad(bulletDir))) + startY;
-        show_debug_message(string(closestCollision) + " " + string(closestCollision.x) + " " + string(closestCollision.y) + " " + string(random(1)));
+       //show_debug_message(string(closestCollision) + " " + string(closestCollision.x) + " " + string(closestCollision.y) + " " + string(random(1)));
     }
     
     // If collision with any zombie
+    var zCollisionOrder = ds_priority_create(); 
+    // order by distance and collision on bullet line before calculating collatoral damage
     with (obj_zombieP) {
         if (collision_line(other.startX, other.startY, other.x, other.y, id, false, false)) {
-            scr_hurt(id, other.damage);
+            var dist = point_distance(other.startX, other.startY, x, y);
+            ds_priority_add(zCollisionOrder, id, dist);
         }
+    }
+    
+    // Loop until bullet has used all damage or until there are no more zombies to damage
+    while (damage &gt; 0 &amp;&amp; !ds_priority_empty(zCollisionOrder)) {
+        // With nearest zombie
+        with (ds_priority_find_min(zCollisionOrder)) {
+            var dmgDealt = scr_hurt(id, other.damage);
+            // Reduce bullet damage based off damage dealt, this degrades every time it goes through a zombie
+            other.damage -= dmgDealt;
+            other.lastZombieTouched = id;
+        }
+        ds_priority_delete_min(zCollisionOrder);
+    }
+    
+    // Remove zCollisionOrder priority queue from mem
+    if (ds_exists(zCollisionOrder, ds_type_priority)) {
+        ds_priority_destroy(zCollisionOrder);
+    }
+    
+    // Make the bullets final position go no further than the last zombie touched
+    if (lastZombieTouched != noone) {
+        /* Using SOH CAH TOA to figure out the length of x
+        and y sides with the angle and the hypot. The angle
+        is inverted because of the way gamemaker does angles
+        compared to sin and cos which is the opposite way. */
+       var distTo = point_distance(startX, startY, lastZombieTouched.x, lastZombieTouched.y);
+       x = (distTo * cos(-degtorad(bulletDir))) + startX;
+       y = (distTo * sin(-degtorad(bulletDir))) + startY;
     }
     
     initCalc = false;

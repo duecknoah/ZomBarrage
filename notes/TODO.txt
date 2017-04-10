@@ -1,12 +1,9 @@
 Improvements to make:
-- make it so you dont loot so much, adjust loot rank
-- show total points in upgrade menu
-- improve pause screen, make it pause instantly
+- Make zombies have less health increases
+- Make more ammo spawn (airdrops n stufF)
 - Find a way to make weapons spawn in a cool way
 - allow loot keys and flashlights to have their own special inventory slots
-- make health of zombies increase more higher as waves go on
 - make collatoral damage not be infinite
-- increase time between waves
 - Make 'sunrise' at end of wave, and 'sunset' at start of wave 
 - Make it so where you click is where the grenade / molotov goes
 - Make it show weapon damage on gun when holding it
@@ -14,7 +11,6 @@ Improvements to make:
 - Make it so each gun has a maxstack amount. You could use this variable with lootRank to lerp the ammo between 0 and the max amount
 
 Bugs to fix:
-- make it so weapon ammo can stack when looting
 - heavy zombie moving towards player while throwing rock or punch while in backup pathfinding
 - FireLights not dissappearing on zombie kill sometimes
 - Buildings not staying faded, usually after looting

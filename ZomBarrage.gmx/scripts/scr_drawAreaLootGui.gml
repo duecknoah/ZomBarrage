@@ -24,10 +24,10 @@ for(var _i = 0; _i < array_length_1d(_area.inventory); _i ++) {
         var swapYoff = ((sprite_get_height(spr_itemWeapon) / 2) + 4) * guiScale; 
         // If swap button pressed, swap this weapon with current selected inventory weapon
         if (scr_buttonGuiSpriteCentered(_x + xoff, _y + swapYoff, spr_lootSwap, _scale) == 2) {
-            var holdW = obj_player.inventory[obj_player.selectedSlot];
-            var holdA = obj_player.inventoryAmmo[obj_player.selectedSlot];
+            var holdW = obj_player.inventory[obj_player.selectedSlot]; // holds weapon in swap
+            var holdA = obj_player.inventoryAmmo[obj_player.selectedSlot]; // holds ammo in swap
             
-            // If the player is selecting the same weapon as the one being swapped with
+            // Just add the ammo If the player is selecting the same weapon as the one being swapped with
             if (obj_player.inventory[obj_player.selectedSlot] == _area.inventory[_i]) {
                 obj_player.inventoryAmmo[obj_player.selectedSlot] += _area.inventoryAmmo[_i];
                 _area.inventory[_i] = "fists";
