@@ -150,6 +150,7 @@ if (!global.allWavesDone) {
                 else {
                 // If not all waves have been completed yet
                     obj_guiController.triggerWaveCompletionText = true;
+                    audio_play_sound(snd_deep_boom, 3, false);
                 }
             }
         }

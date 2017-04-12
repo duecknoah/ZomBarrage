@@ -3,7 +3,7 @@
   <Configs name="configs">
     <Config>Configs\Default</Config>
   </Configs>
-  <datafiles number="23" name="datafiles">
+  <datafiles number="31" name="datafiles">
     <datafile>
       <name>weapons.json</name>
       <exists>-1</exists>
@@ -21,8 +21,8 @@
       </ConfigOptions>
       <filename>weapons.json</filename>
     </datafile>
-    <datafiles number="23" name="munro1">
-      <datafiles number="23" name="munro">
+    <datafiles number="31" name="munro1">
+      <datafiles number="31" name="munro">
         <datafile>
           <name>.DS_Store</name>
           <exists>-1</exists>
@@ -92,8 +92,8 @@
           <filename>MunroSmall.ttf</filename>
         </datafile>
       </datafiles>
-      <datafiles number="23" name="__MACOSX">
-        <datafiles number="23" name="munro">
+      <datafiles number="31" name="__MACOSX">
+        <datafiles number="31" name="munro">
           <datafile>
             <name>._.DS_Store</name>
             <exists>-1</exists>
@@ -165,23 +165,6 @@
         </datafiles>
       </datafiles>
     </datafiles>
-    <datafile>
-      <name>soundfx.zip</name>
-      <exists>-1</exists>
-      <size>9039878</size>
-      <exportAction>2</exportAction>
-      <exportDir></exportDir>
-      <overwrite>0</overwrite>
-      <freeData>-1</freeData>
-      <removeEnd>0</removeEnd>
-      <store>0</store>
-      <ConfigOptions>
-        <Config name="Default">
-          <CopyToMask>9223372036854775807</CopyToMask>
-        </Config>
-      </ConfigOptions>
-      <filename>soundfx.zip</filename>
-    </datafile>
   </datafiles>
   <NewExtensions/>
   <sounds name="sound">
@@ -205,6 +188,19 @@
       <sound>sound\snd_pistol_shot</sound>
       <sound>sound\snd_rocket_moving</sound>
       <sound>sound\snd_rocket_boom</sound>
+    </sounds>
+    <sounds name="zombie">
+      <sound>sound\snd_zombie_growl_1</sound>
+      <sound>sound\snd_zombie_growl_2</sound>
+      <sound>sound\snd_zombie_growl_3</sound>
+      <sound>sound\snd_zombie_growl_4</sound>
+      <sound>sound\snd_zombie_growl_short_1</sound>
+      <sound>sound\snd_zombie_growl_short_2</sound>
+      <sound>sound\snd_zombie_growl_short_3</sound>
+      <sound>sound\snd_zombie_growl_short_4</sound>
+    </sounds>
+    <sounds name="gui">
+      <sound>sound\snd_button_click</sound>
     </sounds>
   </sounds>
   <sprites name="sprites">

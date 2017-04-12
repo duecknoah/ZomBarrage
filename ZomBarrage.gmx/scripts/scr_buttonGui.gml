@@ -16,6 +16,7 @@ var my = device_mouse_y_to_gui(0);
 if (mx >= _x && mx <= _x + _w
  && my >= _y && my <= _y + _h) {
     if (mouse_check_button_pressed(mb_left)) {
+        audio_play_sound(snd_button_click, 5, false);
         return 2; // pressed, hovering
     }
     else return 1; // not pressed, hovering

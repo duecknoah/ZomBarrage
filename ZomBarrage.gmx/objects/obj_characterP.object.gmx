@@ -375,10 +375,20 @@ else if (bobbing == 0 &amp;&amp; !isBobbingUp) {
     isBobbingUp = true;
     switch (object_index) {
         case obj_player:
+        // The difference between a players and a zombies footsteps, is that
+        // the players footsteps will always play the sound, as it is obvious when
+        // the only player isn't making any footstep noises, but that is not obvious
+        // in a horde of zombies
+            var footstepType = choose(snd_footsteps_generic_1, snd_footsteps_generic_2, 
+                                      snd_footsteps_generic_3, snd_footsteps_generic_4);
+            audio_play_sound_on(s_emit, footstepType, false, 3);
+        break;
         case obj_zombie:
-            audio_play_sound_on(s_emit, choose(snd_footsteps_generic_1, snd_footsteps_generic_2, 
-                                                snd_footsteps_generic_3, snd_footsteps_generic_4), 
-                                                false, 5);
+            var footstepType = choose(snd_footsteps_generic_1, snd_footsteps_generic_2, 
+                                      snd_footsteps_generic_3, snd_footsteps_generic_4);
+            if (!audio_is_playing(footstepType)) {
+                audio_play_sound_on(s_emit, footstepType, false, 5);
+            }
         break;
     }
 }

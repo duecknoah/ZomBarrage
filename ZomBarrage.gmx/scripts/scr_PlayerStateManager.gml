@@ -37,15 +37,17 @@ if (!obj_guiController.showUpgradeScreen) {
         break;
         case "shoot Wimps Pistol": // shoot Wimps Pistol
             var dirSpread = (rotation + 90) + random_range(-7 * (1 - shotAcc), 7 * (1 - shotAcc));
-            scr_shootBullet(x, y, dirSpread, currentWeapon[? "damage"] + bulletDmg, 0.15, 400, 425, instance_id);
+            if (scr_shootBullet(x, y, dirSpread, currentWeapon[? "damage"] + bulletDmg, 0.15, 400, 425, instance_id)) {
+                audio_play_sound_on(s_emit, snd_pistol_shot, false, 5);
+            }
             draw_sprite_ext(spr_PlayerWimpPistol, 0, x, y, drawScale, drawScale, rotation, c_white, 1);
-            audio_play_sound_on(s_emit, snd_pistol_shot, false, 5);
         break;
         case "shoot M16": // shoot M16
             var dirSpread = (rotation + 90) + random_range(-10 * (1 - shotAcc), 10 * (1 - shotAcc));
-            scr_shootBullet(x, y, dirSpread, currentWeapon[? "damage"] + bulletDmg, 0.1, 500, 400, instance_id);
+            if (scr_shootBullet(x, y, dirSpread, currentWeapon[? "damage"] + bulletDmg, 0.1, 500, 400, instance_id)) {
+                audio_play_sound_on(s_emit, choose(snd_m16_shot_1, snd_m16_shot_2, snd_m16_shot_3), false, 5);
+            }
             draw_sprite_ext(spr_PlayerM16, 0, x, y, drawScale, drawScale, rotation, c_white, 1);
-            audio_play_sound_on(s_emit, choose(snd_m16_shot_1, snd_m16_shot_2, snd_m16_shot_3), false, 5);
         break;
         case "shoot Rocket Launcher": // shoot Rocket Launcher
             var dirSpread = (rotation + 90) + random_range(-5 * (1 - shotAcc), 5 * (1 - shotAcc));
@@ -117,18 +119,20 @@ if (!obj_guiController.showUpgradeScreen) {
         case "Sniper Rifle scoped shoot": // Sniper Rifle scoped shoot
             draw_sprite_ext(spr_PlayerSniperRifle, 0, x, y, drawScale, drawScale, rotation, c_white, 1);
             var dirSpread = (rotation + 90) + random_range(-2 * (1 - shotAcc), 2 * (1 - shotAcc)); // have a narrow spread
-            scr_shootBullet(x, y, dirSpread, currentWeapon[? "damage"] + bulletDmg, 1, 400, 700, instance_id);
-            with (sniperScopeLight) {
-                x = mouse_x;
-                y = mouse_y;
+            if (scr_shootBullet(x, y, dirSpread, currentWeapon[? "damage"] + bulletDmg, 1, 400, 700, instance_id)) {
+                with (sniperScopeLight) {
+                    x = mouse_x;
+                    y = mouse_y;
+                }
             }
             state = "Sniper Rifle scoped"; // "Sniper Rifle scoped" stop the shooting
         break;
         case "Sniper Rifle unscoped shoot": // Sniper Rifle unscoped shoot
             draw_sprite_ext(spr_PlayerSniperRifle, 0, x, y, drawScale, drawScale, rotation, c_white, 1);
             var dirSpread = (rotation + 90) + random_range(-6 * (1 - shotAcc), 6 * (1 - shotAcc)); // have a wider spread (when unscoped)
-            scr_shootBullet(x, y, dirSpread, currentWeapon[? "damage"] + bulletDmg, 1, 400, 700, instance_id);
-            state = "Sniper Rifle"; // Sniper Rifle
+            if (scr_shootBullet(x, y, dirSpread, currentWeapon[? "damage"] + bulletDmg, 1, 400, 700, instance_id)) {
+                state = "Sniper Rifle"; // Sniper Rifle
+            }
         break;
         case "throw Molotov Cocktail": // throw Molotov Cocktail
             draw_sprite_ext(spr_PlayerMolotovCocktail, 1, x, y, drawScale, drawScale, rotation, c_white, 1);

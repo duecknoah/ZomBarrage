@@ -74,6 +74,8 @@ scr_createZombieBodyAt(x, y, rotation + 90);
 var points = 1;
 scr_createPointsText(x, y, "+" + string(points), c_lime);
 obj_player.points += points; // give points to player on death
+// Destroy inherited stuff
+event_inherited();
 </string>
           </argument>
         </arguments>
