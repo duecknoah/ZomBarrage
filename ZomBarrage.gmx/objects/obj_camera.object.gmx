@@ -122,7 +122,15 @@ x = view_xview[0];
 y = view_yview[0];
 
 // Audio
-//audio_listener_position(x + (view_wview[0] / 2), y + (view_hview[0] / 2), 0);
+var centerX = x + (view_wview[0] / 2);
+var centerY = y + (view_hview[0] / 2);
+// Make it so it is not reversed as gamemakers audio
+// initally starts reversed: 
+// https://gamedevelopment.tutsplus.com/tutorials/understanding-and-implementing-3d-audio-in-gamemaker-studio--cms-20853
+audio_listener_orientation(0,1,0,0,0,1);
+audio_listener_position(centerX, centerY, 0);
+// Doppler
+//audio_listener_velocity(x - xprevious, y - yprevious, 0);
 </string>
           </argument>
         </arguments>

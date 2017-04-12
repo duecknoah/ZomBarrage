@@ -755,6 +755,7 @@ if (showPauseScreen) {
     }
     yy += 96;
     if (scr_buttonGuiSpriteText(xx + xoff, yy, spr_buttonMenu, guiScale, "Quit to Main Menu", c_white) == 2) {
+        audio_stop_all();
         room_goto(rm_Menu);
     }
     

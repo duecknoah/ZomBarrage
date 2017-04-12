@@ -75,6 +75,7 @@
     <instance objName="obj_itemWeapon" x="416" y="160" name="inst_8C2B4070" locked="0" code="weapon = scr_IdToWeapon(8);&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_itemWeapon" x="448" y="160" name="inst_281B6574" locked="0" code="weapon = scr_IdToWeapon(9);&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_runnerZombie" x="288" y="160" name="inst_8E49A5E0" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_soundscape" x="32" y="64" name="inst_B9424F0D" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
     <tile bgName="tile_back" x="224" y="128" w="64" h="64" xo="64" yo="0" id="10001654" name="inst_5599B35F" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>

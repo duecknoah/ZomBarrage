@@ -23,6 +23,6 @@
   <preload>-1</preload>
   <data>snd_env_outdoor_forest_nearby_city.ogg</data>
   <compressed>1</compressed>
-  <streamed>1</streamed>
+  <streamed>0</streamed>
   <uncompressOnLoad>0</uncompressOnLoad>
 </sound>

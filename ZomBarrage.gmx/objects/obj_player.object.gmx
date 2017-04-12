@@ -27,7 +27,6 @@
             <kind>1</kind>
             <string>/// Initialize Player variables
 event_inherited();
-
 // Inventory //
         selectedSlot = 0;
     // Inventory Weapons
@@ -86,7 +85,7 @@ event_inherited();
     image_xscale = 0.85;
     image_yscale = 0.85;
     spr_index = spr_PlayerFists1;
-    
+
 scr_InitView();
 </string>
           </argument>

@@ -11,3 +11,5 @@ if (scr_mapSaveExists(obj_save.saveNum)) {
 else {
     room_restart();
 }
+// Reset all audio
+audio_stop_all();

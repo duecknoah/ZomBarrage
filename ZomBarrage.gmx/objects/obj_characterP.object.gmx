@@ -65,7 +65,7 @@
     xPush = 0; // push in x movement (usually when hit by another entity or force)
     yPush = 0; // push in y movement (usually when hit by another entity or force)
     pushResist = 0.8; // resistance of other forces (0=fully resistant, 1=no resistance)
-    bobbing = 0; // a number between 0-1 where 0 is at the bottom of the bob and 1 is at the top
+    bobbing = random_range(0, 1); // a number between 0-1 where 0 is at the bottom of the bob and 1 is at the top
     isBobbingUp = true; // when true, as entity moves, the image_scale will enlarge, when false, it will shrink, giving an illusion of footsteps
 // Extra
     hat = noone; // an index within spr_hat to represent the hat being worn (noone means no hat)
@@ -73,6 +73,9 @@
 // Part systems
 fireSparkEmitter = noone; // fire spark particle system (when ent is on fire, this is the particle shown)
 fireLight = noone; // light that is created and parented to entity
+
+// Sound
+s_emit = audio_emitter_create();
 </string>
           </argument>
         </arguments>
@@ -95,7 +98,7 @@ fireLight = noone; // light that is created and parented to entity
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Destroy fire spark emitter and fireLight
+            <string>/// Destroy fire spark emitter and fireLight, and other dynamic mem stuff
 if (fireLight != noone) {
     with (fireLight) {
         instance_destroy();
@@ -106,12 +109,44 @@ if (fireLight != noone) {
 if (part_emitter_exists(obj_particleIndex.fireSpark, fireSparkEmitter)) {
     part_emitter_destroy(obj_particleIndex.fireSpark, fireSparkEmitter);
 }
+
+// Destroy sound emitter
+if (!audio_emitter_exists(s_emit)) {
+    audio_emitter_free(s_emit);
+}
 </string>
           </argument>
         </arguments>
       </action>
     </event>
     <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Sound checks and emitter pos update
+// First check that audio emitter exists, if not, recreate it
+if (!audio_emitter_exists(s_emit)) {
+    s_emit = audio_emitter_create();
+}
+// Update pos
+audio_emitter_position(s_emit, x, y, 0);
+</string>
+          </argument>
+        </arguments>
+      </action>
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -335,9 +370,17 @@ drawScale = 1 + (bobbing * bobHeight);
 if (bobbing == 1) {
     isBobbingUp = false;
 }
-// At bottom of bob, begin enlarging up
-else if (bobbing == 0) {
+// At bottom of bob, begin enlarging up, play footstep sound effect
+else if (bobbing == 0 &amp;&amp; !isBobbingUp) {
     isBobbingUp = true;
+    switch (object_index) {
+        case obj_player:
+        case obj_zombie:
+            audio_play_sound_on(s_emit, choose(snd_footsteps_generic_1, snd_footsteps_generic_2, 
+                                                snd_footsteps_generic_3, snd_footsteps_generic_4), 
+                                                false, 5);
+        break;
+    }
 }
 
 // Hide character if in vehicle
@@ -347,6 +390,9 @@ if (object_is_ancestor(interactEntity.object_index, obj_vehicleP)) {
 else {
     visible = true;
 }
+
+// Audio emitter position update
+
 </string>
           </argument>
         </arguments>

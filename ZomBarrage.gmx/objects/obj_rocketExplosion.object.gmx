@@ -37,6 +37,10 @@ rocketDmg = 50; // default
 // Time until death of object
 deathTimer = room_speed * 4;
 initDmg = true; // initialize damage in step event once only
+// Sound
+s_emit = audio_emitter_create();
+audio_emitter_position(s_emit, x, y, 0);
+audio_play_sound_on(s_emit, snd_rocket_boom, false, 5);
 </string>
           </argument>
         </arguments>
@@ -59,9 +63,12 @@ initDmg = true; // initialize damage in step event once only
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Destroy emitter
+            <string>/// Destroy emitters
 if (part_emitter_exists(obj_particleIndex.rocketExplosion, explosionEmitter)) {
     part_emitter_destroy(obj_particleIndex.rocketExplosion, explosionEmitter);
+}
+if (audio_emitter_exists(s_emit)) {
+    audio_emitter_free(s_emit);
 }
 </string>
           </argument>

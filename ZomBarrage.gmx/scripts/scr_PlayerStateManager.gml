@@ -39,13 +39,13 @@ if (!obj_guiController.showUpgradeScreen) {
             var dirSpread = (rotation + 90) + random_range(-7 * (1 - shotAcc), 7 * (1 - shotAcc));
             scr_shootBullet(x, y, dirSpread, currentWeapon[? "damage"] + bulletDmg, 0.15, 400, 425, instance_id);
             draw_sprite_ext(spr_PlayerWimpPistol, 0, x, y, drawScale, drawScale, rotation, c_white, 1);
+            audio_play_sound_on(s_emit, snd_pistol_shot, false, 5);
         break;
         case "shoot M16": // shoot M16
             var dirSpread = (rotation + 90) + random_range(-10 * (1 - shotAcc), 10 * (1 - shotAcc));
             scr_shootBullet(x, y, dirSpread, currentWeapon[? "damage"] + bulletDmg, 0.1, 500, 400, instance_id);
-            //var chosenSound = choose(snd_m16_shot_1, snd_m16_shot_2, snd_m16_shot_3);
-            //audio_play_sound_at(chosenSound, 0, 0, 0, 100, 300, 1, false, 3);
             draw_sprite_ext(spr_PlayerM16, 0, x, y, drawScale, drawScale, rotation, c_white, 1);
+            audio_play_sound_on(s_emit, choose(snd_m16_shot_1, snd_m16_shot_2, snd_m16_shot_3), false, 5);
         break;
         case "shoot Rocket Launcher": // shoot Rocket Launcher
             var dirSpread = (rotation + 90) + random_range(-5 * (1 - shotAcc), 5 * (1 - shotAcc));
@@ -54,6 +54,7 @@ if (!obj_guiController.showUpgradeScreen) {
             draw_sprite_ext(spr_PlayerRocketLauncher, 0, x, y, drawScale, drawScale, rotation, c_white, 1);
         break;
         case "toggle Flashlight": // toggle Flashlight
+            audio_play_sound_on(s_emit, snd_flashlight_toggle, false, 5);
             if (flashLightOn) {
                 flashLightOn = false;
             }
@@ -84,6 +85,8 @@ if (!obj_guiController.showUpgradeScreen) {
                     if (inventoryAmmo[selectedSlot] <= 0) {
                         inventory[selectedSlot] = "fists";
                     }
+                    // Play sound effect
+                    audio_play_sound_on(s_emit, snd_unlock_and_open, false, 5);
                 }
             }
         break;

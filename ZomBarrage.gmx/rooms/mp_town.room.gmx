@@ -156,6 +156,7 @@
     <instance objName="obj_policeCar" x="960" y="1600" name="inst_A3621225" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_miniTruck" x="896" y="1280" name="inst_CFB0A1D7" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_audi" x="928" y="1440" name="inst_7DF689E2" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_soundscape" x="32" y="32" name="inst_6C045FBD" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
     <tile bgName="tile_back" x="224" y="192" w="64" h="64" xo="64" yo="0" id="10000010" name="inst_22FAEEAC" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>

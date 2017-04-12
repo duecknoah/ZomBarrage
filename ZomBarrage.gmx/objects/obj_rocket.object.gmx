@@ -33,6 +33,9 @@ rocketAccel = 0.25; // rocket acceleration every step
 rocketSpdOrg = rocketSpd; // original rocket spd
 rocketAccelOrg = rocketAccel; // orginal rocket acceleration
 creator = 0; // creator of this rocket
+// Sound
+s_emit = audio_emitter_create();
+audio_play_sound_on(s_emit, snd_rocket_moving, false, 5);
 
 initCalc = true;
 </string>
@@ -60,6 +63,30 @@ initCalc = true;
             <string>/// Create rocket explosion, pass on the damage to the explo
 with (instance_create(x, y, obj_rocketExplosion)) {
     rocketDmg = other.rocketDmg;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Stop rocket sound, free mem
+if (audio_emitter_exists(s_emit)) {
+    audio_emitter_free(s_emit);
 }
 </string>
           </argument>
@@ -128,6 +155,9 @@ if (place_meeting(x, y, obj_collision) || place_meeting(x, y, obj_zombieP)) {
 x = lengthdir_x(rocketSpd, rocketDir) + x;
 y = lengthdir_y(rocketSpd, rocketDir) + y;
 image_angle = point_direction(xprevious, yprevious, x, y) - 90;
+
+// Sound
+audio_emitter_position(s_emit, x, y, 0);
 
 rocketSpd += rocketAccel * global.timeScale;
 
