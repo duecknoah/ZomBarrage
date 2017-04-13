@@ -9,6 +9,9 @@
  * fade? - fade damage based on distance from center and radius
  * doAffectPlayer - inflict damage on the player?
  * doAffectZombie - inflict damage on the zombie?
+ *
+ * RETURNS TRUE if hurt an entity
+ * RETURNS FALSE if not
 */
 
 var _x = argument0;
@@ -20,6 +23,7 @@ var _fade = argument5;
 var _doAffectPlayer = argument6;
 var _doAffectZombie = argument7;
 
+var didHurt = false; // did hurt an entity?
 // Debugging
 /*
 draw_set_colour(c_red);
@@ -41,6 +45,7 @@ if (_doAffectPlayer) {
                 _dmg = lerp(0, _dmg, _dist / _radius);
             }
             scr_hurt(id, _dmg);
+            didHurt = true;
         }
     }
 }
@@ -55,6 +60,9 @@ if (_doAffectZombie) {
                 _dmg = lerp(0, _dmg, _dist / _radius);
             }
             scr_hurt(id, _dmg);
+            didHurt = true;
         }
     }
 }
+
+return didHurt;

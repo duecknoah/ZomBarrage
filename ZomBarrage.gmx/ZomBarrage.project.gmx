@@ -175,6 +175,11 @@
       <sound>sound\snd_footsteps_generic_3</sound>
       <sound>sound\snd_footsteps_generic_4</sound>
       <sound>sound\snd_unlock_and_open</sound>
+      <sound>sound\snd_body_hit_1</sound>
+      <sound>sound\snd_body_hit_2</sound>
+      <sound>sound\snd_body_hit_3</sound>
+      <sound>sound\snd_woosh_1</sound>
+      <sound>sound\snd_woosh_2</sound>
     </sounds>
     <sounds name="soundscape">
       <sound>sound\snd_env_outdoor_forest_nearby_city</sound>
@@ -188,6 +193,10 @@
       <sound>sound\snd_pistol_shot</sound>
       <sound>sound\snd_rocket_moving</sound>
       <sound>sound\snd_rocket_boom</sound>
+      <sound>sound\snd_chainsaw_idle</sound>
+      <sound>sound\snd_chainsaw_use</sound>
+      <sound>sound\snd_sniper_reload</sound>
+      <sound>sound\snd_sniper_shot</sound>
     </sounds>
     <sounds name="zombie">
       <sound>sound\snd_zombie_growl_1</sound>
@@ -386,6 +395,7 @@
         <script>scripts\scr_PlayerStateManager.gml</script>
         <script>scripts\scr_lootArea.gml</script>
         <script>scripts\scr_areaAddWeapon.gml</script>
+        <script>scripts\scr_stopPlayerWeaponSound.gml</script>
       </scripts>
       <scripts name="Interactions">
         <script>scripts\scr_isInteractable.gml</script>

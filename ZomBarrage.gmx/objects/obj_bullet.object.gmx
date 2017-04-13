@@ -118,6 +118,8 @@ initCalc = true;
             // Reduce bullet damage based off damage dealt, this degrades every time it goes through a zombie
             other.damage -= dmgDealt;
             other.lastZombieTouched = id;
+            // Play bullet hit sound
+            audio_play_sound_on(s_emit, choose(snd_body_hit_1, snd_body_hit_2, snd_body_hit_3), false, 6);
         }
         ds_priority_delete_min(zCollisionOrder);
     }

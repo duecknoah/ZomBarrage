@@ -19,7 +19,6 @@ if (!obj_guiController.showUpgradeScreen) {
         break;
         case "punch":
             // Once done animating punch, return to default state
-            // show_message(string(image_index) + " " + string(image_number) + " " + string(sprite_get_number(spr_PlayerFists)) + " " + string(sprite_index));
             if (img_index == 0) {
                 state = "default";
                 img_index = 0; 
@@ -29,8 +28,11 @@ if (!obj_guiController.showUpgradeScreen) {
             // create hurt radius at frame 2 in the animation
             if (img_index >= 2 && shootDelay[selectedSlot] <= 0) {
                 var _x = x + lengthdir_x(16, rotation + 90);
-                var _y = y + lengthdir_y(16, rotation + 90);
-                scr_hurtRadius(_x, _y, 2, 16, currentWeapon[? "damage"], false, false, true);
+                var _y  = y + lengthdir_y(16, rotation + 90);
+                var didHurt = scr_hurtRadius(_x, _y, 2, 16, currentWeapon[? "damage"], false, false, true);
+                if (didHurt) {
+                    audio_play_sound_on(s_emit, choose(snd_body_hit_1, snd_body_hit_2, snd_body_hit_3), false, 5);
+                }
                 shootDelay[selectedSlot] = 0.15;
             }
             draw_sprite_ext(spr_index, img_index, x, y, drawScale, drawScale, rotation, c_white, 1);
@@ -119,20 +121,24 @@ if (!obj_guiController.showUpgradeScreen) {
         case "Sniper Rifle scoped shoot": // Sniper Rifle scoped shoot
             draw_sprite_ext(spr_PlayerSniperRifle, 0, x, y, drawScale, drawScale, rotation, c_white, 1);
             var dirSpread = (rotation + 90) + random_range(-2 * (1 - shotAcc), 2 * (1 - shotAcc)); // have a narrow spread
-            if (scr_shootBullet(x, y, dirSpread, currentWeapon[? "damage"] + bulletDmg, 1, 400, 700, instance_id)) {
+            if (scr_shootBullet(x, y, dirSpread, currentWeapon[? "damage"] + bulletDmg, 2, 400, 700, instance_id)) {
                 with (sniperScopeLight) {
                     x = mouse_x;
                     y = mouse_y;
                 }
+                audio_play_sound_on(s_emit, snd_sniper_shot, false, 5);
+                audio_play_sound_on(s_emit, snd_sniper_reload, false, 5);
             }
             state = "Sniper Rifle scoped"; // "Sniper Rifle scoped" stop the shooting
         break;
         case "Sniper Rifle unscoped shoot": // Sniper Rifle unscoped shoot
             draw_sprite_ext(spr_PlayerSniperRifle, 0, x, y, drawScale, drawScale, rotation, c_white, 1);
             var dirSpread = (rotation + 90) + random_range(-6 * (1 - shotAcc), 6 * (1 - shotAcc)); // have a wider spread (when unscoped)
-            if (scr_shootBullet(x, y, dirSpread, currentWeapon[? "damage"] + bulletDmg, 1, 400, 700, instance_id)) {
-                state = "Sniper Rifle"; // Sniper Rifle
+            if (scr_shootBullet(x, y, dirSpread, currentWeapon[? "damage"] + bulletDmg, 2, 400, 700, instance_id)) {
+                audio_play_sound_on(s_emit, snd_sniper_shot, false, 5);
+                audio_play_sound_on(s_emit, snd_sniper_reload, false, 5);
             }
+            state = "Sniper Rifle"; // Sniper Rifle
         break;
         case "throw Molotov Cocktail": // throw Molotov Cocktail
             draw_sprite_ext(spr_PlayerMolotovCocktail, 1, x, y, drawScale, drawScale, rotation, c_white, 1);
@@ -194,6 +200,14 @@ if (!obj_guiController.showUpgradeScreen) {
                 var _x = x + lengthdir_x(8, rotation + 90 + _rotOff);
                 var _y = y + lengthdir_y(8, rotation + 90 + _rotOff);
                 scr_hurtRadius(_x, _y, currentWeapon[? "damage"], currentWeapon[? "radius"], currentWeapon[? "force"], false, false, true);
+                // Cancel idle sound
+                if (audio_is_playing(snd_chainsaw_idle)) {
+                    audio_stop_sound(snd_chainsaw_idle);
+                }
+                // Play chainsaw use sound
+                if (!audio_is_playing(snd_chainsaw_use)) {
+                    audio_play_sound_on(s_emit, snd_chainsaw_use, false, 5);
+                }
                 draw_sprite_ext(spr_PlayerChainsaw, img_index, x, y, drawScale, drawScale, rotation, c_white, 1);
                 inventoryAmmo[selectedSlot] -= 0.05; // lose ammo every step (chainsaw has lots)
                 shootDelay[selectedSlot] = 0.5; // shoot delay only effects the startup of the chainsaw, once running, it is unaffected
@@ -245,7 +259,7 @@ if (!obj_guiController.showUpgradeScreen) {
                 case 7: //"Molotov Cocktail"
                     draw_sprite_ext(spr_PlayerMolotovCocktail, 0, x, y, drawScale, drawScale, rotation, c_white, 1);
                 break;
-                case 88: //"Frag Grenade"
+                case 8: //"Frag Grenade"
                     draw_sprite_ext(spr_PlayerFragGrenade, 0, x, y, drawScale, drawScale, rotation, c_white, 1);
                 break;
                 case 9: //"Iron Sword"
@@ -253,6 +267,16 @@ if (!obj_guiController.showUpgradeScreen) {
                 break;
                 case 10: //"Chainsaw"
                     draw_sprite_ext(spr_PlayerChainsaw, 0, x, y, drawScale, drawScale, rotation, c_white, 1);  
+                    // Cancel use sound (if playing)
+                    if (audio_is_playing(snd_chainsaw_use)) {
+                        audio_stop_sound(snd_chainsaw_use);
+                    }
+                    // Play idle sound if there is still fuel / ammo
+                    if (inventoryAmmo[selectedSlot] > 1) {
+                        if (!audio_is_playing(snd_chainsaw_idle)) {
+                            audio_play_sound_on(s_emit, snd_chainsaw_idle, false, 5);
+                        }
+                    }
                 break;
                 default:
                     // If nothing after all of that, just draw player default sprite

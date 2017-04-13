@@ -288,6 +288,7 @@ if (!isDead &amp;&amp; !obj_guiController.showConsole) {
                             img_index = 1;
                             img_speed = 0.2 * global.timeScale;
                             state = "punch";
+                            audio_play_sound_on(s_emit, choose(snd_woosh_1, snd_woosh_2), false, 5);
                         }
                    }
                 break;
@@ -411,9 +412,11 @@ if (!isDead &amp;&amp; !obj_guiController.showConsole) {
         
         if (keyboard_check_pressed(ord("1"))) {
             selectedSlot = 0;
+            scr_stopPlayerWeaponSound();
         }
         if (keyboard_check_pressed(ord("2"))) {
             selectedSlot = 1;
+            scr_stopPlayerWeaponSound();
         }
         
         // Drop selected weapon
@@ -429,6 +432,7 @@ if (!isDead &amp;&amp; !obj_guiController.showConsole) {
                 // Reset img state, else player cycles through animation forever
                 img_number = sprite_get_number(spr_PlayerFists1) - 1;
                 img_speed = 0;
+                scr_stopPlayerWeaponSound();
             }
         }
     }
