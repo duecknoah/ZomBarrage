@@ -33,6 +33,8 @@ global.waveCompleted = false; // is true when wave is just completed, false duri
 global.currentWave = 0;
 global.amtOfWaves = 5; // the amount of waves in order to complete the level (def 5)
 global.allWavesDone = false; // is the waves all completed in this level?
+global.spawnPool = ds_map_create();
+global.spawnPool[? obj_zombie] = true; // obj_zombie is always in the spawnPool by default
 
 // Zombie wave variables
 zombiesForWave = 0; // how many more zombies for this wave, increases over time
@@ -46,6 +48,9 @@ runnerZombieSpawnChance = 1 / 25; // 0 - no chance of spawn, 1 - 100% chance of 
 // Spawn chance increases (the amount the chance of spawning increases each round)
 heavyZombieSpawnChanceIncrease = 1 / 100;
 runnerZombieSpawnChanceIncrease = 1 / 25;
+// Waves until possible spawn
+heavyZombieSpawnWave = 4;
+runnerZombieSpawnWave = 3;
 // Other boolean settings
 initWave = false; // when true, activates init sequence for wave (when timer is up)
 preventSpawn = true; // when true, zombies will not spawn
@@ -88,6 +93,8 @@ if (!global.allWavesDone) {
         initWave = true;
     }
     else {
+        var calcSpawnPool = false; // when true, it will calculate what zombie are in the spawn pool this wave
+        
         if (initWave) {
             global.currentWave ++;
             zombiesForWave = global.currentWave * zombiesIncForWave;
@@ -98,6 +105,23 @@ if (!global.allWavesDone) {
             // amount each round
             heavyZombieSpawnChance += heavyZombieSpawnChanceIncrease;
             runnerZombieSpawnChance += runnerZombieSpawnChanceIncrease;
+            calcSpawnPool = true;
+        }
+        
+        // Preventing errors, just in case
+        if (!ds_exists(global.spawnPool, ds_type_map)) {
+            calcSpawnPool = true;
+            global.spawnPool = ds_map_create();
+        }
+        
+        if (calcSpawnPool) {
+            ds_map_clear(global.spawnPool); // reset
+            // zombies allowed to spawn this wave
+            ds_map_add(global.spawnPool, obj_zombie, obj_zombie); // added by default
+            if (global.currentWave &gt;= heavyZombieSpawnWave)
+                ds_map_add(global.spawnPool, obj_heavyZombie, true);  
+            if (global.currentWave &gt;= runnerZombieSpawnWave)
+                ds_map_add(global.spawnPool, obj_runnerZombie, true);  
         }
         
         // If not at total zombies for this wave yet   
@@ -107,15 +131,15 @@ if (!global.allWavesDone) {
                 if (instance_exists(obj_zombieSpawn)) {
                     // Spawn at random spawn point
                     spawnPoint = instance_find(obj_zombieSpawn, round(random(instance_number(obj_zombieSpawn))));
-                    // Choose what to spawn there
                     
-                    if (random(1) &gt;= (1 - heavyZombieSpawnChance)) {
+                    // choose a random zombie from the spawnpool to spawn    
+                    if (random(1) &lt; heavyZombieSpawnChance &amp;&amp; !is_undefined(ds_map_find_value(global.spawnPool, obj_heavyZombie))) {
                         instance_create(spawnPoint.x, spawnPoint.y, obj_heavyZombie);
                     }
-                    else if (random(1) &gt;= (1 - runnerZombieSpawnChance)) {
+                    else if (random(1) &lt; runnerZombieSpawnChance &amp;&amp; !is_undefined(ds_map_find_value(global.spawnPool, obj_runnerZombie))) {
                         instance_create(spawnPoint.x, spawnPoint.y, obj_runnerZombie);
                     }
-                    else {
+                    else if (!is_undefined(ds_map_find_value(global.spawnPool, obj_zombie))) {
                         instance_create(spawnPoint.x, spawnPoint.y, obj_zombie);
                     }
                     zombiesSpawned ++;
@@ -156,9 +180,31 @@ if (!global.allWavesDone) {
         }
     }
 }
-
-if (mouse_check_button(mb_middle)) {
-    instance_create(mouse_x, mouse_y, obj_zombie);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="5">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Free dynamic mem
+if (ds_exists(global.spawnPool, ds_type_map)) {
+    ds_map_destroy(global.spawnPool);
 }
 </string>
           </argument>

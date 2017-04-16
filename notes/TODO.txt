@@ -1,4 +1,5 @@
 Improvements to make:
+- Fix being able to get knocked inside walls, this is due to forces somehow getting you inside obj_collisions when hit hard enough
 - Make zombies have less health increases
 - Make more ammo spawn (airdrops n stufF)
 - Find a way to make weapons spawn in a cool way
@@ -9,6 +10,7 @@ Improvements to make:
 - Make it show weapon damage on gun when holding it
 - Make it so each zombie begins spawning at a specific wave, rather than all starting at wave 1
 - Make it so each gun has a maxstack amount. You could use this variable with lootRank to lerp the ammo between 0 and the max amount
+- prevent punching while in car
 
 Bugs to fix:
 - heavy zombie moving towards player while throwing rock or punch while in backup pathfinding

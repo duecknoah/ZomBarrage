@@ -177,16 +177,7 @@ if (round(xPush) != 0 || round(yPush) != 0) {
      * make xPush and ypush = -xpush and -ypush (reversing the
      * push and effectivly bouncing off the wall
     */
-    // Bounce
-    /*
-    if (place_meeting(newX, y, obj_collision)) {
-        xPush = -xPush; // flip x push (bounce off collision)
-    }
     
-    if (place_meeting(x, newY, obj_collision)) {
-        yPush = -yPush; // flip x push (bounce off collision)
-    }
-    */
     if (place_meeting(newX, y, obj_collision)) {
         xPush = 0; // stop x movement (hit collision)
     }

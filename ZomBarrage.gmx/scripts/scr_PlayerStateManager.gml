@@ -176,6 +176,13 @@ if (!obj_guiController.showUpgradeScreen) {
         case "swing Iron Sword": // swing Iron Sword
             // Once done animating sword, return to default state
             // show_message(string(image_index) + " " + string(image_number) + " " + string(sprite_get_number(spr_PlayerFists)) + " " + string(sprite_index));
+            // When at end of animation, return to default state 
+            if (img_index == 0 || currentWeapon[? "name"] != "Iron Sword") {    
+                state = "default";
+                img_index = 0; 
+                img_speed = 0;
+                img_number = 0;
+            }
             // If on frame where player swung sword, create hurt radius
             if (img_index >= 1 && shootDelay[selectedSlot] <= 0) {
                 var _rotOff = 30;
@@ -183,13 +190,6 @@ if (!obj_guiController.showUpgradeScreen) {
                 var _y = y + lengthdir_y(16, rotation + 90 + _rotOff);
                 scr_hurtRadius(_x, _y, currentWeapon[? "damage"], currentWeapon[? "radius"], currentWeapon[? "force"], false, false, true);
                 shootDelay[selectedSlot] = 0.5;
-            }
-            // When at end of animation, return to default state 
-            if (img_index == 0) {    
-                state = "default";
-                img_index = 0; 
-                img_speed = 0;
-                img_number = 0;
             }
             draw_sprite_ext(spr_PlayerIronSword, img_index, x, y, drawScale, drawScale, rotation, c_white, 1);
         break;

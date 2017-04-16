@@ -15,7 +15,7 @@
         "id": 2,
         "name": "M16",
         "ammo": 512, 
-        "damage": 0.625
+        "damage": 0.75
     },
     {
         "id": 3,
@@ -38,7 +38,7 @@
         "id": 6,
         "name": "Sniper Rifle",
         "ammo": 32,
-        "damage": 15
+        "damage": 25
     },
     {
         "id": 7,
@@ -52,14 +52,14 @@
         "id": 8,
         "name": "Frag Grenade",
         "ammo": 8,
-        "damage": 25,
+        "damage": 40,
         "radius": 48
     },
     {
         "id": 9,
         "name": "Iron Sword",
         "ammo": 1, 
-        "damage": 20,
+        "damage": 15,
         "radius": 24,
         "force": 25
     },
