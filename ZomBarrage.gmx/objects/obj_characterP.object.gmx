@@ -169,8 +169,10 @@ audio_emitter_position(s_emit, x, y, 0);
 */
 
 if (round(xPush) != 0 || round(yPush) != 0) {
-    var newX = (x + power(xPush, global.timeScale));
-    var newY = (y + power(yPush, global.timeScale));
+    //var newX = (x + power(xPush, global.timeScale));
+    //var newY = (y + power(yPush, global.timeScale));
+    var newX = x + (xPush / global.timeScale);
+    var newY = y + (yPush / global.timeScale);
     
     // Calculate bounce off collisions from push
     /* Note if you want the entity to bounce,
@@ -331,7 +333,7 @@ image_speed = image_speed * global.timeScale;
 
 var bobHeight = 0.15; //def 0.15
 var movementAmt;
-if (object_index == obj_zombie || object_index == obj_civilian) {
+if (object_index == obj_zombie || object_index == obj_runnerZombie || object_index == obj_civilian) {
     movementAmt = path_speed;
 }
 else if (object_index == obj_heavyZombie) {
@@ -375,6 +377,7 @@ else if (bobbing == 0 &amp;&amp; !isBobbingUp) {
             audio_play_sound_on(s_emit, footstepType, false, 3);
         break;
         case obj_zombie:
+        case obj_runnerZombie:
             var footstepType = choose(snd_footsteps_generic_1, snd_footsteps_generic_2, 
                                       snd_footsteps_generic_3, snd_footsteps_generic_4);
             if (!audio_is_playing(footstepType)) {
@@ -391,8 +394,6 @@ if (object_is_ancestor(interactEntity.object_index, obj_vehicleP)) {
 else {
     visible = true;
 }
-
-// Audio emitter position update
 
 </string>
           </argument>

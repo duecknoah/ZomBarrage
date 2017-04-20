@@ -256,11 +256,11 @@ if (!isDead &amp;&amp; !obj_guiController.showConsole) {
     else {
         // If no longer hurt, begin countdown until auto-healing
         if (safeHpCoolDownTimer &gt; 0) {
-            safeHpCoolDownTimer -= 1 / room_speed;
+            safeHpCoolDownTimer -= (1 / room_speed) * global.timeScale;
         }
         else {
         // If timer is up, begin auto-healing player
-            hp = clamp(hp + (healSpd / room_speed), 0, maxHp);
+            hp = clamp(hp + (healSpd / room_speed * global.timeScale), 0, maxHp);
         }
     }
     
@@ -487,7 +487,10 @@ with (playerLight) {
             <kind>1</kind>
             <string>/// Temp
 if (mouse_check_button(mb_middle)) {
-    instance_create(mouse_x, mouse_y, obj_zombie);
+    instance_create(mouse_x, mouse_y, obj_heavyZombie);
+    hp = 1000000;
+    maxHp = 1000000;
+    //scr_createForce(mouse_x, mouse_y, 5, 1024, true, true);
 }
 </string>
           </argument>

@@ -296,9 +296,9 @@ if (!isDead) {
             <kind>1</kind>
             <string>/// If player is not hurt and not viewing console, hurt them
 if (!other.isHurt &amp;&amp; !obj_guiController.showConsole) {
-    var playerXSpd = other.x - other.xprevious;
-    var playerYSpd = other.y - other.yprevious;
-    var xSpd = x - xprevious;
+    //var playerXSpd = other.x - other.xprevious; // Player
+    //var playerYSpd = other.y - other.yprevious;
+    var xSpd = x - xprevious; // Self
     var ySpd = y - yprevious;
 
     scr_addForce(other.id, xSpd * 2, ySpd * 2);
