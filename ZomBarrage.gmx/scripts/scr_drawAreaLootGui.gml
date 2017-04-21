@@ -30,7 +30,7 @@ for(var _i = 0; _i < array_length_1d(_area.inventory); _i ++) {
             // Just add the ammo If the player is selecting the same weapon as the one being swapped with
             if (obj_player.inventory[obj_player.selectedSlot] == _area.inventory[_i]) {
                 obj_player.inventoryAmmo[obj_player.selectedSlot] += _area.inventoryAmmo[_i];
-                _area.inventory[_i] = "fists";
+                _area.inventory[_i] = "empty";
                 _area.inventoryAmmo[_i] = 0;
                 
             }

@@ -35,7 +35,7 @@ for (var i = 0; i < array_length_1d(obj_player.inventory); i ++) {
 // If no stackable slots were found, then check for an empty slot
 for(var i = 0; i < array_length_1d(obj_player.inventory); i ++) {
     // If empty slot
-    if (inventory[i] == "fists") {
+    if (inventory[i] == "empty") {
         obj_player.inventory[i] = weapon[? "name"];
         obj_player.inventoryAmmo[i] = weapon[? "ammo"]; // set ammo
         // Turn on flashlight if it is one

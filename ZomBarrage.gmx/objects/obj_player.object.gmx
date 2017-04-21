@@ -30,13 +30,16 @@ event_inherited();
 // Inventory //
         selectedSlot = 0;
     // Inventory Weapons
-        inventory[0] = "fists";
-        inventory[1] = "fists";
+        inventory[0] = "empty";
+        inventory[1] = "empty";
     // inventory ammo (corresponding with inventory items)
         inventoryAmmo[0] = 0;
         inventoryAmmo[1] = 0;
-    // Loot keys
-        lootKeys = 0; // separate from inventory slots
+    // Secondary Inventory (4 slots)
+        for (var i = 0; i &lt; 4; i ++) {
+            sInventory[i] = "empty";
+            sInventoryAmmo[i] = 0;
+        }
 
 // State variables
     state = "default";
@@ -409,14 +412,11 @@ if (!isDead &amp;&amp; !obj_guiController.showConsole) {
             }
         }
         // Inventory Controls
-        
-        if (keyboard_check_pressed(ord("1"))) {
-            selectedSlot = 0;
-            scr_stopPlayerWeaponSound();
-        }
-        if (keyboard_check_pressed(ord("2"))) {
-            selectedSlot = 1;
-            scr_stopPlayerWeaponSound();
+        for (var i = 1; i &lt;= 6; i ++) {
+            if (keyboard_check_pressed(ord(string(i)))) {
+                selectedSlot = i - 1;
+                scr_stopPlayerWeaponSound();
+            }
         }
         
         // Drop selected weapon
@@ -425,9 +425,9 @@ if (!isDead &amp;&amp; !obj_guiController.showConsole) {
                 flashLightOn = false; // disable if player had flashlight on
             }
             // If holding an actual weapon
-            if (inventory[selectedSlot] != "fists") {
+            if (inventory[selectedSlot] != "empty") {
                 scr_createWeapon(x, y, scr_WeaponNameToId(inventory[selectedSlot]), inventoryAmmo[selectedSlot]);
-                inventory[selectedSlot] = "fists";
+                inventory[selectedSlot] = "empty";
                 inventoryAmmo[selectedSlot] = 0;
                 // Reset img state, else player cycles through animation forever
                 img_number = sprite_get_number(spr_PlayerFists1) - 1;

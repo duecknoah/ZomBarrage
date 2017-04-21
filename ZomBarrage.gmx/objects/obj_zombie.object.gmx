@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>/// create navPath and set variables
 event_inherited(); // init character and zombie variables
-maxHp = global.currentWave * 5 + 5;
+maxHp = global.currentWave * 5 + 2.5;
 hp = maxHp;
 isCrawler = false; // is this a zombie crawler?
 image_xscale = 0.85;

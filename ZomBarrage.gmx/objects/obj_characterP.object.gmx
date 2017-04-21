@@ -204,6 +204,11 @@ if (round(xPush) != 0 || round(yPush) != 0) {
     }
 }
 
+// If stuck in a collision, just move straight up
+if (place_meeting(x, y, obj_collision)) {
+    y --;
+}
+
 if (isHurt) {
     if (hurtTimer &gt;= 0) {
         hurtTimer -= 1 * global.timeScale;

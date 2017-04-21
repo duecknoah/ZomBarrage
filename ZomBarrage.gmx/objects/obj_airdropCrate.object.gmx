@@ -65,6 +65,10 @@ if (!hasLanded) {
         hasLanded = true;
         canOpen = true;
         depth = scr_getDepth(y, -1, true);
+        
+        var offsetX = sprite_get_width(sprite_index) / 2 * image_xscale;
+        var offsetY = sprite_get_height(sprite_index) / 2 * image_yscale;
+        instance_create(x + offsetX, y + offsetY, obj_collision);
     }
 }
 </string>

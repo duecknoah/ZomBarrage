@@ -244,8 +244,11 @@ switch (_inputLength) {
             
             if (_w > 0 || _h > 0) {
                 window_set_size(_w, _h);
+                view_wview[0] = ceil(_w / 2);
+                view_hview[0] = ceil(_h / 2);
                 view_wport[0] = _w;
                 view_hport[0] = _h;
+                display_set_gui_size(_w, _h);
                 scr_consoleOutPrintln("Window size set to: W: " + string(_w) + ", H: " + string(_h));
             }
             else {

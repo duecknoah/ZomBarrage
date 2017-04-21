@@ -1,7 +1,7 @@
 [
     {
         "id": 0,
-        "name": "fists",
+        "name": "empty",
         "ammo": 0,
         "damage": 1.5
     },

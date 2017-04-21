@@ -52,7 +52,7 @@
   </views>
   <instances>
     <instance objName="obj_mapObjectsInit" x="64" y="64" name="inst_A043EBB6" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_player" x="736" y="800" name="inst_13CF7576" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_player" x="512" y="256" name="inst_13CF7576" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_airdropCrate" x="448" y="-256" name="inst_6993CFA4" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="b_BasicHouse" x="576" y="352" name="inst_2EB2930F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="b_GreenBuilding" x="96" y="192" name="inst_2EA7DD92" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
@@ -75,10 +75,6 @@
     <instance objName="obj_itemWeapon" x="416" y="160" name="inst_8C2B4070" locked="0" code="weapon = scr_IdToWeapon(8);&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_itemWeapon" x="448" y="160" name="inst_281B6574" locked="0" code="weapon = scr_IdToWeapon(9);&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_soundscape" x="32" y="64" name="inst_B9424F0D" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="b_GreenBuilding" x="672" y="864" name="inst_DC36A25A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="b_GreenBuilding" x="800" y="736" name="inst_692BE662" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="b_GreenBuilding" x="672" y="608" name="inst_59898956" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="b_GreenBuilding" x="544" y="736" name="inst_0C1D93D8" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
     <tile bgName="tile_back" x="224" y="128" w="64" h="64" xo="64" yo="0" id="10001654" name="inst_5599B35F" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>

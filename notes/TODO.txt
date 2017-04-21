@@ -1,8 +1,9 @@
 Improvements to make:
-- Fix being able to get knocked inside walls, this is due to forces somehow getting you inside obj_collisions when hit hard enough
-- Make zombies have less health increases
+- Make it so hotkeys (ex. h) would make player select any healing items in their inventory and / or secondary
+- Make it so player can use numbers 1-6 for inventory
 - Make more ammo spawn (airdrops n stufF)
 - Find a way to make weapons spawn in a cool way
+
 - allow loot keys and flashlights to have their own special inventory slots
 - make collatoral damage not be infinite
 - Make 'sunrise' at end of wave, and 'sunset' at start of wave 
@@ -13,6 +14,7 @@ Improvements to make:
 - prevent punching while in car
 
 Bugs to fix:
+- undefined value sometimes when looting, crashing game
 - heavy zombie moving towards player while throwing rock or punch while in backup pathfinding
 - FireLights not dissappearing on zombie kill sometimes
 - Buildings not staying faded, usually after looting

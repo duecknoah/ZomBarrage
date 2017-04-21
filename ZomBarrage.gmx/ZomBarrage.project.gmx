@@ -265,6 +265,7 @@
     <sprites name="Gui">
       <sprite>sprites\spr_WaveBar</sprite>
       <sprite>sprites\spr_inventory</sprite>
+      <sprite>sprites\spr_secondaryInventory</sprite>
       <sprite>sprites\spr_lootKeysBar</sprite>
       <sprite>sprites\spr_healthBar</sprite>
       <sprite>sprites\spr_upgradeBackground</sprite>
@@ -575,6 +576,7 @@
         <object>objects\obj_bigTruck</object>
         <object>objects\obj_playerVehicle</object>
       </objects>
+      <object>objects\obj_airdropCrate</object>
     </objects>
     <objects name="Other">
       <object>objects\obj_zombieSpawn</object>
@@ -651,7 +653,6 @@
       <object>objects\obj_saveZone</object>
       <object>objects\obj_teleportZone</object>
     </objects>
-    <object>objects\obj_airdropCrate</object>
   </objects>
   <timelines name="timelines">
     <timeline>timelines\tl_cutscene_beginning_intro</timeline>

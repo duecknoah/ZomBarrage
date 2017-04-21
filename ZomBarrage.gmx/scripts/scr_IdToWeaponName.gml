@@ -13,4 +13,4 @@ if (_idToSearch > 0 && _idToSearch < obj_weaponDB.totalWeapons) {
     return _weapon[? "name"];
 }
 
-return "fists"; // return fists by default
+return "empty"; // return empty by default

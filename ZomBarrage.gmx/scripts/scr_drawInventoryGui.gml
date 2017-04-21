@@ -12,8 +12,10 @@ var inventorySlotX = _xx + (3 * _scale);
 var inventorySlotY = _yy - ((sprite_get_height(spr_inventory) / 2) * _scale) + (4 * _scale);
 inventorySlotX += weaponDrawOff;
 inventorySlotY += weaponDrawOff;
-var ammoX = inventorySlotX + weaponDrawOff + 8;
-var ammoY = inventorySlotY;
+var ammoX = _xx + 35 * _scale;
+var ammoY = _yy - (sprite_get_height(spr_inventory) / 2 * _scale) + 35 * _scale;
+//var ammoX = inventorySlotX + weaponDrawOff + 8;
+//var ammoY = inventorySlotY;
 
 // weapon sprites in slots
 
@@ -23,7 +25,11 @@ for(i = 0; i < 2; i ++) {
     draw_sprite_ext(spr_itemWeapon, ID, inventorySlotX, inventorySlotY, _scale, _scale, 0, c_white, _alpha);
     
     // Draw ammo amount (ceiled to remove decimals for certain weapons)
+    draw_set_halign(fa_right);
+    draw_set_valign(fa_bottom);
     draw_text(ammoX, ammoY, string(ceil(obj_player.inventoryAmmo[i])));
+    draw_set_halign(fa_left);
+    draw_set_valign(fa_top);
     
     inventorySlotY += 36 * _scale;
     ammoY += 36 * _scale;
@@ -54,16 +60,16 @@ for(i=0; i<2; i++) {
     
     if (i == 0) {
         // Slot 0
-        _x1 = _xx + (52 * _scale);
+        _x1 = _xx + (41 * _scale);
         _y1 = _yy + ((2 + _yoff) * _scale);
-        _x2 = _xx + (56 * _scale);
+        _x2 = _xx + (45 * _scale);
         _y2 = _yy + ((35 + _yoff) * _scale);
     }
     else {
         // Slot 1
-        _x1 = _xx + (52 * _scale);
+        _x1 = _xx + (41 * _scale);
         _y1 = _yy + ((40 + _yoff) * _scale);
-        _x2 = _xx + (56 * _scale);
+        _x2 = _xx + (45 * _scale);
         _y2 = _yy + ((73 + _yoff) * _scale);    
     }
     
@@ -77,3 +83,33 @@ for(i=0; i<2; i++) {
     draw_rectangle(_x1, _y1, _x2, _y2, 0);
     draw_set_colour(c_white);
 }
+
+// Secondary Inventory
+var sInventoryX = _xx;
+var sInventoryY = _yy - ((sprite_get_height(spr_inventory) / 2) * _scale) - (sprite_get_height(spr_secondaryInventory) * _scale);
+var subImg = clamp(obj_player.selectedSlot - 1, 0, 3);
+draw_sprite_ext(spr_secondaryInventory, subImg, sInventoryX, sInventoryY, _scale, _scale, 0, c_white, 1);
+for (var i = 2; i <= 5; i ++) {
+    var slotX, slotY; // relative to top left of secondary inventory
+
+    switch(i) {
+        case 2: // Slot 2
+            slotX = 3;
+            slotY = 3;
+        break;
+        case 3: // Slot 3
+            slotX = 22;
+            slotY = 3;
+        break;
+        case 4: // Slot 4
+            slotX = 3;
+            slotY = 22;
+        break;
+        case 5: // Slot 5
+            slotX = 22;
+            slotY = 22;
+        break;
+    }
+    
+    // TODO: Draw sprite @ sInventory + slot coordinates
+} 

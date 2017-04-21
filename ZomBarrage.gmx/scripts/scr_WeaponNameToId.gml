@@ -22,4 +22,4 @@ for (var i = 0; i < obj_weaponDB.totalWeapons; i ++) {
         return i;
     }
 }
-return 0; // return fists by default
+return 0; // return empty id by default

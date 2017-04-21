@@ -87,7 +87,7 @@ if (!obj_guiController.showUpgradeScreen) {
                     inventoryAmmo[selectedSlot] --;
                     // Then if no keys (ammo) left, remove key and make it fists
                     if (inventoryAmmo[selectedSlot] <= 0) {
-                        inventory[selectedSlot] = "fists";
+                        inventory[selectedSlot] = "empty";
                     }
                     // Play sound effect
                     audio_play_sound_on(s_emit, snd_unlock_and_open, false, 5);
@@ -151,7 +151,7 @@ if (!obj_guiController.showUpgradeScreen) {
             // As them item itself is the quantity
             inventoryAmmo[selectedSlot] --;
             if (inventoryAmmo[selectedSlot] <= 0) {
-                inventory[selectedSlot] = "fists";
+                inventory[selectedSlot] = "empty";
             }
             shootDelay[selectedSlot] = 1.5; // 1 second delay
             state = "Molotov Cocktail"; // Molotov Cocktail
@@ -167,7 +167,7 @@ if (!obj_guiController.showUpgradeScreen) {
             // As them item itself is the quantity
             inventoryAmmo[selectedSlot] --;
             if (inventoryAmmo[selectedSlot] <= 0) {
-                inventory[selectedSlot] = "fists";
+                inventory[selectedSlot] = "empty";
             }
             // Go back to normal state of holding frag grenade
             state = "Frag Grenade"; // Frag Grenade
