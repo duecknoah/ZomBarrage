@@ -6,9 +6,15 @@
 var saveNum = argument[0];
 var dir = "save" + string(saveNum) + "/";
 var dynamicSaveName = "saveDynamic" + string(saveNum) + ".ini"; // saveDynamic (this) holds dynamically created resources that will get loaded after game_load
+var entityDataSaveName = "entityData.ini"; // holds all entity data (itemWeapons on ground for ex), only exists when playing a map
 var saveName = "save" + string(saveNum) + ".ini"; // game_save creates save[i].ini
+var wasError = false;
+var errorStr = "unknown";
 
-//show_message("HG");
+/***************************************************
+  Save Dynamic (All dynamic resources and stats to be kept
+  throughout the game
+ ***************************************************/
 ini_open(dir + dynamicSaveName);
 
 if (ini_section_exists("data")) {
@@ -22,10 +28,7 @@ if (ini_section_exists("data")) {
             }
             obj_save.saveDynamic = ds_map_create(); // init save file, this is the current one being used in game that holds dynamic resources while game_save loads everything else
             ds_map_read(obj_save.saveDynamic, saveStr);
-            /* LIST OF DYNAMIC RESOURCES:
-            - All ds variables
-            - all dynamic data
-            */
+            /* LIST OF DYNAMIC RESOURCES TO BE KEPT WITH ENTITY GAME SAVE: */
             // Player Stats
             with (obj_player) {
                 // Permanent (stats that last the whole game)
@@ -34,12 +37,19 @@ if (ini_section_exists("data")) {
                 lootRange = obj_save.saveDynamic[? "Player.lootRange"]; // range where player can loot from (using loot key)
                 lootTime = obj_save.saveDynamic[? "Player.lootTime"]; // time it takes (in seconds) to loot a building
             }
-            scr_initConsoleDB();
+            scr_initConsoleDB(); // initialize console
             
-        }         
-        return true; // success
+        }
+        ini_close(); // no error, so close now
     }
+    else { wasError = true; errorStr = "Save Ini key in 'saveDynamic.ini' does not exist!"; }
 }
-show_message("Loading save error: error or no save dynamic data");
-room_goto(rm_Menu);
-return false; // error or no file
+else { wasError = true; errorStr = "'data' section in 'saveDynamic.ini' does not exist!"; }
+    
+// Final Error roundup
+if (wasError) {
+    show_message("Loading save error, reason: " + errorStr); //error or no save dynamic data");
+    room_goto(rm_Menu);
+    return false; // error or no file
+}
+return true; // success!

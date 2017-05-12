@@ -206,7 +206,16 @@ if (round(xPush) != 0 || round(yPush) != 0) {
 
 // If stuck in a collision, just move straight up
 if (place_meeting(x, y, obj_collision)) {
-    y --;
+    var doMove = true;
+    if (object_index == obj_player) {
+        // If looting, stay inside what you are currently looting
+        if (lootArea != noone) {
+            doMove = false;
+        }
+    }
+    if (doMove) {
+        y --;
+    }
 }
 
 if (isHurt) {
@@ -393,13 +402,15 @@ else if (bobbing == 0 &amp;&amp; !isBobbingUp) {
 }
 
 // Hide character if in vehicle
-if (object_is_ancestor(interactEntity.object_index, obj_vehicleP)) {
-    visible = false;
+if (interactEntity != noone) {
+    // If we are interacting with a vehicle, then make self invisible
+    if (object_is_ancestor(interactEntity.object_index, obj_vehicleP)) {
+        visible = false;
+    }
 }
 else {
     visible = true;
 }
-
 </string>
           </argument>
         </arguments>

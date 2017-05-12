@@ -40,7 +40,14 @@
 image_speed = 0;
 // random weapon by default
 weapon = scr_IdToWeapon(floor(random_range(1, obj_weaponDB.totalWeapons - 1)));
-initWeapon = true;
+/***************************************************
+  when set, the item will change its weapon to this. 
+  This is done to be able to set the weapon data without 
+  having to wait until the create event finishes before 
+  being overwritten
+ ***************************************************/
+setWeaponTo = ds_map_create();
+
 // Bobbing of weapon animation (hovering up and down)
 var initBobScale = random(0.75); 
 image_xscale = initBobScale;
@@ -55,7 +62,6 @@ if (random(1) &lt; 0.5) {
 else {
     isBobbingUp = true;
 }
-image_index = weapon[? "id"];
 </string>
           </argument>
         </arguments>
@@ -104,17 +110,16 @@ if (ds_exists(weapon, ds_type_map)) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// If a change in weaponType, update the weapon
-if (initWeapon) {
-    image_index = weapon[? "id"];
-    initWeapon = false;
+            <string>// If weapon is indicated to be changed to another
+// weapon, then do so.
+if (ds_exists(setWeaponTo, ds_type_map)) {
+    if (!ds_map_empty(setWeaponTo)) {
+        ds_map_copy(weapon, setWeaponTo);
+    }
 }
 
-// If ds weapon data doesn't exist (ex. loading from save)
-if (!ds_exists(weapon, ds_type_map)) {
-    // Re-create dynamic data off image_index (id)
-    weapon = scr_IdToWeapon(image_index);
-}
+/// If a change in weaponType, update the weapon
+image_index = weapon[? "id"];
 
 if (weapon[? "ammo"] == 0) {
     image_alpha = 1;

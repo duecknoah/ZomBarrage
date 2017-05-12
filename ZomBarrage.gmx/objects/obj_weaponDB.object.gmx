@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>/// Holds all the data for all of the weapons in the game
-weapon = ds_list_create();  // Holds all weapon data in game based off weapons.json
+weapon = ds_list_create();  // Holds all weapon data in game based off weapons.json, used to create weapons
 
 // If there is no json file there, create it
 if (!file_exists("weapons.json")) {

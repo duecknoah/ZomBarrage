@@ -224,8 +224,9 @@ switch (_inputLength) {
             var _slot = real(_input[| 2]);
             var _amt = real(_input[| 3]);
             
-            if (_slot >= 0 && _slot < array_length_1d(obj_player.inventoryAmmo)) {
-                obj_player.inventoryAmmo[_slot] += _amt;
+            if (_slot >= 0 && _slot < ds_list_size(obj_player.inventory)) {
+                var _currentWeap = obj_player.inventory[| _slot];
+                _currentWeap[? "ammo"] += _amt;
                 scr_consoleOutPrintln("Gave player " + _input[| 3] + " ammo in slot" + _input[| 2]);
             }
             else {
@@ -280,11 +281,26 @@ switch (_inputLength) {
         // spawn weapon x y 2 25
         // spawn weapon [x] [y] [id] [ammo]
         if (_input[| 0] == "spawn" && _input[| 1] == "weapon") {
+            var _x, _y, _id, _ammo;
+            _x = real(_input[| 2]);
+            _y = real(_input[| 3]);
+            _id = real(_input[| 4]);
+            _ammo = real(_input[| 5]);
             
-            var isWeapon = scr_createWeapon(real(_input[| 2]), real(_input[| 3]), real(_input[| 4]), real(_input[| 5]));
-            if (isWeapon == -1) {
-                scr_consoleOutPrintln("Weapon id: " + _input[| 4] + " is not a real weapon");
+            // Validate parameters
+            if (_id < 0 || _id >= obj_weaponDB.totalWeapons) {
+                scr_consoleOutPrintln("Weapon id: " + _input[| 4] + " is not a valid weapon");
+                return 0;
             }
+            
+            if (_ammo < 0) {
+                scr_consoleOutPrintln("Ammo cannot be negative!");
+                return 0;
+            }
+            
+            var _weapon = scr_IdToWeapon(_id);
+            _weapon[? "ammo"] = _ammo;
+            scr_createWeapon(_x, _y, _weapon);
             return 0;
         }
     break;

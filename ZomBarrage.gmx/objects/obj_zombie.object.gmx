@@ -60,7 +60,7 @@ alarm[0] = 1;
 var lootKeyChance = 12; // default 1 out of 12
 
 if (round(random(lootKeyChance)) == 0) {
-    scr_createWeapon(x, y, scr_WeaponNameToId("Loot Key"), 1);
+    scr_createWeapon(x, y, scr_IdToWeapon(5));
 }
 
 scr_createZombieBodyAt(x, y, rotation + 90);

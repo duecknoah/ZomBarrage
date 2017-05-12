@@ -30,21 +30,20 @@ event_inherited();
 // Inventory //
         selectedSlot = 0;
     // Inventory Weapons
-        inventory[0] = "empty";
-        inventory[1] = "empty";
-    // inventory ammo (corresponding with inventory items)
-        inventoryAmmo[0] = 0;
-        inventoryAmmo[1] = 0;
-    // Secondary Inventory (4 slots)
-        for (var i = 0; i &lt; 4; i ++) {
-            sInventory[i] = "empty";
-            sInventoryAmmo[i] = 0;
+        inventory = ds_list_create();
+        // Set up empty inventory
+        // The inventory system works by holding a ds_map with all of the
+        // weapon data of a single weapon, each ds_map / weapon is stored in
+        // a different index in the players inventory ds_list
+        for (var i = 0; i &lt; 6; i ++) {
+            ds_list_add(inventory, scr_IdToWeapon(0)); // default / empty
         }
 
 // State variables
     state = "default";
-    shootDelay[0] = 0; // delay between next available shot from weapon in slot 1 (slot 0 in array)
-    shootDelay[1] = 0; // delay between next available shot from weapon in slot 2 (slot 1 in array)
+    for (var i = 0; i &lt; 6; i ++) {
+        shootDelay[i] = 0; // delay between next available shot from weapon in slot i + 1 (slot i in array)
+    }
     lootArea = noone; // area currently being looted.
     hidePlayer = false; //when true, player is not shown (nor the flashlight)
     lootXPrev = 0; // x previous, used after player is done looting to teleport player back outside of building
@@ -274,8 +273,8 @@ if (!isDead &amp;&amp; !obj_guiController.showConsole) {
         // Action Controls
         // if not looting, allow changing states
         if (state != "looting" &amp;&amp; state != "loot choose") {
-            switch(scr_WeaponNameToId(inventory[selectedSlot])) {
-                case 0: // fists
+            switch(scr_WeaponToId(inventory[| selectedSlot])) {
+                case 0: // fists / empty
                    if (mouse_check_button_pressed(mb_left)) {
                         // If not already animating punch / punching
                         if (img_index == 0 &amp;&amp; shootDelay[selectedSlot] &lt;= 0) {
@@ -367,7 +366,7 @@ if (!isDead &amp;&amp; !obj_guiController.showConsole) {
                 case 7: //"Molotov Cocktail"
                     // If clicked and player still has more ammo
                     if (mouse_check_button_pressed(mb_left)
-                    &amp;&amp; inventoryAmmo[selectedSlot] &gt; 0
+                    &amp;&amp; scr_WeaponAmmoOf(inventory[| selectedSlot]) &gt; 0
                     &amp;&amp; shootDelay[selectedSlot] &lt;= 0) {
                         state = "throw Molotov Cocktail";
                     }
@@ -375,7 +374,7 @@ if (!isDead &amp;&amp; !obj_guiController.showConsole) {
                 case 8: //"Frag Grenade"
                     // If clicked and player still has more ammo
                     if (mouse_check_button_pressed(mb_left)
-                    &amp;&amp; inventoryAmmo[selectedSlot] &gt; 0
+                    &amp;&amp; scr_WeaponAmmoOf(inventory[| selectedSlot]) &gt; 0
                     &amp;&amp; shootDelay[selectedSlot] &lt;= 0) {
                         state = "throw Frag Grenade";
                     }
@@ -411,24 +410,47 @@ if (!isDead &amp;&amp; !obj_guiController.showConsole) {
                 break;
             }
         }
+        var inventorySlotChange = false;
         // Inventory Controls
         for (var i = 1; i &lt;= 6; i ++) {
             if (keyboard_check_pressed(ord(string(i)))) {
                 selectedSlot = i - 1;
-                scr_stopPlayerWeaponSound();
+                inventorySlotChange = true;
+            }
+        }
+        
+        if (mouse_wheel_up()) {
+            selectedSlot = (selectedSlot - 1) % ds_list_size(inventory);
+            inventorySlotChange = true;
+        }
+        if (mouse_wheel_down()) {
+            selectedSlot = (selectedSlot + 1) % ds_list_size(inventory);
+            inventorySlotChange = true;
+        }
+        if (selectedSlot &lt; 0) {
+            selectedSlot = ds_list_size(inventory) - 1;
+            inventorySlotChange = true;
+        }
+        
+        // Reset any current state to default as inventory selected slot was changed
+        if (inventorySlotChange) {
+            scr_stopPlayerWeaponSound();
+            // Don't allow changing states mid loot, else player gets stuck
+            // in loot area!
+            if (state != "looting" &amp;&amp; state != "loot choose") {
+                state = "default";
             }
         }
         
         // Drop selected weapon
         if (keyboard_check_pressed(ord("Q"))) {
-            if (inventory[selectedSlot] == scr_IdToWeaponName(4)) { // if holding Flashlight
+            if (scr_WeaponToId(inventory[| selectedSlot]) == 4) { // if holding Flashlight
                 flashLightOn = false; // disable if player had flashlight on
             }
             // If holding an actual weapon
-            if (inventory[selectedSlot] != "empty") {
-                scr_createWeapon(x, y, scr_WeaponNameToId(inventory[selectedSlot]), inventoryAmmo[selectedSlot]);
-                inventory[selectedSlot] = "empty";
-                inventoryAmmo[selectedSlot] = 0;
+            if (scr_WeaponToId(inventory[| selectedSlot]) != 0) { // if not an empty slot
+                scr_createWeapon(x, y, inventory[| selectedSlot]);
+                inventory[| selectedSlot] = scr_IdToWeapon(0); // empty slot
                 // Reset img state, else player cycles through animation forever
                 img_number = sprite_get_number(spr_PlayerFists1) - 1;
                 img_speed = 0;
@@ -552,7 +574,7 @@ with (other) {
 }
 
 if (keyboard_check_pressed(ord("E"))) {
-    var actionTaken = scr_PlayerAddWeapon(other.weapon, other.weapon[? "ammo"]);
+    var actionTaken = scr_PlayerAddWeapon(other.weapon);
     
     switch(actionTaken) {
         case -1: // nothing happened
@@ -568,6 +590,32 @@ if (keyboard_check_pressed(ord("E"))) {
             }  
         break;
     }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="5">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Free extra resources
+if (ds_exists(inventory, ds_type_list)) {
+    ds_list_destroy(inventory);
 }
 </string>
           </argument>
@@ -610,7 +658,7 @@ scr_PlayerStateManager();
 scr_drawHat(0, 0);
 
 // If looting, don't fade out back tiles (else it will show an empty house)
-if (state != "looting" || state != "loot choose") {
+if (state != "looting" &amp;&amp; state != "loot choose") {
     scr_fadeAboveTilesAt(x, y, 3);
     scr_fadeAbovePropsAt(x, y, false);
 }

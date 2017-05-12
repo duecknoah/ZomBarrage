@@ -1,24 +1,22 @@
-/// scr_areaAddWeapon(area, weaponType, ammo);
+/// scr_areaAddWeapon(area, weapon);
 /* Adds weapon to an loot areas inventory
 returns false, unable to add weapon
 returns true, able to add weapon
 */
 
 var _area = argument0;
-var _weaponName = argument1;
-var _ammo = argument2;
+var _weapon = argument1;
 
 /* Loop through the inventory and see if it
  * can fit into an empty slot.
 */
 
-for(var i=0; i<array_length_1d(_area.inventory); i++) {
+for(var i = 0; i < ds_list_size(_area.inventory); i ++) {
     // If empty slot
-    if (_area.inventory[i] == "") {
-        _area.inventory[i] = _weaponName;
-        _area.inventoryAmmo[i] = _ammo;
+    if (scr_WeaponToId(_area.inventory[| i]) == 0) {
+        _area.inventory[| i] = _weapon;
         return true;
     }
 }
-
+// No room in inventory
 return false;

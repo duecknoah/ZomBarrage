@@ -3,23 +3,22 @@ Improvements to make:
 - Make it so player can use numbers 1-6 for inventory
 - Make more ammo spawn (airdrops n stufF)
 - Find a way to make weapons spawn in a cool way
+- Fix bug that makes player unable to punch or swing sword
 
-- allow loot keys and flashlights to have their own special inventory slots
-- make collatoral damage not be infinite
+- Add a time limit in looting
 - Make 'sunrise' at end of wave, and 'sunset' at start of wave 
 - Make it so where you click is where the grenade / molotov goes
 - Make it show weapon damage on gun when holding it
-- Make it so each zombie begins spawning at a specific wave, rather than all starting at wave 1
 - Make it so each gun has a maxstack amount. You could use this variable with lootRank to lerp the ammo between 0 and the max amount
 - prevent punching while in car
+- allow storing a couple weapons in your truck to carry between levels, this would mean saving the trucks inventory in saveDynamic
 
 Bugs to fix:
 - undefined value sometimes when looting, crashing game
 - heavy zombie moving towards player while throwing rock or punch while in backup pathfinding
-- FireLights not dissappearing on zombie kill sometimes
 - Buildings not staying faded, usually after looting
-- prevent allowing picking up two of the same weapon, this happens when you have a gun in the second slot while the first slot is empty. Then when you pickup the same weapon as in slot 2, it will go in slot 1 and not stack when it should.
 - Possible memory leaks due to static particle systems not destroying particle emitters at end of room / game (first check if obj_particleIndex dose this already)
+- Player inventory not saving properly, currently I'm avoiding this by loading a clear inventory each time. It is partly setup, but it gets overridden by the map saves inventory as well.
 
 To make maps more challenging, make them more tight spaced.
 

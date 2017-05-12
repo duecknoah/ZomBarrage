@@ -9,7 +9,7 @@ _maxDist = argument6;
 _creator = argument7;
 
 with (obj_player) {
-    if (inventoryAmmo[selectedSlot] <= 0) {
+    if (scr_WeaponAmmoOf(inventory[| selectedSlot]) <= 0) {
         return false; // unable to shoot bullet, no more ammo
     }
 }
@@ -23,7 +23,8 @@ with (instance_create(xx, yy, obj_bullet)) {
 }
 
 with (obj_player) {
-    inventoryAmmo[selectedSlot] --;
+    var _weapon = inventory[| selectedSlot];
+    _weapon[? "ammo"] --;
     shootDelay[selectedSlot] = other.delay;
 }
 

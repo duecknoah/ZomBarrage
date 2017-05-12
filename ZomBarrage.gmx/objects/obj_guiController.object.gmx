@@ -54,7 +54,6 @@ showRespawnScreen = false; // is shown once player dies
 showLootingBar = true; // show the loading like bar when looting
 showLootingChooseScreen = true; // show the screen post-looting of where the player chooses what they want from the looting
 showChatBar = false; // show all the chatbar items? (the bottom bar where dialogue shows)
-showLootKeysBar = true; // show the lootkeys bar?
 // Other gui variables
 shootDelayMax[0] = 0; // stores the highest value when shootdelay[0] of player is not 0
 shootDelayMax[1] = 0; // stores the highest value when shootdelay of player is not 0
@@ -69,7 +68,7 @@ waveCompletionScreenAlpha = 1;
 weaponScopeAlpha = 1;
 weaponPickupTextAlpha = 1;
 OnFireGuiAlpha = 0; // when player is on fire, this will increase
-inventoryAlpha = 1;
+inventoryAlpha = 0.5;
 healthBarAlpha = 1;
 lootingBarAlpha = 1;
 lootingChooseScreenAlpha = 1;
@@ -356,7 +355,7 @@ if (showWaveCompletionScreen) {
 // Draw inventory GUI
 if (showInventory) {
     scr_drawInventoryGui(0,
-                        view_hport[0] - (sprite_get_height(spr_inventory) / 2 * guiScale),
+                        view_hport[0] - (sprite_get_height(spr_inventory) * guiScale) - (sprite_get_height(spr_secondaryInventory) * guiScale),
                         guiScale,
                         inventoryAlpha);
 }
@@ -503,11 +502,6 @@ if (showHealthBar) {
     draw_sprite_ext(spr_healthBar, 1, hbx, hby, hbHealthXScale, guiScale, 0, c_white, healthBarAlpha);
     // Healthbar frame
     draw_sprite_ext(spr_healthBar, 0, hbx, hby, guiScale, guiScale, 0, c_white, healthBarAlpha);
-}
-
-// Draw Lootkey bar
-if (showLootKeysBar) {
-    draw_sprite_ext(spr_lootKeysBar, 0, 0, 0, guiScale / 2, guiScale / 2, 0, c_white, 1);
 }
 
 // Weapon pickup text toggling

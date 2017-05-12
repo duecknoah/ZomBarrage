@@ -1,19 +1,12 @@
-///scr_createWeapon(x, y, weaponId, ammo);
+///scr_createWeapon(x, y, weapon);
 /* Creates a weapon entity at
  * specified coords
  */
 
 xx = argument0;
 yy = argument1;
-weaponId = argument2; 
-ammo = argument3;
-
-if (weaponId == -1) {
-    return -1;
-}
+weapon = argument2; 
 
 with (instance_create(xx, yy, obj_itemWeapon)) {
-    weapon = scr_IdToWeapon(other.weaponId);
-    weapon[? "ammo"] = other.ammo;
-    ammo = other.ammo;
+    weapon = other.weapon;
 }

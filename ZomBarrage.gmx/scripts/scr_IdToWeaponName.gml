@@ -8,7 +8,7 @@
 
 _idToSearch = argument0;
 
-if (_idToSearch > 0 && _idToSearch < obj_weaponDB.totalWeapons) {
+if (_idToSearch >= 0 && _idToSearch < obj_weaponDB.totalWeapons) {
     var _weapon = obj_weaponDB.weapon[| _idToSearch];
     return _weapon[? "name"];
 }

@@ -9,7 +9,7 @@ if (isDead) {
 // NOTE: This is just going off the weapon database. So something like 
 // ammo of this is NOT the same as the players ammo
 // for this weapon. Rather, its a blueprint of the weapon the total 
-var currentWeapon = scr_WeaponNameToWeapon(inventory[selectedSlot]);
+var currentWeapon = inventory[| selectedSlot];
 
 // If not showing the upgrade menu, allow things to happen
 if (!obj_guiController.showUpgradeScreen) {
@@ -84,10 +84,10 @@ if (!obj_guiController.showUpgradeScreen) {
                     x = _area.x;
                     y = _area.y;
                     // First use player selected slot (use Loot Key)
-                    inventoryAmmo[selectedSlot] --;
-                    // Then if no keys (ammo) left, remove key and make it fists
-                    if (inventoryAmmo[selectedSlot] <= 0) {
-                        inventory[selectedSlot] = "empty";
+                    currentWeapon[? "ammo"] --;
+                    // Then if no keys (ammo) left, remove key and make it empty
+                    if (currentWeapon[? "ammo"] <= 0) {
+                        inventory[| selectedSlot] = scr_IdToWeapon(0); // empty slot
                     }
                     // Play sound effect
                     audio_play_sound_on(s_emit, snd_unlock_and_open, false, 5);
@@ -104,8 +104,8 @@ if (!obj_guiController.showUpgradeScreen) {
             }
         break;
         case "loot choose":
-        // After looting, the player can choose which weapons they want to take
-        // NOTE: gui is drawn in obj_guiController draw GUI event
+            // After looting, the player can choose which weapons they want to take
+            // NOTE: gui is drawn in obj_guiController draw GUI event
         break;
         case "Sniper Rifle scoped": // Sniper Rifle scoped
             draw_sprite_ext(spr_PlayerSniperRifle, 0, x, y, drawScale, drawScale, rotation, c_white, 1);
@@ -149,9 +149,9 @@ if (!obj_guiController.showUpgradeScreen) {
             scr_createMolotovCocktail(_startX, _startY, _dir, _throwDist);
             // Make ammo go down by one, if no more ammo, remove cocktail
             // As them item itself is the quantity
-            inventoryAmmo[selectedSlot] --;
-            if (inventoryAmmo[selectedSlot] <= 0) {
-                inventory[selectedSlot] = "empty";
+            currentWeapon[? "ammo"] --;
+            if (currentWeapon[? "ammo"] <= 0) {
+                inventory[| selectedSlot] = scr_IdToWeapon(0); // empty slot
             }
             shootDelay[selectedSlot] = 1.5; // 1 second delay
             state = "Molotov Cocktail"; // Molotov Cocktail
@@ -165,9 +165,9 @@ if (!obj_guiController.showUpgradeScreen) {
             scr_createFragGrenade(_startX, _startY, _dir, _throwDist);
             // Make ammo go down by one, if no more ammo, remove cocktail
             // As them item itself is the quantity
-            inventoryAmmo[selectedSlot] --;
-            if (inventoryAmmo[selectedSlot] <= 0) {
-                inventory[selectedSlot] = "empty";
+            currentWeapon[? "ammo"] --;
+            if (currentWeapon[? "ammo"] <= 0) {
+                inventory[| selectedSlot] = scr_IdToWeapon(0); // empty slot
             }
             // Go back to normal state of holding frag grenade
             state = "Frag Grenade"; // Frag Grenade
@@ -194,7 +194,7 @@ if (!obj_guiController.showUpgradeScreen) {
             draw_sprite_ext(spr_PlayerIronSword, img_index, x, y, drawScale, drawScale, rotation, c_white, 1);
         break;
         case "run Chainsaw": // run Chainsaw
-            if (inventoryAmmo[selectedSlot] > 0) {
+            if (currentWeapon[? "ammo"] > 0) {
                 // Do constant amounts of small damage
                 var _rotOff = -15;
                 var _x = x + lengthdir_x(8, rotation + 90 + _rotOff);
@@ -209,7 +209,7 @@ if (!obj_guiController.showUpgradeScreen) {
                     audio_play_sound_on(s_emit, snd_chainsaw_use, false, 5);
                 }
                 draw_sprite_ext(spr_PlayerChainsaw, img_index, x, y, drawScale, drawScale, rotation, c_white, 1);
-                inventoryAmmo[selectedSlot] -= 0.05; // lose ammo every step (chainsaw has lots)
+                currentWeapon[? "ammo"] -= 0.05 // lose ammo every step (chainsaw has lots)
                 shootDelay[selectedSlot] = 0.5; // shoot delay only effects the startup of the chainsaw, once running, it is unaffected
             }
             else {
@@ -223,7 +223,7 @@ if (!obj_guiController.showUpgradeScreen) {
         break;
         default:
         // if no special state, show player holding selected item
-            switch(scr_WeaponNameToId(obj_player.inventory[selectedSlot])) {
+            switch(scr_WeaponToId(currentWeapon)) {
                 case 0: // fists
                     draw_sprite_ext(spr_index, 0, x, y, drawScale, drawScale, rotation, c_white, 1);
                 break;
@@ -272,7 +272,7 @@ if (!obj_guiController.showUpgradeScreen) {
                         audio_stop_sound(snd_chainsaw_use);
                     }
                     // Play idle sound if there is still fuel / ammo
-                    if (inventoryAmmo[selectedSlot] > 1) {
+                    if (currentWeapon[? "ammo"] > 1) {
                         if (!audio_is_playing(snd_chainsaw_idle)) {
                             audio_play_sound_on(s_emit, snd_chainsaw_idle, false, 5);
                         }
@@ -286,9 +286,8 @@ if (!obj_guiController.showUpgradeScreen) {
 }
 
 // Update shoot delay
-if (shootDelay[0] > 0) {
-    shootDelay[0] -= (1 / room_speed) * global.timeScale;
-}
-if (shootDelay[1] > 0) {
-    shootDelay[1] -= (1 / room_speed) * global.timeScale;
+for (var i = 0; i < array_length_1d(shootDelay); i ++) {
+    if (shootDelay[i] > 0) {
+        shootDelay[i] -= (1 / room_speed) * global.timeScale;
+    }
 }

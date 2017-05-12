@@ -8,8 +8,10 @@ delay = argument4;
 _rocketAccel = argument5;
 _creator = argument6;
 
+var currentWeapon = obj_player.inventory[| obj_player.selectedSlot];
+
 with (obj_player) {
-    if (inventoryAmmo[selectedSlot] <= 0) {
+    if (currentWeapon[? "ammo"] <= 0) {
         return false; // unable to shoot rocket, no more ammo
     }
 }
@@ -22,7 +24,7 @@ with (instance_create(xx, yy, obj_rocket)) {
 }
 
 with (obj_player) {
-    inventoryAmmo[selectedSlot] --;
+    currentWeapon[? "ammo"] --;
     shootDelay[selectedSlot] = other.delay;
 }
 

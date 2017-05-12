@@ -266,7 +266,6 @@
       <sprite>sprites\spr_WaveBar</sprite>
       <sprite>sprites\spr_inventory</sprite>
       <sprite>sprites\spr_secondaryInventory</sprite>
-      <sprite>sprites\spr_lootKeysBar</sprite>
       <sprite>sprites\spr_healthBar</sprite>
       <sprite>sprites\spr_upgradeBackground</sprite>
       <sprite>sprites\spr_lootingBar</sprite>
@@ -360,6 +359,12 @@
     </sprites>
     <sprites name="airdrop">
       <sprite>sprites\spr_airdropCrate</sprite>
+      <sprite>sprites\spr_airdropCrateOpenOld</sprite>
+      <sprite>sprites\spr_airdropCrateOpen</sprite>
+      <sprite>sprites\spr_airdropWoodCrate</sprite>
+    </sprites>
+    <sprites name="Particle">
+      <sprite>sprites\spr_clothParticle</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background">
@@ -394,9 +399,11 @@
       <scripts name="Player">
         <script>scripts\scr_PlayerAddWeapon.gml</script>
         <script>scripts\scr_PlayerStateManager.gml</script>
+        <script>scripts\scr_PlayerInventoryClear.gml</script>
         <script>scripts\scr_lootArea.gml</script>
         <script>scripts\scr_areaAddWeapon.gml</script>
         <script>scripts\scr_stopPlayerWeaponSound.gml</script>
+        <script>scripts\scr_isSelectingPrimaryInventorySlot.gml</script>
       </scripts>
       <scripts name="Interactions">
         <script>scripts\scr_isInteractable.gml</script>
@@ -423,6 +430,11 @@
       <script>scripts\scr_createMolotovCocktail.gml</script>
       <script>scripts\scr_createFragGrenade.gml</script>
       <script>scripts\scr_createThrownGround.gml</script>
+      <script>scripts\scr_WeaponAmmoOf.gml</script>
+      <scripts name="WeaponsOnGround">
+        <script>scripts\scr_getAllItemWeaponsDS.gml</script>
+        <script>scripts\scr_createWeaponsFromDS.gml</script>
+      </scripts>
     </scripts>
     <scripts name="Physics">
       <script>scripts\scr_isBeingPushed.gml</script>
@@ -491,6 +503,7 @@
         <script>scripts\scr_createGuiText.gml</script>
         <script>scripts\scr_cameraZoom.gml</script>
       </scripts>
+      <script>scripts\scr_drawWeaponGui.gml</script>
     </scripts>
     <scripts name="Saves">
       <script>scripts\scr_createSave.gml</script>
@@ -576,14 +589,15 @@
         <object>objects\obj_bigTruck</object>
         <object>objects\obj_playerVehicle</object>
       </objects>
-      <object>objects\obj_airdropCrate</object>
+      <objects name="Airdrop">
+        <object>objects\obj_airdropWoodCrate</object>
+        <object>objects\obj_airdropCrate</object>
+      </objects>
     </objects>
     <objects name="Other">
       <object>objects\obj_zombieSpawn</object>
       <object>objects\obj_pointsText</object>
       <object>objects\obj_bloodPool</object>
-      <object>objects\obj_lootArea</object>
-      <object>objects\obj_lootBox</object>
       <object>objects\obj_guiText</object>
     </objects>
     <objects name="Controllers">
@@ -652,6 +666,8 @@
       <object>objects\obj_roomZone</object>
       <object>objects\obj_saveZone</object>
       <object>objects\obj_teleportZone</object>
+      <object>objects\obj_lootArea</object>
+      <object>objects\obj_lootBox</object>
     </objects>
   </objects>
   <timelines name="timelines">

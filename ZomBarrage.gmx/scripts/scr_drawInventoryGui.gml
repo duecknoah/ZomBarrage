@@ -5,44 +5,44 @@ var _scale = argument2;
 var _alpha = argument3;
 // Draw inventory GUI
 
-draw_sprite_ext(spr_inventory, obj_player.selectedSlot, _xx, _yy, _scale, _scale, 0, c_white, _alpha);
+var primaryInvX = _xx;
+var primaryInvY = _yy + (sprite_get_height(spr_inventory) / 2 * _scale);
+var primaryInvSubimg = clamp(obj_player.selectedSlot, 0, 2);
+draw_sprite_ext(spr_inventory, primaryInvSubimg, primaryInvX, primaryInvY, _scale, _scale, 0, c_white, _alpha);
 
 var weaponDrawOff = sprite_get_width(spr_itemWeapon) / 2 * _scale;
-var inventorySlotX = _xx + (3 * _scale);
-var inventorySlotY = _yy - ((sprite_get_height(spr_inventory) / 2) * _scale) + (4 * _scale);
+var inventorySlotX = primaryInvX + (3 * _scale);
+var inventorySlotY = primaryInvY - ((sprite_get_height(spr_inventory) / 2) * _scale) + (4 * _scale);
 inventorySlotX += weaponDrawOff;
 inventorySlotY += weaponDrawOff;
-var ammoX = _xx + 35 * _scale;
-var ammoY = _yy - (sprite_get_height(spr_inventory) / 2 * _scale) + 35 * _scale;
-//var ammoX = inventorySlotX + weaponDrawOff + 8;
-//var ammoY = inventorySlotY;
+var pAmmoX = primaryInvX + 35 * _scale;
+var pAmmoY = primaryInvY - (sprite_get_height(spr_inventory) / 2 * _scale) + 35 * _scale;
+
 
 // weapon sprites in slots
-
 for(i = 0; i < 2; i ++) {
     // Draw weapon sprite
-    var ID = scr_WeaponNameToId(obj_player.inventory[i]);
-    draw_sprite_ext(spr_itemWeapon, ID, inventorySlotX, inventorySlotY, _scale, _scale, 0, c_white, _alpha);
+    var ID = scr_WeaponToId(obj_player.inventory[| i]);
+    draw_sprite_ext(spr_itemWeapon, ID, inventorySlotX, inventorySlotY, _scale, _scale, 0, c_white, 1);
     
     // Draw ammo amount (ceiled to remove decimals for certain weapons)
     draw_set_halign(fa_right);
     draw_set_valign(fa_bottom);
-    draw_text(ammoX, ammoY, string(ceil(obj_player.inventoryAmmo[i])));
+    var ammoAmt = ceil(scr_WeaponAmmoOf(obj_player.inventory[| i]));
+    if (ammoAmt > 1) {
+        draw_text(pAmmoX, pAmmoY, string(ammoAmt));
+    }
     draw_set_halign(fa_left);
     draw_set_valign(fa_top);
     
     inventorySlotY += 36 * _scale;
-    ammoY += 36 * _scale;
+    pAmmoY += 36 * _scale;
 }
 
-//draw_sprite_ext(spr_itemWeapon, 5, device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), _scale / 2, _scale / 2, 0, c_white, 1);
-
 // Shoot delay cooldown
-
-for(i=0; i<2; i++) {
+for(i = 0; i < 2; i ++) {
     // top == max shootdelay
     // bottom == 0
-    
     // Keep max shoot delay updated
     if (obj_player.shootDelay[i] > shootDelayMax[i]) {
         shootDelayMax[i] = obj_player.shootDelay[i];
@@ -60,17 +60,17 @@ for(i=0; i<2; i++) {
     
     if (i == 0) {
         // Slot 0
-        _x1 = _xx + (41 * _scale);
-        _y1 = _yy + ((2 + _yoff) * _scale);
-        _x2 = _xx + (45 * _scale);
-        _y2 = _yy + ((35 + _yoff) * _scale);
+        _x1 = primaryInvX + (41 * _scale);
+        _y1 = primaryInvY + ((2 + _yoff) * _scale);
+        _x2 = primaryInvX + (45 * _scale);
+        _y2 = primaryInvY + ((35 + _yoff) * _scale);
     }
     else {
         // Slot 1
-        _x1 = _xx + (41 * _scale);
-        _y1 = _yy + ((40 + _yoff) * _scale);
-        _x2 = _xx + (45 * _scale);
-        _y2 = _yy + ((73 + _yoff) * _scale);    
+        _x1 = primaryInvX + (41 * _scale);
+        _y1 = primaryInvY + ((40 + _yoff) * _scale);
+        _x2 = primaryInvX + (45 * _scale);
+        _y2 = primaryInvY + ((73 + _yoff) * _scale);    
     }
     
     /*  Make delay bar be lerped between top and 
@@ -86,12 +86,12 @@ for(i=0; i<2; i++) {
 
 // Secondary Inventory
 var sInventoryX = _xx;
-var sInventoryY = _yy - ((sprite_get_height(spr_inventory) / 2) * _scale) - (sprite_get_height(spr_secondaryInventory) * _scale);
-var subImg = clamp(obj_player.selectedSlot - 1, 0, 3);
-draw_sprite_ext(spr_secondaryInventory, subImg, sInventoryX, sInventoryY, _scale, _scale, 0, c_white, 1);
+var sInventoryY = _yy + ((sprite_get_height(spr_inventory)) * _scale);
+var secondaryInvsubImg = clamp(obj_player.selectedSlot - 1, 0, 4);
+draw_sprite_ext(spr_secondaryInventory, secondaryInvsubImg, sInventoryX, sInventoryY, _scale, _scale, 0, c_white, _alpha);
 for (var i = 2; i <= 5; i ++) {
     var slotX, slotY; // relative to top left of secondary inventory
-
+    
     switch(i) {
         case 2: // Slot 2
             slotX = 3;
@@ -110,6 +110,26 @@ for (var i = 2; i <= 5; i ++) {
             slotY = 22;
         break;
     }
+    // Make it offset by half due to centered sprite
+    slotX += sprite_get_width(spr_itemWeapon) / 4;
+    slotY += sprite_get_height(spr_itemWeapon) / 4;
+    // Be affected by the scale of the gui
+    slotX *= _scale;
+    slotY *= _scale;
+    var sAmmoX = sInventoryX + slotX + (8 * _scale);
+    var sAmmoY = sInventoryY + slotY + (8 * _scale);
     
     // TODO: Draw sprite @ sInventory + slot coordinates
+    var ID = scr_WeaponToId(obj_player.inventory[| i]);
+    draw_sprite_ext(spr_itemWeapon, ID, sInventoryX + slotX, sInventoryY + slotY, _scale / 2, _scale / 2, 0, c_white, 1);
+    
+    // Draw ammo amount (ceiled to remove decimals for certain weapons)
+    draw_set_halign(fa_right);
+    draw_set_valign(fa_bottom);
+    var ammoAmt = ceil(scr_WeaponAmmoOf(obj_player.inventory[| i]));
+    if (ammoAmt > 1) {
+        draw_text(sAmmoX, sAmmoY, string(ammoAmt));
+    }
+    draw_set_halign(fa_left);
+    draw_set_valign(fa_top);
 } 

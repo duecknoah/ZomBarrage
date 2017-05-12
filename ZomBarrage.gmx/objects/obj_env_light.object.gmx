@@ -29,7 +29,7 @@
 show_debug_message(object_get_name(object_index) + " created");
 surface = noone;
 env_color = 0;
-scr_setEnvColor(make_colour_rgb(25, 25, 69));
+scr_setEnvColor(make_colour_rgb(32, 32, 75));
 // def color 240, 30, 25 hsv
 </string>
           </argument>

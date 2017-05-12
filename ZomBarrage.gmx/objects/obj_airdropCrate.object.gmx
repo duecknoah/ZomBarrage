@@ -30,7 +30,11 @@
 // Shortly after the loot crate will fade away.
 height = 1000; // height before on ground
 hasLanded = false; // landed on ground?
-canOpen = false; // can be opened?
+canOpen = false; // able to open?
+triggerOpen = false; // when true, it will trigger the opening of the crate, then it will be set to false immediatly after
+loot = ds_list_create();
+image_index = 0;
+image_speed = 0;
 depth = -1000000;
 </string>
           </argument>
@@ -64,13 +68,59 @@ if (!hasLanded) {
     else {
         hasLanded = true;
         canOpen = true;
-        depth = scr_getDepth(y, -1, true);
-        
-        var offsetX = sprite_get_width(sprite_index) / 2 * image_xscale;
-        var offsetY = sprite_get_height(sprite_index) / 2 * image_yscale;
-        instance_create(x + offsetX, y + offsetY, obj_collision);
     }
 }
+
+if (canOpen) {
+    // Allow player interaction here
+    triggerOpen = true; // TEMPORARY FOR TESTING PURPOSES
+}
+
+// If opening, show opening animation
+if (triggerOpen &amp;&amp; canOpen) {
+    sprite_index = spr_airdropCrateOpen; // open animation
+    image_speed = 0.05;
+    depth = scr_getDepth(y, -1, true);
+    
+    // Spawn airdrop loot
+    var offsetX = sprite_get_width(sprite_index) / 2 * image_xscale;
+    var offsetY = sprite_get_height(sprite_index) / 2 * image_yscale;
+    
+    // Make sure ds_list exists, if not recreate it
+    if (!ds_exists(loot, ds_type_list)) {
+        loot = ds_list_create();
+    }
+    
+    
+    
+    triggerOpen = false; // reset
+    canOpen = false; // prevent from opening again
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="7">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// At the end of the opening animation, spawn wood crate drop
+image_speed = 0; // stop animation
+image_index = sprite_get_number(sprite_index) - 1; // make index the last index
 </string>
           </argument>
         </arguments>

@@ -31,14 +31,40 @@
 // This is for entire buildings when not inside.
 
 looted = false; // has this already been looted?
+inventory = ds_list_create();
 
 // Loot inventory 
 for(var i = 0; i &lt; 3; i ++) {
     /** we generate the loot on the fly (as player loot level changes)
       * Note: ammo array cooresponds with the weapon array
     */
-    inventory[i] = "";
-    inventoryAmmo[i] = noone;
+    ds_list_add(inventory, scr_IdToWeapon(0)); // empty slot
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="1" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Free mem
+if (ds_exists(inventory, ds_type_list)) {
+    ds_list_destroy(inventory);
 }
 </string>
           </argument>
@@ -66,6 +92,30 @@ for(var i = 0; i &lt; 3; i ++) {
 if (visible) {
     visible = false;
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="5">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Destroy self when room ends
+instance_destroy();
 </string>
           </argument>
         </arguments>
