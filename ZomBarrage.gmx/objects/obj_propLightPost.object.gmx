@@ -80,10 +80,10 @@ if (timeToSpawn) {
          * and offset spawn position does by about half a tile x
          * and y wise
         */
-        x += back_tile_width / 2;
-        y += back_tile_height / 2;
         image_xscale /= 4;
         image_yscale /= 4;
+        x += image_xscale * sprite_get_width(sprite_index) + 8;
+        y += image_yscale * sprite_get_height(sprite_index) + 8;
     }
     
     //shadows

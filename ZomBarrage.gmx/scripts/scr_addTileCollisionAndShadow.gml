@@ -26,9 +26,6 @@ final_y += yoff * back_tile_height;
 with (instance_create(final_x, final_y, obj_collision)) {
     image_xscale = other.w;
     image_yscale = other.h;
-    // Counter-act the image scaling as spr_collision is centered.
-    x += (sprite_get_width(spr_collision) / 2) * image_xscale;
-    y += (sprite_get_height(spr_collision) / 2) * image_yscale;
 }
 
 if (isLootAble) {

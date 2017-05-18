@@ -35,8 +35,8 @@ show_debug_message(object_get_name(object_index) + " created");
 // Setup Camera start transition
 view_wviewOrg = view_wview[0];
 view_hviewOrg = view_hview[0];
-view_wview[0] = view_wviewOrg / 80;
-view_hview[0] = view_hviewOrg / 45; // def 45
+view_wview[0] = view_wviewOrg; /// 80;
+view_hview[0] = view_hviewOrg; /// 45; // def 45
 window_set_cursor(cr_cross);
 // Instantly line up view initially, then tween camera after
 if (instance_exists(obj_player)) {

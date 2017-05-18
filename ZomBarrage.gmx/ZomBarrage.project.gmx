@@ -215,9 +215,10 @@
   <sprites name="sprites">
     <sprites name="Labels">
       <sprite>sprites\spr_collision</sprite>
+      <sprite>sprites\spr_mediumCollision</sprite>
+      <sprite>sprites\spr_smallCollision</sprite>
       <sprite>sprites\spr_lootArea</sprite>
       <sprite>sprites\spr_lootBox</sprite>
-      <sprite>sprites\spr_smallCollision</sprite>
       <sprite>sprites\spr_lightIcon</sprite>
       <sprite>sprites\spr_roomZone</sprite>
       <sprite>sprites\spr_teleportZone</sprite>
@@ -373,6 +374,7 @@
     <background>background\tile_back_shadows</background>
     <background>background\tile_zombieDead</background>
     <background>background\tile_indoor</background>
+    <background>background\tl_dev</background>
   </backgrounds>
   <paths name="paths">
     <path>paths\path_cutscene_beginning_dad1</path>
@@ -627,6 +629,7 @@
     </objects>
     <objects name="Mapping">
       <object>objects\obj_collision</object>
+      <object>objects\obj_mediumCollision</object>
       <object>objects\obj_smallCollision</object>
       <objects name="Props">
         <objects name="Outdoor">
@@ -682,6 +685,7 @@
     </rooms>
     <room>rooms\rm_shaderTesting</room>
     <room>rooms\rm_template</room>
+    <room>rooms\mp_apartments</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

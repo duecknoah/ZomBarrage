@@ -42,11 +42,17 @@ mapDesc[0] = "An abandoned and ruined town that used to house people and have a 
 mapImage[0] = spr_mapTown;
 mapDifficulty[0] = "Easy";
 
-map[1] = mp_testRoom;
-mapName[1] = "The Testing Room";
-mapDesc[1] = "Tests are done here. Warning: Lame.";
+map[1] = mp_apartments;
+mapName[1] = "Apartment Complex";
+mapDesc[1] = "An area of Apartments";
 mapImage[1] = "NULL";
 mapDifficulty[1] = "Easy";
+
+map[2] = mp_testRoom;
+mapName[2] = "The Testing Room";
+mapDesc[2] = "Tests are done here. Warning: Lame.";
+mapImage[2] = "NULL";
+mapDifficulty[2] = "Easy";
 
 // Map viewing variables
 mapViewed = 0; // the current map being shown (which index?)

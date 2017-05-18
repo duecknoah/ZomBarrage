@@ -8,14 +8,9 @@ if (_player != noone) {
     return _player;
 }
 
-var _zombie = instance_place(_x, _y, obj_zombie);
+var _zombie = instance_place(_x, _y, obj_zombieP);
 if (_zombie != noone) {
     return _zombie;
-}
-
-var _bigZombie = instance_place(_x, _y, obj_bigZombie);
-if (_bigZombie != noone) {
-    return _bigZombie;
 }
 
 return noone; // no collisions detected

@@ -5,7 +5,7 @@
   <visible>0</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>obj_collision</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -31,6 +31,7 @@
 // as obj_collision
 
 // this is a 16x16 collision while the default is 64x64 in obj_collision
+/*
 with (instance_create(x, y, obj_collision)) {
     image_xscale = other.image_xscale / 4;
     image_yscale = other.image_yscale / 4;
@@ -38,6 +39,7 @@ with (instance_create(x, y, obj_collision)) {
 
 // destroy self as new obj_collision has been created
 instance_destroy();
+*/
 </string>
           </argument>
         </arguments>

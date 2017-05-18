@@ -5,6 +5,18 @@ Improvements to make:
 - Find a way to make weapons spawn in a cool way
 - Fix bug that makes player unable to punch or swing sword
 
+- REFIX COLLISIONS!! As i moved from origin to top left for collisions!
+- Show Press 'TAB' tab under upgrade bar
+- make upgrade bar flash once when you can afford a new thing
+- Make health bar flash slowly when healing
+- Make health bar blink when low
+- Make weapon slot turn red when there is no more ammo left in a weapon that has ammo
+- Make killing zombies show points in a cooler way
+- Show final stats at end of final wave completion
+- Remove the text of the communicator, just have an objective system with arrows and simple text instead as its a simple arcade game
+- When a level is completed, transition into main menu level selection and have effect of the next level being unlocked
+- powerups (ammo restock, 2x points, Stun (stuns all zombies temporarily))
+
 - Add a time limit in looting
 - Make 'sunrise' at end of wave, and 'sunset' at start of wave 
 - Make it so where you click is where the grenade / molotov goes
@@ -14,9 +26,7 @@ Improvements to make:
 - allow storing a couple weapons in your truck to carry between levels, this would mean saving the trucks inventory in saveDynamic
 
 Bugs to fix:
-- undefined value sometimes when looting, crashing game
 - heavy zombie moving towards player while throwing rock or punch while in backup pathfinding
-- Buildings not staying faded, usually after looting
 - Possible memory leaks due to static particle systems not destroying particle emitters at end of room / game (first check if obj_particleIndex dose this already)
 - Player inventory not saving properly, currently I'm avoiding this by loading a clear inventory each time. It is partly setup, but it gets overridden by the map saves inventory as well.
 
