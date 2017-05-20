@@ -42,9 +42,9 @@ mapDesc[0] = "An abandoned and ruined town that used to house people and have a 
 mapImage[0] = spr_mapTown;
 mapDifficulty[0] = "Easy";
 
-map[1] = mp_apartments;
-mapName[1] = "Apartment Complex";
-mapDesc[1] = "An area of Apartments";
+map[1] = mp_school;
+mapName[1] = "School";
+mapDesc[1] = "Schools out";
 mapImage[1] = "NULL";
 mapDifficulty[1] = "Easy";
 

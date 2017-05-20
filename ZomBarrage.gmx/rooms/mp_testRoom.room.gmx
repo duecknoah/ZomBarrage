@@ -3,8 +3,8 @@
   <caption></caption>
   <width>1000</width>
   <height>1000</height>
-  <vsnap>32</vsnap>
-  <hsnap>32</hsnap>
+  <vsnap>16</vsnap>
+  <hsnap>16</hsnap>
   <isometric>0</isometric>
   <speed>60</speed>
   <persistent>0</persistent>
@@ -76,6 +76,26 @@
     <instance objName="obj_itemWeapon" x="448" y="160" name="inst_281B6574" locked="0" code="weapon = scr_IdToWeapon(9);&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_soundscape" x="32" y="64" name="inst_B9424F0D" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_ambulance" x="416" y="256" name="inst_6E90C719" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_lootCrate" x="448" y="352" name="inst_50A9522D" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_lootCrate" x="512" y="352" name="inst_BFE89394" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_lootCrate" x="480" y="352" name="inst_363AE567" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_lootCrate" x="448" y="384" name="inst_EC5982DC" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_lootCrate" x="480" y="384" name="inst_3502DF9C" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_lootCrate" x="512" y="384" name="inst_5013EAA7" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_lootCrate" x="416" y="368" name="inst_08709467" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_lootCrate" x="416" y="336" name="inst_E71C2D7F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_lootCrate" x="416" y="352" name="inst_FE820063" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_lootCrate" x="432" y="352" name="inst_735CD2D9" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_lootCrate" x="432" y="336" name="inst_EB93255C" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_lootCrate" x="432" y="368" name="inst_3FA18D24" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_lootCrate" x="448" y="368" name="inst_DA4476F3" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_lootCrate" x="416" y="384" name="inst_BFCF45CB" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_lootCrate" x="432" y="384" name="inst_07AC1A58" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_lootCrate" x="464" y="384" name="inst_F2E395C4" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_lootCrate" x="464" y="416" name="inst_71C68889" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_lootCrate" x="496" y="432" name="inst_DCAA2DDB" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_lootCrate" x="496" y="496" name="inst_D1B88602" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_lootCrate" x="544" y="448" name="inst_41AEF9E7" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
     <tile bgName="tile_back" x="224" y="128" w="64" h="64" xo="64" yo="0" id="10001654" name="inst_5599B35F" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>

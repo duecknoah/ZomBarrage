@@ -180,6 +180,9 @@
       <sound>sound\snd_body_hit_3</sound>
       <sound>sound\snd_woosh_1</sound>
       <sound>sound\snd_woosh_2</sound>
+      <sound>sound\snd_wood_create_break_1</sound>
+      <sound>sound\snd_wood_create_break_2</sound>
+      <sound>sound\snd_wood_create_break_3</sound>
     </sounds>
     <sounds name="soundscape">
       <sound>sound\snd_env_outdoor_forest_nearby_city</sound>
@@ -207,6 +210,11 @@
       <sound>sound\snd_zombie_growl_short_2</sound>
       <sound>sound\snd_zombie_growl_short_3</sound>
       <sound>sound\snd_zombie_growl_short_4</sound>
+      <sound>sound\snd_gore_brutal_1</sound>
+      <sound>sound\snd_gore_brutal_2</sound>
+      <sound>sound\snd_gore_normal_1</sound>
+      <sound>sound\snd_gore_normal_2</sound>
+      <sound>sound\snd_gore_normal_3</sound>
     </sounds>
     <sounds name="gui">
       <sound>sound\snd_button_click</sound>
@@ -358,14 +366,16 @@
       <sprite>sprites\spr_taxi</sprite>
       <sprite>sprites\spr_bigTruck</sprite>
     </sprites>
-    <sprites name="airdrop">
+    <sprites name="lootables">
       <sprite>sprites\spr_airdropCrate</sprite>
       <sprite>sprites\spr_airdropCrateOpenOld</sprite>
       <sprite>sprites\spr_airdropCrateOpen</sprite>
       <sprite>sprites\spr_airdropWoodCrate</sprite>
+      <sprite>sprites\spr_lootCrate</sprite>
     </sprites>
     <sprites name="Particle">
       <sprite>sprites\spr_clothParticle</sprite>
+      <sprite>sprites\spr_woodParticle</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background">
@@ -375,6 +385,7 @@
     <background>background\tile_zombieDead</background>
     <background>background\tile_indoor</background>
     <background>background\tl_dev</background>
+    <background>background\bg_dev</background>
   </backgrounds>
   <paths name="paths">
     <path>paths\path_cutscene_beginning_dad1</path>
@@ -539,6 +550,7 @@
       <script>scripts\scr_createZombieGoreBurst.gml</script>
       <script>scripts\scr_createRunnerZombieGoreBurst.gml</script>
       <script>scripts\scr_createBloodSpurtBurst.gml</script>
+      <script>scripts\scr_createWoodBurst.gml</script>
     </scripts>
   </scripts>
   <shaders name="shaders">
@@ -622,6 +634,7 @@
         <object>objects\obj_bloodSpurt</object>
         <object>objects\obj_zombieGore</object>
         <object>objects\obj_runnerZombieGore</object>
+        <object>objects\obj_woodBurst</object>
       </objects>
       <objects name="dynamic">
         <object>objects\obj_rocketExplosion</object>
@@ -672,6 +685,7 @@
       <object>objects\obj_lootArea</object>
       <object>objects\obj_lootBox</object>
     </objects>
+    <object>objects\obj_lootCrate</object>
   </objects>
   <timelines name="timelines">
     <timeline>timelines\tl_cutscene_beginning_intro</timeline>
@@ -685,7 +699,7 @@
     </rooms>
     <room>rooms\rm_shaderTesting</room>
     <room>rooms\rm_template</room>
-    <room>rooms\mp_apartments</room>
+    <room>rooms\mp_school</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

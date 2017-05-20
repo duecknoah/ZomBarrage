@@ -4,6 +4,8 @@ Improvements to make:
 - Make more ammo spawn (airdrops n stufF)
 - Find a way to make weapons spawn in a cool way
 - Fix bug that makes player unable to punch or swing sword
+ Give player invunerability for a few seconds after exiting a loot area
+- Add start wave option to instantly start wave
 
 - REFIX COLLISIONS!! As i moved from origin to top left for collisions!
 - Show Press 'TAB' tab under upgrade bar

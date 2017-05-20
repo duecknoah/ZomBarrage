@@ -65,4 +65,12 @@ if (_doAffectZombie) {
     }
 }
 
+with (obj_lootCrate) {
+    var _dist = scr_getAbsoluteDistance(x, y, _x, _y);
+    var _dmg = _amt;
+    if (_dist <= _radius) {
+        instance_destroy();
+    }
+}
+
 return didHurt;

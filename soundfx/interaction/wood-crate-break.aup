@@ -1,0 +1,67 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE project PUBLIC "-//audacityproject-1.3.0//DTD//EN" "http://audacity.sourceforge.net/xml/audacityproject-1.3.0.dtd" >
+<project xmlns="http://audacity.sourceforge.net/xml/" projname="wood-crate-break_data" version="1.3.0" audacityversion="2.1.2" sel0="0.0000000000" sel1="0.8495238095" vpos="192" h="0.0000000000" zoom="62.3872254184" rate="44100.0" snapto="off" selectionformat="hh:mm:ss + milliseconds" frequencyformat="Hz" bandwidthformat="octaves">
+	<tags>
+		<tag name="Encoded by" value="Lavf52.16.0"/>
+	</tags>
+	<wavetrack name="Breaking Wooden Crates Sound Effects [High Quality, Free Download]" channel="0" linked="1" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="44100" gain="1.0" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="34636">
+				<waveblock start="0">
+					<simpleblockfile filename="e0000d6a.au" len="34636" min="-0.92276" max="0.958586" rms="0.045792"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="Breaking Wooden Crates Sound Effects [High Quality, Free Download]" channel="1" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="44100" gain="1.0" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="34636">
+				<waveblock start="0">
+					<simpleblockfile filename="e0000cff.au" len="34636" min="-0.92276" max="0.958586" rms="0.045792"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="Breaking Wooden Crates Sound Effects [High Quality, Free Download]" channel="0" linked="1" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="44100" gain="1.0" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="42412">
+				<waveblock start="0">
+					<simpleblockfile filename="e0000a14.au" len="42412" min="-0.99471" max="0.98306" rms="0.051754"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="Breaking Wooden Crates Sound Effects [High Quality, Free Download]" channel="1" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="44100" gain="1.0" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="42412">
+				<waveblock start="0">
+					<simpleblockfile filename="e00002e2.au" len="42412" min="-0.99471" max="0.98306" rms="0.051754"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="Breaking Wooden Crates Sound Effects [High Quality, Free Download]" channel="0" linked="1" mute="0" solo="0" height="150" minimized="0" isSelected="1" rate="44100" gain="1.0" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="37464">
+				<waveblock start="0">
+					<simpleblockfile filename="e00009a6.au" len="37464" min="-0.964383" max="0.961694" rms="0.046011"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="Breaking Wooden Crates Sound Effects [High Quality, Free Download]" channel="1" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="1" rate="44100" gain="1.0" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="37464">
+				<waveblock start="0">
+					<simpleblockfile filename="e00005c4.au" len="37464" min="-0.964383" max="0.961694" rms="0.046011"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+</project>

@@ -509,7 +509,7 @@ with (playerLight) {
             <kind>1</kind>
             <string>/// Temp
 if (mouse_check_button(mb_middle)) {
-    instance_create(mouse_x, mouse_y, obj_heavyZombie);
+    instance_create(mouse_x, mouse_y, obj_zombie);
     hp = 1000000;
     maxHp = 1000000;
     //scr_createForce(mouse_x, mouse_y, 5, 1024, true, true);

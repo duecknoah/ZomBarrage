@@ -14,6 +14,6 @@
   </TextureGroups>
   <For3D>0</For3D>
   <width>128</width>
-  <height>240</height>
+  <height>128</height>
   <data>images\tl_dev.png</data>
 </background>

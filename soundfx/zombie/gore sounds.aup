@@ -1,0 +1,111 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE project PUBLIC "-//audacityproject-1.3.0//DTD//EN" "http://audacity.sourceforge.net/xml/audacityproject-1.3.0.dtd" >
+<project xmlns="http://audacity.sourceforge.net/xml/" projname="gore sounds_data" version="1.3.0" audacityversion="2.1.2" sel0="0.1783657336" sel1="0.1783657336" vpos="0" h="0.0000000000" zoom="56.0645803184" rate="44100.0" snapto="off" selectionformat="hh:mm:ss + milliseconds" frequencyformat="Hz" bandwidthformat="octaves">
+	<tags>
+		<tag name="major_brand" value="mp42"/>
+		<tag name="Encoding time" value="2014-07-25 15:57:55"/>
+		<tag name="Software" value="Lavf53.32.100"/>
+		<tag name="compatible_brands" value="isommp42"/>
+		<tag name="minor_version" value="0"/>
+	</tags>
+	<wavetrack name="Sound Effects - Blood, Gore, Carnage, and Tearing Flesh" channel="0" linked="1" mute="0" solo="0" height="150" minimized="0" isSelected="1" rate="44100" gain="1.0" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="50342">
+				<waveblock start="0">
+					<simpleblockfile filename="e000096a.au" len="50342" min="-1.078248" max="1.235798" rms="0.181737"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="Sound Effects - Blood, Gore, Carnage, and Tearing Flesh" channel="1" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="1" rate="44100" gain="1.0" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="50342">
+				<waveblock start="0">
+					<simpleblockfile filename="e000063f.au" len="50342" min="-1.078248" max="1.235798" rms="0.181737"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="Sound Effects - Blood, Gore, Carnage, and Tearing Flesh" channel="0" linked="1" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="44100" gain="1.0" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="34611">
+				<waveblock start="0">
+					<simpleblockfile filename="e000096e.au" len="34611" min="-0.949639" max="0.978497" rms="0.046863"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="Sound Effects - Blood, Gore, Carnage, and Tearing Flesh" channel="1" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="44100" gain="1.0" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="34611">
+				<waveblock start="0">
+					<simpleblockfile filename="e000021a.au" len="34611" min="-0.967669" max="0.996816" rms="0.045554"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="Sound Effects - Blood, Gore, Carnage, and Tearing Flesh" channel="0" linked="1" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="44100" gain="1.0" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="33037">
+				<waveblock start="0">
+					<simpleblockfile filename="e0000d75.au" len="33037" min="-0.909499" max="0.957902" rms="0.072723"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="Sound Effects - Blood, Gore, Carnage, and Tearing Flesh" channel="1" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="44100" gain="1.0" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="33037">
+				<waveblock start="0">
+					<simpleblockfile filename="e00009af.au" len="33037" min="-0.889306" max="0.958898" rms="0.07341"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="Sound Effects - Blood, Gore, Carnage, and Tearing Flesh" channel="0" linked="1" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="44100" gain="1.0" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="17305">
+				<waveblock start="0">
+					<simpleblockfile filename="e0000cf5.au" len="17305" min="-0.519309" max="0.51236" rms="0.031355"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="Sound Effects - Blood, Gore, Carnage, and Tearing Flesh" channel="1" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="44100" gain="1.0" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="17305">
+				<waveblock start="0">
+					<simpleblockfile filename="e000044c.au" len="17305" min="-0.518368" max="0.592168" rms="0.030761"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="Sound Effects - Blood, Gore, Carnage, and Tearing Flesh" channel="0" linked="1" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="44100" gain="1.0" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="55062">
+				<waveblock start="0">
+					<simpleblockfile filename="e0000632.au" len="55062" min="-1.135856" max="1.138461" rms="0.254707"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="Sound Effects - Blood, Gore, Carnage, and Tearing Flesh" channel="1" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="44100" gain="1.0" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="55062">
+				<waveblock start="0">
+					<simpleblockfile filename="e0000be9.au" len="55062" min="-1.135856" max="1.138461" rms="0.254707"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+</project>

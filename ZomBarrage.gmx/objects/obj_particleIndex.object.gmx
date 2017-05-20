@@ -113,6 +113,18 @@ show_debug_message(object_get_name(object_index) + " created");
     part_type_sprite(fireSpark, spr_fireSparkParticle, 0, 0, false);
     show_debug_message("Fire Spark particle systems active");
     show_debug_message("All particle systems active");
+// Wood burst, used for breaking open loot crates and any other effects
+    woodBurst = part_system_create();
+    woodBurst = part_type_create();
+    part_system_depth(woodBurst, -1);
+    part_type_sprite(woodBurst, spr_woodParticle, false, 0, true);
+    part_type_life(woodBurst, 2.5 * room_speed, 3 * room_speed);
+    part_type_alpha2(woodBurst, 1, 0);
+    part_type_direction(woodBurst, 0, 360, 0, 0);
+    part_type_speed(woodBurst, 1, 2, -0.05, 0);
+    // Create static particle object
+    instance_create(x, y, obj_woodBurst);
+    show_debug_message("WoodBurst system active");
 </string>
           </argument>
         </arguments>
@@ -157,6 +169,10 @@ if (part_system_exists(runnerZombieGore)) {
 if (part_system_exists(fireSpark)) {
     part_emitter_destroy_all(fireSpark);
     part_system_destroy(fireSpark);
+}
+if (part_system_exists(woodBurst)) {
+    part_emitter_destroy_all(woodBurst);
+    part_system_destroy(woodBurst);
 }
 </string>
           </argument>
