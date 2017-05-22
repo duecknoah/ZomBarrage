@@ -399,6 +399,8 @@
       <script>scripts\scr_dsListToString.gml</script>
       <script>scripts\scr_stringToBool.gml</script>
       <script>scripts\scr_totalEnemyCount.gml</script>
+      <script>scripts\scr_collision_line_first.gml</script>
+      <script>scripts\scr_range_finder.gml</script>
     </scripts>
     <scripts name="Entity">
       <script>scripts\scr_hurt.gml</script>
@@ -644,6 +646,7 @@
       <object>objects\obj_collision</object>
       <object>objects\obj_mediumCollision</object>
       <object>objects\obj_smallCollision</object>
+      <object>objects\obj_destroyableCollision</object>
       <objects name="Props">
         <objects name="Outdoor">
           <object>objects\obj_propBench</object>

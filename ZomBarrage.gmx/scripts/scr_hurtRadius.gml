@@ -65,12 +65,17 @@ if (_doAffectZombie) {
     }
 }
 
-with (obj_lootCrate) {
-    var _dist = scr_getAbsoluteDistance(x, y, _x, _y);
-    var _dmg = _amt;
-    if (_dist <= _radius) {
-        instance_destroy();
-    }
+with (obj_destroyableCollision) {
+        var _dist = scr_getAbsoluteDistance(x, y, _x, _y);
+        var _dmg = _amt;
+        if (_dist <= _radius) {
+            // Fade damage based on damage
+            if (_fade) {
+                _dmg = lerp(0, _dmg, _dist / _radius);
+            }
+            hp -= _dmg;
+            didHurt = true;
+        }
 }
 
 return didHurt;

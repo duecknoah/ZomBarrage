@@ -59,45 +59,32 @@ initCalc = true;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (initCalc) {
-    var dist = random_range(bulletMinDist, bulletMaxDist);
-    x = lengthdir_x(dist, bulletDir) + x;
-    y = lengthdir_y(dist, bulletDir) + y;
+            <string>/// Do calculations once, and draw until faded out
+if (initCalc) {
+    var travelDist = random_range(bulletMinDist, bulletMaxDist); // max length of bullet path
+    x = lengthdir_x(travelDist, bulletDir) + x;
+    y = lengthdir_y(travelDist, bulletDir) + y;
     
     // Collision checking
-    var closestCollision = -1; // id of closest wall / collision in the bullets direction
+    var collisionData = scr_range_finder(startX, startY, bulletDir, travelDist, obj_collision, false, true); // distance from start of bullet path to nearest collision
     
-    if (instance_exists(obj_collision)) {
-        with (obj_collision) {
-            // If bullets path will collide with this wall
-            if (collision_line(other.startX, other.startY, other.x, other.y, obj_collision, false, false) == id) {
-                // If no collisions found yet, use this one
-                if (closestCollision == -1) {
-                    closestCollision = id;
-                }
-                else if (point_distance(other.startX, other.startY, id.x, id.y) &lt; 
-                    point_distance(other.startX, other.startY, closestCollision.x, closestCollision.y)) {
-                       closestCollision = id; 
-                    }
-                }
-        }
-    }
-    
-    var travelDist = point_distance(startX, startY, x, y);
-    var collisionDist = point_distance(startX, startY, closestCollision.x, closestCollision.y);
-    
-    show_debug_message(closestCollision);
-    
-    /* If the bullet is closer to the wall
-    than it's own travel distance */
-    if (point_distance(startX, startY, x, y) &gt; point_distance(startX, startY, closestCollision.x, closestCollision.y)) {
-        /* Using SOH CAH TOA to figure out the length of x
+    /* If there was a collision found, go off distance to the detected collision and set end points */
+    if (collisionData[? "instance"] != noone) {
+    /* Using SOH CAH TOA to figure out the length of x
         and y sides with the angle and the hypot. The angle
         is inverted because of the way gamemaker does angles
         compared to sin and cos which is the opposite way. */
-       x = (collisionDist * cos(-degtorad(bulletDir))) + startX;
-       y = (collisionDist * sin(-degtorad(bulletDir))) + startY;
-       //show_debug_message(string(closestCollision) + " " + string(closestCollision.x) + " " + string(closestCollision.y) + " " + string(random(1)));
+       x = (collisionData[? "distance"] * cos(-degtorad(bulletDir))) + startX;
+       y = (collisionData[? "distance"] * sin(-degtorad(bulletDir))) + startY;
+       
+       // If destroyable, minus health of the object
+       if (object_is_ancestor(collisionData[? "instance"].object_index, obj_destroyableCollision)) {
+            collisionData[? "instance"].hp -= damage;
+       }
+    }
+    
+    if (ds_exists(collisionData, ds_type_map)) {
+        ds_map_destroy(collisionData);
     }
     
     // If collision with any zombie

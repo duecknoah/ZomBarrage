@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>/// Init vars and settings
-radius = 255; // the radius of the light (default 255)
+radius = 400; // the radius of the light (default 255)
 orgRadius = noone;
 isOn = true; // is light on?
 //image_blend = c_white; // color of the light
@@ -108,6 +108,15 @@ if (isOn) {
         radius = clamp(radius + random_range(-flickerAmt, flickerAmt), orgRadius - flickerAmt, orgRadius + flickerAmt);
     }
 }    
+
+// Flickering regardless if light is on or not
+if (flicker) {
+    if (random(1) &lt; 0.05) {
+        isOn = !isOn;
+    }
+}
+
+
 // If light has a parent, follow it
 if (parent != noone) {
     if (instance_exists(parent)) {

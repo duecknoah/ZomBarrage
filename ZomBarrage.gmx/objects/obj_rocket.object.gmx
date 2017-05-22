@@ -111,7 +111,6 @@ if (audio_emitter_exists(s_emit)) {
           <argument>
             <kind>1</kind>
             <string>/// Destroy self
-
 instance_destroy();
 </string>
           </argument>
