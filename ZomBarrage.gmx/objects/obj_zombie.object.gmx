@@ -68,14 +68,6 @@ var points = 1;
 scr_createPointsText(x, y, "+" + string(points), c_lime);
 obj_player.points += points; // give points to player on death
 
-// Chance of playing Death sound
-/*
-if (random(1) &lt; 0.75) {
-    var growlType = choose(snd_zombie_growl_short_1, snd_zombie_growl_short_2, snd_zombie_growl_short_3, snd_zombie_growl_short_4);
-    audio_play_sound_on(s_emit, growlType, false, 7);
-}
-*/
-
 // Destroy inherited stuff
 event_inherited();
 </string>

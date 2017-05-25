@@ -65,6 +65,8 @@ audio_play_sound_at(goreType, x, y, 0, 100, 300, 1, false, 5);
 if (audio_emitter_exists(s_emit)) {
     audio_emitter_free(s_emit);
 }
+
+event_inherited();
 </string>
           </argument>
         </arguments>

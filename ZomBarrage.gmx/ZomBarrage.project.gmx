@@ -386,6 +386,8 @@
     <background>background\tile_indoor</background>
     <background>background\tl_dev</background>
     <background>background\bg_dev</background>
+    <background>background\tl_ground</background>
+    <background>background\tl_scenery</background>
   </backgrounds>
   <paths name="paths">
     <path>paths\path_cutscene_beginning_dad1</path>
@@ -431,6 +433,7 @@
       <script>scripts\scr_viewFollow.gml</script>
       <script>scripts\scr_viewFollowInstance.gml</script>
       <script>scripts\scr_takeScreenshot.gml</script>
+      <script>scripts\scr_updateView.gml</script>
     </scripts>
     <scripts name="Weapon">
       <script>scripts\scr_shootBullet.gml</script>

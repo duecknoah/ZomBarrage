@@ -10,8 +10,8 @@ var _yUnits = argument[2];
 
 // formula for transition: X += ((finalX) - currentX) * CONSTANT
 
-var _finalX = -room_width * _xUnits;
-var _finalY = -room_height * _yUnits;
+var _finalX = -view_wport[0] * _xUnits;
+var _finalY = -view_hport[0] * _yUnits;
 
 menuX += (_finalX - menuX) * 0.1;
 menuY += (_finalY - menuY) * 0.1;

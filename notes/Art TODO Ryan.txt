@@ -1,0 +1,8 @@
+Notes:
+Buildings must divisible by 16 in terms of width and height.
+ex. 32x32, 128x32, 128x16, 256x256, etc. 
+
+Buildings
+- 
+
+Props

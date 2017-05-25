@@ -420,15 +420,13 @@ if (!isDead &amp;&amp; !obj_guiController.showConsole) {
         }
         
         if (mouse_wheel_up()) {
-            selectedSlot = (selectedSlot - 1) % ds_list_size(inventory);
+            //selectedSlot = (selectedSlot - 1) % ds_list_size(inventory);
+            selectedSlot = abs(selectedSlot - 1) % 2;
             inventorySlotChange = true;
         }
         if (mouse_wheel_down()) {
-            selectedSlot = (selectedSlot + 1) % ds_list_size(inventory);
-            inventorySlotChange = true;
-        }
-        if (selectedSlot &lt; 0) {
-            selectedSlot = ds_list_size(inventory) - 1;
+            //selectedSlot = (selectedSlot + 1) % ds_list_size(inventory);
+            selectedSlot = abs(selectedSlot + 1) % 2;
             inventorySlotChange = true;
         }
         

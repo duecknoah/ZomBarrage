@@ -63,6 +63,30 @@ mapInit = false; // Is the current viewed map starting?
         </arguments>
       </action>
     </event>
+    <event eventtype="3" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Update view port size based off of window size
+scr_updateView();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="8" enumb="64">
       <action>
         <libid>1</libid>
@@ -83,8 +107,8 @@ mapInit = false; // Is the current viewed map starting?
             <string>/// Draw Menu Items and do Menu Stuff
 
 // Constant slight menu offsets based on mouse pos, also tween it slightly
-menuXOff += ((-(mouse_x - (room_width / 2)) / 8) - menuXOff) * 0.25;
-menuYOff += ((-(mouse_y - (room_height / 2)) / 8) - menuYOff) * 0.25;
+menuXOff += ((-(mouse_x - (view_wport[0] / 2)) / 8) - menuXOff) * 0.25;
+menuYOff += ((-(mouse_y - (view_hport[0] / 2)) / 8) - menuYOff) * 0.25;
 var drawMenuX = menuX + menuXOff;
 var drawMenuY = menuY + menuYOff;
 
@@ -99,8 +123,8 @@ var drawMenuY = menuY + menuYOff;
 
 // Main Menu
 if (string_pos("Main", currentMenu) != 0) {
-   var _startX = drawMenuX + (room_width / 2) - ((sprite_get_width(spr_buttonMenu) * menuScale) / 2);
-   var _startY = drawMenuY + (room_height / 2) - ((sprite_get_height(spr_buttonMenu) * menuScale) / 2);
+   var _startX = drawMenuX + (view_wport[0] / 2) - ((sprite_get_width(spr_buttonMenu) * menuScale) / 2);
+   var _startY = drawMenuY + (view_hport[0] / 2) - ((sprite_get_height(spr_buttonMenu) * menuScale) / 2);
    
    if (scr_buttonGuiSpriteText(_startX, _startY, spr_buttonMenu, menuScale, "Start", c_white) == 2) {
         currentMenu = "Main-Start";
@@ -121,14 +145,14 @@ if (string_pos("Main", currentMenu) != 0) {
 
 // Start Menu
 if (string_pos("Start", currentMenu) != 0) {
-    var _xOffset = room_width;
+    var _xOffset = view_wport[0];
     var _yOffset = 0;
-    var _startX = drawMenuX + (room_width / 2) - ((sprite_get_width(spr_buttonMenu) * menuScale) / 2) + _xOffset;
-    var _startY = drawMenuY + (room_height / 2) - ((sprite_get_height(spr_buttonMenu) * menuScale) / 2) + _yOffset;
+    var _startX = drawMenuX + (view_wport[0] / 2) - ((sprite_get_width(spr_buttonMenu) * menuScale) / 2) + _xOffset;
+    var _startY = drawMenuY + (view_hport[0] / 2) - ((sprite_get_height(spr_buttonMenu) * menuScale) / 2) + _yOffset;
     
     // Back button
     var _backX = drawMenuX + _xOffset + (sprite_get_width(spr_arrowButton) * menuScale) + 128;
-    var _backY = drawMenuY + _yOffset + (room_height / 2) - ((sprite_get_height(spr_arrowButton) * menuScale) / 2);
+    var _backY = drawMenuY + _yOffset + (view_hport[0] / 2) - ((sprite_get_height(spr_arrowButton) * menuScale) / 2);
     if (scr_buttonGuiSpriteExt(_backX, _backY, spr_arrowButton, 0, -menuScale, menuScale) == 2) {
         currentMenu = "Start-Main";
     }
@@ -157,10 +181,10 @@ if (string_pos("Start", currentMenu) != 0) {
 
 // LevelSelect Menu
 if (string_pos("LevelSelect", currentMenu) != 0) {
-   var _xOffset = room_width * 2;
+   var _xOffset = view_wport[0] * 2;
    var _yOffset = 0;
-   var _mapGuiX = drawMenuX + (room_width / 2) - ((sprite_get_width(spr_mapMenuGui) * menuScale) / 2) + _xOffset;
-   var _mapGuiY = drawMenuY + (room_height / 2) - ((sprite_get_height(spr_mapMenuGui) * menuScale) / 2) + _yOffset;
+   var _mapGuiX = drawMenuX + (view_wport[0] / 2) - ((sprite_get_width(spr_mapMenuGui) * menuScale) / 2) + _xOffset;
+   var _mapGuiY = drawMenuY + (view_hport[0] / 2) - ((sprite_get_height(spr_mapMenuGui) * menuScale) / 2) + _yOffset;
    //var _mapImageX = _mapGuiX + (9 * menuScale);
    //var _mapImageY = _mapGuiY + (9 * menuScale);
    
@@ -197,7 +221,7 @@ if (currentMenu == "LevelSelect-Game") {
 }
 
 // Vignette
-var _scale = (view_wport[0] / sprite_get_width(spr_vignette)) * 1.5; // drawscale
+var _scale = max(view_wport[0] / sprite_get_width(spr_vignette), view_hport[0] / sprite_get_height(spr_vignette)); // drawscale
 var _xOff = (view_wport[0] - (sprite_get_width(spr_vignette) * _scale)) / 2; // center x
 var _yOff = (view_hport[0] - (sprite_get_height(spr_vignette) * _scale)) / 2; // center y
 

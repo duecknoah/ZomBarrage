@@ -230,9 +230,14 @@ if (showWeaponScope) {
      * effected by a light doesn't get drawn. Not sure why :(
      */
     for(var i = 0; i &lt; 2; i ++) {
+    var guiToGameScaleFactorX = display_get_gui_width() / 1280;
+    var guiToGameScaleFactorY = display_get_gui_height() / 720;
+    
+    show_debug_message(string(display_get_gui_width()) + ", " + string(view_wport[0]) + ", " + string(guiToGameScaleFactorX));
+    
     draw_surface_part_ext(application_surface, 
-                            device_mouse_x_to_gui(0) - (xSize / 2), 
-                            device_mouse_y_to_gui(0) - (ySize / 2), 
+                            device_mouse_x_to_gui(0) / guiToGameScaleFactorX - (xSize / 2), 
+                            device_mouse_y_to_gui(0) / guiToGameScaleFactorY - (ySize / 2), 
                             xSize, 
                             ySize, 
                             device_mouse_x_to_gui(0) - (xSize * scale / 2), 

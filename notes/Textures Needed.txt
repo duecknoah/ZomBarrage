@@ -1,0 +1,80 @@
+School
+- make it spooky looking with flickering lights, lockers knocked over, blood, etc.
+
+Ground textures
+	Primary
+		d - grass short (2x)
+		d - Grass medium (3x)
+		d - Grass long (2x)
+		- sand bright (2x)
+		- sand orange (2x)
+		- Concrete smooth
+		- Concrete cracked
+		- Sidewalk concrete
+		- snow
+	Decals / Patches
+		- Dirt path (UDLR)
+		- Dirt hole
+		- Explosion black imprint
+		Road
+			- Parking lot lines
+			- CrossWalk
+			- Double yellow line
+			- Single yellow lign
+			- dotted white line
+			- Turn UDLR double yellow line
+		RailRoad
+			- Tracks
+			- Track turn wide UDLR
+
+Props
+	Vehicles
+	[Make current ones look more damaged, maybe have some lights flicker]
+	Doors
+		- Plain doors
+	Fence walls
+		- Metal cross fence
+		- Wood fence
+		- Picket fence white
+	Signs
+		- Stop sign
+		- Walk across sign
+Buildings
+[Just look online for any of these for references]
+	Houses
+	Office buildings
+	Restaraunts
+	Outdoor washrooms
+	Playground
+
+Nature
+	Trees
+		- See texture references
+	Cacti
+		- Cactus tall
+		- Cactus medium
+		- Cactus short
+	Grass
+	Boulders
+	Garbage
+		- Garbage bins (blue with black lid)
+		- Compost bin (green)
+		- Blue Dumpster closed
+		- Blue Dumpster Opened
+		- Green Dumpster closed
+		- Green Dumpster Opened
+
+
+
+Textures in the game are layered as follows:
+
+Deepest
+|
+V
+Background
+Ground Textures - 1000000
+Ground decals - 999999
+Props + Nature + Buildings - Dynamic or 999998
+|
+V
+Highest

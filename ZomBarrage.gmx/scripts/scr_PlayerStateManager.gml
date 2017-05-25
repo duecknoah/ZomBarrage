@@ -142,7 +142,7 @@ if (!obj_guiController.showUpgradeScreen) {
         break;
         case "throw Molotov Cocktail": // throw Molotov Cocktail
             draw_sprite_ext(spr_PlayerMolotovCocktail, 1, x, y, drawScale, drawScale, rotation, c_white, 1);
-            var _throwDist = 128;
+            var _throwDist = clamp(point_distance(x, y, mouse_x, mouse_y), 0, 200);
             var _dir = rotation + 90;
             var _startX = x;
             var _startY = y;
@@ -158,7 +158,7 @@ if (!obj_guiController.showUpgradeScreen) {
         break;
         case "throw Frag Grenade": // Throw Frag Grenade
             draw_sprite_ext(spr_PlayerFragGrenade, 1, x, y, drawScale, drawScale, rotation, c_white, 1);
-            var _throwDist = 128;
+            var _throwDist = clamp(point_distance(x, y, mouse_x, mouse_y), 0, 255);
             var _dir = rotation + 90;
             var _startX = x;
             var _startY = y;

@@ -1,11 +1,12 @@
+----------------------------------------------------
 Improvements to make:
-- Make it so hotkeys (ex. h) would make player select any healing items in their inventory and / or secondary
-- Make it so player can use numbers 1-6 for inventory
-- Make more ammo spawn (airdrops n stufF)
-- Find a way to make weapons spawn in a cool way
+----------------------------------------------------
+- POWERUPS (random weapon ?, ammo restock, speed boost, zombie stun (makes zombies confused and not move for 5 seconds), 2x points)
 - Fix bug that makes player unable to punch or swing sword
  Give player invunerability for a few seconds after exiting a loot area
 - Add start wave option to instantly start wave
+- Make it so hotkeys (ex. h) would make player select any healing items in their inventory and / or secondary
+- Make more ammo spawn (airdrops n stufF)
 
 - REFIX COLLISIONS!! As i moved from origin to top left for collisions!
 - Show Press 'TAB' tab under upgrade bar
@@ -13,34 +14,25 @@ Improvements to make:
 - Make health bar flash slowly when healing
 - Make health bar blink when low
 - Make weapon slot turn red when there is no more ammo left in a weapon that has ammo
-- Make killing zombies show points in a cooler way
-- Show final stats at end of final wave completion
+- Allow getting collatoral damage and lots of kills in one time give you extra points
+- Show wave and then total stats at end of wave completion
 - Remove the text of the communicator, just have an objective system with arrows and simple text instead as its a simple arcade game
 - When a level is completed, transition into main menu level selection and have effect of the next level being unlocked
-- powerups (ammo restock, 2x points, Stun (stuns all zombies temporarily))
+- Have a music playlist play throughout the game when fighting. Every song change have the song name and artist show at the bottom somewhere and fade out.
 
 - Add a time limit in looting
-- Make 'sunrise' at end of wave, and 'sunset' at start of wave 
-- Make it so where you click is where the grenade / molotov goes
 - Make it show weapon damage on gun when holding it
 - Make it so each gun has a maxstack amount. You could use this variable with lootRank to lerp the ammo between 0 and the max amount
 - prevent punching while in car
 - allow storing a couple weapons in your truck to carry between levels, this would mean saving the trucks inventory in saveDynamic
-
+----------------------------------------------------
 Bugs to fix:
+----------------------------------------------------
+- 
 - heavy zombie moving towards player while throwing rock or punch while in backup pathfinding
 - Possible memory leaks due to static particle systems not destroying particle emitters at end of room / game (first check if obj_particleIndex dose this already)
 - Player inventory not saving properly, currently I'm avoiding this by loading a clear inventory each time. It is partly setup, but it gets overridden by the map saves inventory as well.
 
-To make maps more challenging, make them more tight spaced.
+To make maps more challenging, make them more tight spaced. EDIT: not too tight spaced, else zombies have a hard time finding a path, this can cause lag quickly 
 
 upgrade idea: faster shooting speed (temporary)
-
-- maybe rather than creating obj_pointText entitys on the ground, maybe make them appear in the gui right below the upgrades tab. Also maybe show points on the outside of the upgrade tab as well
-
-
-
-
-Quick notes:
-Make it so the backup pathfinding of the runnerZombie doesn't make it go super slow compared to its normal speed
-Ammo can be a problem, maybe power ups that drop that solve that??
