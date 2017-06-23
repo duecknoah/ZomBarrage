@@ -46,6 +46,7 @@ Buildings
 	Restaraunts
 	Outdoor washrooms
 	Playground
+	gas station
 
 Nature
 	Trees

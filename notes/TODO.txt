@@ -2,11 +2,13 @@
 Improvements to make:
 ----------------------------------------------------
 - POWERUPS (random weapon ?, ammo restock, speed boost, zombie stun (makes zombies confused and not move for 5 seconds), 2x points)
+- Improve backup pathfinding
 - Fix bug that makes player unable to punch or swing sword
  Give player invunerability for a few seconds after exiting a loot area
 - Add start wave option to instantly start wave
 - Make it so hotkeys (ex. h) would make player select any healing items in their inventory and / or secondary
 - Make more ammo spawn (airdrops n stufF)
+- Fix fire gui not stretching based off of window size
 
 - REFIX COLLISIONS!! As i moved from origin to top left for collisions!
 - Show Press 'TAB' tab under upgrade bar
@@ -28,7 +30,6 @@ Improvements to make:
 ----------------------------------------------------
 Bugs to fix:
 ----------------------------------------------------
-- 
 - heavy zombie moving towards player while throwing rock or punch while in backup pathfinding
 - Possible memory leaks due to static particle systems not destroying particle emitters at end of room / game (first check if obj_particleIndex dose this already)
 - Player inventory not saving properly, currently I'm avoiding this by loading a clear inventory each time. It is partly setup, but it gets overridden by the map saves inventory as well.

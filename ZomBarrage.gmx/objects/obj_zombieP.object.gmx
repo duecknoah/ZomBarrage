@@ -125,17 +125,21 @@ if (target != noone &amp;&amp; instance_exists(target)) {
             var _nextPointX = path_get_x(path, _nextPoint);
             var _nextPointY = path_get_y(path, _nextPoint);
             
-            // Make cell claims based on zombie size
-            switch (object_index) {
-                case obj_heavyZombie: // heavy zombie has a big hitbox, so we want to claim more zones
-                    mp_grid_add_rectangle(global.grid, _nextPointX - obj_navGrid.cell_width, 
-                                                       _nextPointY - obj_navGrid.cell_height, 
-                                                       _nextPointX + obj_navGrid.cell_width, 
-                                                       _nextPointY + obj_navGrid.cell_height);
-                break;
-                default: // default is one cell
-                    mp_grid_add_cell(global.grid, _nextPointX div obj_navGrid.cell_width, 
-                                                  _nextPointY div obj_navGrid.cell_height);
+            // Prevent cell claims close to player so zombies will almost
+            // always find a path
+            if (distance_to_point(target.x, target.y) &gt; 64) {
+                // Make cell claims based on zombie size
+                switch (object_index) {
+                    case obj_heavyZombie: // heavy zombie has a big hitbox, so we want to claim more zones
+                        mp_grid_add_rectangle(global.grid, _nextPointX - obj_navGrid.cell_width, 
+                                                           _nextPointY - obj_navGrid.cell_height, 
+                                                           _nextPointX + obj_navGrid.cell_width, 
+                                                           _nextPointY + obj_navGrid.cell_height);
+                    break;
+                    default: // default is one cell
+                        mp_grid_add_cell(global.grid, _nextPointX div obj_navGrid.cell_width, 
+                                                      _nextPointY div obj_navGrid.cell_height);
+                }
             }
             //mp_grid_add_cell(global.grid, x div obj_navGrid.cell_width, y div obj_navGrid.cell_height);
             doBackupPathFinding = false;
@@ -148,8 +152,6 @@ if (target != noone &amp;&amp; instance_exists(target)) {
     // Backup pathfinding ////////////////
     if (doBackupPathFinding) {
         // if can't find a path to player, just move towards player directly
-        // move_towards_point(px, py, 1);
-        
         // If heading diagonal, make speed slower
         if (y != py &amp;&amp; x != px) {
             stepSpd = 0.5 * global.timeScale;
